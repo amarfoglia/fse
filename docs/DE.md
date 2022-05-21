@@ -66,10 +66,10 @@ In base a determinate condizioni cliniche, di reddito o sociali alcune prestazio
     </representedOrganization>
     ```
 ### Body
-Il CDA R2 di esenzione contiene un SOLO elemento <section>, che contiene le informazioni sulle esenzioni che saranno di tipo narrativo e di tipo codificato.
+Il CDA R2 di esenzione contiene un SOLO elemento ``<section>``, che contiene le informazioni sulle esenzioni che saranno di tipo narrativo e di tipo codificato.
  | Sezioni        | Codici LOINC | Descrizioni LOINC ShortName                     |
   |----------------|--------------|-------------------------------------------------|
-  | Esenzione | 57827-8      | "Motivo di esenzione dal co-pagamento |
+  | Esenzione | 57827-8      | Motivo di esenzione dal co-pagamento |
 - __clinicalDocument/component/structuredBody/component/section__: 
   ```xml
   <component>

@@ -6,3 +6,4 @@
   - [Documento di Esenzione (DE)](docs/DE.md)
   - [Referto di Specialistica Ambulatoriale (RSA)](docs/RSA.md)
   - [Verbale di Pronto Soccorso (VPS)](docs/VPS.md)
+  - [Vaccinazioni (VAC)](docs/VAC.md)
