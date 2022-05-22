@@ -7,3 +7,4 @@
   - [Referto di Specialistica Ambulatoriale (RSA)](docs/RSA.md)
   - [Verbale di Pronto Soccorso (VPS)](docs/VPS.md)
   - [Vaccinazioni (VAC)](docs/VAC.md)
+  - [Referto di Medicina di Laboratorio (RML)](docs/RML.md)
