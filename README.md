@@ -8,3 +8,4 @@
   - [Verbale di Pronto Soccorso (VPS)](docs/VPS.md)
   - [Vaccinazioni (VAC)](docs/VAC.md)
   - [Referto di Medicina di Laboratorio (RML)](docs/RML.md)
+  - [Profilo Sanitario Sintetico (PSS)](docs/PSS.md)
