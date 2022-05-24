@@ -153,22 +153,22 @@ Questa sezione è costituita da un elemento  ```<text>``` di testo libero associ
 
 *Entry Triage, Observation: Elemento OBBLIGATORIO atto a descrivere il valore del codice del livello di triage assegnato all'accettazione e nei successivi controlli precedenti la visita medica.* 
 
-	| Item       | DT |  Card                    | Conf | Description
-	  |----------------|--------------|-------------------------------------------------|--|--|
-	  | @classCode | CS      | 1 .. 1 | O | OBS | 
-	  | @moodCode | CS      |  1 .. 1| O | EVN |
-	  | templateId | II | 1 .. 1 | M | @root 2.16.840.1.113883.2.9.10.1.6.39 |
-	  | text | ED      | 0 .. 1 | R | L'elemento , se presente, punta al testo che descrive l'informazione che viene registrata; comprese date, commenti, ecc. Il contiene un attributo URI in valore. Questo URI indica la descrizione del testo libero del problema nel documento che viene descritto. |
-	  | code |    CE   | 1 .. 1 | R | @code "11283-9" @codeSystem "2.16.840.1.113883.6.1" @codeSystemName "LOINC" @displayName "Valutazione Acutezza" |
-	  | statusCode |    CS   | 1 .. 1 | R | @code “completed”  |
-	  | effectiveTime |    IVL TS   | 0 .. 1 | R | Data ora Triage  |
-	  | value |       | 1 .. 1 | R | @code: valori da @codeSystem “2.16.840.1.113883.2.9.6.1.54.4” (CodiceTriage_VPS)  |
-	  | performer |       | 0 .. * |  | Operatore di triage  |
-	  | @typeCode |    CS   | 0 .. 1 | O | PRF |
-	  | assignedEntity |     | 1 .. 1 | R |  |
-	  | id | II    | 1 .. * | R | Codice fiscale |
-	  | assignedPerson |     | 1 .. 1 | R |  |
-	  | name |  PN   | 1 .. 1 | R | Include nome e cognome |
+| Item  | DT |  Card | Conf | Description
+  |----------------|--------------|------------|--|--|
+  | @classCode | CS      | 1 .. 1 | O | OBS | 
+  | @moodCode | CS      |  1 .. 1| O | EVN |
+  | templateId | II | 1 .. 1 | M | @root 2.16.840.1.113883.2.9.10.1.6.39 |
+  | text | ED      | 0 .. 1 | R | L'elemento , se presente, punta al testo che descrive l'informazione che viene registrata; comprese date, commenti, ecc. Il contiene un attributo URI in valore. Questo URI indica la descrizione del testo libero del problema nel documento che viene descritto. |
+  | code |    CE   | 1 .. 1 | R | @code "11283-9" @codeSystem "2.16.840.1.113883.6.1" @codeSystemName "LOINC" @displayName "Valutazione Acutezza" |
+  | statusCode |    CS   | 1 .. 1 | R | @code “completed”  |
+  | effectiveTime |    IVL TS   | 0 .. 1 | R | Data ora Triage  |
+  | value |       | 1 .. 1 | R | @code: valori da @codeSystem “2.16.840.1.113883.2.9.6.1.54.4” (CodiceTriage_VPS)  |
+  | performer |       | 0 .. * |  | Operatore di triage  |
+  | @typeCode |    CS   | 0 .. 1 | O | PRF |
+  | assignedEntity |     | 1 .. 1 | R |  |
+  | id | II    | 1 .. * | R | Codice fiscale |
+  | assignedPerson |     | 1 .. 1 | R |  |
+  | name |  PN   | 1 .. 1 | R | Include nome e cognome |
 
 ***Dimissione***: Elemento OBBLIGATORIO atto a descrivere i dati relativi alla fase di dimissione, tra cui la diagnosi di dimissione, la prognosi, l’esito del trattamento. È inoltre possibile riportare le note relative alle consegne per un trasferimento del paziente, o per il suo ricovero. Questa sezione è costituita da un elemento ```<text>``` di testo libero associato ```<entry>``` ad un elemento di tipo ```<act>```, contenente le informazioni codificate sul medico che ha effettuato la dimissione, la diagnosi e l’esito del trattamento, e OPZIONALMENTE uno o più elementi ```<entry>``` di tipo ```<observation>``` contenenti le informazioni codificate relative a prognosi, livello di appropriatezza e dati sul decesso. 
 
