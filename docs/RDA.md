@@ -162,7 +162,7 @@ Il Referto di Radiologia può essere indirizzato sia allo Specialista sia al Med
   - identificativo CUP;
   - Identificativo dell’ordine interno;
 
-  #### Esempio di implementazione: Accession Number**
+  #### Esempio di implementazione: Accession Number
   L’elemento ``<inFulfillmentOf>`` DEVE essere utilizzato per documentare l’identificativo assegnato dal RIS per l’ordine per questo studio
     ```xml
     <inFulfillmentOf>
