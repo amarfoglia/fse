@@ -37,7 +37,7 @@ Il Referto di Radiologia può essere indirizzato sia allo Specialista sia al Med
       codeSystemName="Confidentiality"/>
   ```
   N.B: Il documento DEVE contenere uno ed un solo elemento ``confidentialityCode``
-* ***languageCode***: indica la lingua in cui è redatto il documento. Nel caso del Referto di Radiologia, l'elemento DEVE essere così valorizzato: ```<languageCode code="it-IT"/>```. N.B: il documento DEVE contenere un solo elemento ``languageCode```.
+* ***languageCode***: indica la lingua in cui è redatto il documento. Nel caso del Referto di Radiologia, l'elemento DEVE essere così valorizzato: ```<languageCode code="it-IT"/>```. N.B: il documento DEVE contenere un solo elemento ``languageCode``.
 * ***setId*** e ***versionNumber***: consentono di gestire le revisioni del documento, o di suoi eventuali addendum integrativi.  l'elemento ```<setId>``` ha un valore costante tra le diverse versioni del medesimo documento, mentre l'elemento ```<versionNumber>``` cambia al variare della revisione. Il nuovo documento sostitutivo DEVE comprendere un elemento <relatedDocument> che punta al documento sostituito.
 * ***recordTarget***: identifica il soggetto della prestazione, ovvero il paziente a cui il Referto si riferisce. Per il Referto di Radiologia l'elemento deve pertanto essere strutturato come mostrato di seguito.
   ```xml
