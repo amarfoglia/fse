@@ -156,7 +156,7 @@ Il Referto di Radiologia può essere indirizzato sia allo Specialista sia al Med
   </legalAuthenticator>
   ```
 * _participant_: rappresenta tutti coloro che partecipano all’atto descritto dal documento. 
-* ***inFulfillmentOf***: identifica la richiesta che ha determinato la produzione del documento di Referto di Radiologia od agni altro tipo di ordine ad esso relativo. Esempi di ordini che possono essere descritti sono:
+* ***inFulfillmentOf***: identifica la richiesta che ha determinato la produzione del documento di Referto di Radiologia ed ogni altro tipo di ordine ad esso relativo. Esempi di ordini che possono essere descritti sono:
   - **l’accession number** (OBBLIGATORIO);
   - identificativo della prescrizione (CONSIGLIATO);
   - identificativo CUP;
