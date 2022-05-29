@@ -42,6 +42,16 @@ Le sezioni OBBLIGATORIE nel caso del RSA:
           alt="Entry struct">
       <figcaption>Struttura della Entry</figcaption>
     </figure>
+   
+    **Procedura Operativa Eseguita**
+    
+    Come descritto in Figura, le procedure operative possono essere definite, a seconda della necessità, mediante un differente ClinicalStatement. Di seguito si riportano possibili esempi di utilizzo:
+    - _Procedure_: indica procedure diagnostiche invasive, interventistiche, chirurgiche, terapeutiche non farmacologiche;
+    - _SubstanceAdministration_: indica procedure di somministrazioni farmaceutiche come terapie, vaccinazioni e sedazioni;
+    - _Observation_: indica osservazioni eseguite e parametri clinici rilevati durante la prestazione;
+    - _Act_: indica altre procedure non inquadrabili nei costrutti precedenti.
+   
+   
   - **Referto**: atto a riportare quanto emerso nel corso della/e prestazione/i, riporta quindi al proprio interno una descrizione delle valutazioni del medico e dell’esito della prestazione.
     - ***code***: definisce la tipologia di __section__. 
     ```xml

@@ -37,7 +37,7 @@ Il Referto di Radiologia può essere indirizzato sia allo Specialista sia al Med
       codeSystemName="Confidentiality"/>
   ```
   N.B: Il documento DEVE contenere uno ed un solo elemento ``confidentialityCode``
-* ***languageCode***: indica la lingua in cui è redatto il documento. Nel caso del Referto di Radiologia, l'elemento DEVE essere così valorizzato: ```<languageCode code="it-IT"/>```. N.B: il documento DEVE contenere un solo elemento ``languageCode```.
+* ***languageCode***: indica la lingua in cui è redatto il documento. Nel caso del Referto di Radiologia, l'elemento DEVE essere così valorizzato: ```<languageCode code="it-IT"/>```. N.B: il documento DEVE contenere un solo elemento ``languageCode``.
 * ***setId*** e ***versionNumber***: consentono di gestire le revisioni del documento, o di suoi eventuali addendum integrativi.  l'elemento ```<setId>``` ha un valore costante tra le diverse versioni del medesimo documento, mentre l'elemento ```<versionNumber>``` cambia al variare della revisione. Il nuovo documento sostitutivo DEVE comprendere un elemento <relatedDocument> che punta al documento sostituito.
 * ***recordTarget***: identifica il soggetto della prestazione, ovvero il paziente a cui il Referto si riferisce. Per il Referto di Radiologia l'elemento deve pertanto essere strutturato come mostrato di seguito.
   ```xml
@@ -156,13 +156,13 @@ Il Referto di Radiologia può essere indirizzato sia allo Specialista sia al Med
   </legalAuthenticator>
   ```
 * _participant_: rappresenta tutti coloro che partecipano all’atto descritto dal documento. 
-* ***inFulfillmentOf***: identifica la richiesta che ha determinato la produzione del documento di Referto di Radiologia od agni altro tipo di ordine ad esso relativo. Esempi di ordini che possono essere descritti sono:
+* ***inFulfillmentOf***: identifica la richiesta che ha determinato la produzione del documento di Referto di Radiologia ed ogni altro tipo di ordine ad esso relativo. Esempi di ordini che possono essere descritti sono:
   - **l’accession number** (OBBLIGATORIO);
   - identificativo della prescrizione (CONSIGLIATO);
   - identificativo CUP;
   - Identificativo dell’ordine interno;
 
-  #### Esempio di implementazione: Accession Number**
+  #### Esempio di implementazione: Accession Number
   L’elemento ``<inFulfillmentOf>`` DEVE essere utilizzato per documentare l’identificativo assegnato dal RIS per l’ordine per questo studio
     ```xml
     <inFulfillmentOf>

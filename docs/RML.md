@@ -1,4 +1,4 @@
-## Referto di Medicina di Laboratorio (RML)\
+## Referto di Medicina di Laboratorio (RML)
 Il Referto di Medicina di Laboratorio rappresenta il risultato di una prestazione svolta da uno specifico laboratorio interno ad una struttura sanitaria.
 ### Header
 - ***code***: codice LOINC ``"11502-2"``.
