@@ -5,7 +5,7 @@ In base a determinate condizioni cliniche, di reddito o sociali alcune prestazio
 - _Presenza di determinate tipologie_
 - _Riconoscimento dello stato di invalidità_
 - _Altri casi particolari_ (gravidanza, vaccini, etc.)
-### Header*
+### Header
 - ***code***: esempio di utilizzo
   ```xml
   <code code="57827-8"
