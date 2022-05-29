@@ -1,5 +1,5 @@
 ﻿## Prescrizione
-L’obiettivo del presente documento è definire una guida all’implementazione per il documento di prescrizione valido nel contesto italiano, l’attuale ricetta cartacea del S.S.N., il documento di riferimento per il processo che gestisce la fase di prescrizione e la fase d’erogazione di farmaci/prestazioni sanitarie 30 finanziate dal S.S.N.
+L’obiettivo del presente documento è definire una guida all’implementazione per il documento di prescrizione valido nel contesto italiano, l’attuale ricetta cartacea del S.S.N., il documento di riferimento per il processo che gestisce la fase di prescrizione e la fase d’erogazione di farmaci/prestazioni sanitarie finanziate dal S.S.N.
 
 Per quanto riguarda i possibili utilizzi della ricetta rossa questi sono i principali: 
 - prescrizione di farmaci del Prontuario; 
