@@ -49,7 +49,7 @@ Negli esempi di questa specifica tutti gli elementi sono mostrati senza prefisso
 	</recordTarget>
 	```
 
--   **author** :  elemento OBBLIGATORIO che identifica il soggetto che ha creato il documento. 
+-   ***author*** :  elemento OBBLIGATORIO che identifica il soggetto che ha creato il documento. 
 L’elemento author/time DEVE essere presente. L’elemento author/time rappresenta la data e ora in cui l’autore ha creato il documento. Si osserva che fintantoché il processo di prescrizione-erogazione non sarà completamente informatizzato, tale data rappresenta la data di compilazione della prescrizione riportata sulla ricetta rossa.
 L’elemento author è composto da un ruolo assignedAuthor che DEVE essere rappresentato da una persona (assignedPerson) che nel nostro caso è il medico prescrittore.
 L’istanza OBBLIGATORIA di assignedAuthor/id DEVE essere rappresentata dal Codice Fiscale del medico prescrittore.
@@ -79,7 +79,7 @@ Queste informazioni vengono veicolate rispettivamente negli elementi:
 	</custodian>
 	```
 
--   **legalAuthenticator** :  legalAuthenticator è un elemento OBBLIGATORIO che identifica il soggetto che ha legalmente autenticato il documento di prescrizione. Si osserva che il CDA R2 non gestisce direttamente la firma elettronica del soggetto che ha legalmente autenticato il documento (es. la firma del medico prescrittore) ma gestisce, attraverso l’indicazione di uno specifico attributo, che il documento è stato firmato (vedi di seguito elemento signatureCode). La firma elettronica può poi essere apposta secondo la normativa vigente.
+-   ***legalAuthenticator*** :  legalAuthenticator è un elemento OBBLIGATORIO che identifica il soggetto che ha legalmente autenticato il documento di prescrizione. Si osserva che il CDA R2 non gestisce direttamente la firma elettronica del soggetto che ha legalmente autenticato il documento (es. la firma del medico prescrittore) ma gestisce, attraverso l’indicazione di uno specifico attributo, che il documento è stato firmato (vedi di seguito elemento signatureCode). La firma elettronica può poi essere apposta secondo la normativa vigente.
 Il ruolo di firmatario (legalAuthenticator) DEVE essere “giocato” dalla stessa persona che riveste il ruolo di autore (author).
 
 	Esempio di utilizzo:
