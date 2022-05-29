@@ -9,3 +9,4 @@
   - [Vaccinazioni (VAC)](docs/VAC.md)
   - [Referto di Medicina di Laboratorio (RML)](docs/RML.md)
   - [Profilo Sanitario Sintetico (PSS)](docs/PSS.md)
+  - [Prescrizioni (P)](docs/P.md)
