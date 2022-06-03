@@ -1,0 +1,437 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+
+\newcommand{\emailaddr}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+\title{\LARGE
+    FSE Proposal
+}
+
+\author{
+    Alberto Marfoglia \\ \emailaddr{alberto.marfoglia@studio.unibo.it}
+    \and 
+    Christian D'Errico\\ \emailaddr{christian.derrico@studio.unibo.it} 
+}
+
+\date{Giugno 2022}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Il Fascicolo Sanitario Elettronico (FSE) è lo strumento che abilita il
+    cittadino alla consultazione di tutta la sua storia sanitaria,
+    condividendola con medici, infermieri ed eventuali tutori sulla base di
+    permessi. Le informazioni raccolte sono strutturate secondo lo standard
+    HL7\footnote{Per dettagli: \url{http://www.hl7italia.it/hl7italia_D7/}},
+    il quale oltre a definire la semantica dei documenti scambiati ne dettaglia
+    anche le relazioni.
+\end{abstract}
+
+\section{Obiettivo}
+Il progetto si pone come obiettivo l'estensione di una già esistente ontologia
+\cite[]{fse-ontology}, la quale, data la complessità dello standard HL7, non
+copre tutti i concetti necessari per la realizzazione del Fascicolo Sanitario.
+Le nuove informazioni integrate potranno essere sfruttate per la costruzione di
+nuove query SPARQL e la progettazione di nuove schermate lato applicativo
+(\textit{frontend}). Un ulteriore requisito non funzionale, sarà quello relativo
+alla stesura di un'adeguata documentazione sia per quanto riguarda l'ontologia
+FSE di riferimento (non sufficientemente descritta) sia in merito ai nuovi
+concetti introdotti.
+\subsection{Ontologie esterne}
+L'ontologia FSE raccoglie al suo interno concetti derivanti da sorgenti esterne:
+\begin{itemize}
+    \item FOAF (\textit{Friend Of A Friend}): impiegata nella definizione del
+    paziente, del personale sanitario e delle relazioni che intercorrono tra
+    questi;
+    \item ORG (\textit{Organization}): sfruttata per modellare le varie
+    tipologie di strutture sanitarie come ospedali, laboratori, RSA ecc.;
+    \item DOID (\textit{Disease Ontology Identifiers}): descrive tutte le
+    patologie dell'uomo fin'ora conosciute;
+    \item DrOn (\textit{Drug Ontology}): classifica tutti i medicinali presenti nella National
+    Library of Medicine\footnote{Per dettagli: \url{https://www.nlm.nih.gov/}}.
+    \item LOINC (\textit{Logical Observation Identifier Names and Codes}):
+    basata sull'omonimo database, fornisce identificatori univoci ed universali
+    in riferimento a termini e documentazione sanitaria. 
+\end{itemize}
+In base allo stato attuale del progetto FSE, le ontologie sopra citate possono
+essere integrate ulteriormente come per esempio LOINC, che oltre a identificare i
+documenti del Fascicolo Sanitario permette di determinare univocamente anche
+le loro diverse tipologie di sezioni. 
+%
+Oltre a queste è possibile introdurre nuove ontologie a supporto del dominio:
+\begin{itemize}
+    \item UNIT (unità di misura): promuove la semantica relativa alla frequenza e al
+    periodo delle terapie oltre ad approfondire la descrizione del dosaggio delle
+    somministrazioni.
+\end{itemize}
+
+\subsection{Analisi del dominio}
+I documenti clinici HL7 si strutturano su due livelli: \texttt{Header} e
+\texttt{Body}. Il primo raccoglie meta dati ed è comune a tutti i
+\texttt{ClinicalDocument} (radice della gerarchia di documenti), fatta eccezione
+per alcuni concetti non obbligatori e quindi non di interesse per l'analisi. Il
+secondo rappresenta il vero e proprio corpo del documento che può essere
+descritto in maniera "non strutturata", quindi mediante del testo libero, oppure
+"strutturata" cioè avvalendosi del concetto di \textbf{sezione} che diventerà il
+fulcro della nuova estensione.
+%
+\section{Estensioni}
+Allo stato attuale, tutti i documenti del FSE sono sottoclassi di
+\textit{ClinicalDocument}, da questa ereditano alcuni concetti fondamentali
+(Figura \ref{fig:clinicalDocument}) che nello standard HL7 sono raccolti
+all'interno dello \texttt{Header}. Di seguito vengono proposti alcuni schemi che
+oltre a graficare la modellazione dell'ontologia preesistente, evidenziano (in
+rosso) le nuove estensioni.
+\subsection*{ClinicalDocument}
+Il \texttt{clinicalDocument} si relaziona con diverse entità, per quanto riguarda quelle "foglia":
+\begin{itemize}
+    \item \texttt{body}: permette di descrivere agevolmente il documento in maniera "non strutturata";
+    \item \texttt{confidentialityCode}: indica il livello di confidenzialità del
+    documento sulla base di un vocabolario (Tabella
+    \ref{table:confidentialityCode});
+    \item \texttt{createdAt}: registra l'istante di creazione del documento;
+    \item \texttt{languageCode}: indica la lingua in cui è redatto il documento,
+    nel contesto italiano sarà sempre valorizzato a \texttt{<languageCode
+    code="it-IT"/>};
+    \item \texttt{realmCode}: indica il dominio di appartenenza del documento,
+    nel contesto italiano corrisponde a \texttt{<realmCode code="IT"/>};
+    \item \texttt{versionNumber}: permette di marcare le diverse versioni di uno
+    stesso documento a seconda della revisione.
+\end{itemize}
+Altre relazioni degne di nota:
+\begin{itemize}
+    \item \texttt{inFulfillmentOf}: identifica la richiesta che ha determinato
+    la produzione del documento. L'estensione prevede di aggiungere come oggetto
+    (\texttt{range}) del predicato l'entità \texttt{prescription};
+    \item \texttt{hasPreviousVersion}: rappresenta la versione precedente del documento;
+    \item \texttt{hasLatestVersion}: traccia l'ultima versione del documento;
+    \item \texttt{refersTo}: rappresenta il paziente a cui fa riferimento il documento;
+    \item \texttt{hasCode}: indica la tipologia di documento in base alla codifica LOINC;
+    \item \texttt{hasSignatory}: riporta il firmatario del documento (\texttt{hasSupervisor}) e l'istante in cui è avvenuto l'atto;
+    \item \texttt{componentOf}: descrive l'incontro tra l'assistito e la struttura sanitaria.
+\end{itemize}
+
+\begin{table}[h]
+    \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{Codice}     & \textbf{Descrizione}                                                                                                   \\ \hline
+    N (normal)          & Il paziente, i delegati e gli operatori autorizzati possono accedere al documento.                                     \\ \hline
+    R (restricted)      & Accesso ristretto soltanto al personale medico o sanitario che ha un mandato di cura attivo in relazione al documento. \\ \hline
+    V (very restricted) & Accessibile solo al paziente e dal medico autore del referto.                                                          \\ \hline
+    \end{tabularx}
+    \caption{Livelli dei permessi dei documenti HL7.}
+    \label{table:confidentialityCode}
+\end{table}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/clinicalDocument.png}
+    \caption[]{Estensione del \texttt{ClinicalDocument}}
+    \label{fig:clinicalDocument}
+\end{figure}
+
+\subsection*{Sezioni}
+Un \textit{ClinicalDocument} schematizza informazioni differenti sulla base
+della tipologia (RDA, VAC, DE, ecc.) dello stesso. La differenziazione è dettata
+dal contenuto del \texttt{Body} e, nello specifico, dalle sezioni che lo
+compongono. Si è quindi ritenuto necessario introdurre quest'ultimo concetto
+mediante delle relazioni di sottoclasse (Figura \ref*{fig:sections}). Ogni
+referto può essere assemblato da più sezioni, di queste, solamente quelle
+obbligatorie sono state oggetto di studio. L'entità \texttt{section} oltre ad
+amplificare il potenziale semantico dell'ontologia, rende quest'ultima ancora
+più aderente allo standard HL7, per esempio aggiungendo una relazione
+\texttt{hasCode} che permette di identificare la sezione tramite un codice
+LOINC. La relazione \texttt{hasSection} funge da collante tra il
+\texttt{clinicalDocument} e le sue molteplici sezioni.
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/sections.png}
+    \caption[]{Tipologie di referti HL7.}
+    \label{fig:sections}
+\end{figure}
+\newline
+\newline
+A seguire vengono presentate le tipologie di documenti HL7 necessari per la
+realizzazione del FSE secondo le direttive\footnote{Standard documentali:
+\url{https://www.fascicolosanitario.gov.it/it/Standard-documentali}} del
+Ministero della Salute.
+%
+\subsubsection*{RAD (Referto di Radiologia)}
+Riassume i risultati di tutte le indagini afferenti alla specialità radiologica
+(Tabella \ref*{table:radSections}), attestando quanto effettuato per
+l’inquadramento diagnostico e terapeutico. Il documento è modellato tramite
+l'entità \texttt{fse:radiologyReport} ed è identificato dal codice LOINC
+\texttt{"68604-8”}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Esame eseguito & \texttt{fse:performedExam} & 55111-9      & \small{Descrive l’esame
+    radiologico oggetto del referto e deve comprendere sia la data che la modalità
+    di esecuzione.} \\ \hline Referto        & \texttt{fse:radReport}     &
+    18782-3      & \small{Rappresenta l’elemento centrale e riporta al proprio interno una
+    descrizione delle valutazioni del medico.}   \\ \hline
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento RAD.}
+    \label{table:radSections}
+\end{table}
+    %
+\subsubsection*{LDO (Lettera di Dimissione Ospedaliera)}
+La lettera di  dimissione è un documento che viene rilasciato al paziente al
+termine di una fase di ricovero ospedaliero e contiene le indicazioni per gli
+eventuali controlli o terapie da effettuare (Tabella \ref*{table:ldoSections}).
+Rappresentato da \texttt{fse:hospitalDischargeLetter} e univocamente
+identificato dal codice LOINC \texttt{"34105-7"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Dimissione   & \small{\texttt{fse:dischargeDiagnosis}}  &  11535-2 & \small{Descrive l'elenco
+    delle diagnosi di dimissione, in ordine di rilevanza.}      \\ \hline 
+    Motivo del ricovero   & \small{\texttt{fse:reasonForAdmission}}     &    46241-6   & \small{Descrive la causa principale che ha determinato il ricovero del paziente
+    attraverso la diagnosi di accettazione.}      \\ \hline
+    Decorso ospedaliero   & \texttt{fse:progression}     &    8648-8   & \small{Descrivere l’andamento del ricovero, il percorso diagnostico,
+    terapeutico, riabilitativo o assistenziale.}      \\ \hline
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento LDO}
+    \label{table:ldoSections}
+\end{table}
+%
+\subsubsection*{DE (Documento di Esenzione)}
+Descrive la tipologia di esenzioni posseduta dall’assistito che può essere
+totale o parziale (Tabella \ref*{table:deSections}). Definito dalla classe
+\texttt{fse:exemptionReport}, è associato al codice LOINC \texttt{"57827-8"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+        Esenzione & \texttt{fse:exemption}  & 57827-8 & \small{Contiene le
+        informazioni sulle esenzioni.}      \\ \hline 
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento DE}
+    \label{table:deSections}
+\end{table}
+%
+\subsubsection*{RSA (Referto di Specialistica Ambulatoriale)} 
+RSA è finalizzato a definire uno standard per la refertazione di prestazioni
+ambulatoriali specialistiche (visite mediche ed esami strumentali) che non
+ricadano nella sfera della medicina di laboratorio, della radiologia ed imaging,
+dell'anatomia patologica (Tabella \ref*{table:rsaSections}). Modellato tramite
+\texttt{fse:outpatientSpecialistReport} e identificato dal codice LOINC
+\texttt{"11488-4"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Prestazioni  & \texttt{fse:services}  & 62387-6 & \small{Riporta le prestazioni
+    amministrative erogate, e, ove applicabile, le procedure operative e
+    cliniche eseguite (es. somministrazione farmaci).}      \\ \hline 
+    Referto  & \texttt{fse:osReport}  & 47045-0 & \small{Descrizione delle
+    valutazioni del medico e dell’esito della prestazione.}      \\ \hline
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento RSA}
+    \label{table:rsaSections}
+\end{table}
+%
+\subsubsection*{VPS (Verbale di Pronto Soccorso)}
+VPS riassume i risultati di tutte le indagini eseguite in regime di urgenza in
+Pronto Soccorso, attestando quanto effettuato per l’inquadramento diagnostico e
+terapeutico (Tabella \ref*{table:vpsSections}). Rappresentato da
+\texttt{fse:firstAidReport} e associato al codice LOINC \texttt{"59258-4"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Motivo della visita  & \texttt{fse:reasonForVisit}  & 46239-0 & \small{Descrive il motivo per cui il paziente accede al Pronto Soccorso, ed il
+    problema, il sintomo principale riscontrato o percepito dal paziente.}      \\ \hline 
+    Dimissione  & \texttt{fse:discharge}  & 28574-2 & \small{Descrive i dati
+    relativi alla fase di dimissione, tra cui la diagnosi di dimissione, la
+    prognosi, l’esito del trattamento.}      \\ \hline
+    Triage & \texttt{fse:triage}  & 54094-8 & \small{Definisce la fase di triage
+    dell’accesso in Pronto Soccorso.}      \\ \hline 
+    Modalità di trasporto  & \texttt{fse:modeOfTransport}  & 11459-5 & \small{Specifica la modalità di trasporto (modalità arrivo) del paziente al
+    Pronto Soccorso ed il responsabile dell’invio al Pronto Soccorso.}      \\ \hline
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento VPS}
+    \label{table:vpsSections}
+\end{table}
+    %
+\subsubsection*{VAC (Vaccinazioni)}
+VAC è il documento che attesta l’avvenuta somministrazione della/le
+vaccinazione/i somministrate all’assistito in una certa data (Tabella
+\ref*{table:vacSections}). Definito tramite \texttt{fse:immunization} e
+identificato da codice LOINC \texttt{"87273-9"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    \small{Scheda della singola Vacc.}  & \texttt{fse:immunizationCard}  & 11369-6 & \small{Descrive i dettagli della somministrazione}      \\ \hline 
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento VAC}
+    \label{table:vacSections}
+\end{table}
+%
+\subsubsection*{RML (Referto di Medicina di Laboratorio)}
+RML rappresenta il risultato di una prestazione svolta da uno specifico
+laboratorio interno ad una struttura sanitaria. Rappresentato da
+\texttt{fse:laboratoryMedicineReport} con codice LOINC \texttt{"11502-2"}.
+L'identificativo LOINC della sezione (Tabella \ref*{table:rmlSections}) cambia
+in base alla tipologia di esame.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|c|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Specialità  & \texttt{fse:specialty}  & * & \small{contiene i risultati di esami di laboratorio afferenti ad una singola specialità (ad esempio uno studio microbiologico) o a più specialità}      \\ \hline 
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento RML}
+    \label{table:rmlSections}
+\end{table}
+% 
+\subsubsection*{PSS (Profilo Sanitario Sintetico)}: è il documento
+socio-sanitario informatico redatto e aggiornato dal MMG/PLS, che riassume la
+storia clinica dell’assistito e la sua situazione corrente conosciuta (Tabella
+\ref*{table:pssSections}). In particolare, lo scopo del documento è quello di
+favorire la continuità di cura. Definito dalla classe
+\texttt{fse:summaryHealthProfile} con codice LOINC \texttt{"60591-5"}.
+\begin{table}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+    \hline
+    \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
+    Allergie  & \texttt{fse:alerts}  & 48765-2 & \small{Raccoglie ogni
+    informazione relativa ad allergie, reazioni avverse, ed allarmi passati
+    o presenti inerenti il paziente, se ritenute rilevanti.}      \\ \hline 
+    Terapie  & \texttt{fse:medications}  & 10160-0 & \small{Deputata alla
+    registrazione di tutte le informazioni inerenti le terapie
+    farmacologiche (prescrizioni, somministrazioni, ecc.)}      \\ \hline
+    Lista dei Problemi	  & \small{\texttt{fse:HistoryOfDiseases}}  & 11450-4 & \small{Documenta tutti i problemi clinici rilevanti noti al momento in
+        cui è stato generato il documento (problemi clinici, condizioni,
+        sospetti diagnostici e diagnosi certe, sintomi attuali o passati).}      \\ \hline 
+    Gravidanze e parto  & \small{\texttt{fse:HistoryOfPregnancies}}  & 10162-6 &
+        \small{Include tutte le informazioni inerenti gravidanze (incluso aborti spontanei), parti, eventuali
+        complicanze derivate e stato mestruale}
+        \\ \hline
+    Vaccinazioni  & \small{\texttt{fse:immunizations}}  & 11369-6 &
+    \small{Riporta le informazioni relative allo stato attuale di
+    immunizzazione (vaccinazioni) del paziente e alle vaccinazioni
+    effettuate}      \\ \hline
+    \end{tabularx}
+    \caption{Sezioni obbligatorie del documento PSS}
+    \label{table:pssSections}
+\end{table}
+%
+\subsection{Certificato Vaccinale}
+Attraverso la sezione \texttt{fse:immunizationCard} sarà possibile ripercorrere
+le vaccinazioni effettuate negli anni, con conseguente produzione del
+Certificato Vaccinale. Si rende necessaria l'introduzione dell'entità
+\texttt{fse:substanceAdministration} (Figura \ref*{fig:immunizations}) al fine
+di dettagliare l'atto di somministrazione mediante:
+\begin{itemize}
+    \item \texttt{effectiveTime}: istante di avvenuta vaccinazione;
+    \item \texttt{routeCode}: via di somministrazione;
+    \item \texttt{approachSiteCode}: parte anatomica interessata dalla somministrazione;
+    \item \texttt{doseQuantity}: dose del farmaco inoculato.
+\end{itemize}
+Da questa si propagano varie relazioni:
+\begin{itemize}
+    \item \texttt{fse:prevents}: specifica la malattia che è in grado di prevenire;
+    \item \texttt{fse:consume}: indica il farmaco impiegato;
+    \item \texttt{fse:participant}: definisce la struttura sanitaria in cui si è
+    svolta la somministrazione.
+    \item \texttt{fse:booster}: tiene traccia degli eventuali richiami,
+    identificati da un codice LOINC.
+\end{itemize}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/immunizations.png}
+    \caption[]{Estensione dell'entità \texttt{fse:immunization} (referto VAC).}
+    \label{fig:immunizations}
+\end{figure}
+%
+\subsection{PSS}
+L'introduzione della relazione \texttt{fse:hasSection}, nel caso del
+\texttt{summaryHealthProfile}, abilita alla raccolta di nuove informazioni
+raggruppate per competenza:
+\begin{itemize}
+    \item \texttt{fse:alters}: sintetizza tutti i dati relativi ad eventuali
+    allergie del paziente. Tramite \texttt{fse:hasAgent} si definisce l'agente
+    che ha provocato l'allergia, mentre con \texttt{fse:adverseReaction} è
+    possibile specificare le reazioni avverse. Infine con
+    \texttt{fse:hasAllergy} si referenzia la descrizione completa dell'allergia
+    di cui il paziente è affetto.
+    \item \texttt{fse:historyOfDiseases}: storico delle eventuali patologia che
+    affliggono il paziente. 
+    \item \texttt{fse:medications}: la sezione raccoglie, tramite apposita
+    relazione (\texttt{fse:hasTherapy}), tutte le terapie assegnate, e di ognuna
+    anche la sostanza somministrata.
+    \item  \texttt{fse:historyOfPregnancies}: corrisponde all'elenco delle
+    gravidanze associate tramite la relazione \texttt{fse:hasPregnancy}, la
+    quale include l'esito finale e il periodo.
+\end{itemize}
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/pss.png}
+    \caption[]{Estensione dell'entità \texttt{fse:summaryHealthProfile} (referto PSS).}
+    \label{fig:pps}
+\end{figure}
+
+\subsection{VPS e RSA}
+Seguendo la logica delle precedenti estensioni anche per i referti VPS e RSA, vi
+sono una serie di nuove relazioni dettate dall'integrazione di specifiche
+sezioni (Figura \ref*{fig:vps-rsa}). Le sezioni dei due documenti hanno un
+concetto comune, e cioè quello di \texttt{operatingProcedure}, il quale può
+presentarsi in varie forme:
+\begin{itemize}
+    \item \texttt{fse:procedure}: indica procedure diagnostiche invasive,
+    interventistiche, chirurgiche, terapeutiche non farmacologiche;
+    \item \texttt{fse:substanceAdministration}: indica procedure di
+    somministrazioni farmaceutiche come terapie, vaccinazioni e sedazioni;
+    \item \texttt{fse:observation}: indica osservazioni eseguite e parametri
+    clinici rilevati durante la prestazione;    
+\end{itemize}
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/vps-rsa.png}
+    \caption[]{Estensione dei documenti VPS e RSA.}
+    \label{fig:vps-rsa}
+\end{figure}
+
+\subsection{RML}
+Attraverso l'impiego della sezione \texttt{fse:specialty}, il documento RML è in
+grado di raccogliere gli esami effettuati (es. studio microbiologico) ed i
+relativi risultati grazie alla relazione \texttt{fse:hasResult} (Figura
+\ref*{fig:rml}). Infine è possibile ripercorrere la catena di esami eseguiti
+mediante la relazione \texttt{fse:hasNext}.
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/rml.png}
+    \caption[]{Estensione del documento RML.}
+    \label{fig:rml}
+\end{figure}
+
+\subsection{Prescrizioni}
+\begin{itemize}
+    \item \textit{Prescrizione farmaceutica} (\texttt{fse:pharma}): documento normato che riporta una
+    previsione clinica e un ordine amministrativo, indirizzato alla struttura
+    erogante (ex: FARMACIA), di fornire al paziente un insieme di presidi
+    medicinali.
+    \item \textit{Prescrizione specialistica} (\texttt{fse:specialist}):
+    \item \textit{Prescrizione ricovero} (\texttt{fse:admission}): 
+    \item \textit{Richiesta di trasporto} (\texttt{fse:transportRequest}): 
+\end{itemize}
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{images/prescription.png}
+    \caption[]{Schema dell'entità \texttt{fse:prescription}.}
+    \label{fig:prescription}
+\end{figure}
+
+\newpage
+\nocite{*} % Includes all references from the `references.bib` file
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
