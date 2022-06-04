@@ -44,35 +44,36 @@ nuove query SPARQL e la progettazione di nuove schermate lato applicativo
 (\textit{frontend}). Un ulteriore requisito non funzionale, sarà quello relativo
 alla stesura di un'adeguata documentazione sia per quanto riguarda l'ontologia
 FSE di riferimento (non sufficientemente descritta) sia in merito ai nuovi
-concetti introdotti.
+concetti introdotti, motivando le scelte perseguite.
 \subsection{Ontologie esterne}
 L'ontologia FSE raccoglie al suo interno concetti derivanti da sorgenti esterne:
 \begin{itemize}
-    \item FOAF (\textit{Friend Of A Friend}): impiegata nella definizione del
+    \item FOAF (\textit{Friend Of A Friend})\footnote{FOAF
+    dettagli:\url{http://xmlns.com/foaf/spec/}}: impiegata nella definizione del
     paziente, del personale sanitario e delle relazioni che intercorrono tra
     questi;
-    \item ORG (\textit{Organization}): sfruttata per modellare le varie
+    \item ORG (\textit{Organization})\footnote{ORG dettagli:
+    \url{https://www.w3.org/TR/vocab-org/}}: sfruttata per modellare le varie
     tipologie di strutture sanitarie come ospedali, laboratori, RSA ecc.;
-    \item DOID (\textit{Disease Ontology Identifiers}): descrive tutte le
+    \item DOID (\textit{Disease Ontology Identifiers})\footnote{DOID dettagli:
+    \url{https://www.ebi.ac.uk/ols/ontologies/doid}}: descrive tutte le
     patologie dell'uomo fin'ora conosciute;
-    \item DrOn (\textit{Drug Ontology}): classifica tutti i medicinali presenti nella National
-    Library of Medicine\footnote{Per dettagli: \url{https://www.nlm.nih.gov/}}.
-    \item LOINC (\textit{Logical Observation Identifier Names and Codes}):
-    basata sull'omonimo database, fornisce identificatori univoci ed universali
-    in riferimento a termini e documentazione sanitaria. 
-\end{itemize}
-In base allo stato attuale del progetto FSE, le ontologie sopra citate possono
-essere integrate ulteriormente come per esempio LOINC, che oltre a identificare i
-documenti del Fascicolo Sanitario permette di determinare univocamente anche
-le loro diverse tipologie di sezioni. 
-%
-Oltre a queste è possibile introdurre nuove ontologie a supporto del dominio:
-\begin{itemize}
-    \item UNIT (unità di misura): promuove la semantica relativa alla frequenza e al
-    periodo delle terapie oltre ad approfondire la descrizione del dosaggio delle
-    somministrazioni.
+    \item DRON (\textit{Drug Ontology})\footnote{DRON dettagli:
+    \url{https://bioportal.bioontology.org/ontologies/DRON}}: classifica tutti i
+    medicinali presenti nella National Library of Medicine\footnote{Per
+    dettagli: \url{https://www.nlm.nih.gov/}}.
+    \item LOINC (\textit{Logical Observation Identifier Names and
+    Codes})\footnote{LOINC dettagli:
+    \url{https://loinc.org/document-ontology/}}: basata sull'omonimo database,
+    fornisce identificatori univoci ed universali in riferimento a termini e
+    documentazione sanitaria. 
 \end{itemize}
 
+Le ontologie appena elencate sono dense di contenuto informativo non pienamente
+sfruttato, queste infatti dovranno essere maggiormente integrate. Un valido
+esempio può essere LOINC i cui codici permetto di identificare univocamente le
+diverse tipologie di documenti HL7 e le loro sezioni. 
+%
 \subsection{Analisi del dominio}
 I documenti clinici HL7 si strutturano su due livelli: \texttt{Header} e
 \texttt{Body}. Il primo raccoglie meta dati ed è comune a tutti i
@@ -293,11 +294,11 @@ in base alla tipologia di esame.
     \label{table:rmlSections}
 \end{table}
 % 
-\subsubsection*{PSS (Profilo Sanitario Sintetico)}: è il documento
-socio-sanitario informatico redatto e aggiornato dal MMG/PLS, che riassume la
-storia clinica dell’assistito e la sua situazione corrente conosciuta (Tabella
-\ref*{table:pssSections}). In particolare, lo scopo del documento è quello di
-favorire la continuità di cura. Definito dalla classe
+\subsubsection*{PSS (Profilo Sanitario Sintetico)}
+PPS è il documento socio-sanitario informatico redatto e aggiornato dal MMG/PLS,
+che riassume la storia clinica dell’assistito e la sua situazione corrente
+conosciuta (Tabella \ref*{table:pssSections}). In particolare, lo scopo del
+documento è quello di favorire la continuità di cura. Definito dalla classe
 \texttt{fse:summaryHealthProfile} con codice LOINC \texttt{"60591-5"}.
 \begin{table}
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
@@ -407,27 +408,48 @@ relativi risultati grazie alla relazione \texttt{fse:hasResult} (Figura
 mediante la relazione \texttt{fse:hasNext}.
 \begin{figure}[]
     \centering
-    \includegraphics[width=0.4\textwidth]{images/rml.png}
+    \includegraphics[width=0.38\textwidth]{images/rml.png}
     \caption[]{Estensione del documento RML.}
     \label{fig:rml}
 \end{figure}
 
 \subsection{Prescrizioni}
+Il documento di Prescrizione è un \texttt{clinicalDocument} che non fa
+direttamente parte del FSE ma è un'entità di supporto che permette di tracciare
+l'ordine che ha dato vita alla creazione di uno specifico referto. Questo lo si
+evince anche dalla estensione della relazione \texttt{fse:inFulfillmentOf}
+(Figura \ref*{fig:prescription}). Il documento di Prescrizione può
+concretizzarsi in diverse classi, ognuna identificata da uno specifico codice LOINC:
 \begin{itemize}
-    \item \textit{Prescrizione farmaceutica} (\texttt{fse:pharma}): documento normato che riporta una
-    previsione clinica e un ordine amministrativo, indirizzato alla struttura
-    erogante (ex: FARMACIA), di fornire al paziente un insieme di presidi
+    \item \textit{Prescrizione farmaceutica} (\texttt{fse:pharma});
     medicinali.
-    \item \textit{Prescrizione specialistica} (\texttt{fse:specialist}):
-    \item \textit{Prescrizione ricovero} (\texttt{fse:admission}): 
-    \item \textit{Richiesta di trasporto} (\texttt{fse:transportRequest}): 
+    \item \textit{Prescrizione specialistica} (\texttt{fse:specialist});
+    \item \textit{Prescrizione ricovero} (\texttt{fse:admission});
+    \item \textit{Richiesta di trasporto} (\texttt{fse:transportRequest}).
 \end{itemize}
+Il termine \texttt{priority} specifica il livello di priorità della prescrizione
+e deve assumere dei valori predefiniti (Tabella \ref*{table:priorityLevels}). 
 \begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{images/prescription.png}
     \caption[]{Schema dell'entità \texttt{fse:prescription}.}
     \label{fig:prescription}
 \end{figure}
+
+\begin{table}
+    \begin{tabularx}{\textwidth}{|c|X|}
+    \hline
+    \textbf{Codice}    & \textbf{Descrizione}   \\ \hline
+    S  & Urgente - nel più breve tempo possibile o, se differibile, entro 72 ore \\ \hline
+    A  & Breve entro 10 gg \\ \hline
+    EL & Differita - entro 30 gg per le visite, entro 60 gg per gli accertamenti specialistici \\ \hline
+    R  & Programmata - senza priorità \\ \hline
+    \end{tabularx}
+    \caption{Livelli di priorità relativi alle prescrizioni.}
+    \label{table:priorityLevels}
+\end{table}
+
+
 
 \newpage
 \nocite{*} % Includes all references from the `references.bib` file
