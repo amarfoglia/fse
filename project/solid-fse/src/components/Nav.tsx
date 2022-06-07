@@ -23,7 +23,7 @@ const SearchBar: Component = () => {
         value={search()}
         onKeyUp={(e) => setSearch(e.currentTarget.value)}
       />
-      <button type="submit" class="btn h-[44px] rounded-l-none">
+      <button type="submit" class="btn rounded-l-none">
         <i class="mdi mdi-magnify"></i>
       </button>
     </form>

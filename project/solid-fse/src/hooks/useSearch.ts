@@ -4,4 +4,4 @@ const [search, setSearch] = createSignal("")
 
 const setSearchToLower = (search: string) => setSearch(search.toLowerCase())
 
-export default () => ({ search, setSearch: setSearchToLower })
+export default () => ({ search, setSearch })

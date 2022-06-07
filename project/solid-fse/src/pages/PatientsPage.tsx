@@ -34,7 +34,8 @@ const PatientsPage: Component = () => {
 
   const patients = usePatientsStore()
   const filteredPatients = createMemo(() =>
-    patients().filter(p => p.name.toLowerCase().includes(search()))
+    patients().filter(p => p.name.concat(" ").concat(p.surname).toLowerCase()
+      .includes(search().toLowerCase()))
   )
 
   return (
