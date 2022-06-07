@@ -68,11 +68,10 @@ L'ontologia FSE raccoglie al suo interno concetti derivanti da sorgenti esterne:
     fornisce identificatori univoci ed universali in riferimento a termini e
     documentazione sanitaria. 
 \end{itemize}
-
-Le ontologie appena elencate sono dense di contenuto informativo non pienamente
-sfruttato, queste infatti dovranno essere maggiormente integrate. Un valido
-esempio può essere LOINC i cui codici permetto di identificare univocamente le
-diverse tipologie di documenti HL7 e le loro sezioni. 
+Il progetto proposto si integra con le ontologie appena elencate, andandone a
+valorizzare il contenuto informativo sfruttabile su più livelli di dettaglio. Un
+valido esempio può essere LOINC i cui codici permetto di identificare
+univocamente le diverse tipologie di documenti HL7 e le loro sezioni. 
 %
 \subsection{Analisi del dominio}
 I documenti clinici HL7 si strutturano su due livelli: \texttt{Header} e
@@ -295,7 +294,7 @@ in base alla tipologia di esame.
 \end{table}
 % 
 \subsubsection*{PSS (Profilo Sanitario Sintetico)}
-PPS è il documento socio-sanitario informatico redatto e aggiornato dal MMG/PLS,
+PSS è il documento socio-sanitario informatico redatto e aggiornato dal MMG/PLS,
 che riassume la storia clinica dell’assistito e la sua situazione corrente
 conosciuta (Tabella \ref*{table:pssSections}). In particolare, lo scopo del
 documento è quello di favorire la continuità di cura. Definito dalla classe
@@ -357,7 +356,7 @@ Da questa si propagano varie relazioni:
 \subsection{PSS}
 L'introduzione della relazione \texttt{fse:hasSection}, nel caso del
 \texttt{summaryHealthProfile}, abilita alla raccolta di nuove informazioni
-raggruppate per competenza:
+raggruppate per competenza (Figura \ref*{fig:pss}):
 \begin{itemize}
     \item \texttt{fse:alters}: sintetizza tutti i dati relativi ad eventuali
     allergie del paziente. Tramite \texttt{fse:hasAgent} si definisce l'agente
@@ -377,7 +376,7 @@ raggruppate per competenza:
 \begin{figure}
     \includegraphics[width=\textwidth]{images/pss.png}
     \caption[]{Estensione dell'entità \texttt{fse:summaryHealthProfile} (referto PSS).}
-    \label{fig:pps}
+    \label{fig:pss}
 \end{figure}
 
 \subsection{VPS e RSA}
