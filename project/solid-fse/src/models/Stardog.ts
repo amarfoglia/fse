@@ -4,9 +4,11 @@ export interface StardogQueryOptions {
   offset: number
 }
 
+const STARDOG_LIMIT = 150000
+
 export const defaultOptions: StardogQueryOptions = {
-  reasoning: false,
-  limit: Number.MAX_SAFE_INTEGER,
+  reasoning: true,
+  limit: STARDOG_LIMIT,
   offset: 0
 }
 

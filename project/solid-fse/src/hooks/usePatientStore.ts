@@ -1,6 +1,7 @@
 import { createResource } from "solid-js"
 import { ClinicalDocument } from "../models/ClinicalDocument"
 import { Patient } from "../models/Patient"
+import { Section } from "../models/Section"
 import mapBindingsToValues from "../utils/mapBindingsToValues"
 import createStardogQuery from "./createStardogQuery"
 
@@ -65,6 +66,7 @@ const fetchClinicalDocuments = async (fiscalCode: string) => {
         ?id fse:hasCustodian ?o .
         ?o org:identifier ?organization .
       }
+      FILTER(?documentType NOT IN (fse:clinicalDocument))
     }
   `)
   const res = (await query.execute()).results.bindings

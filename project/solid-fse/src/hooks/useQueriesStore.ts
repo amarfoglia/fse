@@ -62,6 +62,7 @@ const queries: Query[] = [
           ?ID fse:hasCustodian ?o .
           ?o org:identifier ?Organizzazione .
         }
+        FILTER(?Tipo_Documento NOT IN (fse:clinicalDocument))
       }
     `
   },
