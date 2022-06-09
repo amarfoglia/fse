@@ -682,23 +682,15 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
+###  http://api.stardog.com/LOINC_code
+:LOINC_code rdf:type owl:Class .
+
+
 ###  http://api.stardog.com/confidentialityCode
 :confidentialityCode rdf:type owl:Class .
 
 
-###  http://api.stardog.com/section
-:section rdf:type owl:Class .
-
-
-###  http://api.stardog.com/sign
-:sign rdf:type owl:Class .
-
-
-###  http://fse.ontology#LOINC_code
-:LOINC_code rdf:type owl:Class .
-
-
-###  http://fse.ontology#document_code
+###  http://api.stardog.com/document_code
 :document_code rdf:type owl:Class ;
                rdfs:subClassOf :LOINC_code ;
                owl:disjointWith :section_code ;
@@ -708,13 +700,21 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                <tag:stardog:studio:label> "document_code" .
 
 
-###  http://fse.ontology#section_code
+###  http://api.stardog.com/section
+:section rdf:type owl:Class .
+
+
+###  http://api.stardog.com/section_code
 :section_code rdf:type owl:Class ;
               rdfs:subClassOf :LOINC_code ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il codice LOINC che identifica univocamente la tipologia della sezione di uno specifico documento."@it ,
                                                                           "Represents the LOINC code that uniquely identifies the type of section of a specific document."@en ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "section_code" ;
               <tag:stardog:studio:label> "section_code" .
+
+
+###  http://api.stardog.com/sign
+:sign rdf:type owl:Class .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -975,6 +975,76 @@ fse:vehicle rdf:type owl:Class ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Accessible only to the patient and the doctor who wrote the report."@en ;
                  rdfs:label "V (very restricted)"@en ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11488-4
+<http://purl.bioontology.org/ontology/LNC/11488-4> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11502-2
+<http://purl.bioontology.org/ontology/LNC/11502-2> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/34105-7
+<http://purl.bioontology.org/ontology/LNC/34105-7> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57827-8
+<http://purl.bioontology.org/ontology/LNC/57827-8> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57829-4
+<http://purl.bioontology.org/ontology/LNC/57829-4> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57830-2
+<http://purl.bioontology.org/ontology/LNC/57830-2> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57831-0
+<http://purl.bioontology.org/ontology/LNC/57831-0> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57832-8
+<http://purl.bioontology.org/ontology/LNC/57832-8> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57833-6
+<http://purl.bioontology.org/ontology/LNC/57833-6> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/57834-4
+<http://purl.bioontology.org/ontology/LNC/57834-4> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/59258-4
+<http://purl.bioontology.org/ontology/LNC/59258-4> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/60591-5
+<http://purl.bioontology.org/ontology/LNC/60591-5> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/68604-8
+<http://purl.bioontology.org/ontology/LNC/68604-8> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/87273-9
+<http://purl.bioontology.org/ontology/LNC/87273-9> rdf:type owl:NamedIndividual ,
+                                                            :document_code .
 
 
 [ <http://fse.ontology/www.w3.org/2002/07/owl#maxCardinalityQ> "1"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
