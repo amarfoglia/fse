@@ -74,7 +74,7 @@
 #    Object Properties
 #################################################################
 
-###  http://fse.ontology#componentOf
+###  http://api.stardog.com/componentOf
 :componentOf rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
              rdf:type owl:FunctionalProperty ;
@@ -85,7 +85,7 @@
              <tag:stardog:studio:label> "componentOf"@en .
 
 
-###  http://fse.ontology#hasBeenSigned
+###  http://api.stardog.com/hasBeenSigned
 :hasBeenSigned rdf:type owl:ObjectProperty ,
                         owl:FunctionalProperty ;
                rdfs:domain fse:clinicalDocument ;
@@ -95,12 +95,15 @@
                <tag:stardog:studio:label> "hasBeenSigned"@en .
 
 
-###  http://fse.ontology#hasLegalAuthenticator
+###  http://api.stardog.com/hasLegalAuthenticator
 :hasLegalAuthenticator rdf:type owl:ObjectProperty ;
-                       rdfs:subPropertyOf owl:topObjectProperty .
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain :sign ;
+                       rdfs:range fse:doctor .
 
 
-###  http://fse.ontology#hasSection
+###  http://api.stardog.com/hasSection
 :hasSection rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
             owl:inverseOf :isPartOf ;
@@ -111,7 +114,7 @@
             <tag:stardog:studio:label> "hasSection"@en .
 
 
-###  http://fse.ontology#isLessConfidentialThan
+###  http://api.stardog.com/isLessConfidentialThan
 :isLessConfidentialThan rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf owl:topObjectProperty ;
                         owl:inverseOf :isMoreConfidentialThan ;
@@ -120,14 +123,14 @@
                         rdfs:range :confidentialityCode .
 
 
-###  http://fse.ontology#isMoreConfidentialThan
+###  http://api.stardog.com/isMoreConfidentialThan
 :isMoreConfidentialThan rdf:type owl:ObjectProperty ,
                                  owl:TransitiveProperty ;
                         rdfs:domain :confidentialityCode ;
                         rdfs:range :confidentialityCode .
 
 
-###  http://fse.ontology#isPartOf
+###  http://api.stardog.com/isPartOf
 :isPartOf rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf owl:topObjectProperty ;
           rdf:type owl:FunctionalProperty ;
@@ -139,10 +142,7 @@
 
 
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
-owl:topObjectProperty rdf:type owl:FunctionalProperty ;
-                      rdfs:domain :sign ;
-                      rdfs:range fse:doctor ;
-                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
+owl:topObjectProperty <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLegalAuthenticator"@en ;
                       <tag:stardog:studio:label> "hasLegalAuthenticator"@en .
 
@@ -386,18 +386,14 @@ fse:hasTherapy rdf:type owl:ObjectProperty ;
                <tag:stardog:studio:label> "hasTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://fse.ontology/hasType
-fse:hasType rdf:type owl:ObjectProperty ;
-            rdfs:domain fse:laboratoryMedicineReport ;
-            rdfs:range fse:reportType ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasType"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <tag:stardog:studio:label> "hasType"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
 ###  https://fse.ontology/inFulfillmentOf
-fse:inFulfillmentOf rdf:type owl:ObjectProperty ;
+fse:inFulfillmentOf rdf:type owl:ObjectProperty ,
+                             owl:AsymmetricProperty ,
+                             owl:IrreflexiveProperty ;
                     rdfs:domain fse:clinicalDocument ;
-                    rdfs:range fse:clinicalDocument ;
+                    rdfs:range fse:prescription ;
+                    <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> """Identifies the request that led to the production of the
+document."""@en ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "inFulfillmentOf"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "inFulfillmentOf"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
@@ -497,7 +493,7 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
-###  http://fse.ontology#effectiveTime
+###  http://api.stardog.com/effectiveTime
 :effectiveTime rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
                rdfs:domain :sign ;
@@ -686,16 +682,39 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://fse.ontology#confidentialityCode
+###  http://api.stardog.com/confidentialityCode
 :confidentialityCode rdf:type owl:Class .
 
 
-###  http://fse.ontology#section
+###  http://api.stardog.com/section
 :section rdf:type owl:Class .
 
 
-###  http://fse.ontology#sign
+###  http://api.stardog.com/sign
 :sign rdf:type owl:Class .
+
+
+###  http://fse.ontology#LOINC_code
+:LOINC_code rdf:type owl:Class .
+
+
+###  http://fse.ontology#document_code
+:document_code rdf:type owl:Class ;
+               rdfs:subClassOf :LOINC_code ;
+               owl:disjointWith :section_code ;
+               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il codice LOINC che identifica univocamente la tipologia del documento."@it ,
+                                                                           "Represents the LOINC code which uniquely identifies the type of document."@en ;
+               rdfs:label "document_code" ;
+               <tag:stardog:studio:label> "document_code" .
+
+
+###  http://fse.ontology#section_code
+:section_code rdf:type owl:Class ;
+              rdfs:subClassOf :LOINC_code ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il codice LOINC che identifica univocamente la tipologia della sezione di uno specifico documento."@it ,
+                                                                          "Represents the LOINC code that uniquely identifies the type of section of a specific document."@en ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "section_code" ;
+              <tag:stardog:studio:label> "section_code" .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -900,36 +919,6 @@ fse:radiologyReport rdf:type owl:Class ;
                     <tag:stardog:studio:label> "radiologyReport"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://fse.ontology/reportType
-fse:reportType rdf:type owl:Class ;
-               owl:equivalentClass [ rdf:type owl:Class ;
-                                     owl:unionOf ( <https://loinc.org/document-ontology/18716-1>
-                                                   <https://loinc.org/document-ontology/18717-9>
-                                                   <https://loinc.org/document-ontology/18718-7>
-                                                   <https://loinc.org/document-ontology/18719-5>
-                                                   <https://loinc.org/document-ontology/18720-3>
-                                                   <https://loinc.org/document-ontology/18721-1>
-                                                   <https://loinc.org/document-ontology/18722-9>
-                                                   <https://loinc.org/document-ontology/18723-7>
-                                                   <https://loinc.org/document-ontology/18724-5>
-                                                   <https://loinc.org/document-ontology/18725-2>
-                                                   <https://loinc.org/document-ontology/18727-8>
-                                                   <https://loinc.org/document-ontology/18728-6>
-                                                   <https://loinc.org/document-ontology/18729-4>
-                                                   <https://loinc.org/document-ontology/18767-4>
-                                                   <https://loinc.org/document-ontology/18768-2>
-                                                   <https://loinc.org/document-ontology/18769-0>
-                                                   <https://loinc.org/document-ontology/26435-8>
-                                                   <https://loinc.org/document-ontology/26436-6>
-                                                   <https://loinc.org/document-ontology/26437-4>
-                                                   <https://loinc.org/document-ontology/26438-2>
-                                                   <https://loinc.org/document-ontology/26439-0>
-                                                 )
-                                   ] ;
-               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "reportType"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-               <tag:stardog:studio:label> "reportType"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
 ###  https://fse.ontology/summaryHealthProfile
 fse:summaryHealthProfile rdf:type owl:Class ;
                          rdfs:subClassOf fse:clinicalDocument ;
@@ -956,95 +945,11 @@ fse:vehicle rdf:type owl:Class ;
             <tag:stardog:studio:label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://loinc.org/document-ontology/18716-1
-<https://loinc.org/document-ontology/18716-1> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18717-9
-<https://loinc.org/document-ontology/18717-9> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18718-7
-<https://loinc.org/document-ontology/18718-7> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18719-5
-<https://loinc.org/document-ontology/18719-5> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18720-3
-<https://loinc.org/document-ontology/18720-3> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18721-1
-<https://loinc.org/document-ontology/18721-1> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18722-9
-<https://loinc.org/document-ontology/18722-9> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18723-7
-<https://loinc.org/document-ontology/18723-7> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18724-5
-<https://loinc.org/document-ontology/18724-5> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18725-2
-<https://loinc.org/document-ontology/18725-2> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18727-8
-<https://loinc.org/document-ontology/18727-8> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18728-6
-<https://loinc.org/document-ontology/18728-6> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18729-4
-<https://loinc.org/document-ontology/18729-4> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18767-4
-<https://loinc.org/document-ontology/18767-4> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18768-2
-<https://loinc.org/document-ontology/18768-2> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/18769-0
-<https://loinc.org/document-ontology/18769-0> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/26435-8
-<https://loinc.org/document-ontology/26435-8> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/26436-6
-<https://loinc.org/document-ontology/26436-6> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/26437-4
-<https://loinc.org/document-ontology/26437-4> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/26438-2
-<https://loinc.org/document-ontology/26438-2> rdf:type owl:Class .
-
-
-###  https://loinc.org/document-ontology/26439-0
-<https://loinc.org/document-ontology/26439-0> rdf:type owl:Class .
-
-
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://fse.ontology#Normal
+###  http://api.stardog.com/Normal
 :Normal rdf:type owl:NamedIndividual ,
                  :confidentialityCode ;
         :isLessConfidentialThan :Restricted ;
@@ -1053,7 +958,7 @@ fse:vehicle rdf:type owl:Class ;
         <tag:stardog:studio:label> "N (normal)"@en .
 
 
-###  http://fse.ontology#Restricted
+###  http://api.stardog.com/Restricted
 :Restricted rdf:type owl:NamedIndividual ,
                      :confidentialityCode ;
             :isLessConfidentialThan :Very_Restricted ;
@@ -1063,7 +968,7 @@ fse:vehicle rdf:type owl:Class ;
             <tag:stardog:studio:label> "R (restricted)"@en .
 
 
-###  http://fse.ontology#Very_Restricted
+###  http://api.stardog.com/Very_Restricted
 :Very_Restricted rdf:type owl:NamedIndividual ,
                           :confidentialityCode ;
                  :isMoreConfidentialThan :Restricted ;
