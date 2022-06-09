@@ -1,0 +1,503 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://api.stardog.com/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix stardog: <tag:stardog:api:> .
+@prefix fse: <https://fse.ontology/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix loinc: <http://purl.bioontology.org/ontology/LNC/> .
+
+fse:patient a owl:Class ;
+    rdfs:label "patient" ;
+    rdfs:subClassOf foaf:Person ;
+    <tag:stardog:studio:label> "patient" .
+
+fse:healthWorker a owl:Class ;
+    rdfs:label "healthWorker" ;
+    rdfs:subClassOf foaf:Person ;
+    <tag:stardog:studio:label> "healthWorker" .
+
+fse:doctor a owl:Class ;
+    rdfs:label "doctor" ;
+    rdfs:subClassOf fse:healthWorker ;
+    <tag:stardog:studio:label> "doctor" .
+
+fse:nurse a owl:Class ;
+    rdfs:label "nurse" ;
+    rdfs:subClassOf fse:healthWorker ;
+    <tag:stardog:studio:label> "nurse" .
+
+fse:healthOrganization a owl:Class ;
+    rdfs:label "healthOrganization" ;
+    rdfs:subClassOf org:Organization ;
+    <tag:stardog:studio:label> "healthOrganization" .
+
+fse:healthcareFacility a owl:Class ;
+    rdfs:label "healthcareFacility" ;
+    rdfs:subClassOf org:Site ;
+    <tag:stardog:studio:label> "healthcareFacility" .
+
+fse:hasFamilyDoctor a owl:ObjectProperty ;
+    rdfs:label "hasFamilyDoctor" ;
+    rdfs:domain fse:patient ;
+    rdfs:range fse:doctor ;
+    <tag:stardog:studio:label> "hasFamilyDoctor" .
+
+fse:belongsTo a owl:ObjectProperty ;
+    rdfs:label "belongsTo" ;
+    rdfs:domain fse:healthWorker ;
+    rdfs:range fse:healthOrganization ;
+    <tag:stardog:studio:label> "belongsTo" .
+
+fse:clinicalDocument a owl:Class ;
+    rdfs:comment "A generic clinical document." ;
+    rdfs:label "clinicalDocument" ;
+    owl:unionOf ( fse:summaryHealthProfile fse:firstAidReport fse:outpatientSpecialistReport fse:radiologyReport fse:laboratoryMedicineReport fse:hospitalDischargeLetter fse:prescription fse:exemption fse:immunization ) ;
+    <tag:stardog:studio:label> "clinicalDocument" .
+
+fse:summaryHealthProfile a owl:Class ;
+    rdfs:comment "PSS" ;
+    rdfs:label "summaryHealthProfile" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "summaryHealthProfile" .
+
+fse:firstAidReport a owl:Class ;
+    rdfs:label "firstAidReport" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "firstAidReport" .
+
+fse:outpatientSpecialistReport a owl:Class ;
+    rdfs:comment "RSA" ;
+    rdfs:label "outpatientSpecialistReport" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "outpatientSpecialistReport" .
+
+fse:radiologyReport a owl:Class ;
+    rdfs:comment "RAD" ;
+    rdfs:label "radiologyReport" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "radiologyReport" .
+
+fse:laboratoryMedicineReport a owl:Class ;
+    rdfs:comment "LAB" ;
+    rdfs:label "laboratoryMedicineReport" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "laboratoryMedicineReport" .
+
+fse:hospitalDischargeLetter a owl:Class ;
+    rdfs:comment "LDO" ;
+    rdfs:label "hospitalDischargeLetter" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:prescription , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "hospitalDischargeLetter" .
+
+fse:prescription a owl:Class ;
+    rdfs:label "prescription" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:exemption , fse:immunization ;
+    <tag:stardog:studio:label> "prescription" .
+
+fse:exemption a owl:Class ;
+    rdfs:comment "DE" ;
+    rdfs:label "exemption" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:immunization ;
+    <tag:stardog:studio:label> "exemption" .
+
+fse:immunization a owl:Class ;
+    rdfs:comment "VAC" ;
+    rdfs:label "immunization" ;
+    rdfs:subClassOf fse:clinicalDocument ;
+    owl:disjointWith fse:summaryHealthProfile , fse:firstAidReport , fse:outpatientSpecialistReport , fse:radiologyReport , fse:laboratoryMedicineReport , fse:hospitalDischargeLetter , fse:prescription , fse:exemption ;
+    <tag:stardog:studio:label> "immunization" .
+
+fse:confidentialityCode a owl:DatatypeProperty ;
+    rdfs:label "confidentialityCode" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "confidentialityCode" .
+
+fse:realmCode a owl:DatatypeProperty ;
+    rdfs:label "realmCode" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "realmCode" .
+
+fse:languageCode a owl:DatatypeProperty ;
+    rdfs:label "languageCode" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "languageCode" .
+
+fse:body a owl:DatatypeProperty ;
+    rdfs:label "body" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "body" .
+
+fse:versionNumber a owl:DatatypeProperty ;
+    rdfs:label "versionNumber" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:decimal ;
+    <tag:stardog:studio:label> "versionNumber" .
+
+fse:device a owl:Class ;
+    rdfs:label "device" ;
+    <tag:stardog:studio:label> "device" .
+
+fse:hasGuardian a owl:ObjectProperty ;
+    rdfs:label "hasGuardian" ;
+    rdfs:domain fse:patient ;
+    rdfs:range foaf:Person ;
+    <tag:stardog:studio:label> "hasGuardian" .
+
+fse:hasRecipient a owl:ObjectProperty ;
+    rdfs:label "hasRecipient" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range foaf:Person ;
+    <tag:stardog:studio:label> "hasRecipient" .
+
+fse:hasParticipant a owl:ObjectProperty ;
+    rdfs:label "hasParticipant" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range foaf:Person ;
+    <tag:stardog:studio:label> "hasParticipant" .
+
+fse:refersTo a owl:ObjectProperty ;
+    rdfs:label "refersTo" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:patient ;
+    <tag:stardog:studio:label> "refersTo" .
+
+fse:hasClinicalDocument a owl:ObjectProperty ;
+    rdfs:label "hasClinicalDocument" ;
+    owl:inverseOf fse:refersTo ;
+    <tag:stardog:studio:label> "hasClinicalDocument" .
+
+fse:createdAt a owl:DatatypeProperty ;
+    rdfs:label "createdAt" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range xsd:dateTime ;
+    <tag:stardog:studio:label> "createdAt" .
+
+fse:hasPreviousVersion a owl:ObjectProperty ;
+    rdfs:label "hasPreviousVersion" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:clinicalDocument ;
+    <tag:stardog:studio:label> "hasPreviousVersion" .
+
+fse:hasLatestVersion a owl:ObjectProperty ;
+    rdfs:label "hasLatestVersion" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:clinicalDocument ;
+    <tag:stardog:studio:label> "hasLatestVersion" .
+
+fse:hasField a owl:ObjectProperty ;
+    rdfs:label "hasField" ;
+    rdfs:domain fse:patient ;
+    <tag:stardog:studio:label> "hasField" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesField ) .
+
+fse:hasAllergy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasAllergy" ;
+    rdfs:domain fse:patient ;
+    rdfs:range obo:DOID_1205 ;
+    <tag:stardog:studio:label> "hasAllergy" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesAllergy ) .
+
+fse:hasPregnancy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasPregnancy" ;
+    rdfs:domain fse:patient ;
+    rdfs:range fse:pregnancy ;
+    <tag:stardog:studio:label> "hasPregnancy" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesPregnancy ) .
+
+fse:hasTherapy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasTherapy" ;
+    rdfs:domain fse:patient ;
+    rdfs:range fse:therapy ;
+    <tag:stardog:studio:label> "hasTherapy" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesTherapy ) .
+
+fse:hasDisease a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasDisease" ;
+    rdfs:domain fse:patient ;
+    rdfs:range obo:DOID_4 ;
+    <tag:stardog:studio:label> "hasDisease" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesDisease ) .
+
+fse:hasMedicalNotes a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasMedicalNotes" ;
+    rdfs:domain fse:patient ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "hasMedicalNotes" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesMedicalNotes ) .
+
+fse:hasImmunizationAgainst a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "hasImmunizationAgainst" ;
+    rdfs:domain fse:patient ;
+    rdfs:range obo:DOID_4 ;
+    <tag:stardog:studio:label> "hasImmunizationAgainst" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:prevents ) .
+
+fse:isOrganDonor a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:hasField ;
+    rdfs:label "isOrganDonor" ;
+    rdfs:domain fse:patient ;
+    rdfs:range xsd:boolean ;
+    <tag:stardog:studio:label> "isOrganDonor" ;
+    owl:propertyChainAxiom ( fse:hasClinicalDocument fse:hasLatestVersion fse:includesOrganDonor ) .
+
+fse:prevents a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "prevents" ;
+    rdfs:domain fse:immunization ;
+    rdfs:range obo:DOID_4 ;
+    <tag:stardog:studio:label> "prevents" .
+
+fse:validUntil a owl:DatatypeProperty ;
+    rdfs:label "validUntil" ;
+    rdfs:domain fse:immunization ;
+    rdfs:range xsd:dateTime ;
+    <tag:stardog:studio:label> "validUntil" .
+
+fse:hasQuantity a owl:DatatypeProperty ;
+    rdfs:label "hasQuantity" ;
+    rdfs:domain fse:prescription ;
+    rdfs:range xsd:decimal ;
+    <tag:stardog:studio:label> "hasQuantity" .
+
+fse:administration a owl:ObjectProperty ;
+    rdfs:label "administration" ;
+    rdfs:domain fse:immunization ;
+    rdfs:range obo:DRON_00000005 ;
+    <tag:stardog:studio:label> "administration" .
+
+fse:for a owl:ObjectProperty ;
+    rdfs:label "for" ;
+    rdfs:domain fse:prescription ;
+    rdfs:range obo:DRON_00000005 ;
+    <tag:stardog:studio:label> "for" .
+
+fse:hasResponsible a owl:ObjectProperty ;
+    rdfs:label "hasResponsible" ;
+    rdfs:domain fse:firstAidReport ;
+    rdfs:range fse:healthWorker ;
+    <tag:stardog:studio:label> "hasResponsible" .
+
+fse:vehicle a owl:Class ;
+    rdfs:label "vehicle" ;
+    <tag:stardog:studio:label> "vehicle" .
+
+fse:plate a owl:DatatypeProperty ;
+    rdfs:label "plate" ;
+    rdfs:domain fse:vehicle ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "plate" .
+
+fse:cameWith a owl:ObjectProperty ;
+    rdfs:label "cameWith" ;
+    rdfs:domain fse:firstAidReport ;
+    rdfs:range fse:vehicle ;
+    <tag:stardog:studio:label> "cameWith" .
+
+fse:pregnancy a owl:Class ;
+    rdfs:label "pregnancy" ;
+    <tag:stardog:studio:label> "pregnancy" .
+
+fse:startedAt a owl:DatatypeProperty ;
+    rdfs:label "startedAt" ;
+    rdfs:domain fse:pregnancy ;
+    rdfs:range xsd:dateTime ;
+    <tag:stardog:studio:label> "startedAt" .
+
+fse:endedAt a owl:DatatypeProperty ;
+    rdfs:label "endedAt" ;
+    rdfs:domain fse:pregnancy ;
+    rdfs:range xsd:dateTime ;
+    <tag:stardog:studio:label> "endedAt" .
+
+fse:result a owl:DatatypeProperty ;
+    rdfs:label "result" ;
+    rdfs:domain fse:pregnancy ;
+    rdfs:range xsd:boolean ;
+    <tag:stardog:studio:label> "result" .
+
+fse:includesField a owl:ObjectProperty ;
+    rdfs:label "includesField" ;
+    rdfs:domain fse:clinicalDocument ;
+    <tag:stardog:studio:label> "includesField" .
+
+fse:includesOrganDonor a owl:DatatypeProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesOrganDonor" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range xsd:boolean ;
+    <tag:stardog:studio:label> "includesOrganDonor" .
+
+fse:includesPregnancy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesPregnancy" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range fse:pregnancy ;
+    <tag:stardog:studio:label> "includesPregnancy" .
+
+fse:includesMedicalNotes a owl:DatatypeProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesMedicalNotes" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "includesMedicalNotes" .
+
+fse:includesAllergy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesAllergy" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range obo:DOID_1205 ;
+    <tag:stardog:studio:label> "includesAllergy" .
+
+fse:includesTherapy a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesTherapy" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range fse:therapy ;
+    <tag:stardog:studio:label> "includesTherapy" .
+
+fse:includesDisease a owl:ObjectProperty ;
+    rdfs:subPropertyOf fse:includesField ;
+    rdfs:label "includesDisease" ;
+    rdfs:domain fse:summaryHealthProfile ;
+    rdfs:range obo:DOID_4 ;
+    <tag:stardog:studio:label> "includesDisease" .
+
+fse:therapy a owl:Class ;
+    rdfs:label "therapy" ;
+    <tag:stardog:studio:label> "therapy" .
+
+fse:therapyMedicinal a owl:Class ;
+    rdfs:label "therapyMedicinal" ;
+    <tag:stardog:studio:label> "therapyMedicinal" .
+
+fse:hasIntake a owl:ObjectProperty ;
+    rdfs:label "hasIntake" ;
+    rdfs:domain fse:therapy ;
+    rdfs:range fse:therapyMedicinal ;
+    <tag:stardog:studio:label> "hasIntake" .
+
+fse:hasMedicinal a owl:ObjectProperty ;
+    rdfs:label "hasMedicinal" ;
+    rdfs:domain fse:therapyMedicinal ;
+    rdfs:range obo:DRON_00000005 ;
+    <tag:stardog:studio:label> "hasMedicinal" .
+
+fse:startDate a owl:DatatypeProperty ;
+    rdfs:label "startDate" ;
+    rdfs:domain fse:therapyMedicinal ;
+    rdfs:range xsd:date ;
+    <tag:stardog:studio:label> "startDate" .
+
+fse:dailyQuantity a owl:DatatypeProperty ;
+    rdfs:label "dailyQuantity" ;
+    rdfs:domain fse:therapyMedicinal ;
+    rdfs:range xsd:decimal ;
+    <tag:stardog:studio:label> "dailyQuantity" .
+
+fse:hasCustodian a owl:ObjectProperty ;
+    rdfs:label "hasCustodian" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:healthOrganization ;
+    <tag:stardog:studio:label> "hasCustodian" .
+
+fse:worksIn a owl:ObjectProperty ;
+    rdfs:label "worksIn" ;
+    rdfs:domain fse:healthWorker ;
+    rdfs:range fse:healthcareFacility ;
+    <tag:stardog:studio:label> "worksIn" .
+
+fse:laboratory a owl:Class ;
+    rdfs:label "laboratory" ;
+    rdfs:subClassOf fse:healthcareFacility ;
+    <tag:stardog:studio:label> "laboratory" .
+
+fse:hasLaboratory a owl:ObjectProperty ;
+    rdfs:label "hasLaboratory" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:laboratory ;
+    <tag:stardog:studio:label> "hasLaboratory" .
+
+fse:reportType a owl:Class ;
+    rdfs:label "reportType" ;
+    owl:unionOf ( <https://loinc.org/document-ontology/18717-9> <https://loinc.org/document-ontology/18718-7> <https://loinc.org/document-ontology/18719-5> <https://loinc.org/document-ontology/18720-3> <https://loinc.org/document-ontology/18721-1> <https://loinc.org/document-ontology/18722-9> <https://loinc.org/document-ontology/18723-7> <https://loinc.org/document-ontology/18724-5> <https://loinc.org/document-ontology/18725-2> <https://loinc.org/document-ontology/18727-8> <https://loinc.org/document-ontology/18728-6> <https://loinc.org/document-ontology/18729-4> <https://loinc.org/document-ontology/18767-4> <https://loinc.org/document-ontology/18768-2> <https://loinc.org/document-ontology/18769-0> <https://loinc.org/document-ontology/26435-8> <https://loinc.org/document-ontology/26436-6> <https://loinc.org/document-ontology/26437-4> <https://loinc.org/document-ontology/26438-2> <https://loinc.org/document-ontology/18716-1> <https://loinc.org/document-ontology/26439-0> ) ;
+    <tag:stardog:studio:label> "reportType" .
+
+fse:hasType a owl:ObjectProperty ;
+    rdfs:label "hasType" ;
+    rdfs:domain fse:laboratoryMedicineReport ;
+    rdfs:range fse:reportType ;
+    <tag:stardog:studio:label> "hasType" .
+
+fse:inFulfillmentOf a owl:ObjectProperty ;
+    rdfs:label "inFulfillmentOf" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:clinicalDocument ;
+    <tag:stardog:studio:label> "inFulfillmentOf" .
+
+fse:hasSpecialistReportType a owl:DatatypeProperty ;
+    rdfs:label "hasSpecialistReportType" ;
+    rdfs:domain fse:outpatientSpecialistReport ;
+    rdfs:range [
+        a rdfs:Datatype ;
+        owl:oneOf ( "Ortopedia" "Cardiologia" "Odontoiatria" )
+    ] ;
+    <tag:stardog:studio:label> "hasSpecialistReportType" .
+
+fse:fiscalCode a owl:DatatypeProperty ;
+    rdfs:label "fiscalCode" ;
+    rdfs:domain fse:patient ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "fiscalCode" .
+
+fse:healthCardNumber a owl:DatatypeProperty ;
+    rdfs:label "healthCardNumber" ;
+    rdfs:domain fse:patient ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "healthCardNumber" .
+
+fse:hasHumanAuthor a owl:ObjectProperty ;
+    rdfs:label "hasHumanAuthor" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:healthWorker ;
+    <tag:stardog:studio:label> "hasHumanAuthor" .
+
+fse:hasDeviceAuthor a owl:ObjectProperty ;
+    rdfs:label "hasDeviceAuthor" ;
+    rdfs:domain fse:clinicalDocument ;
+    rdfs:range fse:device ;
+    <tag:stardog:studio:label> "hasDeviceAuthor" .
+
+fse:hasIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasIdentifier" ;
+    rdfs:domain fse:device ;
+    rdfs:range xsd:string ;
+    <tag:stardog:studio:label> "hasIdentifier" .
+
+[
+    a owl:Restriction ;
+    owl:onProperty fse:cameWith ;
+    owl:minCardinalityQ 0 ;
+    owl:maxCardinalityQ 1
+] .
