@@ -95,6 +95,24 @@
                <tag:stardog:studio:label> "hasBeenSigned"@en .
 
 
+###  http://api.stardog.com/hasCode
+:hasCode rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:range :LOINC_code ;
+         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collega il documento al proprio codice LOINC univoco."@it ,
+                                                                     "Links the document to its own LOINC code."@en ;
+         rdfs:label "hasCode" ;
+         <tag:stardog:studio:label> "hasCode" .
+
+
+###  http://api.stardog.com/hasDocumentCode
+:hasDocumentCode rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasCode ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain fse:clinicalDocument .
+
+
 ###  http://api.stardog.com/hasLegalAuthenticator
 :hasLegalAuthenticator rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf owl:topObjectProperty ;
@@ -112,6 +130,13 @@
             rdfs:comment "Points to a section that composes the document"@en ;
             rdfs:label "hasSection"@en ;
             <tag:stardog:studio:label> "hasSection"@en .
+
+
+###  http://api.stardog.com/hasSectionCode
+:hasSectionCode rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasCode ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain :section .
 
 
 ###  http://api.stardog.com/isLessConfidentialThan
@@ -139,31 +164,6 @@
           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Link the section with the releated clinicalDocument"@en ;
           rdfs:label "isPartOf" ;
           <tag:stardog:studio:label> "isPartOf" .
-
-
-###  http://fse.ontology#hasCode
-:hasCode rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf owl:topObjectProperty ;
-         rdf:type owl:FunctionalProperty ;
-         rdfs:range :LOINC_code ;
-         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collega il documento al proprio codice LOINC univoco."@it ,
-                                                                     "Links the document to its own LOINC code."@en ;
-         rdfs:label "hasCode" ;
-         <tag:stardog:studio:label> "hasCode" .
-
-
-###  http://fse.ontology#hasDocumentCode
-:hasDocumentCode rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :hasCode ;
-                 rdf:type owl:FunctionalProperty ;
-                 rdfs:domain fse:clinicalDocument .
-
-
-###  http://fse.ontology#hasSectionCode
-:hasSectionCode rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :hasCode ;
-                rdf:type owl:FunctionalProperty ;
-                rdfs:domain :section .
 
 
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
@@ -528,7 +528,7 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                <tag:stardog:studio:label> "effectiveTime" .
 
 
-###  http://fse.ontology#title
+###  http://api.stardog.com/title
 :title rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf owl:topDataProperty ;
        rdf:type owl:FunctionalProperty ;
@@ -730,120 +730,545 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
             <tag:stardog:studio:label> "LOINC_code" .
 
 
+###  http://api.stardog.com/alerts
+:alerts rdf:type owl:Class ;
+        rdfs:subClassOf :section ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasSectionCode ;
+                          owl:hasValue <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        ] .
+
+
 ###  http://api.stardog.com/confidentialityCode
 :confidentialityCode rdf:type owl:Class .
+
+
+###  http://api.stardog.com/discharge
+:discharge rdf:type owl:Class ;
+           rdfs:subClassOf :section ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasSectionCode ;
+                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/18842-5>
+                           ] .
+
+
+###  http://api.stardog.com/dischargeDiagnoses
+:dischargeDiagnoses rdf:type owl:Class ;
+                    rdfs:subClassOf :section ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSectionCode ;
+                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/11535-2>
+                                    ] .
+
+
+###  http://api.stardog.com/dischargeExemption
+:dischargeExemption rdf:type owl:Class ;
+                    rdfs:subClassOf :section ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSectionCode ;
+                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/57827-8>
+                                    ] .
+
+
+###  http://api.stardog.com/historyOfDiseases
+:historyOfDiseases rdf:type owl:Class ;
+                   rdfs:subClassOf :section ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasSectionCode ;
+                                     owl:hasValue <http://purl.bioontology.org/ontology/LNC/11450-4>
+                                   ] .
+
+
+###  http://api.stardog.com/historyOfPregnancies
+:historyOfPregnancies rdf:type owl:Class ;
+                      rdfs:subClassOf :section ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :hasSectionCode ;
+                                        owl:hasValue <http://purl.bioontology.org/ontology/LNC/10162-6>
+                                      ] .
+
+
+###  http://api.stardog.com/immunizationCard
+:immunizationCard rdf:type owl:Class ;
+                  rdfs:subClassOf :section ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasSectionCode ;
+                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
+                                  ] .
+
+
+###  http://api.stardog.com/immunizations
+:immunizations rdf:type owl:Class ;
+               rdfs:subClassOf :section ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasSectionCode ;
+                                 owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
+                               ] .
+
+
+###  http://api.stardog.com/medications
+:medications rdf:type owl:Class ;
+             rdfs:subClassOf :section ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasSectionCode ;
+                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/10160-0>
+                             ] .
+
+
+###  http://api.stardog.com/modeOfTransport
+:modeOfTransport rdf:type owl:Class ;
+                 rdfs:subClassOf :section ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :hasSectionCode ;
+                                   owl:hasValue <http://purl.bioontology.org/ontology/LNC/11459-5>
+                                 ] .
+
+
+###  http://api.stardog.com/osReport
+:osReport rdf:type owl:Class ;
+          rdfs:subClassOf :section ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasSectionCode ;
+                            owl:hasValue <http://purl.bioontology.org/ontology/LNC/47045-0>
+                          ] .
+
+
+###  http://api.stardog.com/performedExam
+:performedExam rdf:type owl:Class ;
+               rdfs:subClassOf :section ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasSectionCode ;
+                                 owl:hasValue <http://purl.bioontology.org/ontology/LNC/55111-9>
+                               ] .
+
+
+###  http://api.stardog.com/prescriptions
+:prescriptions rdf:type owl:Class ;
+               rdfs:subClassOf :section .
+
+
+###  http://api.stardog.com/progression
+:progression rdf:type owl:Class ;
+             rdfs:subClassOf :section ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasSectionCode ;
+                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/8648-8>
+                             ] .
+
+
+###  http://api.stardog.com/radReport
+:radReport rdf:type owl:Class ;
+           rdfs:subClassOf :section ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasSectionCode ;
+                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/18782-3>
+                           ] .
+
+
+###  http://api.stardog.com/reasonForAdmission
+:reasonForAdmission rdf:type owl:Class ;
+                    rdfs:subClassOf :section ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasSectionCode ;
+                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/46241-6>
+                                    ] .
+
+
+###  http://api.stardog.com/reasonForVisit
+:reasonForVisit rdf:type owl:Class ;
+                rdfs:subClassOf :section ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :hasSectionCode ;
+                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/46239-0>
+                                ] .
 
 
 ###  http://api.stardog.com/section
 :section rdf:type owl:Class .
 
 
+###  http://api.stardog.com/services
+:services rdf:type owl:Class ;
+          rdfs:subClassOf :section ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasSectionCode ;
+                            owl:hasValue <http://purl.bioontology.org/ontology/LNC/62387-6>
+                          ] .
+
+
 ###  http://api.stardog.com/sign
 :sign rdf:type owl:Class .
 
 
-###  http://fse.ontology#alerts
-:alerts rdf:type owl:Class ;
-        rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#discharge
-:discharge rdf:type owl:Class ;
-           rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#dischargeDiagnoses
-:dischargeDiagnoses rdf:type owl:Class ;
-                    rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#dischargeExemption
-:dischargeExemption rdf:type owl:Class ;
-                    rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#historyOfDiseases
-:historyOfDiseases rdf:type owl:Class ;
-                   rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#historyOfPregnancies
-:historyOfPregnancies rdf:type owl:Class ;
-                      rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#immunizationCard
-:immunizationCard rdf:type owl:Class ;
-                  rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#immunizations
-:immunizations rdf:type owl:Class ;
-               rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#medications
-:medications rdf:type owl:Class ;
-             rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#modeOfTransport
-:modeOfTransport rdf:type owl:Class ;
-                 rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#osReport
-:osReport rdf:type owl:Class ;
-          rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#performedExam
-:performedExam rdf:type owl:Class ;
-               rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#prescriptions
-:prescriptions rdf:type owl:Class ;
-               rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#progression
-:progression rdf:type owl:Class ;
-             rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#radReport
-:radReport rdf:type owl:Class ;
-           rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#reasonForAdmission
-:reasonForAdmission rdf:type owl:Class ;
-                    rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#reasonForVisit
-:reasonForVisit rdf:type owl:Class ;
-                rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#services
-:services rdf:type owl:Class ;
-          rdfs:subClassOf :section .
-
-
-###  http://fse.ontology#speciality
+###  http://api.stardog.com/speciality
 :speciality rdf:type owl:Class ;
-            rdfs:subClassOf :section .
+            rdfs:subClassOf :section ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18716-1>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18717-9>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18718-7>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18719-5>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18720-3>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18721-1>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18722-9>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18723-7>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18724-5>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18725-2>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18727-8>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18728-6>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18729-4>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18767-4>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18768-2>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18769-0>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26435-8>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26436-6>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26437-4>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26438-2>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSectionCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26439-0>
+                            ] .
 
 
-###  http://fse.ontology#triage
+###  http://api.stardog.com/triage
 :triage rdf:type owl:Class ;
-        rdfs:subClassOf :section .
+        rdfs:subClassOf :section ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasSectionCode ;
+                          owl:hasValue <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        ] .
+
+
+###  http://fse.ontology#admission
+:admission rdf:type owl:Class ;
+           rdfs:subClassOf fse:prescription .
+
+
+###  http://fse.ontology#pharma
+:pharma rdf:type owl:Class ;
+        rdfs:subClassOf fse:prescription .
+
+
+###  http://fse.ontology#specialist
+:specialist rdf:type owl:Class ;
+            rdfs:subClassOf fse:prescription .
+
+
+###  http://fse.ontology#transportRequest
+:transportRequest rdf:type owl:Class ;
+                  rdfs:subClassOf fse:prescription .
+
+
+###  http://fse.ontology#10160-0
+<http://fse.ontology#10160-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#10162-6
+<http://fse.ontology#10162-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#11369-6
+<http://fse.ontology#11369-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#11450-4
+<http://fse.ontology#11450-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#11459-5
+<http://fse.ontology#11459-5> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
 
 
 ###  http://fse.ontology#11488-4
 <http://fse.ontology#11488-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#11502-2
+<http://fse.ontology#11502-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#11535-2
+<http://fse.ontology#11535-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18716-1
+<http://fse.ontology#18716-1> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18717-9
+<http://fse.ontology#18717-9> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18718-7
+<http://fse.ontology#18718-7> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18719-5
+<http://fse.ontology#18719-5> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18720-3
+<http://fse.ontology#18720-3> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18721-1
+<http://fse.ontology#18721-1> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18722-9
+<http://fse.ontology#18722-9> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18723-7
+<http://fse.ontology#18723-7> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18724-5
+<http://fse.ontology#18724-5> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18725-2
+<http://fse.ontology#18725-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18727-8
+<http://fse.ontology#18727-8> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18728-6
+<http://fse.ontology#18728-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18729-4
+<http://fse.ontology#18729-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18767-4
+<http://fse.ontology#18767-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18768-2
+<http://fse.ontology#18768-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18769-0
+<http://fse.ontology#18769-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18782-3
+<http://fse.ontology#18782-3> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#18842-0000000
+<http://fse.ontology#18842-0000000> rdf:type owl:Class ;
+                                    rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#26435-8
+<http://fse.ontology#26435-8> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#26436-6
+<http://fse.ontology#26436-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#26437-4
+<http://fse.ontology#26437-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#26438-2
+<http://fse.ontology#26438-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#26439-0
+<http://fse.ontology#26439-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#34105-7
+<http://fse.ontology#34105-7> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#46239-0
+<http://fse.ontology#46239-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#46241-6
+<http://fse.ontology#46241-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#47045-0
+<http://fse.ontology#47045-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#48765-2
+<http://fse.ontology#48765-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#55111-9
+<http://fse.ontology#55111-9> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57827-8
+<http://fse.ontology#57827-8> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57829-4
+<http://fse.ontology#57829-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57830-2
+<http://fse.ontology#57830-2> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57831-0
+<http://fse.ontology#57831-0> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57832-8
+<http://fse.ontology#57832-8> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57833-6000
+<http://fse.ontology#57833-6000> rdf:type owl:Class ;
+                                 rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#57834-4
+<http://fse.ontology#57834-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#59258-4
+<http://fse.ontology#59258-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#60591-5
+<http://fse.ontology#60591-5> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#62387-6
+<http://fse.ontology#62387-6> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#68604-8
+<http://fse.ontology#68604-8> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#8648-8
+<http://fse.ontology#8648-8> rdf:type owl:Class ;
+                             rdfs:subClassOf :LOINC_code .
+
+
+###  http://fse.ontology#87273-9
+<http://fse.ontology#87273-9> rdf:type owl:Class ;
                               rdfs:subClassOf :LOINC_code .
 
 
@@ -885,7 +1310,6 @@ fse:clinicalDocument rdf:type owl:Class ;
                                                          fse:summaryHealthProfile
                                                        )
                                          ] ;
-                     owl:disjointWith fse:laboratoryMedicineReport ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "A generic clinical document."^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -1108,6 +1532,38 @@ fse:vehicle rdf:type owl:Class ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
 
 
+###  http://fse.ontology#ciao
+:ciao rdf:type owl:NamedIndividual ,
+               :discharge .
+
+
+###  http://purl.bioontology.org/ontology/LNC/10160-0
+<http://purl.bioontology.org/ontology/LNC/10160-0> rdf:type owl:NamedIndividual ,
+                                                            <http://fse.ontology#10160-0> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/10162-6
+<http://purl.bioontology.org/ontology/LNC/10162-6> rdf:type owl:NamedIndividual ,
+                                                            <http://fse.ontology#10162-6> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11369-6
+<http://purl.bioontology.org/ontology/LNC/11369-6> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#11369-6> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11450-4
+<http://purl.bioontology.org/ontology/LNC/11450-4> rdf:type owl:NamedIndividual ,
+                                                            <http://fse.ontology#11450-4> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11459-5
+<http://purl.bioontology.org/ontology/LNC/11459-5> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#11459-5> .
+
+
 ###  http://purl.bioontology.org/ontology/LNC/11488-4
 <http://purl.bioontology.org/ontology/LNC/11488-4> rdf:type owl:NamedIndividual ,
                                                             :LOINC_code ,
@@ -1116,67 +1572,271 @@ fse:vehicle rdf:type owl:Class ;
 
 ###  http://purl.bioontology.org/ontology/LNC/11502-2
 <http://purl.bioontology.org/ontology/LNC/11502-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#11502-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/11535-2
+<http://purl.bioontology.org/ontology/LNC/11535-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#11535-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18716-1
+<http://purl.bioontology.org/ontology/LNC/18716-1> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18716-1> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18717-9
+<http://purl.bioontology.org/ontology/LNC/18717-9> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18717-9> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18718-7
+<http://purl.bioontology.org/ontology/LNC/18718-7> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18718-7> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18719-5
+<http://purl.bioontology.org/ontology/LNC/18719-5> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18719-5> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18720-3
+<http://purl.bioontology.org/ontology/LNC/18720-3> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18720-3> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18721-1
+<http://purl.bioontology.org/ontology/LNC/18721-1> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18721-1> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18722-9
+<http://purl.bioontology.org/ontology/LNC/18722-9> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18722-9> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18723-7
+<http://purl.bioontology.org/ontology/LNC/18723-7> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18723-7> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18724-5
+<http://purl.bioontology.org/ontology/LNC/18724-5> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18724-5> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18725-2
+<http://purl.bioontology.org/ontology/LNC/18725-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18725-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18727-8
+<http://purl.bioontology.org/ontology/LNC/18727-8> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18727-8> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18728-6
+<http://purl.bioontology.org/ontology/LNC/18728-6> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18728-6> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18729-4
+<http://purl.bioontology.org/ontology/LNC/18729-4> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18729-4> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18767-4
+<http://purl.bioontology.org/ontology/LNC/18767-4> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18767-4> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18768-2
+<http://purl.bioontology.org/ontology/LNC/18768-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18768-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18769-0
+<http://purl.bioontology.org/ontology/LNC/18769-0> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18769-0> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18782-3
+<http://purl.bioontology.org/ontology/LNC/18782-3> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18782-3> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18842-5
+<http://purl.bioontology.org/ontology/LNC/18842-5> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#18842-0000000> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/26435-8
+<http://purl.bioontology.org/ontology/LNC/26435-8> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#26435-8> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/26436-6
+<http://purl.bioontology.org/ontology/LNC/26436-6> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#26436-6> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/26437-4
+<http://purl.bioontology.org/ontology/LNC/26437-4> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#26437-4> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/26438-2
+<http://purl.bioontology.org/ontology/LNC/26438-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#26438-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/26439-0
+<http://purl.bioontology.org/ontology/LNC/26439-0> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#26439-0> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/34105-7
 <http://purl.bioontology.org/ontology/LNC/34105-7> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#34105-7> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/46239-0
+<http://purl.bioontology.org/ontology/LNC/46239-0> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#46239-0> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/46241-6
+<http://purl.bioontology.org/ontology/LNC/46241-6> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#46241-6> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/47045-0
+<http://purl.bioontology.org/ontology/LNC/47045-0> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#47045-0> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/48765-2
+<http://purl.bioontology.org/ontology/LNC/48765-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#48765-2> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/54094-8
+<http://purl.bioontology.org/ontology/LNC/54094-8> rdf:type owl:NamedIndividual ,
                                                             :LOINC_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/55111-9
+<http://purl.bioontology.org/ontology/LNC/55111-9> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#55111-9> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57827-8
 <http://purl.bioontology.org/ontology/LNC/57827-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57827-8> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57829-4
 <http://purl.bioontology.org/ontology/LNC/57829-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57829-4> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57830-2
 <http://purl.bioontology.org/ontology/LNC/57830-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57830-2> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57831-0
 <http://purl.bioontology.org/ontology/LNC/57831-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57831-0> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57832-8
 <http://purl.bioontology.org/ontology/LNC/57832-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57832-8> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57833-6
 <http://purl.bioontology.org/ontology/LNC/57833-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57833-6000> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57834-4
 <http://purl.bioontology.org/ontology/LNC/57834-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#57834-4> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/59258-4
 <http://purl.bioontology.org/ontology/LNC/59258-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#59258-4> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/60591-5
 <http://purl.bioontology.org/ontology/LNC/60591-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#60591-5> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/62387-6
+<http://purl.bioontology.org/ontology/LNC/62387-6> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#62387-6> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/68604-8
 <http://purl.bioontology.org/ontology/LNC/68604-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#68604-8> .
+
+
+###  http://purl.bioontology.org/ontology/LNC/8648-8
+<http://purl.bioontology.org/ontology/LNC/8648-8> rdf:type owl:NamedIndividual ,
+                                                           :LOINC_code ,
+                                                           <http://fse.ontology#8648-8> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/87273-9
 <http://purl.bioontology.org/ontology/LNC/87273-9> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#87273-9> .
 
 
 [ <http://fse.ontology/www.w3.org/2002/07/owl#maxCardinalityQ> "1"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
@@ -1241,8 +1901,71 @@ fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOr
 
 
 [ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11369-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18716-1>
+                        <http://purl.bioontology.org/ontology/LNC/18717-9>
+                        <http://purl.bioontology.org/ontology/LNC/18718-7>
+                        <http://purl.bioontology.org/ontology/LNC/18719-5>
+                        <http://purl.bioontology.org/ontology/LNC/18720-3>
+                        <http://purl.bioontology.org/ontology/LNC/18721-1>
+                        <http://purl.bioontology.org/ontology/LNC/18722-9>
+                        <http://purl.bioontology.org/ontology/LNC/18723-7>
+                        <http://purl.bioontology.org/ontology/LNC/18724-5>
+                        <http://purl.bioontology.org/ontology/LNC/18725-2>
+                        <http://purl.bioontology.org/ontology/LNC/18727-8>
+                        <http://purl.bioontology.org/ontology/LNC/18728-6>
+                        <http://purl.bioontology.org/ontology/LNC/18729-4>
+                        <http://purl.bioontology.org/ontology/LNC/18767-4>
+                        <http://purl.bioontology.org/ontology/LNC/18768-2>
+                        <http://purl.bioontology.org/ontology/LNC/18769-0>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26435-8>
+                        <http://purl.bioontology.org/ontology/LNC/26436-6>
+                        <http://purl.bioontology.org/ontology/LNC/26437-4>
+                        <http://purl.bioontology.org/ontology/LNC/26438-2>
+                        <http://purl.bioontology.org/ontology/LNC/26439-0>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/11488-4>
                         <http://purl.bioontology.org/ontology/LNC/11502-2>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
                       )
 ] .
 
