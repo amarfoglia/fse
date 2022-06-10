@@ -141,6 +141,31 @@
           <tag:stardog:studio:label> "isPartOf" .
 
 
+###  http://fse.ontology#hasCode
+:hasCode rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:range :LOINC_code ;
+         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collega il documento al proprio codice LOINC univoco."@it ,
+                                                                     "Links the document to its own LOINC code."@en ;
+         rdfs:label "hasCode" ;
+         <tag:stardog:studio:label> "hasCode" .
+
+
+###  http://fse.ontology#hasDocumentCode
+:hasDocumentCode rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasCode ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain fse:clinicalDocument .
+
+
+###  http://fse.ontology#hasSectionCode
+:hasSectionCode rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasCode ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain :section .
+
+
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
 owl:topObjectProperty <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLegalAuthenticator"@en ;
@@ -503,9 +528,25 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                <tag:stardog:studio:label> "effectiveTime" .
 
 
+###  http://fse.ontology#title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdf:type owl:FunctionalProperty ;
+       rdfs:domain :section ;
+       rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
+       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il titolo di una sezione."@it ,
+                                                                   "Represent the title of a section."@en ;
+       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "title"@en ,
+                                                                 "titolo"@it ;
+       <tag:stardog:studio:label> "title"@en ,
+                                  "titolo"@it .
+
+
 ###  https://fse.ontology/body
-fse:body rdf:type owl:DatatypeProperty ;
-         rdfs:domain fse:clinicalDocument ;
+fse:body rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :section ,
+                     fse:clinicalDocument ;
          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "body"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
          <tag:stardog:studio:label> "body"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -683,38 +724,127 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 #################################################################
 
 ###  http://api.stardog.com/LOINC_code
-:LOINC_code rdf:type owl:Class .
+:LOINC_code rdf:type owl:Class ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents the LOINC code which uniquely identifies the type of document and its sections."@en ;
+            rdfs:label "LOINC_code" ;
+            <tag:stardog:studio:label> "LOINC_code" .
 
 
 ###  http://api.stardog.com/confidentialityCode
 :confidentialityCode rdf:type owl:Class .
 
 
-###  http://api.stardog.com/document_code
-:document_code rdf:type owl:Class ;
-               rdfs:subClassOf :LOINC_code ;
-               owl:disjointWith :section_code ;
-               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il codice LOINC che identifica univocamente la tipologia del documento."@it ,
-                                                                           "Represents the LOINC code which uniquely identifies the type of document."@en ;
-               rdfs:label "document_code" ;
-               <tag:stardog:studio:label> "document_code" .
-
-
 ###  http://api.stardog.com/section
 :section rdf:type owl:Class .
 
 
-###  http://api.stardog.com/section_code
-:section_code rdf:type owl:Class ;
-              rdfs:subClassOf :LOINC_code ;
-              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Rappresenta il codice LOINC che identifica univocamente la tipologia della sezione di uno specifico documento."@it ,
-                                                                          "Represents the LOINC code that uniquely identifies the type of section of a specific document."@en ;
-              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "section_code" ;
-              <tag:stardog:studio:label> "section_code" .
-
-
 ###  http://api.stardog.com/sign
 :sign rdf:type owl:Class .
+
+
+###  http://fse.ontology#alerts
+:alerts rdf:type owl:Class ;
+        rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#discharge
+:discharge rdf:type owl:Class ;
+           rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#dischargeDiagnoses
+:dischargeDiagnoses rdf:type owl:Class ;
+                    rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#dischargeExemption
+:dischargeExemption rdf:type owl:Class ;
+                    rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#historyOfDiseases
+:historyOfDiseases rdf:type owl:Class ;
+                   rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#historyOfPregnancies
+:historyOfPregnancies rdf:type owl:Class ;
+                      rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#immunizationCard
+:immunizationCard rdf:type owl:Class ;
+                  rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#immunizations
+:immunizations rdf:type owl:Class ;
+               rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#medications
+:medications rdf:type owl:Class ;
+             rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#modeOfTransport
+:modeOfTransport rdf:type owl:Class ;
+                 rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#osReport
+:osReport rdf:type owl:Class ;
+          rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#performedExam
+:performedExam rdf:type owl:Class ;
+               rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#prescriptions
+:prescriptions rdf:type owl:Class ;
+               rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#progression
+:progression rdf:type owl:Class ;
+             rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#radReport
+:radReport rdf:type owl:Class ;
+           rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#reasonForAdmission
+:reasonForAdmission rdf:type owl:Class ;
+                    rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#reasonForVisit
+:reasonForVisit rdf:type owl:Class ;
+                rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#services
+:services rdf:type owl:Class ;
+          rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#speciality
+:speciality rdf:type owl:Class ;
+            rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#triage
+:triage rdf:type owl:Class ;
+        rdfs:subClassOf :section .
+
+
+###  http://fse.ontology#11488-4
+<http://fse.ontology#11488-4> rdf:type owl:Class ;
+                              rdfs:subClassOf :LOINC_code .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -755,6 +885,7 @@ fse:clinicalDocument rdf:type owl:Class ;
                                                          fse:summaryHealthProfile
                                                        )
                                          ] ;
+                     owl:disjointWith fse:laboratoryMedicineReport ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "A generic clinical document."^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -979,72 +1110,73 @@ fse:vehicle rdf:type owl:Class ;
 
 ###  http://purl.bioontology.org/ontology/LNC/11488-4
 <http://purl.bioontology.org/ontology/LNC/11488-4> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code ,
+                                                            <http://fse.ontology#11488-4> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11502-2
 <http://purl.bioontology.org/ontology/LNC/11502-2> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/34105-7
 <http://purl.bioontology.org/ontology/LNC/34105-7> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57827-8
 <http://purl.bioontology.org/ontology/LNC/57827-8> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57829-4
 <http://purl.bioontology.org/ontology/LNC/57829-4> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57830-2
 <http://purl.bioontology.org/ontology/LNC/57830-2> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57831-0
 <http://purl.bioontology.org/ontology/LNC/57831-0> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57832-8
 <http://purl.bioontology.org/ontology/LNC/57832-8> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57833-6
 <http://purl.bioontology.org/ontology/LNC/57833-6> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57834-4
 <http://purl.bioontology.org/ontology/LNC/57834-4> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/59258-4
 <http://purl.bioontology.org/ontology/LNC/59258-4> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/60591-5
 <http://purl.bioontology.org/ontology/LNC/60591-5> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/68604-8
 <http://purl.bioontology.org/ontology/LNC/68604-8> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/87273-9
 <http://purl.bioontology.org/ontology/LNC/87273-9> rdf:type owl:NamedIndividual ,
-                                                            :document_code .
+                                                            :LOINC_code .
 
 
 [ <http://fse.ontology/www.w3.org/2002/07/owl#maxCardinalityQ> "1"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
@@ -1075,10 +1207,42 @@ fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOr
 #    General axioms
 #################################################################
 
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :alerts
+                :discharge
+                :dischargeDiagnoses
+                :dischargeExemption
+                :historyOfDiseases
+                :historyOfPregnancies
+                :immunizationCard
+                :immunizations
+                :medications
+                :modeOfTransport
+                :osReport
+                :performedExam
+                :prescriptions
+                :progression
+                :radReport
+                :reasonForAdmission
+                :reasonForVisit
+                :services
+                :speciality
+                :triage
+              )
+] .
+
+
 [ rdf:type owl:AllDifferent ;
   owl:distinctMembers ( :Normal
                         :Restricted
                         :Very_Restricted
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
                       )
 ] .
 
