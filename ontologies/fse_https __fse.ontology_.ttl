@@ -730,6 +730,16 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
             <tag:stardog:studio:label> "LOINC_code" .
 
 
+###  http://api.stardog.com/RML_code
+:RML_code rdf:type owl:Class ;
+          rdfs:subClassOf :LOINC_code .
+
+
+###  http://api.stardog.com/admission
+:admission rdf:type owl:Class ;
+           rdfs:subClassOf fse:prescription .
+
+
 ###  http://api.stardog.com/alerts
 :alerts rdf:type owl:Class ;
         rdfs:subClassOf :section ,
@@ -842,6 +852,11 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                                ] .
 
 
+###  http://api.stardog.com/pharma
+:pharma rdf:type owl:Class ;
+        rdfs:subClassOf fse:prescription .
+
+
 ###  http://api.stardog.com/prescriptions
 :prescriptions rdf:type owl:Class ;
                rdfs:subClassOf :section .
@@ -900,97 +915,28 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :sign rdf:type owl:Class .
 
 
-###  http://api.stardog.com/speciality
-:speciality rdf:type owl:Class ;
-            rdfs:subClassOf :section ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18716-1>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18717-9>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18718-7>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18719-5>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18720-3>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18721-1>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18722-9>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18723-7>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18724-5>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18725-2>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18727-8>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18728-6>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18729-4>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18767-4>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18768-2>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18769-0>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26435-8>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26436-6>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26437-4>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26438-2>
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasSectionCode ;
-                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/26439-0>
-                            ] .
+###  http://api.stardog.com/specialist
+:specialist rdf:type owl:Class ;
+            rdfs:subClassOf fse:prescription .
+
+
+###  http://api.stardog.com/specialty
+:specialty rdf:type owl:Class ;
+           rdfs:subClassOf :section ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasSectionCode ;
+                             owl:allValuesFrom :RML_code
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasSectionCode ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :RML_code
+                           ] .
+
+
+###  http://api.stardog.com/transportRequest
+:transportRequest rdf:type owl:Class ;
+                  rdfs:subClassOf fse:prescription .
 
 
 ###  http://api.stardog.com/triage
@@ -1000,276 +946,6 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                           owl:onProperty :hasSectionCode ;
                           owl:hasValue <http://purl.bioontology.org/ontology/LNC/11488-4>
                         ] .
-
-
-###  http://fse.ontology#admission
-:admission rdf:type owl:Class ;
-           rdfs:subClassOf fse:prescription .
-
-
-###  http://fse.ontology#pharma
-:pharma rdf:type owl:Class ;
-        rdfs:subClassOf fse:prescription .
-
-
-###  http://fse.ontology#specialist
-:specialist rdf:type owl:Class ;
-            rdfs:subClassOf fse:prescription .
-
-
-###  http://fse.ontology#transportRequest
-:transportRequest rdf:type owl:Class ;
-                  rdfs:subClassOf fse:prescription .
-
-
-###  http://fse.ontology#10160-0
-<http://fse.ontology#10160-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#10162-6
-<http://fse.ontology#10162-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11369-6
-<http://fse.ontology#11369-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11450-4
-<http://fse.ontology#11450-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11459-5
-<http://fse.ontology#11459-5> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11488-4
-<http://fse.ontology#11488-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11502-2
-<http://fse.ontology#11502-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#11535-2
-<http://fse.ontology#11535-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18716-1
-<http://fse.ontology#18716-1> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18717-9
-<http://fse.ontology#18717-9> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18718-7
-<http://fse.ontology#18718-7> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18719-5
-<http://fse.ontology#18719-5> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18720-3
-<http://fse.ontology#18720-3> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18721-1
-<http://fse.ontology#18721-1> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18722-9
-<http://fse.ontology#18722-9> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18723-7
-<http://fse.ontology#18723-7> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18724-5
-<http://fse.ontology#18724-5> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18725-2
-<http://fse.ontology#18725-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18727-8
-<http://fse.ontology#18727-8> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18728-6
-<http://fse.ontology#18728-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18729-4
-<http://fse.ontology#18729-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18767-4
-<http://fse.ontology#18767-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18768-2
-<http://fse.ontology#18768-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18769-0
-<http://fse.ontology#18769-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18782-3
-<http://fse.ontology#18782-3> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#18842-0000000
-<http://fse.ontology#18842-0000000> rdf:type owl:Class ;
-                                    rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#26435-8
-<http://fse.ontology#26435-8> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#26436-6
-<http://fse.ontology#26436-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#26437-4
-<http://fse.ontology#26437-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#26438-2
-<http://fse.ontology#26438-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#26439-0
-<http://fse.ontology#26439-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#34105-7
-<http://fse.ontology#34105-7> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#46239-0
-<http://fse.ontology#46239-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#46241-6
-<http://fse.ontology#46241-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#47045-0
-<http://fse.ontology#47045-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#48765-2
-<http://fse.ontology#48765-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#55111-9
-<http://fse.ontology#55111-9> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57827-8
-<http://fse.ontology#57827-8> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57829-4
-<http://fse.ontology#57829-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57830-2
-<http://fse.ontology#57830-2> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57831-0
-<http://fse.ontology#57831-0> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57832-8
-<http://fse.ontology#57832-8> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57833-6000
-<http://fse.ontology#57833-6000> rdf:type owl:Class ;
-                                 rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#57834-4
-<http://fse.ontology#57834-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#59258-4
-<http://fse.ontology#59258-4> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#60591-5
-<http://fse.ontology#60591-5> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#62387-6
-<http://fse.ontology#62387-6> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#68604-8
-<http://fse.ontology#68604-8> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#8648-8
-<http://fse.ontology#8648-8> rdf:type owl:Class ;
-                             rdfs:subClassOf :LOINC_code .
-
-
-###  http://fse.ontology#87273-9
-<http://fse.ontology#87273-9> rdf:type owl:Class ;
-                              rdfs:subClassOf :LOINC_code .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -1532,222 +1208,191 @@ fse:vehicle rdf:type owl:Class ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
 
 
-###  http://fse.ontology#ciao
+###  http://api.stardog.com/ciao
 :ciao rdf:type owl:NamedIndividual ,
-               :discharge .
+               :specialty ;
+      :hasSectionCode <http://purl.bioontology.org/ontology/LNC/26439-0> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/10160-0
-<http://purl.bioontology.org/ontology/LNC/10160-0> rdf:type owl:NamedIndividual ,
-                                                            <http://fse.ontology#10160-0> .
+<http://purl.bioontology.org/ontology/LNC/10160-0> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/10162-6
-<http://purl.bioontology.org/ontology/LNC/10162-6> rdf:type owl:NamedIndividual ,
-                                                            <http://fse.ontology#10162-6> .
+<http://purl.bioontology.org/ontology/LNC/10162-6> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11369-6
 <http://purl.bioontology.org/ontology/LNC/11369-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#11369-6> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11450-4
-<http://purl.bioontology.org/ontology/LNC/11450-4> rdf:type owl:NamedIndividual ,
-                                                            <http://fse.ontology#11450-4> .
+<http://purl.bioontology.org/ontology/LNC/11450-4> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11459-5
 <http://purl.bioontology.org/ontology/LNC/11459-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#11459-5> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11488-4
 <http://purl.bioontology.org/ontology/LNC/11488-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#11488-4> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11502-2
 <http://purl.bioontology.org/ontology/LNC/11502-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#11502-2> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/11535-2
 <http://purl.bioontology.org/ontology/LNC/11535-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#11535-2> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18716-1
 <http://purl.bioontology.org/ontology/LNC/18716-1> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18716-1> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18717-9
 <http://purl.bioontology.org/ontology/LNC/18717-9> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18717-9> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18718-7
 <http://purl.bioontology.org/ontology/LNC/18718-7> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18718-7> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18719-5
 <http://purl.bioontology.org/ontology/LNC/18719-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18719-5> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18720-3
 <http://purl.bioontology.org/ontology/LNC/18720-3> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18720-3> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18721-1
 <http://purl.bioontology.org/ontology/LNC/18721-1> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18721-1> .
+                                                            :RML_code .
+
+
+###  http://purl.bioontology.org/ontology/LNC/18721-7
+<http://purl.bioontology.org/ontology/LNC/18721-7> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18722-9
 <http://purl.bioontology.org/ontology/LNC/18722-9> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18722-9> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18723-7
 <http://purl.bioontology.org/ontology/LNC/18723-7> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18723-7> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18724-5
 <http://purl.bioontology.org/ontology/LNC/18724-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18724-5> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18725-2
 <http://purl.bioontology.org/ontology/LNC/18725-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18725-2> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18727-8
 <http://purl.bioontology.org/ontology/LNC/18727-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18727-8> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18728-6
 <http://purl.bioontology.org/ontology/LNC/18728-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18728-6> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18729-4
 <http://purl.bioontology.org/ontology/LNC/18729-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18729-4> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18767-4
 <http://purl.bioontology.org/ontology/LNC/18767-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18767-4> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18768-2
 <http://purl.bioontology.org/ontology/LNC/18768-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18768-2> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18769-0
 <http://purl.bioontology.org/ontology/LNC/18769-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18769-0> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18782-3
 <http://purl.bioontology.org/ontology/LNC/18782-3> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18782-3> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/18842-5
 <http://purl.bioontology.org/ontology/LNC/18842-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#18842-0000000> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/26435-8
 <http://purl.bioontology.org/ontology/LNC/26435-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#26435-8> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/26436-6
 <http://purl.bioontology.org/ontology/LNC/26436-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#26436-6> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/26437-4
 <http://purl.bioontology.org/ontology/LNC/26437-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#26437-4> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/26438-2
 <http://purl.bioontology.org/ontology/LNC/26438-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#26438-2> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/26439-0
 <http://purl.bioontology.org/ontology/LNC/26439-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#26439-0> .
+                                                            :RML_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/34105-7
 <http://purl.bioontology.org/ontology/LNC/34105-7> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#34105-7> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/46239-0
 <http://purl.bioontology.org/ontology/LNC/46239-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#46239-0> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/46241-6
 <http://purl.bioontology.org/ontology/LNC/46241-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#46241-6> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/47045-0
 <http://purl.bioontology.org/ontology/LNC/47045-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#47045-0> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/48765-2
 <http://purl.bioontology.org/ontology/LNC/48765-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#48765-2> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/54094-8
@@ -1757,86 +1402,72 @@ fse:vehicle rdf:type owl:Class ;
 
 ###  http://purl.bioontology.org/ontology/LNC/55111-9
 <http://purl.bioontology.org/ontology/LNC/55111-9> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#55111-9> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57827-8
 <http://purl.bioontology.org/ontology/LNC/57827-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57827-8> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57829-4
 <http://purl.bioontology.org/ontology/LNC/57829-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57829-4> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57830-2
 <http://purl.bioontology.org/ontology/LNC/57830-2> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57830-2> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57831-0
 <http://purl.bioontology.org/ontology/LNC/57831-0> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57831-0> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57832-8
 <http://purl.bioontology.org/ontology/LNC/57832-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57832-8> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57833-6
 <http://purl.bioontology.org/ontology/LNC/57833-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57833-6000> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57834-4
 <http://purl.bioontology.org/ontology/LNC/57834-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#57834-4> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/59258-4
 <http://purl.bioontology.org/ontology/LNC/59258-4> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#59258-4> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/60591-5
 <http://purl.bioontology.org/ontology/LNC/60591-5> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#60591-5> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/62387-6
 <http://purl.bioontology.org/ontology/LNC/62387-6> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#62387-6> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/68604-8
 <http://purl.bioontology.org/ontology/LNC/68604-8> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#68604-8> .
+                                                            :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/8648-8
 <http://purl.bioontology.org/ontology/LNC/8648-8> rdf:type owl:NamedIndividual ,
-                                                           :LOINC_code ,
-                                                           <http://fse.ontology#8648-8> .
+                                                           :LOINC_code .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/87273-9
 <http://purl.bioontology.org/ontology/LNC/87273-9> rdf:type owl:NamedIndividual ,
-                                                            :LOINC_code ,
-                                                            <http://fse.ontology#87273-9> .
+                                                            :LOINC_code .
 
 
 [ <http://fse.ontology/www.w3.org/2002/07/owl#maxCardinalityQ> "1"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
@@ -1886,7 +1517,7 @@ fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOr
                 :reasonForAdmission
                 :reasonForVisit
                 :services
-                :speciality
+                :specialty
                 :triage
               )
 ] .
@@ -1909,29 +1540,8 @@ fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOr
                         <http://purl.bioontology.org/ontology/LNC/11488-4>
                         <http://purl.bioontology.org/ontology/LNC/11502-2>
                         <http://purl.bioontology.org/ontology/LNC/11535-2>
-                        <http://purl.bioontology.org/ontology/LNC/18716-1>
-                        <http://purl.bioontology.org/ontology/LNC/18717-9>
-                        <http://purl.bioontology.org/ontology/LNC/18718-7>
-                        <http://purl.bioontology.org/ontology/LNC/18719-5>
-                        <http://purl.bioontology.org/ontology/LNC/18720-3>
-                        <http://purl.bioontology.org/ontology/LNC/18721-1>
-                        <http://purl.bioontology.org/ontology/LNC/18722-9>
-                        <http://purl.bioontology.org/ontology/LNC/18723-7>
-                        <http://purl.bioontology.org/ontology/LNC/18724-5>
-                        <http://purl.bioontology.org/ontology/LNC/18725-2>
-                        <http://purl.bioontology.org/ontology/LNC/18727-8>
-                        <http://purl.bioontology.org/ontology/LNC/18728-6>
-                        <http://purl.bioontology.org/ontology/LNC/18729-4>
-                        <http://purl.bioontology.org/ontology/LNC/18767-4>
-                        <http://purl.bioontology.org/ontology/LNC/18768-2>
-                        <http://purl.bioontology.org/ontology/LNC/18769-0>
                         <http://purl.bioontology.org/ontology/LNC/18782-3>
                         <http://purl.bioontology.org/ontology/LNC/18842-5>
-                        <http://purl.bioontology.org/ontology/LNC/26435-8>
-                        <http://purl.bioontology.org/ontology/LNC/26436-6>
-                        <http://purl.bioontology.org/ontology/LNC/26437-4>
-                        <http://purl.bioontology.org/ontology/LNC/26438-2>
-                        <http://purl.bioontology.org/ontology/LNC/26439-0>
                         <http://purl.bioontology.org/ontology/LNC/34105-7>
                         <http://purl.bioontology.org/ontology/LNC/46239-0>
                         <http://purl.bioontology.org/ontology/LNC/46241-6>
@@ -1957,15 +1567,771 @@ fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOr
 
 
 [ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/11488-4>
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
                         <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18716-1>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
                       )
 ] .
 
 
 [ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/18842-5>
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18717-9>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
                         <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18718-7>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18719-5>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18720-3>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18721-1>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18721-7>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18722-9>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18723-7>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18724-5>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18725-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18727-8>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18728-6>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18729-4>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18767-4>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18768-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18769-0>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26435-8>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26436-6>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26437-4>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26438-2>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( <http://purl.bioontology.org/ontology/LNC/10160-0>
+                        <http://purl.bioontology.org/ontology/LNC/10162-6>
+                        <http://purl.bioontology.org/ontology/LNC/11450-4>
+                        <http://purl.bioontology.org/ontology/LNC/11459-5>
+                        <http://purl.bioontology.org/ontology/LNC/11488-4>
+                        <http://purl.bioontology.org/ontology/LNC/11502-2>
+                        <http://purl.bioontology.org/ontology/LNC/11535-2>
+                        <http://purl.bioontology.org/ontology/LNC/18782-3>
+                        <http://purl.bioontology.org/ontology/LNC/18842-5>
+                        <http://purl.bioontology.org/ontology/LNC/26439-0>
+                        <http://purl.bioontology.org/ontology/LNC/34105-7>
+                        <http://purl.bioontology.org/ontology/LNC/46239-0>
+                        <http://purl.bioontology.org/ontology/LNC/46241-6>
+                        <http://purl.bioontology.org/ontology/LNC/47045-0>
+                        <http://purl.bioontology.org/ontology/LNC/48765-2>
+                        <http://purl.bioontology.org/ontology/LNC/54094-8>
+                        <http://purl.bioontology.org/ontology/LNC/55111-9>
+                        <http://purl.bioontology.org/ontology/LNC/57827-8>
+                        <http://purl.bioontology.org/ontology/LNC/57829-4>
+                        <http://purl.bioontology.org/ontology/LNC/57830-2>
+                        <http://purl.bioontology.org/ontology/LNC/57831-0>
+                        <http://purl.bioontology.org/ontology/LNC/57832-8>
+                        <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        <http://purl.bioontology.org/ontology/LNC/57834-4>
+                        <http://purl.bioontology.org/ontology/LNC/59258-4>
+                        <http://purl.bioontology.org/ontology/LNC/60591-5>
+                        <http://purl.bioontology.org/ontology/LNC/62387-6>
+                        <http://purl.bioontology.org/ontology/LNC/68604-8>
+                        <http://purl.bioontology.org/ontology/LNC/8648-8>
+                        <http://purl.bioontology.org/ontology/LNC/87273-9>
                       )
 ] .
 
