@@ -74,6 +74,18 @@
 #    Object Properties
 #################################################################
 
+###  http://api.stardog.com/boosterOf
+:boosterOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdf:type owl:FunctionalProperty ,
+                    owl:SymmetricProperty ;
+           rdfs:domain :booster ;
+           rdfs:range :substanceAdministration ;
+           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "boosterOf" ;
+           rdfs:comment "refers to administrated booster" ;
+           <tag:stardog:studio:label> "boosterOf" .
+
+
 ###  http://api.stardog.com/componentOf
 :componentOf rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
@@ -83,6 +95,17 @@
              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes the meeting between the patient and the health facility."@en ;
              rdfs:label "componentOf"@en ;
              <tag:stardog:studio:label> "componentOf"@en .
+
+
+###  http://api.stardog.com/consumable
+:consumable rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdf:type owl:FunctionalProperty ;
+            rdfs:domain :substanceAdministration ;
+            rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DRON_00000005> ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Refers to the administrated drug" ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "consumable" ;
+            <tag:stardog:studio:label> "consumable" .
 
 
 ###  http://api.stardog.com/hasBeenSigned
@@ -113,12 +136,37 @@
                  rdfs:domain fse:clinicalDocument .
 
 
+###  http://api.stardog.com/hasDocumentLatestVersion
+:hasDocumentLatestVersion rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf fse:hasLatestVersion ;
+                          rdf:type owl:FunctionalProperty ,
+                                   owl:IrreflexiveProperty ;
+                          rdfs:domain fse:clinicalDocument ;
+                          rdfs:range fse:clinicalDocument .
+
+
+###  http://api.stardog.com/hasDocumentPreviousVersion
+:hasDocumentPreviousVersion rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf fse:hasPreviousVersion ;
+                            rdf:type owl:FunctionalProperty ,
+                                     owl:IrreflexiveProperty ;
+                            rdfs:domain fse:clinicalDocument ;
+                            rdfs:range fse:clinicalDocument .
+
+
 ###  http://api.stardog.com/hasLegalAuthenticator
 :hasLegalAuthenticator rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf owl:topObjectProperty ;
                        rdf:type owl:FunctionalProperty ;
                        rdfs:domain :sign ;
                        rdfs:range fse:doctor .
+
+
+###  http://api.stardog.com/hasResult
+:hasResult rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain :specialty ;
+           rdfs:range :test .
 
 
 ###  http://api.stardog.com/hasSection
@@ -137,6 +185,24 @@
                 rdfs:subPropertyOf :hasCode ;
                 rdf:type owl:FunctionalProperty ;
                 rdfs:domain :section .
+
+
+###  http://api.stardog.com/hasTestLatestVersion
+:hasTestLatestVersion rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf fse:hasLatestVersion ;
+                      rdf:type owl:FunctionalProperty ,
+                               owl:IrreflexiveProperty ;
+                      rdfs:domain :test ;
+                      rdfs:range :test .
+
+
+###  http://api.stardog.com/hasTestPreviousVersion
+:hasTestPreviousVersion rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf fse:hasPreviousVersion ;
+                        rdf:type owl:FunctionalProperty ,
+                                 owl:IrreflexiveProperty ;
+                        rdfs:domain :test ;
+                        rdfs:range :test .
 
 
 ###  http://api.stardog.com/isLessConfidentialThan
@@ -166,18 +232,29 @@
           <tag:stardog:studio:label> "isPartOf" .
 
 
+###  http://api.stardog.com/participant
+:participant rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Location for the execution of drug administration" ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "participant" ;
+             <tag:stardog:studio:label> "participant" .
+
+
+###  http://api.stardog.com/via
+:via rdf:type owl:ObjectProperty ;
+     rdfs:subPropertyOf owl:topObjectProperty ;
+     rdf:type owl:FunctionalProperty ;
+     rdfs:domain :substanceAdministration ;
+     rdfs:range obo:OMIT_0005589 ;
+     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes route administration for drug" ;
+     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "via" ;
+     <tag:stardog:studio:label> "via" .
+
+
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
 owl:topObjectProperty <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLegalAuthenticator"@en ;
                       <tag:stardog:studio:label> "hasLegalAuthenticator"@en .
-
-
-###  https://fse.ontology/administration
-fse:administration rdf:type owl:ObjectProperty ;
-                   rdfs:domain fse:immunization ;
-                   rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DRON_00000005> ;
-                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "administration"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                   <tag:stardog:studio:label> "administration"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/belongsTo
@@ -216,11 +293,12 @@ fse:for rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasAllergy
 fse:hasAllergy rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf fse:hasField ;
+               rdfs:subPropertyOf fse:hasProfileField ;
                rdfs:domain fse:patient ;
                rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_1205> ;
                owl:propertyChainAxiom ( fse:hasClinicalDocument
                                         fse:hasLatestVersion
+                                        :hasSection
                                         fse:includesAllergy
                                       ) ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasAllergy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -252,11 +330,12 @@ fse:hasDeviceAuthor rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasDisease
 fse:hasDisease rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf fse:hasField ;
+               rdfs:subPropertyOf fse:hasProfileField ;
                rdfs:domain fse:patient ;
                rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_4> ;
                owl:propertyChainAxiom ( fse:hasClinicalDocument
                                         fse:hasLatestVersion
+                                        :hasSection
                                         fse:includesDisease
                                       ) ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasDisease"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -269,17 +348,6 @@ fse:hasFamilyDoctor rdf:type owl:ObjectProperty ;
                     rdfs:range fse:doctor ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasFamilyDoctor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "hasFamilyDoctor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/hasField
-fse:hasField rdf:type owl:ObjectProperty ;
-             rdfs:domain fse:patient ;
-             owl:propertyChainAxiom ( fse:hasClinicalDocument
-                                      fse:hasLatestVersion
-                                      fse:includesField
-                                    ) ;
-             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-             <tag:stardog:studio:label> "hasField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/hasGuardian
@@ -300,23 +368,17 @@ fse:hasHumanAuthor rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasImmunizationAgainst
 fse:hasImmunizationAgainst rdf:type owl:ObjectProperty ;
-                           rdfs:subPropertyOf fse:hasField ;
+                           rdfs:subPropertyOf fse:hasProfileField ;
                            rdfs:domain fse:patient ;
                            rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_4> ;
                            owl:propertyChainAxiom ( fse:hasClinicalDocument
                                                     fse:hasLatestVersion
+                                                    :hasSection
+                                                    fse:includesAdministration
                                                     fse:prevents
                                                   ) ;
                            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasImmunizationAgainst"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                            <tag:stardog:studio:label> "hasImmunizationAgainst"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/hasIntake
-fse:hasIntake rdf:type owl:ObjectProperty ;
-              rdfs:domain fse:therapy ;
-              rdfs:range fse:therapyMedicinal ;
-              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasIntake"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-              <tag:stardog:studio:label> "hasIntake"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/hasLaboratory
@@ -328,29 +390,18 @@ fse:hasLaboratory rdf:type owl:ObjectProperty ;
 
 
 ###  https://fse.ontology/hasLatestVersion
-fse:hasLatestVersion rdf:type owl:ObjectProperty ;
-                     rdfs:domain fse:clinicalDocument ;
-                     rdfs:range fse:clinicalDocument ;
+fse:hasLatestVersion rdf:type owl:ObjectProperty ,
+                              owl:TransitiveProperty ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLatestVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "hasLatestVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/hasMedicalNotes
 fse:hasMedicalNotes rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf fse:hasField ;
-                    rdfs:domain fse:patient ;
                     owl:propertyChainAxiom ( fse:hasClinicalDocument
                                              fse:hasLatestVersion
                                              fse:includesMedicalNotes
                                            ) .
-
-
-###  https://fse.ontology/hasMedicinal
-fse:hasMedicinal rdf:type owl:ObjectProperty ;
-                 rdfs:domain fse:therapyMedicinal ;
-                 rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DRON_00000005> ;
-                 <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasMedicinal"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                 <tag:stardog:studio:label> "hasMedicinal"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/hasParticipant
@@ -363,11 +414,12 @@ fse:hasParticipant rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasPregnancy
 fse:hasPregnancy rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf fse:hasField ;
+                 rdfs:subPropertyOf fse:hasProfileField ;
                  rdfs:domain fse:patient ;
                  rdfs:range fse:pregnancy ;
                  owl:propertyChainAxiom ( fse:hasClinicalDocument
                                           fse:hasLatestVersion
+                                          :hasSection
                                           fse:includesPregnancy
                                         ) ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasPregnancy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -375,11 +427,22 @@ fse:hasPregnancy rdf:type owl:ObjectProperty ;
 
 
 ###  https://fse.ontology/hasPreviousVersion
-fse:hasPreviousVersion rdf:type owl:ObjectProperty ;
-                       rdfs:domain fse:clinicalDocument ;
-                       rdfs:range fse:clinicalDocument ;
+fse:hasPreviousVersion rdf:type owl:ObjectProperty ,
+                                owl:TransitiveProperty ;
                        <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasPreviousVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                        <tag:stardog:studio:label> "hasPreviousVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+
+
+###  https://fse.ontology/hasProfileField
+fse:hasProfileField rdf:type owl:ObjectProperty ;
+                    rdfs:domain fse:patient ;
+                    owl:propertyChainAxiom ( fse:hasClinicalDocument
+                                             fse:hasLatestVersion
+                                             :hasSection
+                                             fse:includesField
+                                           ) ;
+                    <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+                    <tag:stardog:studio:label> "hasField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/hasRecipient
@@ -400,11 +463,12 @@ fse:hasResponsible rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasTherapy
 fse:hasTherapy rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf fse:hasField ;
+               rdfs:subPropertyOf fse:hasProfileField ;
                rdfs:domain fse:patient ;
                rdfs:range fse:therapy ;
                owl:propertyChainAxiom ( fse:hasClinicalDocument
                                         fse:hasLatestVersion
+                                        :hasSection
                                         fse:includesTherapy
                                       ) ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -423,10 +487,19 @@ document."""@en ;
                     <tag:stardog:studio:label> "inFulfillmentOf"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/includesAdministration
+fse:includesAdministration rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf fse:includesField ;
+                           rdfs:domain :immunizationCard ;
+                           rdfs:range :substanceAdministration ;
+                           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+                           <tag:stardog:studio:label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+
+
 ###  https://fse.ontology/includesAllergy
 fse:includesAllergy rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain fse:summaryHealthProfile ;
+                    rdfs:domain :alerts ;
                     rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_1205> ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesAllergy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesAllergy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -435,7 +508,7 @@ fse:includesAllergy rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesDisease
 fse:includesDisease rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain fse:summaryHealthProfile ;
+                    rdfs:domain :historyOfDiseases ;
                     rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_4> ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesDisease"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesDisease"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -443,27 +516,15 @@ fse:includesDisease rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/includesField
 fse:includesField rdf:type owl:ObjectProperty ;
-                  rdfs:domain fse:clinicalDocument ;
+                  rdfs:domain :section ;
                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                   <tag:stardog:studio:label> "includesField"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/includesMedicalNotes
-fse:includesMedicalNotes rdf:type owl:ObjectProperty ;
-                         rdfs:subPropertyOf fse:includesField ;
-                         rdfs:domain fse:summaryHealthProfile .
-
-
-###  https://fse.ontology/includesOrganDonor
-fse:includesOrganDonor rdf:type owl:ObjectProperty ;
-                       rdfs:subPropertyOf fse:includesField ;
-                       rdfs:domain fse:summaryHealthProfile .
 
 
 ###  https://fse.ontology/includesPregnancy
 fse:includesPregnancy rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf fse:includesField ;
-                      rdfs:domain fse:summaryHealthProfile ;
+                      rdfs:domain :historyOfPregnancies ;
                       rdfs:range fse:pregnancy ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesPregnancy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                       <tag:stardog:studio:label> "includesPregnancy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -472,7 +533,7 @@ fse:includesPregnancy rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesTherapy
 fse:includesTherapy rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain fse:summaryHealthProfile ;
+                    rdfs:domain :medications ;
                     rdfs:range fse:therapy ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -480,8 +541,6 @@ fse:includesTherapy rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/isOrganDonor
 fse:isOrganDonor rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf fse:hasField ;
-                 rdfs:domain fse:patient ;
                  owl:propertyChainAxiom ( fse:hasClinicalDocument
                                           fse:hasLatestVersion
                                           fse:includesOrganDonor
@@ -490,11 +549,10 @@ fse:isOrganDonor rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/prevents
 fse:prevents rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf fse:includesField ;
-             rdfs:domain fse:immunization ;
+             rdfs:domain :substanceAdministration ;
              rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_4> ;
-             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-             <tag:stardog:studio:label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "administration"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+             <tag:stardog:studio:label> "administration"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/refersTo
@@ -518,6 +576,34 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
+###  http://api.stardog.com/approachSiteCode
+:approachSiteCode rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :substanceAdministration ;
+                  rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
+                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "approachSiteCode" ;
+                  rdfs:comment "Interested anathomic part" ;
+                  rdfs:seeAlso "http://terminology.hl7.org/CodeSystem/v3-ActSite" ;
+                  <tag:stardog:studio:label> "approachSiteCode" .
+
+
+###  http://api.stardog.com/boosterNum
+:boosterNum rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :booster ;
+            rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#integer> .
+
+
+###  http://api.stardog.com/doseQuantity
+:doseQuantity rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :substanceAdministration ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Administrated quantity of drug" ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "doseQuantity" ;
+              <tag:stardog:studio:label> "doseQuantity" .
+
+
 ###  http://api.stardog.com/effectiveTime
 :effectiveTime rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
@@ -526,6 +612,56 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents the instant when an event occurred"@en ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "effectiveTime"@en ;
                <tag:stardog:studio:label> "effectiveTime" .
+
+
+###  http://api.stardog.com/material
+:material rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :test ;
+          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
+
+
+###  http://api.stardog.com/method
+:method rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :test ;
+        rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
+
+
+###  http://api.stardog.com/name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf owl:topDataProperty ;
+      rdfs:domain :test ;
+      rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
+
+
+###  http://api.stardog.com/nextBooster
+:nextBooster rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :booster ;
+             rdfs:range xsd:dateTime .
+
+
+###  http://api.stardog.com/statusCode
+:statusCode rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :booster ,
+                        fse:therapy ;
+            rdfs:range [ rdf:type rdfs:Datatype ;
+                         owl:oneOf [ rdf:type rdf:List ;
+                                     rdf:first "Aborted"^^xsd:string ;
+                                     rdf:rest [ rdf:type rdf:List ;
+                                                rdf:first "Active"^^xsd:string ;
+                                                rdf:rest [ rdf:type rdf:List ;
+                                                           rdf:first "Completed"^^xsd:string ;
+                                                           rdf:rest [ rdf:type rdf:List ;
+                                                                      rdf:first "Suspended"^^xsd:string ;
+                                                                      rdf:rest rdf:nil
+                                                                    ]
+                                                         ]
+                                              ]
+                                   ]
+                       ] .
 
 
 ###  http://api.stardog.com/title
@@ -540,6 +676,13 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                                                                  "titolo"@it ;
        <tag:stardog:studio:label> "title"@en ,
                                   "titolo"@it .
+
+
+###  http://api.stardog.com/unit
+:unit rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf owl:topDataProperty ;
+      rdfs:domain :test ;
+      rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
 ###  https://fse.ontology/body
@@ -570,18 +713,20 @@ fse:createdAt rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/dailyQuantity
 fse:dailyQuantity rdf:type owl:DatatypeProperty ;
-                  rdfs:domain fse:therapyMedicinal ;
+                  rdfs:domain fse:therapy ;
                   rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#decimal> ;
                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "dailyQuantity"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                   <tag:stardog:studio:label> "dailyQuantity"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://fse.ontology/endedAt
-fse:endedAt rdf:type owl:DatatypeProperty ;
-            rdfs:domain fse:pregnancy ;
-            rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <tag:stardog:studio:label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+###  https://fse.ontology/end
+fse:end rdf:type owl:DatatypeProperty ;
+        rdfs:domain :alerts ,
+                    fse:pregnancy ,
+                    fse:therapy ;
+        rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+        <tag:stardog:studio:label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/fiscalCode
@@ -681,26 +826,21 @@ fse:realmCode rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/result
 fse:result rdf:type owl:DatatypeProperty ;
-           rdfs:domain fse:pregnancy ;
-           rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> ;
+           rdfs:domain :test ,
+                       fse:pregnancy ;
+           rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "result"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
            <tag:stardog:studio:label> "result"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://fse.ontology/startDate
-fse:startDate rdf:type owl:DatatypeProperty ;
-              rdfs:domain fse:therapyMedicinal ;
-              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#date> ;
-              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "startDate"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-              <tag:stardog:studio:label> "startDate"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/startedAt
-fse:startedAt rdf:type owl:DatatypeProperty ;
-              rdfs:domain fse:pregnancy ;
-              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
-              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-              <tag:stardog:studio:label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+###  https://fse.ontology/start
+fse:start rdf:type owl:DatatypeProperty ;
+          rdfs:domain :alerts ,
+                      fse:pregnancy ,
+                      fse:therapy ;
+          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+          <tag:stardog:studio:label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/validUntil
@@ -747,6 +887,10 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                           owl:onProperty :hasSectionCode ;
                           owl:hasValue <http://purl.bioontology.org/ontology/LNC/48765-2>
                         ] .
+
+
+###  http://api.stardog.com/booster
+:booster rdf:type owl:Class .
 
 
 ###  http://api.stardog.com/confidentialityCode
@@ -832,6 +976,10 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                                    owl:onProperty :hasSectionCode ;
                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/11459-5>
                                  ] .
+
+
+###  http://api.stardog.com/observation
+:observation rdf:type owl:Class .
 
 
 ###  http://api.stardog.com/osReport
@@ -934,6 +1082,32 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
                            ] .
 
 
+###  http://api.stardog.com/substanceAdministration
+:substanceAdministration rdf:type owl:Class .
+
+
+###  http://api.stardog.com/test
+:test rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasTestLatestVersion ;
+                        owl:allValuesFrom :test
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasTestPreviousVersion ;
+                        owl:allValuesFrom :test
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasTestLatestVersion ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :test
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasTestPreviousVersion ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :test
+                      ] .
+
+
 ###  http://api.stardog.com/transportRequest
 :transportRequest rdf:type owl:Class ;
                   rdfs:subClassOf fse:prescription .
@@ -972,6 +1146,20 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 <http://fse.ontology/xmlns.com/foaf/0.1/Person> rdf:type owl:Class .
 
 
+###  http://purl.obolibrary.org/obo/NCIT_C116555
+obo:NCIT_C116555 rdf:type owl:Class ;
+                 rdfs:subClassOf :observation .
+
+
+###  http://purl.obolibrary.org/obo/NCIT_C15722
+obo:NCIT_C15722 rdf:type owl:Class ;
+                rdfs:subClassOf :observation .
+
+
+###  http://purl.obolibrary.org/obo/OMIT_0005589
+obo:OMIT_0005589 rdf:type owl:Class .
+
+
 ###  https://fse.ontology/clinicalDocument
 fse:clinicalDocument rdf:type owl:Class ;
                      owl:equivalentClass [ rdf:type owl:Class ;
@@ -986,6 +1174,24 @@ fse:clinicalDocument rdf:type owl:Class ;
                                                          fse:summaryHealthProfile
                                                        )
                                          ] ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasDocumentLatestVersion ;
+                                       owl:allValuesFrom fse:clinicalDocument
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasDocumentPreviousVersion ;
+                                       owl:allValuesFrom fse:clinicalDocument
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasDocumentLatestVersion ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass fse:clinicalDocument
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasDocumentPreviousVersion ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass fse:clinicalDocument
+                                     ] ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "A generic clinical document."^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -1162,12 +1368,6 @@ fse:summaryHealthProfile rdf:type owl:Class ;
 fse:therapy rdf:type owl:Class ;
             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "therapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
             <tag:stardog:studio:label> "therapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/therapyMedicinal
-fse:therapyMedicinal rdf:type owl:Class ;
-                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "therapyMedicinal"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                     <tag:stardog:studio:label> "therapyMedicinal"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/vehicle
@@ -1370,6 +1570,11 @@ fse:vehicle rdf:type owl:Class ;
                                                             :RML_code .
 
 
+###  http://purl.bioontology.org/ontology/LNC/30973-2
+<http://purl.bioontology.org/ontology/LNC/30973-2> rdf:type owl:NamedIndividual ,
+                                                            :LOINC_code .
+
+
 ###  http://purl.bioontology.org/ontology/LNC/34105-7
 <http://purl.bioontology.org/ontology/LNC/34105-7> rdf:type owl:NamedIndividual ,
                                                             :LOINC_code .
@@ -1475,52 +1680,32 @@ fse:vehicle rdf:type owl:Class ;
 ] .
 
 #################################################################
-#    Annotations
-#################################################################
-
-fse:hasMedicalNotes <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasMedicalNotes"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                     <tag:stardog:studio:label> "hasMedicalNotes"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-fse:includesMedicalNotes <tag:stardog:studio:label> "includesMedicalNotes"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesMedicalNotes"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-fse:includesOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesOrganDonor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                       <tag:stardog:studio:label> "includesOrganDonor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-fse:isOrganDonor <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "isOrganDonor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-                 <tag:stardog:studio:label> "isOrganDonor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-#################################################################
 #    General axioms
 #################################################################
 
 [ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :alerts
-                :discharge
-                :dischargeDiagnoses
-                :dischargeExemption
-                :historyOfDiseases
-                :historyOfPregnancies
-                :immunizationCard
-                :immunizations
-                :medications
-                :modeOfTransport
-                :osReport
-                :performedExam
-                :prescriptions
-                :progression
-                :radReport
-                :reasonForAdmission
-                :reasonForVisit
-                :services
-                :specialty
-                :triage
-              )
-] .
+   owl:members ( :alerts
+                 :discharge
+                 :dischargeDiagnoses
+                 :dischargeExemption
+                 :historyOfDiseases
+                 :historyOfPregnancies
+                 :immunizationCard
+                 :immunizations
+                 :medications
+                 :modeOfTransport
+                 :osReport
+                 :performedExam
+                 :prescriptions
+                 :progression
+                 :radReport
+                 :reasonForAdmission
+                 :reasonForVisit
+                 :services
+                 :specialty
+                 :triage
+               )
+ ] .
 
 
 [ rdf:type owl:AllDifferent ;
