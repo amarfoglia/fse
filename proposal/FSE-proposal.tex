@@ -250,7 +250,7 @@ terapeutico (Tabella \ref*{table:vpsSections}). Rappresentato da
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
     Motivo della visita  & \texttt{fse:reasonForVisit}  & 46239-0 & \small{Descrive il motivo per cui il paziente accede al Pronto Soccorso, ed il
     problema, il sintomo principale riscontrato o percepito dal paziente.}      \\ \hline 
-    Dimissione  & \texttt{fse:discharge}  & 28574-2 & \small{Descrive i dati
+    Dimissione  & \texttt{fse:discharge}  & 18842-5 & \small{Descrive i dati
     relativi alla fase di dimissione, tra cui la diagnosi di dimissione, la
     prognosi, l’esito del trattamento.}      \\ \hline
     Triage & \texttt{fse:triage}  & 54094-8 & \small{Definisce la fase di triage
@@ -287,7 +287,7 @@ in base alla tipologia di esame.
     \begin{tabularx}{\textwidth}{|l|l|c|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
-    Specialità  & \texttt{fse:specialty}  & * & \small{contiene i risultati di esami di laboratorio afferenti ad una singola specialità (ad esempio uno studio microbiologico) o a più specialità}      \\ \hline 
+    Specialità  & \texttt{fse:specialty}  & * & \small{Contiene i risultati di esami di laboratorio afferenti ad una singola specialità (ad esempio uno studio microbiologico) o a più specialità}      \\ \hline 
     \end{tabularx}
     \caption{Sezioni obbligatorie del documento RML}
     \label{table:rmlSections}
@@ -309,10 +309,10 @@ documento è quello di favorire la continuità di cura. Definito dalla classe
     Terapie  & \texttt{fse:medications}  & 10160-0 & \small{Deputata alla
     registrazione di tutte le informazioni inerenti le terapie
     farmacologiche (prescrizioni, somministrazioni, ecc.)}      \\ \hline
-    Lista dei Problemi	  & \small{\texttt{fse:HistoryOfDiseases}}  & 11450-4 & \small{Documenta tutti i problemi clinici rilevanti noti al momento in
+    Lista dei Problemi	  & \small{\texttt{fse:historyOfDiseases}}  & 11450-4 & \small{Documenta tutti i problemi clinici rilevanti noti al momento in
         cui è stato generato il documento (problemi clinici, condizioni,
         sospetti diagnostici e diagnosi certe, sintomi attuali o passati).}      \\ \hline 
-    Gravidanze e parto  & \small{\texttt{fse:HistoryOfPregnancies}}  & 10162-6 &
+    Gravidanze e parto  & \small{\texttt{fse:historyOfPregnancies}}  & 10162-6 &
         \small{Include tutte le informazioni inerenti gravidanze (incluso aborti spontanei), parti, eventuali
         complicanze derivate e stato mestruale}
         \\ \hline
@@ -418,10 +418,10 @@ direttamente parte del FSE ma è un'entità di supporto che permette di tracciar
 l'ordine che ha dato vita alla creazione di uno specifico referto. Questo lo si
 evince anche dalla estensione della relazione \texttt{fse:inFulfillmentOf}
 (Figura \ref*{fig:prescription}). Il documento di Prescrizione può
-concretizzarsi in diverse classi, ognuna identificata da uno specifico codice LOINC:
+concretizzarsi in diverse classi, ognuna è sottoclasse dell'entità
+\texttt{fse:prescription} ed è identificata da uno specifico codice LOINC:
 \begin{itemize}
     \item \textit{Prescrizione farmaceutica} (\texttt{fse:pharma});
-    medicinali.
     \item \textit{Prescrizione specialistica} (\texttt{fse:specialist});
     \item \textit{Prescrizione ricovero} (\texttt{fse:admission});
     \item \textit{Richiesta di trasporto} (\texttt{fse:transportRequest}).
