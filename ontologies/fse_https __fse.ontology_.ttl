@@ -122,36 +122,16 @@
 :hasCode rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf owl:topObjectProperty ;
          rdf:type owl:FunctionalProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :section
+                                     fse:clinicalDocument
+                                   )
+                     ] ;
          rdfs:range :LOINC_code ;
          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collega il documento al proprio codice LOINC univoco."@it ,
                                                                      "Links the document to its own LOINC code."@en ;
          rdfs:label "hasCode" ;
          <tag:stardog:studio:label> "hasCode" .
-
-
-###  http://api.stardog.com/hasDocumentCode
-:hasDocumentCode rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf :hasCode ;
-                 rdf:type owl:FunctionalProperty ;
-                 rdfs:domain fse:clinicalDocument .
-
-
-###  http://api.stardog.com/hasDocumentLatestVersion
-:hasDocumentLatestVersion rdf:type owl:ObjectProperty ;
-                          rdfs:subPropertyOf fse:hasLatestVersion ;
-                          rdf:type owl:FunctionalProperty ,
-                                   owl:IrreflexiveProperty ;
-                          rdfs:domain fse:clinicalDocument ;
-                          rdfs:range fse:clinicalDocument .
-
-
-###  http://api.stardog.com/hasDocumentPreviousVersion
-:hasDocumentPreviousVersion rdf:type owl:ObjectProperty ;
-                            rdfs:subPropertyOf fse:hasPreviousVersion ;
-                            rdf:type owl:FunctionalProperty ,
-                                     owl:IrreflexiveProperty ;
-                            rdfs:domain fse:clinicalDocument ;
-                            rdfs:range fse:clinicalDocument .
 
 
 ###  http://api.stardog.com/hasLegalAuthenticator
@@ -178,31 +158,6 @@
             rdfs:comment "Points to a section that composes the document"@en ;
             rdfs:label "hasSection"@en ;
             <tag:stardog:studio:label> "hasSection"@en .
-
-
-###  http://api.stardog.com/hasSectionCode
-:hasSectionCode rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf :hasCode ;
-                rdf:type owl:FunctionalProperty ;
-                rdfs:domain :section .
-
-
-###  http://api.stardog.com/hasTestLatestVersion
-:hasTestLatestVersion rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf fse:hasLatestVersion ;
-                      rdf:type owl:FunctionalProperty ,
-                               owl:IrreflexiveProperty ;
-                      rdfs:domain :test ;
-                      rdfs:range :test .
-
-
-###  http://api.stardog.com/hasTestPreviousVersion
-:hasTestPreviousVersion rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf fse:hasPreviousVersion ;
-                        rdf:type owl:FunctionalProperty ,
-                                 owl:IrreflexiveProperty ;
-                        rdfs:domain :test ;
-                        rdfs:range :test .
 
 
 ###  http://api.stardog.com/isLessConfidentialThan
@@ -249,6 +204,66 @@
      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes route administration for drug" ;
      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "via" ;
      <tag:stardog:studio:label> "via" .
+
+
+###  http://fse.ontology#hasAdministration
+:hasAdministration rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdf:type owl:FunctionalProperty ,
+                            owl:IrreflexiveProperty ;
+                   rdfs:domain :pharma ;
+                   rdfs:range :substanceAdministration .
+
+
+###  http://fse.ontology#hasMissionManager
+:hasMissionManager rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdfs:domain :modeOfTransport ;
+                   rdfs:range fse:healthWorker .
+
+
+###  http://fse.ontology#hasObservation
+:hasObservation rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdf:type owl:FunctionalProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain :specialist ;
+                rdfs:range :observation .
+
+
+###  http://fse.ontology#hasPerformer
+:hasPerformer rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( :discharge
+                                          :triage
+                                        )
+                          ] ;
+              rdfs:range fse:healthWorker .
+
+
+###  http://fse.ontology#hasProcedure
+:hasProcedure rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdf:type owl:FunctionalProperty ,
+                       owl:IrreflexiveProperty ;
+              rdfs:domain :services ;
+              rdfs:range :operatingProcedure .
+
+
+###  http://fse.ontology#mainProblem
+:mainProblem rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :reasonForVisit ;
+             rdfs:range :observation .
+
+
+###  http://fse.ontology#transfer
+:transfer rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :discharge ;
+          rdfs:range <http://fse.ontology/www.w3.org/ns/org#Organization> .
 
 
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
@@ -391,7 +406,18 @@ fse:hasLaboratory rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasLatestVersion
 fse:hasLatestVersion rdf:type owl:ObjectProperty ,
-                              owl:TransitiveProperty ;
+                              owl:FunctionalProperty ,
+                              owl:IrreflexiveProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :test
+                                                 fse:clinicalDocument
+                                               )
+                                 ] ;
+                     rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( :test
+                                                fse:clinicalDocument
+                                              )
+                                ] ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLatestVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "hasLatestVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
@@ -428,7 +454,18 @@ fse:hasPregnancy rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasPreviousVersion
 fse:hasPreviousVersion rdf:type owl:ObjectProperty ,
-                                owl:TransitiveProperty ;
+                                owl:FunctionalProperty ,
+                                owl:IrreflexiveProperty ;
+                       rdfs:domain [ rdf:type owl:Class ;
+                                     owl:unionOf ( :test
+                                                   fse:clinicalDocument
+                                                 )
+                                   ] ;
+                       rdfs:range [ rdf:type owl:Class ;
+                                    owl:unionOf ( :test
+                                                  fse:clinicalDocument
+                                                )
+                                  ] ;
                        <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasPreviousVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                        <tag:stardog:studio:label> "hasPreviousVersion"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
@@ -607,7 +644,12 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 ###  http://api.stardog.com/effectiveTime
 :effectiveTime rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
-               rdfs:domain :sign ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :discharge
+                                           :sign
+                                           :triage
+                                         )
+                           ] ;
                rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents the instant when an event occurred"@en ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "effectiveTime"@en ;
@@ -645,8 +687,13 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 ###  http://api.stardog.com/statusCode
 :statusCode rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
-            rdfs:domain :booster ,
-                        fse:therapy ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :booster
+                                        :discharge
+                                        :triage
+                                        fse:therapy
+                                      )
+                        ] ;
             rdfs:range [ rdf:type rdfs:Datatype ;
                          owl:oneOf [ rdf:type rdf:List ;
                                      rdf:first "Aborted"^^xsd:string ;
@@ -685,11 +732,30 @@ fse:worksIn rdf:type owl:ObjectProperty ;
       rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
+###  http://fse.ontology#vehicle
+:vehicle rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :modeOfTransport ;
+         rdfs:range [ rdf:type rdfs:Datatype ;
+                      owl:oneOf [ rdf:type rdf:List ;
+                                  rdf:first "Ambulance"^^xsd:string ;
+                                  rdf:rest [ rdf:type rdf:List ;
+                                             rdf:first "Helicopter"^^xsd:string ;
+                                             rdf:rest rdf:nil
+                                           ]
+                                ]
+                    ] .
+
+
 ###  https://fse.ontology/body
-fse:body rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty ;
-         rdfs:domain :section ,
-                     fse:clinicalDocument ;
+fse:body rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :section
+                                     fse:clinicalDocument
+                                   )
+                     ] ;
          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "body"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
          <tag:stardog:studio:label> "body"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -697,6 +763,7 @@ fse:body rdf:type owl:DatatypeProperty ,
 
 ###  https://fse.ontology/confidentialityCode
 fse:confidentialityCode rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
                         rdfs:domain fse:clinicalDocument ;
                         rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
                         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "confidentialityCode"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -705,6 +772,7 @@ fse:confidentialityCode rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/createdAt
 fse:createdAt rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain fse:clinicalDocument ;
               rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "createdAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -713,6 +781,7 @@ fse:createdAt rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/dailyQuantity
 fse:dailyQuantity rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
                   rdfs:domain fse:therapy ;
                   rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#decimal> ;
                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "dailyQuantity"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -721,9 +790,13 @@ fse:dailyQuantity rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/end
 fse:end rdf:type owl:DatatypeProperty ;
-        rdfs:domain :alerts ,
-                    fse:pregnancy ,
-                    fse:therapy ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :alerts
+                                    fse:pregnancy
+                                    fse:therapy
+                                  )
+                    ] ;
         rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
         <tag:stardog:studio:label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -731,6 +804,7 @@ fse:end rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/fiscalCode
 fse:fiscalCode rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
                rdfs:domain fse:patient ;
                rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "fiscalCode"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -739,6 +813,7 @@ fse:fiscalCode rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/hasIdentifier
 fse:hasIdentifier rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
                   rdfs:domain fse:device ;
                   rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasIdentifier"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -747,6 +822,7 @@ fse:hasIdentifier rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/hasMedicalNotes
 fse:hasMedicalNotes rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
                     rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
@@ -826,8 +902,11 @@ fse:realmCode rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/result
 fse:result rdf:type owl:DatatypeProperty ;
-           rdfs:domain :test ,
-                       fse:pregnancy ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :test
+                                       fse:pregnancy
+                                     )
+                       ] ;
            rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "result"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
            <tag:stardog:studio:label> "result"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -835,9 +914,12 @@ fse:result rdf:type owl:DatatypeProperty ;
 
 ###  https://fse.ontology/start
 fse:start rdf:type owl:DatatypeProperty ;
-          rdfs:domain :alerts ,
-                      fse:pregnancy ,
-                      fse:therapy ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :alerts
+                                      fse:pregnancy
+                                      fse:therapy
+                                    )
+                      ] ;
           rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
           <tag:stardog:studio:label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -884,7 +966,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :alerts rdf:type owl:Class ;
         rdfs:subClassOf :section ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :hasSectionCode ;
+                          owl:onProperty :hasCode ;
                           owl:hasValue <http://purl.bioontology.org/ontology/LNC/48765-2>
                         ] .
 
@@ -901,7 +983,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :discharge rdf:type owl:Class ;
            rdfs:subClassOf :section ,
                            [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasSectionCode ;
+                             owl:onProperty :hasCode ;
                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18842-5>
                            ] .
 
@@ -910,7 +992,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :dischargeDiagnoses rdf:type owl:Class ;
                     rdfs:subClassOf :section ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty :hasSectionCode ;
+                                      owl:onProperty :hasCode ;
                                       owl:hasValue <http://purl.bioontology.org/ontology/LNC/11535-2>
                                     ] .
 
@@ -919,7 +1001,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :dischargeExemption rdf:type owl:Class ;
                     rdfs:subClassOf :section ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty :hasSectionCode ;
+                                      owl:onProperty :hasCode ;
                                       owl:hasValue <http://purl.bioontology.org/ontology/LNC/57827-8>
                                     ] .
 
@@ -928,7 +1010,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :historyOfDiseases rdf:type owl:Class ;
                    rdfs:subClassOf :section ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty :hasSectionCode ;
+                                     owl:onProperty :hasCode ;
                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/11450-4>
                                    ] .
 
@@ -937,7 +1019,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :historyOfPregnancies rdf:type owl:Class ;
                       rdfs:subClassOf :section ,
                                       [ rdf:type owl:Restriction ;
-                                        owl:onProperty :hasSectionCode ;
+                                        owl:onProperty :hasCode ;
                                         owl:hasValue <http://purl.bioontology.org/ontology/LNC/10162-6>
                                       ] .
 
@@ -946,7 +1028,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :immunizationCard rdf:type owl:Class ;
                   rdfs:subClassOf :section ,
                                   [ rdf:type owl:Restriction ;
-                                    owl:onProperty :hasSectionCode ;
+                                    owl:onProperty :hasCode ;
                                     owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
                                   ] .
 
@@ -955,7 +1037,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :immunizations rdf:type owl:Class ;
                rdfs:subClassOf :section ,
                                [ rdf:type owl:Restriction ;
-                                 owl:onProperty :hasSectionCode ;
+                                 owl:onProperty :hasCode ;
                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
                                ] .
 
@@ -964,7 +1046,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :medications rdf:type owl:Class ;
              rdfs:subClassOf :section ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty :hasSectionCode ;
+                               owl:onProperty :hasCode ;
                                owl:hasValue <http://purl.bioontology.org/ontology/LNC/10160-0>
                              ] .
 
@@ -973,20 +1055,21 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :modeOfTransport rdf:type owl:Class ;
                  rdfs:subClassOf :section ,
                                  [ rdf:type owl:Restriction ;
-                                   owl:onProperty :hasSectionCode ;
+                                   owl:onProperty :hasCode ;
                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/11459-5>
                                  ] .
 
 
 ###  http://api.stardog.com/observation
-:observation rdf:type owl:Class .
+:observation rdf:type owl:Class ;
+             rdfs:subClassOf :operatingProcedure .
 
 
 ###  http://api.stardog.com/osReport
 :osReport rdf:type owl:Class ;
           rdfs:subClassOf :section ,
                           [ rdf:type owl:Restriction ;
-                            owl:onProperty :hasSectionCode ;
+                            owl:onProperty :hasCode ;
                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/47045-0>
                           ] .
 
@@ -995,7 +1078,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :performedExam rdf:type owl:Class ;
                rdfs:subClassOf :section ,
                                [ rdf:type owl:Restriction ;
-                                 owl:onProperty :hasSectionCode ;
+                                 owl:onProperty :hasCode ;
                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/55111-9>
                                ] .
 
@@ -1014,7 +1097,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :progression rdf:type owl:Class ;
              rdfs:subClassOf :section ,
                              [ rdf:type owl:Restriction ;
-                               owl:onProperty :hasSectionCode ;
+                               owl:onProperty :hasCode ;
                                owl:hasValue <http://purl.bioontology.org/ontology/LNC/8648-8>
                              ] .
 
@@ -1023,7 +1106,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :radReport rdf:type owl:Class ;
            rdfs:subClassOf :section ,
                            [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasSectionCode ;
+                             owl:onProperty :hasCode ;
                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/18782-3>
                            ] .
 
@@ -1032,7 +1115,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :reasonForAdmission rdf:type owl:Class ;
                     rdfs:subClassOf :section ,
                                     [ rdf:type owl:Restriction ;
-                                      owl:onProperty :hasSectionCode ;
+                                      owl:onProperty :hasCode ;
                                       owl:hasValue <http://purl.bioontology.org/ontology/LNC/46241-6>
                                     ] .
 
@@ -1041,7 +1124,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :reasonForVisit rdf:type owl:Class ;
                 rdfs:subClassOf :section ,
                                 [ rdf:type owl:Restriction ;
-                                  owl:onProperty :hasSectionCode ;
+                                  owl:onProperty :hasCode ;
                                   owl:hasValue <http://purl.bioontology.org/ontology/LNC/46239-0>
                                 ] .
 
@@ -1054,7 +1137,7 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :services rdf:type owl:Class ;
           rdfs:subClassOf :section ,
                           [ rdf:type owl:Restriction ;
-                            owl:onProperty :hasSectionCode ;
+                            owl:onProperty :hasCode ;
                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/62387-6>
                           ] .
 
@@ -1072,39 +1155,25 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :specialty rdf:type owl:Class ;
            rdfs:subClassOf :section ,
                            [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasSectionCode ;
+                             owl:onProperty :hasCode ;
                              owl:allValuesFrom :RML_code
-                           ] ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty :hasSectionCode ;
-                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                             owl:onClass :RML_code
                            ] .
 
 
 ###  http://api.stardog.com/substanceAdministration
-:substanceAdministration rdf:type owl:Class .
+:substanceAdministration rdf:type owl:Class ;
+                         rdfs:subClassOf :operatingProcedure .
 
 
 ###  http://api.stardog.com/test
 :test rdf:type owl:Class ;
       rdfs:subClassOf [ rdf:type owl:Restriction ;
-                        owl:onProperty :hasTestLatestVersion ;
+                        owl:onProperty fse:hasLatestVersion ;
                         owl:allValuesFrom :test
                       ] ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty :hasTestPreviousVersion ;
+                        owl:onProperty fse:hasPreviousVersion ;
                         owl:allValuesFrom :test
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :hasTestLatestVersion ;
-                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onClass :test
-                      ] ,
-                      [ rdf:type owl:Restriction ;
-                        owl:onProperty :hasTestPreviousVersion ;
-                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                        owl:onClass :test
                       ] .
 
 
@@ -1117,9 +1186,54 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
 :triage rdf:type owl:Class ;
         rdfs:subClassOf :section ,
                         [ rdf:type owl:Restriction ;
-                          owl:onProperty :hasSectionCode ;
+                          owl:onProperty :hasCode ;
                           owl:hasValue <http://purl.bioontology.org/ontology/LNC/11488-4>
                         ] .
+
+
+###  http://fse.ontology#admission
+:admission rdf:type owl:Class ;
+           rdfs:subClassOf :prescriptions ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasCode ;
+                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/57830-2>
+                           ] .
+
+
+###  http://fse.ontology#operatingProcedure
+:operatingProcedure rdf:type owl:Class .
+
+
+###  http://fse.ontology#pharma
+:pharma rdf:type owl:Class ;
+        rdfs:subClassOf :prescriptions ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasCode ;
+                          owl:hasValue <http://purl.bioontology.org/ontology/LNC/57833-6>
+                        ] .
+
+
+###  http://fse.ontology#procedure
+:procedure rdf:type owl:Class ;
+           rdfs:subClassOf :operatingProcedure .
+
+
+###  http://fse.ontology#specialist
+:specialist rdf:type owl:Class ;
+            rdfs:subClassOf :prescriptions ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasCode ;
+                              owl:hasValue <http://purl.bioontology.org/ontology/LNC/57832-8>
+                            ] .
+
+
+###  http://fse.ontology#transportRequest
+:transportRequest rdf:type owl:Class ;
+                  rdfs:subClassOf :prescriptions ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :hasCode ;
+                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/57834-4>
+                                  ] .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -1175,22 +1289,12 @@ fse:clinicalDocument rdf:type owl:Class ;
                                                        )
                                          ] ;
                      rdfs:subClassOf [ rdf:type owl:Restriction ;
-                                       owl:onProperty :hasDocumentLatestVersion ;
+                                       owl:onProperty fse:hasLatestVersion ;
                                        owl:allValuesFrom fse:clinicalDocument
                                      ] ,
                                      [ rdf:type owl:Restriction ;
-                                       owl:onProperty :hasDocumentPreviousVersion ;
+                                       owl:onProperty fse:hasPreviousVersion ;
                                        owl:allValuesFrom fse:clinicalDocument
-                                     ] ,
-                                     [ rdf:type owl:Restriction ;
-                                       owl:onProperty :hasDocumentLatestVersion ;
-                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                       owl:onClass fse:clinicalDocument
-                                     ] ,
-                                     [ rdf:type owl:Restriction ;
-                                       owl:onProperty :hasDocumentPreviousVersion ;
-                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                       owl:onClass fse:clinicalDocument
                                      ] ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "A generic clinical document."^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "clinicalDocument"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
@@ -1406,12 +1510,6 @@ fse:vehicle rdf:type owl:Class ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Accessible only to the patient and the doctor who wrote the report."@en ;
                  rdfs:label "V (very restricted)"@en ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
-
-
-###  http://api.stardog.com/ciao
-:ciao rdf:type owl:NamedIndividual ,
-               :specialty ;
-      :hasSectionCode <http://purl.bioontology.org/ontology/LNC/26439-0> .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/10160-0
