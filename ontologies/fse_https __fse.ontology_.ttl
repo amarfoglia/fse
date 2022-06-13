@@ -272,6 +272,16 @@
      <tag:stardog:studio:label> "via" .
 
 
+###  http://fse.ontology#hasPriority
+:hasPriority rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain fse:prescription ;
+             rdfs:range :priorityLevel ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Defines the urgency of the prescription."@en ;
+             <tag:stardog:studio:label> "hasPriority"@en .
+
+
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
 owl:topObjectProperty <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLegalAuthenticator"@en ;
