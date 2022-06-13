@@ -103,6 +103,7 @@ descritto in maniera "non strutturata", quindi mediante del testo libero, oppure
 "strutturata" cioè avvalendosi del concetto di \textbf{sezione} che diventerà il
 fulcro della nuova estensione.
 %
+\newpage
 \section{Estensioni}
 Allo stato attuale, tutti i documenti del FSE sono sottoclassi di
 \textit{ClinicalDocument}, da questa ereditano alcuni concetti fondamentali
@@ -144,7 +145,7 @@ Altre relazioni degne di nota:
     \texttt{fse:confidentialityCode}. 
 \end{itemize}
 
-\begin{table}[h]
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|X|}
     \hline
     \textbf{Codice}     & \textbf{Descrizione}                                                                                                   \\ \hline
@@ -156,7 +157,7 @@ Altre relazioni degne di nota:
     \label{table:confidentialityCode}
 \end{table}
 
-\begin{figure}
+\begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/clinicalDocument.png}
     \caption[]{Estensione del \texttt{ClinicalDocument}}
     \label{fig:clinicalDocument}
@@ -176,7 +177,7 @@ più aderente allo standard HL7, per esempio aggiungendo una relazione
 LOINC. La relazione \texttt{fse:hasSection}, e la sua inversa
 \texttt{fse:isPartOf}, fungono da collante tra il \texttt{clinicalDocument} e le
 sue molteplici sezioni.
-\begin{figure}
+\begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/sections.png}
     \caption[]{Tipologie di referti HL7.}
     \label{fig:sections}
@@ -194,7 +195,7 @@ Riassume i risultati di tutte le indagini afferenti alla specialità radiologica
 l’inquadramento diagnostico e terapeutico. Il documento è modellato tramite
 l'entità \texttt{fse:radiologyReport} ed è identificato dal codice LOINC
 \texttt{"68604-8”}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -214,7 +215,7 @@ termine di una fase di ricovero ospedaliero e contiene le indicazioni per gli
 eventuali controlli o terapie da effettuare (Tabella \ref*{table:ldoSections}).
 Rappresentato da \texttt{fse:hospitalDischargeLetter} e univocamente
 identificato dal codice LOINC \texttt{"34105-7"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -233,7 +234,7 @@ identificato dal codice LOINC \texttt{"34105-7"}.
 Descrive la tipologia di esenzioni posseduta dall’assistito che può essere
 totale o parziale (Tabella \ref*{table:deSections}). Definito dalla classe
 \texttt{fse:exemptionReport}, è associato al codice LOINC \texttt{"57827-8"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -251,7 +252,7 @@ ricadano nella sfera della medicina di laboratorio, della radiologia ed imaging,
 dell'anatomia patologica (Tabella \ref*{table:rsaSections}). Modellato tramite
 \texttt{fse:outpatientSpecialistReport} e identificato dal codice LOINC
 \texttt{"11488-4"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -270,7 +271,7 @@ VPS riassume i risultati di tutte le indagini eseguite in regime di urgenza in
 Pronto Soccorso, attestando quanto effettuato per l’inquadramento diagnostico e
 terapeutico (Tabella \ref*{table:vpsSections}). Rappresentato da
 \texttt{fse:firstAidReport} e associato al codice LOINC \texttt{"59258-4"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -293,7 +294,7 @@ VAC è il documento che attesta l’avvenuta somministrazione della/le
 vaccinazione/i somministrate all’assistito in una certa data (Tabella
 \ref*{table:vacSections}). Definito tramite \texttt{fse:immunization} e
 identificato da codice LOINC \texttt{"87273-9"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -309,7 +310,7 @@ laboratorio interno ad una struttura sanitaria. Rappresentato da
 \texttt{fse:laboratoryMedicineReport} con codice LOINC \texttt{"11502-2"}.
 L'identificativo LOINC della sezione (Tabella \ref*{table:rmlSections}) cambia
 in base alla tipologia di esame.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|c|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -325,7 +326,7 @@ che riassume la storia clinica dell’assistito e la sua situazione corrente
 conosciuta (Tabella \ref*{table:pssSections}). In particolare, lo scopo del
 documento è quello di favorire la continuità di cura. Definito dalla classe
 \texttt{fse:summaryHealthProfile} con codice LOINC \texttt{"60591-5"}.
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -378,7 +379,7 @@ Da questa si propagano varie relazioni:
     \item \texttt{fse:includesAdministration}: lega la sezione alla somministrazione.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/immunizations.png}
     \caption[]{Estensione dell'entità \texttt{fse:immunization} (referto VAC).}
     \label{fig:immunizations}
@@ -404,7 +405,7 @@ raggruppate per competenza (Figura \ref*{fig:pss}):
     gravidanze associate tramite la relazione \texttt{fse:includesPregnancy}, la
     quale include l'esito finale e il periodo.
 \end{itemize}
-\begin{figure}
+\begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/pss.png}
     \caption[]{Estensione dell'entità \texttt{fse:summaryHealthProfile} (referto PSS).}
     \label{fig:pss}
@@ -424,7 +425,7 @@ presentarsi in varie forme:
     \item \texttt{fse:observation}: indica osservazioni eseguite e parametri
     clinici rilevati durante la prestazione;    
 \end{itemize}
-\begin{figure}
+\begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/vps-rsa.png}
     \caption[]{Estensione dei documenti VPS e RSA.}
     \label{fig:vps-rsa}
@@ -437,7 +438,7 @@ relativi risultati grazie alla relazione \texttt{fse:hasResult} (Figura
 \ref*{fig:rml}). Infine è possibile ripercorrere la catena di esami eseguiti,
 similmente a quanto fatto per \texttt{fse:clinicalDocument}, mediante le
 relazioni \texttt{fse:hasPreviousVersion} e \texttt{fse:hasLatestVersion}.
-\begin{figure}[]
+\begin{figure}[htp]
     \centering
     \includegraphics[width=0.4\textwidth]{images/rml.png}
     \caption[]{Estensione del documento RML.}
@@ -452,14 +453,16 @@ evince anche dalla estensione della relazione \texttt{fse:inFulfillmentOf}
 (Figura \ref*{fig:prescription}). Il documento di Prescrizione può
 concretizzarsi in diverse classi, ognuna è sottoclasse dell'entità
 \texttt{fse:prescription} ed è identificata da uno specifico codice LOINC
-(Tabella \ref*{table:prescriptions}).
+(Tabella \ref*{table:prescriptions}).\newline\newline
 %
-Alle prescrizioni viene associato un livello di priorità preso da un set di
-valori predefiniti (Tabella \ref*{table:priorityLevels}). Questo è modellato per
-mezzo della classe \texttt{fse:priorityLevel} e la relazione
-\texttt{fse:hasPriority}.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=\textwidth]{images/prescription.png}
+    \caption[]{Schema dell'entità \texttt{fse:prescription}.}
+    \label{fig:prescription}
+\end{figure}
 %
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
     \hline
     \textbf{Sezione}    & \textbf{Classe}  & \textbf{LOINC} & \textbf{Descrizione}   \\ \hline
@@ -473,22 +476,20 @@ mezzo della classe \texttt{fse:priorityLevel} e la relazione
     richiesta di trasporto, alla priorità richiesta dal prescrittore, ecc.}
     \\ \hline 
     P. Trasporto  & \small{\texttt{fse:transportRequest}}  &  57834-4 &
-        \small{Include tutte le informazioni inerenti gravidanze (incluso aborti spontanei), parti, eventuali
-        complicanze derivate e stato mestruale}
-        \\ \hline
+        \small{Include tutte le informazioni inerenti gravidanze (incluso aborti
+        spontanei), parti, eventuali complicanze derivate e stato mestruale} \\
+        \hline
     \end{tabularx}
     \caption{Famiglia delle prescrizioni.}
     \label{table:prescriptions}
 \end{table}
 %
-\begin{figure}[]
-    \centering
-    \includegraphics[width=\textwidth]{images/prescription.png}
-    \caption[]{Schema dell'entità \texttt{fse:prescription}.}
-    \label{fig:prescription}
-\end{figure}
+Alle prescrizioni viene associato un livello di priorità preso da un set di
+valori predefiniti (Tabella \ref*{table:priorityLevels}). Questo è modellato per
+mezzo della classe \texttt{fse:priorityLevel} e la relazione
+\texttt{fse:hasPriority}.
 %
-\begin{table}
+\begin{table}[htp]
     \begin{tabularx}{\textwidth}{|c|X|}
     \hline
     \textbf{Codice}    & \textbf{Descrizione}   \\ \hline
@@ -500,7 +501,8 @@ mezzo della classe \texttt{fse:priorityLevel} e la relazione
     \caption{Livelli di priorità relativi alle prescrizioni.}
     \label{table:priorityLevels}
 \end{table}
-
+%
+\newpage
 \section{Scelte implementative}
 La modellazione dei concetti dell'ontologia si pone a metà tra la terminologia
 HL7 e quella definita ad-hoc, al fine di mantenere un buon bilanciamento tra
@@ -528,7 +530,7 @@ consistenza delle informazioni, sono stati specificati altri due vincoli:
     composizione del corpo del documento sono \texttt{fse:discharge\newline Diagnosis},
     \texttt{fse:progression} e \texttt{fse:reasonForAdmission}.
 \end{itemize}
-\begin{figure}[]
+\begin{figure}[htp]
     \centering
     \includegraphics[width=\textwidth]{images/clinicalDocument_restrictions.png}
     \caption[]{Restrizioni sulla gerarchia \texttt{fse:clinicalDocument}.}
@@ -549,9 +551,9 @@ permette anche di esprimere delle proprietà transitive, come
 \texttt{fse:isMoreUrgentThan} e \texttt{fse:isLessUrgentThan} (Figura
 \ref*{fig:priorityLevel}), che determinano l'ordinamento delle diverse istanze,
 in parte inferito dal \textit{reasoner}.
-\begin{figure}[]
+\begin{figure}[htp]
     \centering
-    \includegraphics[width=\textwidth]{images/priorityLevel.png}
+    \includegraphics[width=0.9\textwidth]{images/priorityLevel.png}
     \caption[]{Modellazione della \textit{enumerated class} \texttt{fse:priorityLevel}.}
     \label{fig:priorityLevel}
 \end{figure}
@@ -561,7 +563,7 @@ e il concetto di osservazione (\texttt{fse:observation}), siccome questo è a su
 volta descritto da diverse entità che raccolgono un'elevata mole di dati, si è
 preferito referenziare le classi \texttt{Client Observation} e \texttt{Patient
 Observation} dell'ontologia esterna NCIT (Figura \ref*{fig:ncit}).
-\begin{figure}[h]
+\begin{figure}[htp]
     \centering
     \includegraphics[width=\textwidth]{images/NCIT.png}
     \caption[]{Integrazione dell'ontologia esterna NCIT.}
@@ -579,22 +581,28 @@ contorno che modellano i codici dei \texttt{fse:clinicalDocument} e delle
 solo quelle relative alle possibili vie di somministrazione. A tal proposito si
 è realizzato un "taglio" dell'ontologia (OMIT\_0005589) che comprende uno
 specifico gruppo di classi (Figura \ref{fig:omit}).
-\begin{figure}[h]
+\begin{figure}[htp]
     \centering
     \includegraphics[width=0.55\textwidth]{images/omit.png}
     \caption[]{Integrazione dell'ontologia esterna OMIT.}
     \label{fig:omit}
 \end{figure}
 %
+\newpage
 \subsection{OWL - Property Chains}
 Nella precedente versione dell'ontologia vi sono due gerarchie di \textit{Object
 Property} (Figura \ref*{fig:chain}) che semplificano la fruizione del grafo
-della conoscenza. Nel dettaglio, le proprietà derivanti da
-\texttt{fse:hasProfileField}, che ha come dominio \texttt{fse:patient}, vengono
-automaticamente inferite sulla base della controparte
-\texttt{fse:includesFields}, il cui dominio è \texttt{fse:section}. Il tutto si
-rende possibile grazie alle \textit{Object Properties}, funzionalità di OWL 2.  
-\begin{figure}[h]
+della conoscenza, evitando il percorso lungo i documenti. Nel dettaglio, le
+proprietà derivanti da \texttt{fse:hasProfileField}, che ha come dominio
+\texttt{fse:patient}, vengono automaticamente inferite sulla base della
+controparte \texttt{fse:includesFields}, il cui dominio è \texttt{fse:section}.
+Il tutto si rende possibile grazie alle \textit{Object Properties}, funzionalità
+di OWL 2. Prendendo come esempio il predicato \texttt{fse:hasAllergy}:
+\begin{center}
+    \texttt{hasClinicalDocument o hasLatestVersion o hasSection\newline o
+    includesAllergy} \(\rightarrow\) \texttt{hasAllergy}
+\end{center}
+\begin{figure}[htp]
     \centering
     \includegraphics[width=0.8\textwidth]{images/property-chain.png}
     \caption[]{\textit{Object Properties} interessate dalla catena OWL.}
