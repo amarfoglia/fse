@@ -34,6 +34,10 @@
 <http://fse.ontology/www.w3.org/2002/07/owl#minCardinalityQ> rdf:type owl:AnnotationProperty .
 
 
+###  http://www.w3.org/2003/06/sw-vocab-status/ns#term_status
+<http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> rdf:type owl:AnnotationProperty .
+
+
 ###  tag:stardog:studio:label
 <tag:stardog:studio:label> rdf:type owl:AnnotationProperty .
 
@@ -169,6 +173,16 @@
               rdfs:range fse:healthWorker .
 
 
+###  http://api.stardog.com/hasPriority
+:hasPriority rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain fse:prescription ;
+             rdfs:range :priorityLevel ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Defines the urgency of the prescription."@en ;
+             <tag:stardog:studio:label> "hasPriority"@en .
+
+
 ###  http://api.stardog.com/hasProcedure
 :hasProcedure rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf owl:topObjectProperty ;
@@ -272,20 +286,30 @@
      <tag:stardog:studio:label> "via" .
 
 
-###  http://fse.ontology#hasPriority
-:hasPriority rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf owl:topObjectProperty ;
-             rdf:type owl:FunctionalProperty ;
-             rdfs:domain fse:prescription ;
-             rdfs:range :priorityLevel ;
-             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Defines the urgency of the prescription."@en ;
-             <tag:stardog:studio:label> "hasPriority"@en .
-
-
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
 owl:topObjectProperty <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Points to the signatory doctor."@en ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "hasLegalAuthenticator"@en ;
                       <tag:stardog:studio:label> "hasLegalAuthenticator"@en .
+
+
+###  http://www.w3.org/ns/org#hasSite
+org:hasSite rdf:type owl:ObjectProperty ;
+            owl:inverseOf org:siteOf ;
+            rdfs:domain <http://fse.ontology/www.w3.org/ns/org#Organization> ;
+            rdfs:range <http://fse.ontology/www.w3.org/ns/org#Site> ;
+            rdfs:comment "Indica la sede in cui l'Organization ha una qualche presenza anche in modo indiretto (ad esempio un ufficio virtuale). È l'inverso di `org:siteOf`."@it ,
+                         "Indicates a site at which the Organization has some presence even if only indirect (e.g. virtual office or a professional service which is acting as the registered address for a company). Inverse of `org:siteOf`."@en ,
+                         "Indique un site sur lequel l'Organisation possède une présence, même indirecte (domiciliation, boite postale). Inverse de `org:siteOf`."@fr ,
+                         "Lugar en donde la organización tiene algún tipo de presencia, incluso si es de forma indirecta (por ejemplo, una oficina virtual o servicio profesional que hagan la función de dirección registrada de la compañía). Es la relación inversa de `org:siteOf`."@es ,
+                         "組織が、間接（例えば、会社の登録住所として機能しているバーチャル・オフィスやプロフェッショナル・サービス）のみであったとしても、ある存在感を持っているサイトを示します。"@ja ;
+            rdfs:isDefinedBy <http://www.w3.org/ns/org> ;
+            rdfs:label "a un site"@fr ,
+                       "hasSite"@en ,
+                       "tiene sede en"@es .
+
+
+###  http://www.w3.org/ns/org#siteOf
+org:siteOf rdf:type owl:ObjectProperty .
 
 
 ###  https://fse.ontology/belongsTo
@@ -747,6 +771,59 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                     ] .
 
 
+###  http://fse.ontology#siteAddress
+:siteAddress rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain <http://fse.ontology/www.w3.org/ns/org#Organization> ;
+             rdfs:range xsd:string .
+
+
+###  http://www.w3.org/ns/org#identifier
+org:identifier rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain <http://fse.ontology/www.w3.org/ns/org#Organization> ;
+               rdfs:comment "Código o identificador, como por ejemplo el CIF de una empresa, que permite identificar de forma inequívoca a una organización. Existen muchos códigos de identificación tanto nacionales como internacionales. Esta ontología no obliga al uso de ningún esquema en concreto. Los códigos de identificación utilizados en cada caso se deberían indicar mediante el uso de la propiedad “datatype” del valor del identificador. El uso de la propiedad “datatype” para especificar el esquema de notación utilizado está en consonancia con las buenas prácticas recomendadas para el uso de la propiedad `skos:notation`, de la que esta propiedad es una especialización."@es ,
+                            "Donne un identifiant, comme par exemple le numéro d'enregistrement d'une entreprise, qui peut être utilisé comme identifiant unique pour l'Organisation. De nombreux schémas nationaux et internationaux sont disponibles. Cette ontologie reste neutre par rapport au schéma utilisé. Le schéma particulier utilisé devrait être indiqué par le `datatype` de la valeur de l'identifiant. Utiliser les datatypes pour distinguer les schémas de notation est cohérent avec les bonnes pratiques pour `skos:notation` dont cette propriété est une spécialisation."@fr ,
+                            "Gives an identifier, such as a company registration number, that can be used to used to uniquely identify the organization. Many different national and international identier schemes are available. The org ontology is neutral to which schemes are used. The particular identifier scheme should be indicated by the datatype of the identifier value.  Using datatypes to distinguish the notation scheme used is consistent with recommended best practice for `skos:notation` of which this property is a specialization."@en ,
+                            "Indica un identificatore univoco per l'organizzazione, come ad esempio la partita IVA di un'azienda. Molti schemi di identificazione a livello nazionale e internazionale sono disponibili allo scopo. L'ontologia ORG è neutrale rispetto allo schema da utilizzare. Lo schema di identificazione dovrebbe essere indicato dal datatype del valore dell'identificatore. L'uso del datatype per distinguere lo schema di identificazione è coerente con le best practice per `skos:notation`, di cui questa proprietà è una specializzazione."@it ,
+                            "組織を一意に識別するために使用できる会社登録番号などの識別子を与えます。"@ja ;
+               rdfs:isDefinedBy <http://www.w3.org/ns/org> ;
+               rdfs:label "identifiant"@fr ,
+                          "identifier"@en ,
+                          "tiene identificador"@es .
+
+
+###  http://xmlns.com/foaf/0.1/birthday
+foaf:birthday rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
+              rdfs:range rdfs:Literal ;
+              rdfs:comment "The birthday of this Agent, represented in mm-dd string form, eg. '12-31'." ;
+              rdfs:isDefinedBy foaf: ;
+              rdfs:label "birthday" ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "unstable" .
+
+
+###  http://xmlns.com/foaf/0.1/firstName
+foaf:firstName rdf:type owl:DatatypeProperty ;
+               rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
+               rdfs:range rdfs:Literal ;
+               rdfs:comment "The first name of a person." ;
+               rdfs:isDefinedBy foaf: ;
+               rdfs:label "firstName" ;
+               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+
+###  http://xmlns.com/foaf/0.1/lastName
+foaf:lastName rdf:type owl:DatatypeProperty ;
+              rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
+              rdfs:range rdfs:Literal ;
+              rdfs:comment "The last name of a person." ;
+              rdfs:isDefinedBy foaf: ;
+              rdfs:label "lastName" ;
+              <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+
 ###  https://fse.ontology/body
 fse:body rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf owl:topDataProperty ;
@@ -921,8 +998,8 @@ fse:start rdf:type owl:DatatypeProperty ;
                                     )
                       ] ;
           rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
-          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-          <tag:stardog:studio:label> "startedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "start"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+          <tag:stardog:studio:label> "start"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/validUntil
@@ -1705,6 +1782,43 @@ fse:vehicle rdf:type owl:Class ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Accessible only to the patient and the doctor who wrote the report."@en ;
                  rdfs:label "V (very restricted)"@en ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
+
+
+###  http://api.stardog.com/prova
+:prova rdf:type owl:NamedIndividual ,
+                fse:patient ;
+       foaf:birthday "11/11/1956"^^rdfs:Literal ;
+       foaf:firstName "Priscilla"^^rdfs:Literal ;
+       foaf:lastName "Fiorentino"^^rdfs:Literal ;
+       fse:fiscalCode "FRNPSC56S51F839H"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
+
+
+###  http://fse.ontology#doctor_abarese
+:doctor_abarese rdf:type owl:NamedIndividual ;
+                fse:belongsTo :ordinemedici ;
+                foaf:birthday "11/07/1997" ;
+                foaf:firstName "Antonia" ;
+                foaf:lastName "Barese" .
+
+
+###  http://fse.ontology#ordinemedici
+:ordinemedici rdf:type owl:NamedIndividual ,
+                       fse:healthOrganization ;
+              org:hasSite :ufficiodoctor_abarese ,
+                          :ufficiodoctor_cbelotti ;
+              org:identifier "Ordine dei Medici Chirurghi e Odontoiatri Italiana" .
+
+
+###  http://fse.ontology#ufficiodoctor_abarese
+:ufficiodoctor_abarese rdf:type owl:NamedIndividual ,
+                                fse:healthcareFacility ;
+                       :siteAddress "Via Cervese, 1 - Forlì" .
+
+
+###  http://fse.ontology#ufficiodoctor_cbelotti
+:ufficiodoctor_cbelotti rdf:type owl:NamedIndividual ,
+                                 fse:healthcareFacility ;
+                        :siteAddress "Via dell'Acquedotto, 31 - Perugia" .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/10160-0
