@@ -652,14 +652,14 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 :boosterNum rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
             rdfs:domain :booster ;
-            rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#integer> .
+            rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#decimal> .
 
 
 ###  http://api.stardog.com/doseQuantity
 :doseQuantity rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain :substanceAdministration ;
-              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#decimal> ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Administrated quantity of drug" ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "doseQuantity" ;
               <tag:stardog:studio:label> "doseQuantity" .
@@ -674,7 +674,7 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                                            :triage
                                          )
                            ] ;
-               rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+               rdfs:range xsd:dateTimeStamp ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents the instant when an event occurred"@en ;
                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "effectiveTime"@en ;
                <tag:stardog:studio:label> "effectiveTime" .
@@ -705,7 +705,14 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 :nextBooster rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf owl:topDataProperty ;
              rdfs:domain :booster ;
-             rdfs:range xsd:dateTime .
+             rdfs:range xsd:dateTimeStamp .
+
+
+###  http://api.stardog.com/siteAddress
+:siteAddress rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain <http://fse.ontology/www.w3.org/ns/org#Organization> ;
+             rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
 ###  http://api.stardog.com/statusCode
@@ -752,7 +759,11 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 ###  http://api.stardog.com/unit
 :unit rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf owl:topDataProperty ;
-      rdfs:domain :test ;
+      rdfs:domain [ rdf:type owl:Class ;
+                    owl:unionOf ( :substanceAdministration
+                                  :test
+                                )
+                  ] ;
       rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
@@ -769,13 +780,6 @@ fse:worksIn rdf:type owl:ObjectProperty ;
                                            ]
                                 ]
                     ] .
-
-
-###  http://fse.ontology#siteAddress
-:siteAddress rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf owl:topDataProperty ;
-             rdfs:domain <http://fse.ontology/www.w3.org/ns/org#Organization> ;
-             rdfs:range xsd:string .
 
 
 ###  http://www.w3.org/ns/org#identifier
@@ -797,7 +801,7 @@ org:identifier rdf:type owl:DatatypeProperty ;
 foaf:birthday rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
               rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
-              rdfs:range rdfs:Literal ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
               rdfs:comment "The birthday of this Agent, represented in mm-dd string form, eg. '12-31'." ;
               rdfs:isDefinedBy foaf: ;
               rdfs:label "birthday" ;
@@ -807,7 +811,7 @@ foaf:birthday rdf:type owl:DatatypeProperty ,
 ###  http://xmlns.com/foaf/0.1/firstName
 foaf:firstName rdf:type owl:DatatypeProperty ;
                rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
-               rdfs:range rdfs:Literal ;
+               rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
                rdfs:comment "The first name of a person." ;
                rdfs:isDefinedBy foaf: ;
                rdfs:label "firstName" ;
@@ -817,7 +821,7 @@ foaf:firstName rdf:type owl:DatatypeProperty ;
 ###  http://xmlns.com/foaf/0.1/lastName
 foaf:lastName rdf:type owl:DatatypeProperty ;
               rdfs:domain <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
-              rdfs:range rdfs:Literal ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
               rdfs:comment "The last name of a person." ;
               rdfs:isDefinedBy foaf: ;
               rdfs:label "lastName" ;
@@ -851,7 +855,7 @@ fse:confidentialityCode rdf:type owl:DatatypeProperty ;
 fse:createdAt rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain fse:clinicalDocument ;
-              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+              rdfs:range xsd:dateTimeStamp ;
               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "createdAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
               <tag:stardog:studio:label> "createdAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
@@ -874,7 +878,7 @@ fse:end rdf:type owl:DatatypeProperty ;
                                     fse:therapy
                                   )
                     ] ;
-        rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+        rdfs:range xsd:dateTimeStamp ;
         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
         <tag:stardog:studio:label> "endedAt"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
@@ -897,12 +901,6 @@ fse:hasIdentifier rdf:type owl:DatatypeProperty ;
                   <tag:stardog:studio:label> "hasIdentifier"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
-###  https://fse.ontology/hasMedicalNotes
-fse:hasMedicalNotes rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf owl:topDataProperty ;
-                    rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
-
-
 ###  https://fse.ontology/hasQuantity
 fse:hasQuantity rdf:type owl:DatatypeProperty ;
                 rdfs:domain fse:prescription ;
@@ -916,11 +914,11 @@ fse:hasSpecialistReportType rdf:type owl:DatatypeProperty ;
                             rdfs:domain fse:outpatientSpecialistReport ;
                             rdfs:range [ rdf:type rdfs:Datatype ;
                                          owl:oneOf [ rdf:type rdf:List ;
-                                                     rdf:first "Cardiologia"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+                                                     rdf:first "Cardiologia"^^xsd:string ;
                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                rdf:first "Odontoiatria"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+                                                                rdf:first "Odontoiatria"^^xsd:string ;
                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                           rdf:first "Ortopedia"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+                                                                           rdf:first "Ortopedia"^^xsd:string ;
                                                                            rdf:rest rdf:nil
                                                                          ]
                                                               ]
@@ -936,21 +934,6 @@ fse:healthCardNumber rdf:type owl:DatatypeProperty ;
                      rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "healthCardNumber"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                      <tag:stardog:studio:label> "healthCardNumber"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/includesMedicalNotes
-fse:includesMedicalNotes rdf:type owl:DatatypeProperty ;
-                         rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
-
-
-###  https://fse.ontology/includesOrganDonor
-fse:includesOrganDonor rdf:type owl:DatatypeProperty ;
-                       rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> .
-
-
-###  https://fse.ontology/isOrganDonor
-fse:isOrganDonor rdf:type owl:DatatypeProperty ;
-                 rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> .
 
 
 ###  https://fse.ontology/languageCode
@@ -997,17 +980,9 @@ fse:start rdf:type owl:DatatypeProperty ;
                                       fse:therapy
                                     )
                       ] ;
-          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
+          rdfs:range xsd:dateTimeStamp ;
           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "start"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
           <tag:stardog:studio:label> "start"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-###  https://fse.ontology/validUntil
-fse:validUntil rdf:type owl:DatatypeProperty ;
-               rdfs:domain fse:immunization ;
-               rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#dateTime> ;
-               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "validUntil"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-               <tag:stardog:studio:label> "validUntil"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 ###  https://fse.ontology/versionNumber
@@ -1784,6 +1759,22 @@ fse:vehicle rdf:type owl:Class ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
 
 
+###  http://api.stardog.com/doctor_abarese
+:doctor_abarese rdf:type owl:NamedIndividual ;
+                fse:belongsTo :ordinemedici ;
+                foaf:birthday "11/07/1997" ;
+                foaf:firstName "Antonia" ;
+                foaf:lastName "Barese" .
+
+
+###  http://api.stardog.com/ordinemedici
+:ordinemedici rdf:type owl:NamedIndividual ,
+                       fse:healthOrganization ;
+              org:hasSite :ufficiodoctor_abarese ,
+                          :ufficiodoctor_cbelotti ;
+              org:identifier "Ordine dei Medici Chirurghi e Odontoiatri Italiana" .
+
+
 ###  http://api.stardog.com/prova
 :prova rdf:type owl:NamedIndividual ,
                 fse:patient ;
@@ -1793,29 +1784,13 @@ fse:vehicle rdf:type owl:Class ;
        fse:fiscalCode "FRNPSC56S51F839H"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
-###  http://fse.ontology#doctor_abarese
-:doctor_abarese rdf:type owl:NamedIndividual ;
-                fse:belongsTo :ordinemedici ;
-                foaf:birthday "11/07/1997" ;
-                foaf:firstName "Antonia" ;
-                foaf:lastName "Barese" .
-
-
-###  http://fse.ontology#ordinemedici
-:ordinemedici rdf:type owl:NamedIndividual ,
-                       fse:healthOrganization ;
-              org:hasSite :ufficiodoctor_abarese ,
-                          :ufficiodoctor_cbelotti ;
-              org:identifier "Ordine dei Medici Chirurghi e Odontoiatri Italiana" .
-
-
-###  http://fse.ontology#ufficiodoctor_abarese
+###  http://api.stardog.com/ufficiodoctor_abarese
 :ufficiodoctor_abarese rdf:type owl:NamedIndividual ,
                                 fse:healthcareFacility ;
                        :siteAddress "Via Cervese, 1 - Forlì" .
 
 
-###  http://fse.ontology#ufficiodoctor_cbelotti
+###  http://api.stardog.com/ufficiodoctor_cbelotti
 :ufficiodoctor_cbelotti rdf:type owl:NamedIndividual ,
                                  fse:healthcareFacility ;
                         :siteAddress "Via dell'Acquedotto, 31 - Perugia" .
