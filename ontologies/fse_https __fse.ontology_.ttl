@@ -559,7 +559,7 @@ document."""@en ;
 ###  https://fse.ontology/includesAdministration
 fse:includesAdministration rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf fse:includesField ;
-                           rdfs:domain :immunizationCard ;
+                           rdfs:domain :immunizations ;
                            rdfs:range :substanceAdministration ;
                            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                            <tag:stardog:studio:label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
