@@ -90,7 +90,12 @@ portale \textit{Ontobee}\footnotetext{Per dettagli:
     \item NCIT (\textit{National Cancer Institute Thesaurus}\footnote{NCIT
     dettagli: \url{https://bioportal.bioontology.org/ontologies/NCIT}}):
     vocabolario per l'assistenza clinica, la ricerca traslazionale e di base,
-    l'informazione pubblica e le attività amministrative.
+    l'informazione pubblica e le attività amministrative;
+    \item SYMP (\textit{Symptom Ontology})\footnote{SYMP dettagli:
+    \url{https://bioportal.bioontology.org/ontologies/SYMP}}: ontologia
+    progettata sulla base del concetto guida di "sintomo", cioè un cambiamento
+    percepito nella funzione, nella sensazione o nell'aspetto riportato da un
+    paziente e indicativo di una malattia.
 \end{itemize}
 %
 \subsection{Analisi del dominio}
@@ -111,7 +116,7 @@ Allo stato attuale, tutti i documenti del FSE sono sottoclassi di
 all'interno dello \texttt{Header}. Di seguito vengono proposti alcuni schemi che
 oltre a graficare la modellazione dell'ontologia preesistente, evidenziano (in
 rosso) le nuove estensioni.
-\subsection*{ClinicalDocument}
+\subsection{ClinicalDocument}
 Il \texttt{clinicalDocument} si relaziona con diverse entità, per quanto
 riguarda quelle "foglia" (\textit{Data Properties}):
 \begin{itemize}
@@ -163,7 +168,7 @@ Altre relazioni degne di nota:
     \label{fig:clinicalDocument}
 \end{figure}
 
-\subsection*{Sezioni}
+\subsection{Sezioni}
 Un \textit{ClinicalDocument} schematizza informazioni differenti sulla base
 della tipologia (RDA, VAC, DE, ecc.) dello stesso. La differenziazione è dettata
 dal contenuto del \texttt{Body} e, nello specifico, dalle sezioni che lo
@@ -176,7 +181,9 @@ più aderente allo standard HL7, per esempio aggiungendo una relazione
 \texttt{fse:hasCode} che permette di identificare la sezione tramite un codice
 LOINC. La relazione \texttt{fse:hasSection}, e la sua inversa
 \texttt{fse:isPartOf}, fungono da collante tra il \texttt{clinicalDocument} e le
-sue molteplici sezioni.
+sue molteplici sezioni. Infine ogni sezione è descritta da un titolo
+(\texttt{fse:title}) e da una \texttt{Data Property} \texttt{body} che permette
+di fornire la descrizione del corpo tramite testo libero.
 \begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/sections.png}
     \caption[]{Tipologie di referti HL7.}
@@ -189,7 +196,7 @@ realizzazione del FSE secondo le direttive\footnote{Standard documentali:
 \url{https://www.fascicolosanitario.gov.it/it/Standard-documentali}} del
 Ministero della Salute.
 %
-\subsubsection*{RAD (Referto di Radiologia)}
+\subsubsection{RAD (Referto di Radiologia)}
 Riassume i risultati di tutte le indagini afferenti alla specialità radiologica
 (Tabella \ref*{table:radSections}), attestando quanto effettuato per
 l’inquadramento diagnostico e terapeutico. Il documento è modellato tramite
@@ -209,7 +216,7 @@ l'entità \texttt{fse:radiologyReport} ed è identificato dal codice LOINC
     \label{table:radSections}
 \end{table}
     %
-\subsubsection*{LDO (Lettera di Dimissione Ospedaliera)}
+\subsubsection{LDO (Lettera di Dimissione Ospedaliera)}
 La lettera di  dimissione è un documento che viene rilasciato al paziente al
 termine di una fase di ricovero ospedaliero e contiene le indicazioni per gli
 eventuali controlli o terapie da effettuare (Tabella \ref*{table:ldoSections}).
@@ -230,7 +237,7 @@ identificato dal codice LOINC \texttt{"34105-7"}.
     \label{table:ldoSections}
 \end{table}
 %
-\subsubsection*{DE (Documento di Esenzione)}
+\subsubsection{DE (Documento di Esenzione)}
 Descrive la tipologia di esenzioni posseduta dall’assistito che può essere
 totale o parziale (Tabella \ref*{table:deSections}). Definito dalla classe
 \texttt{fse:exemptionReport}, è associato al codice LOINC \texttt{"57827-8"}.
@@ -245,7 +252,7 @@ totale o parziale (Tabella \ref*{table:deSections}). Definito dalla classe
     \label{table:deSections}
 \end{table}
 %
-\subsubsection*{RSA (Referto di Specialistica Ambulatoriale)} 
+\subsubsection{RSA (Referto di Specialistica Ambulatoriale)} 
 RSA è finalizzato a definire uno standard per la refertazione di prestazioni
 ambulatoriali specialistiche (visite mediche ed esami strumentali) che non
 ricadano nella sfera della medicina di laboratorio, della radiologia ed imaging,
@@ -266,7 +273,7 @@ dell'anatomia patologica (Tabella \ref*{table:rsaSections}). Modellato tramite
     \label{table:rsaSections}
 \end{table}
 %
-\subsubsection*{VPS (Verbale di Pronto Soccorso)}
+\subsubsection{VPS (Verbale di Pronto Soccorso)}
 VPS riassume i risultati di tutte le indagini eseguite in regime di urgenza in
 Pronto Soccorso, attestando quanto effettuato per l’inquadramento diagnostico e
 terapeutico (Tabella \ref*{table:vpsSections}). Rappresentato da
@@ -289,7 +296,7 @@ terapeutico (Tabella \ref*{table:vpsSections}). Rappresentato da
     \label{table:vpsSections}
 \end{table}
     %
-\subsubsection*{VAC (Vaccinazioni)}
+\subsubsection{VAC (Vaccinazioni)}
 VAC è il documento che attesta l’avvenuta somministrazione della/le
 vaccinazione/i somministrate all’assistito in una certa data (Tabella
 \ref*{table:vacSections}). Definito tramite \texttt{fse:immunization} e
@@ -304,7 +311,7 @@ identificato da codice LOINC \texttt{"87273-9"}.
     \label{table:vacSections}
 \end{table}
 %
-\subsubsection*{RML (Referto di Medicina di Laboratorio)}
+\subsubsection{RML (Referto di Medicina di Laboratorio)}
 RML rappresenta il risultato di una prestazione svolta da uno specifico
 laboratorio interno ad una struttura sanitaria. Rappresentato da
 \texttt{fse:laboratoryMedicineReport} con codice LOINC \texttt{"11502-2"}.
@@ -320,7 +327,7 @@ in base alla tipologia di esame.
     \label{table:rmlSections}
 \end{table}
 % 
-\subsubsection*{PSS (Profilo Sanitario Sintetico)}
+\subsubsection{PSS (Profilo Sanitario Sintetico)}
 PSS è il documento socio-sanitario informatico redatto e aggiornato dal MMG/PLS,
 che riassume la storia clinica dell’assistito e la sua situazione corrente
 conosciuta (Tabella \ref*{table:pssSections}). In particolare, lo scopo del
@@ -385,7 +392,7 @@ Da questa si propagano varie relazioni:
     \label{fig:immunizations}
 \end{figure}
 %
-\subsection{PSS}
+\subsection{Profilo sanitario}
 L'introduzione della relazione \texttt{fse:hasSection}, nel caso del
 \texttt{summaryHealthProfile}, abilita alla raccolta di nuove informazioni
 raggruppate per competenza (Figura \ref*{fig:pss}):
@@ -411,27 +418,41 @@ raggruppate per competenza (Figura \ref*{fig:pss}):
     \label{fig:pss}
 \end{figure}
 
-\subsection{VPS e RSA}
-Seguendo la logica delle precedenti estensioni anche per i referti VPS e RSA, vi
-sono una serie di nuove relazioni dettate dall'integrazione di specifiche
-sezioni (Figura \ref*{fig:vps-rsa}). Le sezioni dei due documenti hanno un
-concetto comune, e cioè quello di \texttt{operatingProcedure}, il quale può
-presentarsi in varie forme:
+\subsection{Osservazioni}
+Il Verbale di Pronto Soccorso si articola su più sezioni
+(\ref*{table:vpsSections}), nel caso specifico di \texttt{fse:reasonForVisit} si
+è imposta una relazione \texttt{fse:mainProblem} che lega la sezione al concetto
+di \texttt{fse:observation}. Quest'ultimo raccoglie alcune informazioni
+(\texttt{fse:body}) ed i sintomi \texttt{fse:hasSymptom} che hanno portato al
+ricovero del paziente. L'implementazione dell'entità si avvale della ontologia
+esterna \textbf{SYMP\_0000466} (sottoporzione di DOID dedicata ai sintomi) ed è
+identificata dal codice LOINC \texttt{"56817-0"}.
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/vps.png}
+    \caption[]{Estensione dell'entità \texttt{fse:firstAidReport} (referto VPS).}
+    \label{fig:vps}
+\end{figure}
+
+\subsection{Procedure operative}
+Il contenuto semantico delle procedure operative prende forma mediante l'entità
+\texttt{fse:operating\newline Procedure}. Questa può concretizzarsi in diversi modi
+(Figura \ref*{fig:rsa}) assumendo significati differenti:
 \begin{itemize}
     \item \texttt{fse:procedure}: indica procedure diagnostiche invasive,
     interventistiche, chirurgiche, terapeutiche non farmacologiche;
     \item \texttt{fse:substanceAdministration}: indica procedure di
     somministrazioni farmaceutiche come terapie, vaccinazioni e sedazioni;
-    \item \texttt{fse:observation}: indica osservazioni eseguite e parametri
+    \item \texttt{fse:diagnosticProcedure}: indica osservazioni eseguite e parametri
     clinici rilevati durante la prestazione;    
 \end{itemize}
 \begin{figure}[htp]
-    \includegraphics[width=\textwidth]{images/vps-rsa.png}
-    \caption[]{Estensione dei documenti VPS e RSA.}
-    \label{fig:vps-rsa}
+    \includegraphics[width=\textwidth]{images/rsa.png}
+    \caption[]{Estensione dell'entità \texttt{fse:outpatientSpecialistReport}
+    (referto RSA).}
+    \label{fig:rsa}
 \end{figure}
 
-\subsection{RML}
+\subsection{Esami eseguiti}
 Attraverso l'impiego della sezione \texttt{fse:specialty}, il documento RML è in
 grado di raccogliere gli esami effettuati (es. studio microbiologico) ed i
 relativi risultati grazie alla relazione \texttt{fse:hasResult} (Figura
@@ -557,16 +578,23 @@ in parte inferito dal \textit{reasoner}.
     \caption[]{Modellazione della \textit{enumerated class} \texttt{fse:priorityLevel}.}
     \label{fig:priorityLevel}
 \end{figure}
-\subsection{Gerarchia Observation}
-Le procedure sanitarie effettuate possono essere di diversi tipi, uno di questi
-e il concetto di osservazione (\texttt{fse:observation}), siccome questo è a sua
-volta descritto da diverse entità che raccolgono un'elevata mole di dati, si è
-preferito referenziare le classi \texttt{Client Observation} e \texttt{Patient
-Observation} dell'ontologia esterna NCIT (Figura \ref*{fig:ncit}).
+\subsection{Gerarchia OperatingProcedure}
+Come già anticipato, le procedure sanitarie effettuate possono essere di diverse
+ tipologie, questa differenziazione viene supporta da alcune entità dell'ontologia
+ esterna NCIT (Figura \ref*{fig:ncit}):
+ \begin{itemize}
+     \item \textit{Diagnostic Procedure}: test specifico o serie di passaggi
+     eseguiti per aiutare a diagnosticare una malattia o una condizione;
+     \item \textit{Surgical Procedure}: procedura per rimuovere o riparare una
+     parte del corpo o per scoprire se è presente una malattia;
+     \item \textit{Endoscopic Procedure}: procedura diagnostica o terapeutica in
+     cui un endoscopio viene inserito in un organo tubolare per esaminare
+     l'architettura strutturale e/o rimuovere i tessuti anormali.
+ \end{itemize}
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=\textwidth]{images/NCIT.png}
-    \caption[]{Integrazione dell'ontologia esterna NCIT.}
+    \includegraphics[width=\textwidth]{images/procedures.png}
+    \caption[]{Gerarchia \texttt{fse:operatingProcedure} integrata con l'ontologia esterna NCIT.}
     \label{fig:ncit}
 \end{figure}
 \subsection{Semplificazione delle ontologie esterne}
