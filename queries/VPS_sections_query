@@ -1,0 +1,34 @@
+PREFIX fse: <https://fse.ontology/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX tag: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/>
+PREFIX api: <http://purl.org/linked-data/api/vocab#>
+PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
+
+SELECT ?Id ?Sect ?Title ?Body ?Time ?Code ?Performer ?Vehicle
+FROM <https://fse.ontology/>
+WHERE {
+  ?Id 
+    a fse:firstAidReport ;
+      fse:hasSection ?Sect .
+      ?Sect fse:hasCode ?Code ;
+    OPTIONAL {
+      ?Sect fse:body ?Body ;
+            fse:title ?Title .
+    }
+    OPTIONAL {
+      ?Sect fse:mainProblem ?Problem .
+    }
+    OPTIONAL {
+      ?Sect fse:effectiveTime ?Time .
+    }
+    OPTIONAL {
+      ?Sect fse:hasPerformer ?Performer .
+    }
+    OPTIONAL {
+      ?Sect fse:hasVehicle ?Vehicle .
+    }
+}
