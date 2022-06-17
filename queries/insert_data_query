@@ -26,6 +26,7 @@ INSERT DATA {
         
         <#vac_pfiorentino>
             a fse:immunization ;
+            fse:validUntil "2022-08-01" ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
             #fse:hasCode <loinc:87273-9> ;
             fse:languageCode "it-IT" ;
@@ -89,6 +90,7 @@ INSERT DATA {
         
         <#vac_bcosta>
             a fse:immunization ;
+            fse:validUntil "2022-05-05" ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
             #fse:hasCode <loinc:87273-9> ;
             fse:languageCode "it-IT" ;
