@@ -1,26 +1,28 @@
-import { Link, useLocation, useNavigate } from "solid-app-router"
-import { Component, createMemo, For, Match, Resource, Switch } from "solid-js"
-import useDocumentStore from "../hooks/useDocumentStore"
+import { Component, For } from "solid-js"
 import { ClinicalDocument } from "../models/ClinicalDocument"
-import { Section } from "../models/Section"
+import formatDocumentType from "../utils/formatDocumentType"
+import Immunization from "./document/Immunization"
+import SpecialtyCard from "./document/SpecialtyCard"
 
 const DocSections: Component<{ document: ClinicalDocument; goBack: () => void }> = (props) => {
-  const { sections } = useDocumentStore(props.document.id)
 
-  function renderSection(section: Section) {
-    return (
-      <><h2>{section.title}</h2><p>{section.text}</p></>
-    )
+  const renderDocumentContent = (document: ClinicalDocument) => {
+    const type = formatDocumentType(document.documentType)
+    switch(type) {
+      case "Laboratory Medicine Report": return <SpecialtyCard document={document} />
+      case "Immunization": return <Immunization document={document} />
+      default: return <p>Work in progress...</p>
+    }
   }
 
   return (
-    <div class="flex gap-12">
+    <div class="gap-12">
       <div class="flex flex-col gap-4">
-        <For each={sections()}>{ section =>
-          renderSection(section)
-        }</For>
+        {renderDocumentContent(props.document)}
       </div>
-      <button class="btn mt-6 mx-auto px-10" onClick={props.goBack}>Indietro</button>
+      <div class="grid justify-end">
+        <button class="btn mt-6 mx-auto px-10" onClick={props.goBack}>Indietro</button>
+      </div>
     </div>
   )
 }

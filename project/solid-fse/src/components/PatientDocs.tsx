@@ -1,11 +1,29 @@
 import { Link, useLocation, useNavigate } from "solid-app-router"
 import { Component, createMemo, For, Match, Resource, Switch } from "solid-js"
 import { ClinicalDocument } from "../models/ClinicalDocument"
+import { dateToString } from "../utils/date"
 import formatDocumentType from "../utils/formatDocumentType"
+import FallbackWrapper from "./FallBackWrapper"
 
 interface DocProps {
   document: ClinicalDocument
   onClick: (doc: ClinicalDocument) => void
+}
+
+const ConfidentialTooltip: Component<{ confidentialityLevel: string }> = (props) => {
+  const getColor = (level: string) => {
+    switch(level) {
+      case "N (normal)": return "blue"
+      case "R (restricted)": return "yellow"
+      case "V (very restricted)": return "red"
+      default: return "white"
+    }
+  }
+  return (
+    <i class={'text-'+getColor(props.confidentialityLevel)+'-400 mdi mdi-alert-circle tooltip'}>
+      <span class="tooltiptext bg-blue-400 text-gray-700">{props.confidentialityLevel}</span>
+    </i>
+  )
 }
 
 const DocumentCard: Component<DocProps> = (props) => {
@@ -25,14 +43,22 @@ const DocumentCard: Component<DocProps> = (props) => {
           bg-blue-400 text-gray-700 text-2xl
         "><i class="mdi mdi-file-document-outline"></i></div>
         <div class="flex flex-col flex-grow">
-          <h2 class="text-xl mb-4">
-            {formatDocumentType(document().documentType)}
-          </h2>
+          <div class="flex flex-wrap gap-4 items-baseline mb-4 justify-between">
+            <h2 class="text-xl">
+              {formatDocumentType(document().documentType)}
+            </h2>
+            <ConfidentialTooltip confidentialityLevel={document().confidentialityCode} />
+          </div>
           <div class="flex flex-wrap gap-4 text-sm text-gray-400">
             <p><i class="mdi mdi-key mr-2"></i>{document().id}</p>
             {document().humanAuthor && <p><i class="mdi mdi-account-circle mr-2"></i>{document().humanAuthor}</p>}
             {document().organization && <p><i class="mdi mdi-domain mr-2"></i>{document().organization}</p>}
-            <p><i class="mdi mdi-calendar mr-2"></i>01/01/2021</p>
+            <p><i class="mdi mdi-calendar mr-2"></i>{dateToString(document().createdAt)}</p>
+            <p class="tooltip">
+              <i class="mdi mdi-pen mr-2"></i>{document().signatory}
+              <span class="tooltiptext bg-blue-400 text-gray-700">{dateToString(document().signTime)}</span>
+            </p>
+            <p><i class="mdi mdi-link-variant mr-2">{document().inFulfillmentOf}</i></p>
           </div>
           <div class="divider my-4"></div>
           <p class="line-clamp-2">{document().body}</p>
@@ -48,26 +74,22 @@ interface Props {
   onDocumentClick: (doc: ClinicalDocument) => void
 }
 
+const renderContent = (documents: ClinicalDocument[], onClick: (doc: ClinicalDocument) => void) => (
+  <For each={documents}>{ document =>
+    <DocumentCard document={document} onClick={onClick}/>
+  }</For>
+)
+
 const PatientDocs: Component<Props> = (props) => {
   return (
-    <Switch fallback={
-      <div class="flex flex-col gap-6">
-        <h1 class="text-3xl">Documenti</h1>
-        <For each={props.documents()}>{ document =>
-          <DocumentCard document={document} onClick={props.onDocumentClick}/>
-        }</For>
-      </div>
-    }>
-      <Match when={props.documents.error}>
-        <p class="text-center">Si è verificato un errore.</p>
-      </Match>
-      <Match when={props.documents.loading}>
-        <p class="text-center">Caricamento...</p>
-      </Match>
-      <Match when={props.documents()?.length == 0}>
-        <p class="text-center">Nessun documento.</p>
-      </Match>
-    </Switch>
+    <FallbackWrapper 
+        reasonForEmpty="Nessun documento." 
+        renderContent={() => renderContent(props.documents(), props.onDocumentClick)} 
+        title="Documenti"
+        error={props.documents.error}
+        loading={props.documents.loading}
+        empty={props.documents()?.length == 0}
+    />
   )
 }
 

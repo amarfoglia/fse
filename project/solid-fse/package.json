@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/line-clamp": "^0.2.1",
+    "flowbite": "^1.4.7",
     "outdent": "^0.8.0",
     "solid-app-router": "^0.1.4",
     "solid-js": "^1.0.7",

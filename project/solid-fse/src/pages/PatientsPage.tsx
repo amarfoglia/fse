@@ -2,7 +2,7 @@ import { Component, createMemo, For, Match, Switch } from "solid-js"
 import { Link } from "solid-app-router"
 import usePatientsStore from "../hooks/usePatientsStore"
 import useSearch from "../hooks/useSearch"
-import { Patient } from "../models/Patient"
+import { Patient } from "../models/Person"
 
 const PatientCard: Component<{ patient: Patient }> = (props) => {
   const avatarLetters = createMemo(
