@@ -1,0 +1,47 @@
+PREFIX fse: <https://fse.ontology/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX tag: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/>
+PREFIX api: <http://purl.org/linked-data/api/vocab#>
+PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
+
+SELECT
+  ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Dominio ?Versione
+  (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
+  (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
+  ?Dispositivo_Emittente ?Organizzazione
+FROM <https://fse.ontology/>
+WHERE {
+  ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
+  ?ID
+    a ?Tipo_Documento ;
+    fse:languageCode ?Lingua ;
+    fse:realmCode ?Paese ;
+    fse:versionNumber ?Versione ;
+    fse:confidentialityLevel ?Dominio ;
+    fse:refersTo ?p .
+  ?p
+    foaf:firstName ?patientName ;
+    foaf:lastName ?patientSurname .
+  OPTIONAL {
+    ?ID fse:hasHumanAuthor ?ha .
+    ?ha
+      foaf:firstName ?authorName ;
+      foaf:lastName ?authorSurname .
+  }
+  OPTIONAL {
+      ?ID fse:body ?Testo ;
+  }
+  OPTIONAL {
+    ?ID fse:hasDeviceAuthor ?da .
+    ?da fse:hasIdentifier ?Dispositivo_Emittente .
+  }
+  OPTIONAL {
+    ?ID fse:hasCustodian ?o .
+    ?o org:identifier ?Organizzazione .
+  }
+  FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument, fse:prescription))
+}
