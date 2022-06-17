@@ -1,5 +1,5 @@
 import { Component, createMemo, Match, Resource, Show, Switch } from "solid-js"
-import { Patient } from "../models/Patient"
+import { Patient } from "../models/Person"
 
 const PatientInfo: Component<{ patient: Resource<Patient> }> = (props) => {
   const avatarLetters = createMemo(

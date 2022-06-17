@@ -1,10 +1,10 @@
 import { Component, createSignal, Match, Switch } from "solid-js"
 import { useParams } from "solid-app-router"
-import usePatientStore from "../../hooks/usePatientStore"
-import PatientInfo from "../../components/PatientInfo"
-import PatientDocs from "../../components/PatientDocs"
-import DocSections from "../../components/DocSections"
-import { ClinicalDocument } from "../../models/ClinicalDocument"
+import usePatientStore from "../hooks/usePatientStore"
+import PatientInfo from "../components/PatientInfo"
+import PatientDocs from "../components/PatientDocs"
+import DocSections from "../components/DocSections"
+import { ClinicalDocument } from "../models/ClinicalDocument"
 
 const PatientPage: Component = () => {
   const params = useParams()
@@ -16,6 +16,7 @@ const PatientPage: Component = () => {
 
   const showDocumentDetails = (doc: ClinicalDocument) => setDocument(doc)
 
+  
   return (
     <div class="patient flex gap-12">
       <div class="w-1/4"><PatientInfo patient={patient}/></div>

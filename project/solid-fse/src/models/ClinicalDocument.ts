@@ -1,11 +1,11 @@
 import { Observation } from "./OperatingProcedure"
-import { Section } from "./Section"
+import { ImmunizationCard, Section } from "./Section"
 import { SubstanceAdministration } from "./SubstanceAdministration"
 
-export interface ClinicalDocument {
+interface ClinicalDocument {
   id: string
   documentType: string
-  // timestamp: string
+  createdAt: Date
   version: number
   languageCode: string
   realmCode: string
@@ -14,16 +14,37 @@ export interface ClinicalDocument {
   humanAuthor?: string
   deviceAuthor?: string
   organization?: string
+  signatory?: string
+  signTime?: Date
   code?: LOINC_code
   sections?: Section[]
-  inFulfillmentOf?: Prescription
+  inFulfillmentOf?: string
 }
 
-export interface LOINC_code {
-  value: string
-  description: string
+interface LOINC_code {
+  value: Code
+  description?: string
 }
 
+enum Code {
+  Exemption  = "57827-8",
+  FirstAid   = "59258-4",
+  Discharge  = "34105-7",
+  Immunization   = "87273-9",
+  LaboratoryMedicine   = "11502-2",
+  OutpatientSpecialist = "11488-4",
+  P_Admission   = "57830-2",
+  P_Pharma = "57833-6",
+  P_Specialist = "57833-6",
+  P_TransportRequest = "57834-4",
+  Radiology = "68604-8",
+  SummaryHealthProfile = "60591-5"
+}
+
+// Immunization
+interface Immunization {
+  sections: ImmunizationCard[]
+}
 
 // Prescription
 interface Prescription extends ClinicalDocument {
@@ -41,3 +62,5 @@ interface Specialist extends Prescription {
 interface Admission extends Prescription {}
 
 interface TransportRequest extends Prescription {}
+
+export { ClinicalDocument, LOINC_code, Code }

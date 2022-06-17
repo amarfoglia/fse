@@ -3,7 +3,7 @@ import { Routes, Route } from "solid-app-router"
 import Nav from "./components/Nav"
 
 const PatientsPage = lazy(() => import("./pages/PatientsPage"))
-const PatientPage = lazy(() => import("./pages/patient/PatientPage"))
+const PatientPage = lazy(() => import("./pages/PatientPage"))
 const RegisterPage = lazy(() => import("./pages/RegisterPage"))
 const QueriesPage = lazy(() => import("./pages/QueriesPage"))
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"))

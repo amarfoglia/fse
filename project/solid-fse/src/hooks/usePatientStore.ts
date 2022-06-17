@@ -1,6 +1,6 @@
 import { createResource } from "solid-js"
 import { ClinicalDocument } from "../models/ClinicalDocument"
-import { Patient } from "../models/Patient"
+import { Patient } from "../models/Person"
 import { Section } from "../models/Section"
 import mapBindingsToValues from "../utils/mapBindingsToValues"
 import createStardogQuery from "./createStardogQuery"

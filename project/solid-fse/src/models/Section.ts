@@ -5,15 +5,15 @@ import { SubstanceAdministration } from "./SubstanceAdministration"
 
 interface Section {
   title: string
-  text: string
+  body?: string
+  code: string
   isPartOf?: ClinicalDocument
-  code: LOINC_code
 }
 
 
 // PSS - Summary Health Profile
-interface ImmunizationCard extends Section {
-  administration: SubstanceAdministration
+interface Immunizations extends Section {
+  administrations: SubstanceAdministration[]
 }
 
 interface Alerts extends Section {
@@ -38,7 +38,7 @@ interface Medications extends Section {
 
 // RML - Medicine Laboratory Report
 interface Specialty extends Section {
-  results: Test[]
+  test: Test
 }
 
 // RSA - Outpatient Specialist Report
@@ -76,7 +76,9 @@ interface ReasonForVisit extends Section {
 }
 
 // VAC - Immunization
-interface ImmunizationCard extends Section {}
+interface ImmunizationCard extends Section {
+  administration: SubstanceAdministration
+}
 
 // DE - Discharge Letter
 interface DsExemption extends Section {}
@@ -133,6 +135,7 @@ interface Test {
   material: string
   result: string
   unit: string
+  latestVersion?: string
 }
 
-export { Section, OperatingProcedure }
+export { Section, OperatingProcedure, ImmunizationCard, Specialty, Test }

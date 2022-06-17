@@ -1,23 +1,22 @@
-import { LOINC_code } from "./ClinicalDocument"
 import { OperatingProcedure } from "./OperatingProcedure"
 
 interface SubstanceAdministration extends OperatingProcedure {
-  effectiveTime: string
-  routeCode: string
+  effectiveTime: number
   via: string
-  approachSiteCode: string
   doseQuantity: number
-  boosterOf?: Booster
+  unit: string
+  approchSiteCode: string
+  consumable?: Drug
+  boosters: Booster[]
   preventedDisease?: Disease
-  consumable: Drug
   participant?: string
 }
 
 interface Booster {
   boosterNumber: number
   statusCode: string
-  nextBooster: string
-  code: LOINC_code
+  nextBooster?: number
+  code: string
 }
 
 interface Disease {
