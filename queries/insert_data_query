@@ -190,7 +190,7 @@ INSERT DATA {
             fse:languageCode "it-IT" ;
             fse:realmCode "IT" ;
             fse:versionNumber 1 ;
-            fse:inFulfillmentOf: <tag:stardog:api:#prescription_acalabrese> ;
+            fse:inFulfillmentOf <tag:stardog:api:#prescription_acalabrese> ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
             fse:refersTo <tag:stardog:api:#RSSDNI48C45C573H> ;
             fse:hasHumanAuthor <tag:stardog:api:#doctor_gmoccia> ;
@@ -219,17 +219,17 @@ INSERT DATA {
         # -------------------------
         <#sign_rad_pfiorentino_abarese>
             a fse:sign ;
-            fse:hasEffectiveTime "2015-10-05T22:15:05" ;
+            fse:effectiveTime "2015-10-05T22:15:05" ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_abarese> .
 
         <#sign_vpsCosta_aparatore>
             a fse:sign ;
-            fse:hasEffectiveTime "2021-10-23T09:14:00" ;
+            fse:effectiveTime "2021-10-23T09:14:00" ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_aparatore> .
         
         <#sign_deEsposito_aparatore>
             a fse:sign ;
-            fse:hasEffectiveTime "2021-10-23T09:14:00" ;
+            fse:effectiveTime "2021-10-23T09:14:00" ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_aparatore> .
         # -------------------------
         # SECTIONS
