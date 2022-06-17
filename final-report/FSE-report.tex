@@ -474,7 +474,11 @@ evince anche dalla estensione della relazione \texttt{fse:inFulfillmentOf}
 (Figura \ref*{fig:prescription}). Il documento di Prescrizione può
 concretizzarsi in diverse classi, ognuna è sottoclasse dell'entità
 \texttt{fse:prescription} ed è identificata da uno specifico codice LOINC
-(Tabella \ref*{table:prescriptions}).\newline\newline
+(Tabella \ref*{table:prescriptions}).\newline
+Alle prescrizioni viene associato un livello di priorità preso da un set di
+valori predefiniti (Tabella \ref*{table:priorityLevels}). Questo è modellato per
+mezzo della classe \texttt{fse:priorityLevel} e la relazione
+\texttt{fse:hasPriority}.
 %
 \begin{figure}[htp]
     \centering
@@ -504,11 +508,6 @@ concretizzarsi in diverse classi, ognuna è sottoclasse dell'entità
     \caption{Famiglia delle prescrizioni.}
     \label{table:prescriptions}
 \end{table}
-%
-Alle prescrizioni viene associato un livello di priorità preso da un set di
-valori predefiniti (Tabella \ref*{table:priorityLevels}). Questo è modellato per
-mezzo della classe \texttt{fse:priorityLevel} e la relazione
-\texttt{fse:hasPriority}.
 %
 \begin{table}[htp]
     \begin{tabularx}{\textwidth}{|c|X|}
