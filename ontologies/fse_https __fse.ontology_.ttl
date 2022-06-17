@@ -291,6 +291,14 @@ fse:hasDeviceAuthor rdf:type owl:ObjectProperty ;
                     <tag:stardog:studio:label> "hasDeviceAuthor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/hasDiagnosis
+fse:hasDiagnosis rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ,
+                          owl:IrreflexiveProperty ;
+                 rdfs:domain fse:specialist ;
+                 rdfs:range obo:NCIT_C18020 .
+
+
 ###  https://fse.ontology/hasDisease
 fse:hasDisease rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf fse:hasProfileField ;
@@ -379,14 +387,6 @@ fse:hasLegalAuthenticator rdf:type owl:ObjectProperty ,
 fse:hasMissionManager rdf:type owl:ObjectProperty ;
                       rdfs:domain :modeOfTransport ;
                       rdfs:range fse:healthWorker .
-
-
-###  https://fse.ontology/hasObservation
-fse:hasObservation rdf:type owl:ObjectProperty ,
-                            owl:FunctionalProperty ,
-                            owl:IrreflexiveProperty ;
-                   rdfs:domain fse:specialist ;
-                   rdfs:range fse:observation .
 
 
 ###  https://fse.ontology/hasParticipant
@@ -786,6 +786,12 @@ foaf:lastName rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy foaf: ;
               rdfs:label "lastName" ;
               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
+
+
+###  https://fse.ontology#validUntil
+:validUntil rdf:type owl:DatatypeProperty ;
+            rdfs:domain fse:immunization ;
+            rdfs:range xsd:dateTime .
 
 
 ###  https://fse.ontology/approachSiteCode
