@@ -8,17 +8,20 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT ?Title ?Name ?Result ?Method ?Code
+SELECT ?title ?name ?result ?method ?code ?material ?unit
 FROM <https://fse.ontology/>
 WHERE {
   ?id a fse:laboratoryMedicineReport ;
       fse:hasSection [
-            fse:title ?Title ;
-            fse:hasCode ?Code ;
+            fse:title ?title ;
+            fse:hasCode ?code ;
             fse:hasResult [
-                  fse:name ?Name ;
-                  fse:result ?Result ;
-                  fse:method ?Method ;     
+                  fse:name ?name ;
+                  fse:result ?result ;
+                  fse:method ?method ;
+                  fse:material ?material ;
+                  fse:unit ?unit ;      
             ] 
-      ] .
+      ] 
+    FILTER(?id = <tag:stardog:api:#lab_bcosta>)
 }

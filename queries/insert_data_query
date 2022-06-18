@@ -90,7 +90,7 @@ INSERT DATA {
         
         <#vac_bcosta>
             a fse:immunization ;
-            fse:validUntil "2022-05-05" ;
+            fse:validUntil "2022-05-05T07:35:58"^^xsd:dateTime ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
             #fse:hasCode <loinc:87273-9> ;
             fse:languageCode "it-IT" ;
@@ -219,17 +219,17 @@ INSERT DATA {
         # -------------------------
         <#sign_rad_pfiorentino_abarese>
             a fse:sign ;
-            fse:effectiveTime "2015-10-05T22:15:05" ;
+            fse:effectiveTime "2015-10-05T22:15:05"^^xsd:dateTime ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_abarese> .
 
         <#sign_vpsCosta_aparatore>
             a fse:sign ;
-            fse:effectiveTime "2021-10-23T09:14:00" ;
+            fse:effectiveTime "2021-10-23T09:14:00"^^xsd:dateTime ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_aparatore> .
         
         <#sign_deEsposito_aparatore>
             a fse:sign ;
-            fse:effectiveTime "2021-10-23T09:14:00" ;
+            fse:effectiveTime "2021-10-23T09:14:00"^^xsd:dateTime ;
             fse:hasLegalAuthenticator <tag:stardog:api:#doctor_aparatore> .
         # -------------------------
         # SECTIONS
@@ -269,7 +269,7 @@ INSERT DATA {
             #fse:hasCode <loinc:48765-2> ;
             fse:includesAllergy <obo:DOID_0060532> ;
             fse:includesAllergy <obo:DOID_0080811> ;
-            fse:start "2015-03-21" .
+            fse:start "2022-02-02T07:35:58"^^xsd:dateTime .
         
         <#pregnancies_vpinto>
             a fse:historyOfPregnancies ;
@@ -310,21 +310,21 @@ INSERT DATA {
         <#immunization_fiorentino>
             a fse:immunizationCard ;
             #fse:hasCode <loinc:11369-6> ;
-            fse:title "Scheda della singola Vacc." ;
+            fse:title "Scheda della singola Vaccinazione." ;
             fse:body "Somministrata vaccinazione anti SARS-COV2" ;
             fse:includesAdministration <tag:stardog:api:#substance_administration_fiorentino> .
         
         <#immunization_fiorentino_2>
             a fse:immunizationCard ;
             #fse:hasCode <loinc:11369-6> ;
-            fse:title "Scheda della singola Vacc." ;
+            fse:title "Scheda della singola Vaccinazione." ;
             fse:body "Somministrata vaccinazione anti SARS-COV2" ;
             fse:includesAdministration <tag:stardog:api:#substance_administration_fiorentino_2> .
         
         <#immunization_costa>
             a fse:immunizationCard ;
             #fse:hasCode <loinc:11369-6> ;
-            fse:title "Scheda della singola Vacc." ;
+            fse:title "Scheda della singola Vaccinazione." ;
             fse:body "Somministrata vaccinazione anti SARS-COV2" ;
             fse:includesAdministration <tag:stardog:api:#substance_administration_costa> .
         
@@ -346,7 +346,7 @@ INSERT DATA {
             #fse:hasCode <loinc:18842-5> ;
             fse:title "Dimissione" ;
             fse:body "Trauma distorsivo alla 1 MTC-F con lesione di Stener. Non fratture nè deficit v/n. Mantiene tutore dedicato con blocco 1° MTC-F per 20 gg. Rivalutazione in chir della mano tra 20 gg Arcoxia 90 mg 1 cp se dolore" ;
-            fse:effectiveTime "23/10/2021 09:14" ;
+            fse:effectiveTime "2020-08-15T07:35:58"^^xsd:dateTime ;
             fse:statusCode "Completed" .
         
         <#triage_costa>
@@ -355,7 +355,7 @@ INSERT DATA {
             #fse:hasCode <loinc:54094-8> ;
             fse:hasVehicle "Ambulance" ;
             fse:hasPerformer <tag:stardog:api:#doctor_aparatore> ;
-            fse:effectiveTime "23/10/2021 08:00" ;
+            fse:effectiveTime "2020-07-15T07:35:58"^^xsd:dateTime ;
             fse:statusCode "Completed" .
         
         <#transport_costa>
@@ -363,7 +363,7 @@ INSERT DATA {
             fse:title "Modalità di trasporto" ;
             #fse:hasCode <loinc:11459-5> ;
             fse:hasVehicle <tag:stardog:api:#plate_ca128td> ;
-            fse:effectiveTime "23/10/2021 08:00" ;
+            fse:effectiveTime "2020-07-15T07:35:58"^^xsd:dateTime ;
             fse:statusCode "Completed" .
         
         <#service_rossi>
@@ -415,32 +415,35 @@ INSERT DATA {
             a fse:substanceAdministration ;
             fse:approachSiteCode "braccio dx" ;
             fse:doseQuantity "0.05" ;
-            fse:unit "ML" ;
-            fse:effectiveTime "2021-02-01" ; 
-            fse:validUntil "2021-08-01" ;
+            fse:unit "ml" ;
+            fse:effectiveTime "2020-07-15T07:35:58"^^xsd:dateTime ; 
+            fse:validUntil "2021-08-01T07:35:58"^^xsd:dateTime ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
-            fse:via obo:OMIT_0008394 .
+            fse:via obo:OMIT_0008394 ;
+            fse:boosterOf <tag:stardog:api:#booster_fiorentino_1> ;
+            fse:participant <tag:stardog:api:#doctor_abarese>.
             #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
 
         <#substance_administration_fiorentino_2>
             a fse:substanceAdministration ;
-            fse:effectiveTime "2021-08-02" ; 
-            fse:validUntil "2022-02-02" ;
+            fse:effectiveTime "2021-01-15T07:35:58"^^xsd:dateTime ; 
+            fse:validUntil "2022-02-02T07:35:58"^^xsd:dateTime;
             fse:approachSiteCode "braccio dx" ;
             fse:doseQuantity "0.05" ;
-            fse:unit "ML" ;
+            fse:unit "ml" ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
             fse:via obo:OMIT_0008394 ;
-            fse:boosterOf <tag:stardog:api:#booster_fiorentino_2> .
+            fse:boosterOf <tag:stardog:api:#booster_fiorentino_2> ;
+            fse:participant <tag:stardog:api:#doctor_abarese>.
         #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
 
         <#substance_administration_costa>
             a fse:substanceAdministration ;
             fse:approachSiteCode "braccio sx" ;
             fse:doseQuantity "0.05" ;
-            fse:unit "ML" ;
+            fse:unit "ml" ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
             fse:via obo:OMIT_0008394 .
@@ -448,34 +451,40 @@ INSERT DATA {
         # -------------------------
         # BOOSTER
         # -------------------------
+        <#booster_fiorentino_1>
+            a fse:booster ;
+            fse:boosterNum 1 ;
+            fse:nextBooster "2021-01-15T07:35:58"^^xsd:dateTime;
+            fse:statusCode "Completed" .
+        
         <#booster_fiorentino_2>
             a fse:booster ;
-            fse:boosterNum "2" ;
+            fse:boosterNum 2 ;
             fse:statusCode "Completed" .
         # -------------------------
         # PREGNANCIES
         # -------------------------
         <#pregnancy_vpinto>
             a fse:pregnancy ;
-            fse:start "2003-01-01" ;
-            fse:end "2003-09-27" ;
-            fse:result "true" .
+            fse:start "2022-02-02T07:35:58"^^xsd:dateTime ;
+            fse:end "2022-11-02T07:35:58"^^xsd:dateTime ;
+            fse:result true .
         # -------------------------
         # THERAPIES
         # -------------------------
         <#antihistamine_vpinto>
             a fse:therapy ;
-            fse:start "2021-09-24" ;
+            fse:start "2021-09-24T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 1 ;
             fse:hasMedicinal obo:DRON_00070584 .
         <#fugalinfectiontreatment_clori>
             a fse:therapy ;
-            fse:start "2021-08-08" ;
+            fse:start "2022-08-08T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 2 ;
             fse:hasMedicinal obo:CHEBI_10023 .
         <#gastricacidity_acalabrese>
             a fse:therapy ;
-            fse:start "2021-09-10" ;
+            fse:start "2022-09-10T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 2 ;
             fse:hasMedicinal obo:CHEBI_55324 .
         # -------------------------

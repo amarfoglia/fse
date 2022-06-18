@@ -3,42 +3,31 @@ import useDocumentStore from "../../hooks/useDocumentStore"
 import { ClinicalDocument } from "../../models/ClinicalDocument"
 import { ImmunizationCard } from "../../models/Section"
 import { Booster, SubstanceAdministration } from "../../models/SubstanceAdministration"
-import { timestampToDate } from "../../utils/date"
+import { formatDate } from "../../utils/helpers"
 import FallbackWrapper from "../FallBackWrapper"
 
 interface DocProps {
   card: ImmunizationCard
 }
 
-
-const checkBoosterDate = (booster: Booster) =>
-  booster?.nextBooster ? timestampToDate(booster.nextBooster) : "N/D"
-
-const BoosterBox: Component<{booster: Booster}> = (props) => (
-  <>
-  <div class="divider my-4"></div>
-  <h3 class="text-base mb-2">Richiamo #{props.booster.boosterNumber}</h3>
-  <div class="flex flex-wrap gap-4 text-sm text-gray-400">
-    <p><i class="mdi mdi-key mr-2"></i>{props.booster.code}</p>
-    <p><i class="mdi mdi-checkbox-multiple-blank-circle-outline mr-2"></i>{props.booster.statusCode}</p>
-    <p><i class="mdi mdi-skip-next mr-2"></i>{checkBoosterDate(props.booster)}</p>
-  </div>
-  </>
-)
-
 const renderAdministration = (administration: SubstanceAdministration): JSXElement => {
-  const boosters = administration.boosters
+  const booster = administration.booster
+
   return (
     <>
       <div class="flex flex-wrap gap-4 text-sm text-gray-400">
-        {<p><i class="mdi mdi-svg mr-2"></i>{administration.preventedDisease?.name}</p>}
+        {<p><i class="mdi mdi-svg mr-2"></i>{administration.preventedDisease}</p>}
         {<p><i class="mdi mdi-human mr-2"></i>{administration.via}</p>}
-        {<p><i class="mdi mdi-pill mr-2"></i>{administration.consumable.name + ' (' + administration.doseQuantity + ' ' + administration.unit + ')'}</p>}
-        <p><i class="mdi mdi-calendar mr-2"></i>{timestampToDate(administration.effectiveTime)}</p>
+        {<p><i class="mdi mdi-pill mr-2"></i>{administration.consumable + ' (' + administration.doseQuantity + ' ' + administration.unit + ')'}</p>}
+        <p><i class="mdi mdi-calendar mr-2"></i>{formatDate(administration.effectiveTime)}</p>
+        <p><i class="mdi mdi-account-multiple mr-2"></i>{administration.participant}</p>
       </div>
-      <For each={boosters}>{ b =>
-        <BoosterBox booster={b}/>
-      }</For>
+      <div class="divider my-4"></div>
+      <h3 class="text-base mb-2">Richiamo #{booster.boosterNumber}</h3>
+      <div class="flex flex-wrap gap-4 text-sm text-gray-400">
+        <p><i class="mdi mdi-checkbox-multiple-blank-circle-outline mr-2"></i>{booster.statusCode}</p>
+        <p><i class="mdi mdi-skip-next mr-2"></i>{booster.nextBooster}</p>
+      </div>
     </>
   )
 }
@@ -77,7 +66,7 @@ const renderContent = (cards: ImmunizationCard[]) => (
 
 const Immunization: Component<Props> = (props) => {
   const { immunizationCards } = useDocumentStore(props.document.id)
-
+  console.log("cardss", immunizationCards())
   return (
     <FallbackWrapper 
         reasonForEmpty="Nessuna vaccinazione." 

@@ -12,6 +12,7 @@ export const mimeType = "application/sparql-results+json"
 
 const createStardogQuery = (queryCode: string, options: Partial<StardogQueryOptions> = {}) => {
   const allOptions = { ...defaultOptions, ...options }
+  console.log(queryCode)
   const execute = async () => {
     const { body } = await query.execute(conn, database, queryCode, mimeType, allOptions)
     console.log(body)

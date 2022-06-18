@@ -1,31 +1,22 @@
 import { OperatingProcedure } from "./OperatingProcedure"
 
 interface SubstanceAdministration extends OperatingProcedure {
-  effectiveTime: number
+  effectiveTime: string
   via: string
   doseQuantity: number
   unit: string
-  approchSiteCode: string
-  consumable?: Drug
-  boosters: Booster[]
-  preventedDisease?: Disease
+  approachSiteCode: string
+  consumable?: string
+  booster?: Booster
+  preventedDisease?: string
   participant?: string
 }
 
 interface Booster {
   boosterNumber: number
   statusCode: string
-  nextBooster?: number
-  code: string
-}
-
-interface Disease {
-  name: string
-}
-
-interface Drug {
-  name: string
-  description: string
+  nextBooster?: string
+  code?: string
 }
 
 export { SubstanceAdministration, Booster }

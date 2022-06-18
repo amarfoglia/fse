@@ -6,7 +6,7 @@ import { SubstanceAdministration } from "./SubstanceAdministration"
 interface Section {
   title: string
   body?: string
-  code: string
+  code?: string
   isPartOf?: ClinicalDocument
 }
 

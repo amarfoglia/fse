@@ -34,40 +34,59 @@ const fetchPatient = async (fiscalCode: string) => {
 const fetchClinicalDocuments = async (fiscalCode: string) => {
   const query = createStardogQuery(`
     SELECT
-      ?id ?documentType ?body ?languageCode ?realmCode ?confidentialityCode ?version
-      (CONCAT(?patientName, " ", ?patientSurname) AS ?patient)
-      (CONCAT(?authorName, " ", ?authorSurname) AS ?humanAuthor)
-      ?deviceAuthor ?organization
-    FROM <https://fse.ontology/>
-    WHERE {
-      ?documentType rdfs:subClassOf fse:clinicalDocument .
-      ?id
-        a ?documentType ;
-        fse:body ?body ;
-        fse:languageCode ?languageCode ;
-        fse:realmCode ?realmCode ;
-        fse:versionNumber ?version ;
-        fse:confidentialityCode ?confidentialityCode ;
-        fse:refersTo <tag:stardog:api:#${fiscalCode}> .
-      <tag:stardog:api:#${fiscalCode}>
-        foaf:firstName ?patientName ;
-        foaf:lastName ?patientSurname .
-      OPTIONAL {
-        ?id fse:hasHumanAuthor ?ha .
-        ?ha
-          foaf:firstName ?authorName ;
-          foaf:lastName ?authorSurname .
+        ?id ?documentType ?body ?languageCode ?realmCode ?confidentialityCode ?version
+        (CONCAT(?patientName, " ", ?patientSurname) AS ?patient)
+        (CONCAT(?authorName, " ", ?authorSurname) AS ?humanAuthor)
+        ?deviceAuthor ?organization ?createdAt
+        ?inFulfillmentOf
+        (CONCAT(?signatoryName, " ", ?signatorySurname) AS ?signatory) ?signTime
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?documentType rdfs:subClassOf fse:clinicalDocument .
+        ?id
+          a ?documentType ;
+          fse:languageCode ?languageCode ;
+          fse:realmCode ?realmCode ;
+          fse:versionNumber ?version ;
+          fse:confidentialityLevel ?confidentialityCode ;
+          fse:createdAt ?createdAt;
+          fse:refersTo <tag:stardog:api:#${fiscalCode}> .
+        <tag:stardog:api:#${fiscalCode}>
+          foaf:firstName ?patientName ;
+          foaf:lastName ?patientSurname .
+        OPTIONAL {
+          ?id fse:hasHumanAuthor [
+            foaf:firstName ?authorName ;
+            foaf:lastName ?authorSurname
+          ]
+        }
+        OPTIONAL {
+          ?id fse:body ?body ;
+        }
+        OPTIONAL {
+          ?id fse:hasDeviceAuthor [
+            fse:hasIdentifier ?deviceAuthor
+          ]
+        }
+        OPTIONAL {
+          ?id fse:hasCustodian [
+            org:identifier ?organization
+          ]
+        }
+        OPTIONAL {
+          ?id fse:inFulfillmentOf ?inFulfillmentOf;
+        }
+        OPTIONAL {
+          ?id fse:hasBeenSigned [
+            fse:effectiveTime ?signTime ;
+            fse:hasLegalAuthenticator [
+              foaf:firstName ?signatoryName;
+              foaf:lastName ?signatorySurname
+            ]
+          ];
+        }
+        FILTER(?documentType NOT IN (fse:clinicalDocument))
       }
-      OPTIONAL {
-        ?id fse:hasDeviceAuthor ?da .
-        ?da fse:hasIdentifier ?deviceAuthor .
-      }
-      OPTIONAL {
-        ?id fse:hasCustodian ?o .
-        ?o org:identifier ?organization .
-      }
-      FILTER(?documentType NOT IN (fse:clinicalDocument))
-    }
   `)
   const res = (await query.execute()).results.bindings
   const documents = mapBindingsToValues(res)

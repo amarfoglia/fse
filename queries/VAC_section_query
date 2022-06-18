@@ -8,23 +8,34 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT ?title ?body ?approachSiteCode ?quantity ?unit ?disease ?consumable ?via ?date ?deadline
-  FROM <https://fse.ontology/>
-  WHERE {
-    ?id a fse:immunization ;
-        fse:hasSection [
-          fse:title ?title ;
-          fse:body ?body;
-          fse:includesAdministration [
-            fse:approachSiteCode ?approachSiteCode ;
-            fse:doseQuantity ?quantity ;
-            fse:effectiveTime ?date ;
-            fse:validUntil ?deadline ;
-            fse:unit ?unit ;
-            fse:prevents ?disease ;
-            fse:consumable ?consumable ;
-            fse:via ?via ;
-          ]
-        ] ;
-      FILTER(?id = <tag:stardog:api:#vac_pfiorentino>)
-    }
+SELECT ?title ?body ?approachSiteCode ?quantity ?unit ?preventedDisease 
+      ?consumable ?via ?participant ?effectiveTime
+      (CONCAT(?participantName, " ", ?participantSurname) AS ?participant)
+      ?boosterNum ?boosterStatus ?nextBooster
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:immunization ;
+          fse:hasSection [
+            fse:title ?title ;
+            fse:body ?body; 
+            fse:includesAdministration [
+              fse:approachSiteCode ?approachSiteCode ;
+              fse:doseQuantity ?quantity ;
+              fse:unit ?unit ;
+              fse:prevents ?preventedDisease ;
+              fse:consumable ?consumable ;
+              fse:via ?via;
+              fse:effectiveTime ?effectiveTime;
+              fse:participant [
+                foaf:firstName ?participantName ;
+                foaf:lastName ?participantSurname
+              ];
+              fse:boosterOf [
+                fse:boosterNum ?boosterNum ;
+                fse:statusCode ?boosterStatus;
+                fse:nextBooster ?nextBooster
+              ]
+            ]
+          ].
+        FILTER(?id = <tag:stardog:api:#vac_pfiorentino>)
+      }

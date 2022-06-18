@@ -5,7 +5,7 @@ import { SubstanceAdministration } from "./SubstanceAdministration"
 interface ClinicalDocument {
   id: string
   documentType: string
-  createdAt: Date
+  createdAt: string
   version: number
   languageCode: string
   realmCode: string
@@ -15,7 +15,7 @@ interface ClinicalDocument {
   deviceAuthor?: string
   organization?: string
   signatory?: string
-  signTime?: Date
+  signTime?: string
   code?: LOINC_code
   sections?: Section[]
   inFulfillmentOf?: string

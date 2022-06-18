@@ -9,9 +9,19 @@ const DocSections: Component<{ document: ClinicalDocument; goBack: () => void }>
   const renderDocumentContent = (document: ClinicalDocument) => {
     const type = formatDocumentType(document.documentType)
     switch(type) {
-      case "Laboratory Medicine Report": return <SpecialtyCard document={document} />
-      case "Immunization": return <Immunization document={document} />
-      default: return <p>Work in progress...</p>
+      case "Referto di Radiologia": return <></>
+      case "Vaccinazioni": return <Immunization document={document} />
+      case "Verbale di Pronto Soccorso": return <></>
+      case "Referto di Specialistica Ambulatoriale": return <></>
+      case "Documento di Esenzione": return <></>
+      case "Lettera di Dimissione Ospedaliera": return <></>
+      case "Prescrizione": return <></>
+      case "Referto di Medicina di Laboratorio": return <SpecialtyCard document={document} />
+      case "Profilo Sanitario Sintetico": return <></>
+      case "Prescrizione Farmaceutica": return <></>
+      case "Prescrizione Specialistica": return <></>
+      case "Prescrizione di Ricovero": return <></>
+      case "Prescrizione di Trasporto": return <></>
     }
   }
 
