@@ -8,11 +8,12 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT ?Sect ?Disease
+SELECT ?Disease
 FROM <https://fse.ontology/>
 WHERE {
   ?id a fse:summaryHealthProfile ;
       #fse:code ?code ;
-      fse:hasSection ?Sect .
-    ?Sect fse:includesDisease ?Disease .
+      fse:hasSection [
+        fse:includesDisease ?Disease 
+      ] .
 }

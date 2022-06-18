@@ -8,18 +8,21 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento ?Valido_fino_a
+SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento ?Data ?Valido_fino_a
 FROM <https://fse.ontology/>
 WHERE {
   ?doc
     a fse:immunization ;
     fse:hasLatestVersion ?doc ;
     fse:refersTo ?ID ;
-    fse:validUntil ?Valido_fino_a ;
-    fse:hasSection ?Sect .
-  ?Sect fse:body ?Documento .
-  ?ID
-    foaf:firstName ?name ;
+    fse:hasSection [
+      fse:body ?Documento ;
+      fse:includesAdministration [
+        fse:effectiveTime ?Data ;
+        fse:validUntil ?Valido_fino_a
+      ]
+    ] .
+    ?ID foaf:firstName ?name ;
     foaf:lastName ?surname .
   FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
 }

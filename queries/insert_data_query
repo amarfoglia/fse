@@ -26,7 +26,6 @@ INSERT DATA {
         
         <#vac_pfiorentino>
             a fse:immunization ;
-            fse:validUntil "2022-08-01" ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
             #fse:hasCode <loinc:87273-9> ;
             fse:languageCode "it-IT" ;
@@ -37,7 +36,8 @@ INSERT DATA {
             fse:hasCustodian <tag:stardog:api:#ausl> ;
             fse:hasLatestVersion <tag:stardog:api:#vac_pfiorentino> ;
             fse:createdAt "2017-10-05T22:15:04" ;
-            fse:hasSection <tag:stardog:api:#immunization_fiorentino> .
+            fse:hasSection <tag:stardog:api:#immunization_fiorentino> ;
+            fse:hasSection <tag:stardog:api:#immunization_fiorentino_2> .
         
         <#lab_bcosta>
             a fse:laboratoryMedicineReport ;
@@ -192,7 +192,7 @@ INSERT DATA {
             fse:versionNumber 1 ;
             fse:inFulfillmentOf <tag:stardog:api:#prescription_acalabrese> ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
-            fse:refersTo <tag:stardog:api:#RSSDNI48C45C573H> ;
+            fse:refersTo <tag:stardog:api:#CLBDLA93S07D969X> ;
             fse:hasHumanAuthor <tag:stardog:api:#doctor_gmoccia> ;
             fse:hasCustodian <tag:stardog:api:#auser> ;
             fse:hasLatestVersion <tag:stardog:api:#rsa_calabrese> ;
@@ -314,6 +314,13 @@ INSERT DATA {
             fse:body "Somministrata vaccinazione anti SARS-COV2" ;
             fse:includesAdministration <tag:stardog:api:#substance_administration_fiorentino> .
         
+        <#immunization_fiorentino_2>
+            a fse:immunizationCard ;
+            #fse:hasCode <loinc:11369-6> ;
+            fse:title "Scheda della singola Vacc." ;
+            fse:body "Somministrata vaccinazione anti SARS-COV2" ;
+            fse:includesAdministration <tag:stardog:api:#substance_administration_fiorentino_2> .
+        
         <#immunization_costa>
             a fse:immunizationCard ;
             #fse:hasCode <loinc:11369-6> ;
@@ -323,7 +330,7 @@ INSERT DATA {
         
         <#specialty_bcosta>
             a fse:specialty ;
-            #fse:hasCode <loinc:18717-9> ;
+            fse:hasCode <loinc:18717-9> ;
             fse:title "Specialità" ;
             fse:hasResult <tag:stardog:api:#test_bcosta> .
          
@@ -409,11 +416,25 @@ INSERT DATA {
             fse:approachSiteCode "braccio dx" ;
             fse:doseQuantity "0.05" ;
             fse:unit "ML" ;
+            fse:effectiveTime "2021-02-01" ; 
+            fse:validUntil "2021-08-01" ;
+            fse:prevents obo:DOID_0080600 ;
+            fse:consumable obo:DRON_00020458 ;
+            fse:via obo:OMIT_0008394 .
+            #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
+
+        <#substance_administration_fiorentino_2>
+            a fse:substanceAdministration ;
+            fse:effectiveTime "2021-08-02" ; 
+            fse:validUntil "2022-02-02" ;
+            fse:approachSiteCode "braccio dx" ;
+            fse:doseQuantity "0.05" ;
+            fse:unit "ML" ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
             fse:via obo:OMIT_0008394 ;
-            fse:body "Vaccinazione Covid 19" .
-            #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
+            fse:boosterOf <tag:stardog:api:#booster_fiorentino_2> .
+        #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
 
         <#substance_administration_costa>
             a fse:substanceAdministration ;
@@ -422,9 +443,15 @@ INSERT DATA {
             fse:unit "ML" ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
-            fse:via obo:OMIT_0008394 ;
-            fse:body "Vaccinazione Covid 19" .
+            fse:via obo:OMIT_0008394 .
             #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
+        # -------------------------
+        # BOOSTER
+        # -------------------------
+        <#booster_fiorentino_2>
+            a fse:booster ;
+            fse:boosterNum "2" ;
+            fse:statusCode "Completed" .
         # -------------------------
         # PREGNANCIES
         # -------------------------
