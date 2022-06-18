@@ -100,46 +100,6 @@
             rdfs:range obo:SYMP_0000462 .
 
 
-###  http://bioportal.bioontology.org/ontologies/umls/hasSTY
-<http://bioportal.bioontology.org/ontologies/umls/hasSTY> rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_class
-loinc:has_class rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_component
-loinc:has_component rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_property
-loinc:has_property rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_scale
-loinc:has_scale rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_supersystem
-loinc:has_supersystem rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_system
-loinc:has_system rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/has_time_aspect
-loinc:has_time_aspect rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/measures
-loinc:measures rdf:type owl:ObjectProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/member_of
-loinc:member_of rdf:type owl:ObjectProperty .
-
-
 ###  http://www.w3.org/ns/org#hasSite
 org:hasSite rdf:type owl:ObjectProperty ;
             owl:inverseOf org:siteOf ;
@@ -675,72 +635,10 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
-###  http://purl.bioontology.org/ontology/LNC/COMMON_ORDER_RANK
-loinc:COMMON_ORDER_RANK rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/COMMON_SI_TEST_RANK
-loinc:COMMON_SI_TEST_RANK rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/COMMON_TEST_RANK
-loinc:COMMON_TEST_RANK rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LCL
-loinc:LCL rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LCN
-loinc:LCN rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LCS
-loinc:LCS rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LCT
-loinc:LCT rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LOINC_COMPONENT
-loinc:LOINC_COMPONENT rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LOINC_PROPERTY
-loinc:LOINC_PROPERTY rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LOINC_SCALE_TYP
-loinc:LOINC_SCALE_TYP rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LOINC_SYSTEM
-loinc:LOINC_SYSTEM rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LOINC_TIME_ASPECT
-loinc:LOINC_TIME_ASPECT rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LRN2
-loinc:LRN2 rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/LUR
-loinc:LUR rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/VERSION_FIRST_RELEASED
-loinc:VERSION_FIRST_RELEASED rdf:type owl:DatatypeProperty .
-
-
-###  http://purl.bioontology.org/ontology/LNC/VERSION_LAST_CHANGED
-loinc:VERSION_LAST_CHANGED rdf:type owl:DatatypeProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#notation
-<http://www.w3.org/2004/02/skos/core#notation> rdf:type owl:DatatypeProperty .
+###  http://api.stardog.com/validUntil
+:validUntil rdf:type owl:DatatypeProperty ;
+            rdfs:domain fse:immunization ;
+            rdfs:range xsd:dateTime .
 
 
 ###  http://www.w3.org/ns/org#identifier
@@ -786,12 +684,6 @@ foaf:lastName rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy foaf: ;
               rdfs:label "lastName" ;
               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
-
-
-###  https://fse.ontology#validUntil
-:validUntil rdf:type owl:DatatypeProperty ;
-            rdfs:domain fse:immunization ;
-            rdfs:range xsd:dateTime .
 
 
 ###  https://fse.ontology/approachSiteCode
@@ -2102,41 +1994,7 @@ loinc:MTHU034750 rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/56817-0
-<http://purl.bioontology.org/ontology/LNC/56817-0> rdf:type owl:NamedIndividual ;
-                                                   <http://bioportal.bioontology.org/ontologies/umls/hasSTY> <http://purl.bioontology.org/ontology/STY/T201> ;
-                                                   loinc:has_class loinc:LP7787-7 ,
-                                                                   loinc:LP7792-7 ;
-                                                   loinc:has_component loinc:LP185407-6 ,
-                                                                       loinc:LP96269-3 ;
-                                                   loinc:has_property loinc:LP6813-2 ;
-                                                   loinc:has_scale loinc:LP7750-5 ;
-                                                   loinc:has_supersystem loinc:LP6985-8 ;
-                                                   loinc:has_system loinc:LP310005-6 ;
-                                                   loinc:has_time_aspect loinc:LP6960-1 ;
-                                                   loinc:measures loinc:MTHU034750 ;
-                                                   loinc:member_of <http://purl.bioontology.org/ontology/LNC/55177-0> ;
-                                                   loinc:COMMON_ORDER_RANK "0"^^xsd:string ;
-                                                   loinc:COMMON_SI_TEST_RANK "0"^^xsd:string ;
-                                                   loinc:COMMON_TEST_RANK "0"^^xsd:string ;
-                                                   loinc:LCL "ED"^^xsd:string ;
-                                                   loinc:LCN "2"^^xsd:string ;
-                                                   loinc:LCS "ACTIVE"^^xsd:string ;
-                                                   loinc:LCT "MIN"^^xsd:string ;
-                                                   loinc:LOINC_COMPONENT "Presenting problem"^^xsd:string ;
-                                                   loinc:LOINC_PROPERTY "Find"^^xsd:string ;
-                                                   loinc:LOINC_SCALE_TYP "Nom"^^xsd:string ;
-                                                   loinc:LOINC_SYSTEM "^Patient"^^xsd:string ;
-                                                   loinc:LOINC_TIME_ASPECT "Pt"^^xsd:string ;
-                                                   loinc:LRN2 "DEEDS; Emergency Department; EMERGENCY DEPARTMENT (DEEDS); Finding; Findings; Nominal; Point in time; Random"^^xsd:string ;
-                                                   loinc:LUR "N"^^xsd:string ;
-                                                   loinc:VERSION_FIRST_RELEASED "2.29"^^xsd:string ;
-                                                   loinc:VERSION_LAST_CHANGED "2.29"^^xsd:string ;
-                                                   <http://www.w3.org/2004/02/skos/core#notation> "56817-0"^^xsd:string ;
-                                                   <http://bioportal.bioontology.org/ontologies/umls/cui> "C2735055"^^xsd:string ;
-                                                   <http://bioportal.bioontology.org/ontologies/umls/tui> "T201"^^xsd:string ;
-                                                   <http://www.w3.org/2004/02/skos/core#altLabel> "Presenting problem"@en ,
-                                                                                                  "Presenting problem:Finding:To identify measures at a point in time:^Patient:Nominal"@en ;
-                                                   <http://www.w3.org/2004/02/skos/core#prefLabel> "Presenting problem:Find:Pt:^Patient:Nom"@en .
+<http://purl.bioontology.org/ontology/LNC/56817-0> rdf:type owl:NamedIndividual .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/57827-8
@@ -2228,8 +2086,8 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
 
 
 fse:vehicle <tag:stardog:studio:label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en .
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 #################################################################
