@@ -14,7 +14,9 @@ WHERE {
   ?Id 
     a fse:firstAidReport ;
       fse:hasSection ?Sect .
+    OPTIONAL {
       ?Sect fse:hasCode ?Code ;
+    }
     OPTIONAL {
       ?Sect fse:body ?Body ;
             fse:title ?Title .
