@@ -489,7 +489,7 @@ document."""@en ;
 ###  https://fse.ontology/includesAdministration
 fse:includesAdministration rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf fse:includesField ;
-                           rdfs:domain :immunizations ;
+                           rdfs:domain :immunizationCard ;
                            rdfs:range fse:substanceAdministration ;
                            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                            <tag:stardog:studio:label> "prevents"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -585,6 +585,8 @@ fse:mainProblem rdf:type owl:ObjectProperty ,
 
 ###  https://fse.ontology/participant
 fse:participant rdf:type owl:ObjectProperty ;
+                rdfs:domain fse:substanceAdministration ;
+                rdfs:range fse:healthWorker ;
                 <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Location for the execution of drug administration" ;
                 <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "participant" ;
                 <tag:stardog:studio:label> "participant" .
@@ -637,7 +639,7 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 
 ###  http://api.stardog.com/validUntil
 :validUntil rdf:type owl:DatatypeProperty ;
-            rdfs:domain fse:immunization ;
+            rdfs:domain fse:substanceAdministration ;
             rdfs:range xsd:dateTime .
 
 
@@ -742,7 +744,7 @@ fse:dailyQuantity rdf:type owl:DatatypeProperty ;
 ###  https://fse.ontology/doseQuantity
 fse:doseQuantity rdf:type owl:DatatypeProperty ;
                  rdfs:domain fse:substanceAdministration ;
-                 rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#decimal> ;
+                 rdfs:range xsd:decimal ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Administrated quantity of drug" ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "doseQuantity" ;
                  <tag:stardog:studio:label> "doseQuantity" .
@@ -754,6 +756,7 @@ fse:effectiveTime rdf:type owl:DatatypeProperty ;
                                 owl:unionOf ( :discharge
                                               :triage
                                               fse:sign
+                                              fse:substanceAdministration
                                             )
                               ] ;
                   rdfs:range xsd:dateTime ;
