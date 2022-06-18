@@ -8,13 +8,12 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT ?Sect ?Title ?Body ?Name ?Result ?Method
+SELECT ?Sect ?Title ?Name ?Result ?Method
 FROM <https://fse.ontology/>
 WHERE {
   ?id a fse:laboratoryMedicineReport ;
       fse:hasSection ?Sect .
   ?Sect fse:title ?Title ;
-        fse:body ?Body ;
         #fse:hasCode ?code ;
         fse:hasResult ?Test .
   ?Test fse:name ?Name ;
