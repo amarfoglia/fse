@@ -29,41 +29,43 @@ const queries: Query[] = [
   {
     name: "Lista documenti",
     code: outdent`
-      SELECT
-        ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Dominio ?Versione
-        (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
-        (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
-        ?Dispositivo_Emittente ?Organizzazione
-      FROM <https://fse.ontology/>
-      WHERE {
-        ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
-        ?ID
-          a ?Tipo_Documento ;
-          fse:body ?Testo ;
-          fse:languageCode ?Lingua ;
-          fse:realmCode ?Paese ;
-          fse:versionNumber ?Versione ;
-          fse:confidentialityCode ?Dominio ;
-          fse:refersTo ?p .
-        ?p
-          foaf:firstName ?patientName ;
-          foaf:lastName ?patientSurname .
-        OPTIONAL {
-          ?ID fse:hasHumanAuthor ?ha .
-          ?ha
-            foaf:firstName ?authorName ;
-            foaf:lastName ?authorSurname .
-        }
-        OPTIONAL {
-          ?ID fse:hasDeviceAuthor ?da .
-          ?da fse:hasIdentifier ?Dispositivo_Emittente .
-        }
-        OPTIONAL {
-          ?ID fse:hasCustodian ?o .
-          ?o org:identifier ?Organizzazione .
-        }
-        FILTER(?Tipo_Documento NOT IN (fse:clinicalDocument))
+    SELECT
+      ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Dominio ?Versione
+      (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
+      (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
+      ?Dispositivo_Emittente ?Organizzazione
+    FROM <https://fse.ontology/>
+    WHERE {
+      ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
+      ?ID
+        a ?Tipo_Documento ;
+        fse:languageCode ?Lingua ;
+        fse:realmCode ?Paese ;
+        fse:versionNumber ?Versione ;
+        fse:confidentialityLevel ?Dominio ;
+        fse:refersTo ?p .
+      ?p
+        foaf:firstName ?patientName ;
+        foaf:lastName ?patientSurname .
+      OPTIONAL {
+        ?ID fse:hasHumanAuthor ?ha .
+        ?ha
+          foaf:firstName ?authorName ;
+          foaf:lastName ?authorSurname .
       }
+      OPTIONAL {
+          ?ID fse:body ?Testo ;
+      }
+      OPTIONAL {
+        ?ID fse:hasDeviceAuthor ?da .
+        ?da fse:hasIdentifier ?Dispositivo_Emittente .
+      }
+      OPTIONAL {
+        ?ID fse:hasCustodian ?o .
+        ?o org:identifier ?Organizzazione .
+      }
+      FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument, fse:prescription))
+    }
     `
   },
   {
@@ -93,20 +95,24 @@ const queries: Query[] = [
   {
     name: "Pazienti con vaccini scaduti",
     code: outdent`
-      SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento ?Valido_fino_a
-      FROM <https://fse.ontology/>
-      WHERE {
-        ?doc
-          a fse:immunization ;
-          fse:hasLatestVersion ?doc ;
-          fse:refersTo ?ID ;
+    SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento ?Data ?Valido_fino_a
+    FROM <https://fse.ontology/>
+    WHERE {
+      ?doc
+        a fse:immunization ;
+        fse:hasLatestVersion ?doc ;
+        fse:refersTo ?ID ;
+        fse:hasSection [
           fse:body ?Documento ;
-          fse:validUntil ?Valido_fino_a .
-        ?ID
-          foaf:firstName ?name ;
-          foaf:lastName ?surname .
-        FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
-      }
+          fse:includesAdministration [
+            fse:effectiveTime ?Data ;
+            fse:validUntil ?Valido_fino_a
+          ]
+        ] .
+        ?ID foaf:firstName ?name ;
+        foaf:lastName ?surname .
+      FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
+    }
     `
   },
   {
@@ -151,6 +157,20 @@ const queries: Query[] = [
           fse:hasDisease ?Cod_Malattia .
         ?Cod_Malattia
           obo:IAO_0000115 ?Descrizione .
+      }
+    `,
+    options: { reasoning: true }
+  },
+  {
+    name: "Descrizione documenti",
+    code: outdent`
+      SELECT ?id ?desc
+      FROM <tag:stardog:api:context:all>
+      WHERE {
+        ?id a fse:clinicalDocument .
+        ?id fse:hasCode [
+                loinc:LOINC_COMPONENT ?desc 
+            ]
       }
     `,
     options: { reasoning: true }
