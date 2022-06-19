@@ -1,5 +1,6 @@
 import { createResource } from "solid-js"
-import { ImmunizationCard, Section, Specialty } from "../models/Section"
+import { Alerts, Disease, HistoryOfDiseases, HistoryOfPregnancies, ImmunizationCard, Medications, Pregnancy, Section, Specialty, Therapy } from "../models/Section"
+import mapBindingsToValues from "../utils/mapBindingsToValues"
 import createStardogQuery from "./createStardogQuery"
 
 const fetchImmunizationCards = async (documentId: string): Promise<ImmunizationCard[]> => {
@@ -104,23 +105,183 @@ const fetchSpecialties = async (documentId: string): Promise<Specialty[]> => {
   return specialties
 }
 
-const fetchAllergies = async (documentId: string): Promise<ImmunizationCard[]> => {
-  const query = createStardogQuery(``)
+const fetchAlerts = async (documentId: string): Promise<Alerts[]> => {
+  const query = createStardogQuery(`
+    SELECT ?title ?start ?end ?allergy 
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:summaryHealthProfile ;
+            #fse:code ?code ;
+            fse:hasSection [
+              a fse:alerts;
+                  fse:title ?title;
+                  fse:start ?start;
+                  fse:end ?end;
+                  fse:includesAllergy ?allergy
+            ] 
+            FILTER(?id = <${documentId}>)
+      }
+  `)
   const res = (await query.execute()).results.bindings
-  const immunizationCards: ImmunizationCard[] = []
+  return mapBindingsToValues(res) as Alerts[]
+}
+
+const fetchTherapies = async (medicationsId: string): Promise<Therapy[]> => {
+  const query = createStardogQuery(`
+    SELECT *
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:medications;
+        fse:includesTherapy [
+            fse:start ?start ;
+            fse:end ?end ;
+            fse:dailyQuantity ?dailyQuantity ;
+            fse:statusCode ?statusCode ;
+            fse:includesAdministration [
+                fse:approachSiteCode ?approachSiteCode ;
+                fse:doseQuantity ?doseQuantity ;
+                fse:unit ?unit ;
+                fse:prevents ?preventedDisease ;
+                fse:consumable ?consumable ;
+                fse:via ?via
+            ]
+        ]
+        FILTER(?id = <${medicationsId}>)
+      }
+  `)
+  const res = (await query.execute()).results.bindings
+  const therapies: Therapy[] = []
 
   for (const elem of res) {
-    immunizationCards.push()
-  }  
+    therapies.push({
+      dailyQuantity: elem["dailyQuantity"].value,
+      statusCode: elem["statusCode"].value,
+      start: elem["start"].value,
+      end: elem["end"].value,
+      administration: {
+        approachSiteCode: elem["approachSiteCode"].value,
+        doseQuantity: elem["doseQuantity"].value,
+        preventedDisease: elem["preventedDisease"].value,
+        unit: elem["unit"].value,
+        via: elem["via"].value,
+        consumable: elem["consumable"].value,
+      }
+    })
+  }
+  return therapies
+}
 
-  return immunizationCards
+const fetchMedications = async (documentId: string): Promise<Medications[]> => {
+  const query = createStardogQuery(`
+    SELECT ?sect ?title
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:summaryHealthProfile ;
+            fse:hasSection ?sect.
+              ?sect a fse:medications;
+                      fse:title ?title;
+        FILTER(?id = <${documentId}>)
+      } 
+  `)
+  const res = (await query.execute()).results.bindings
+  const medications: Medications[] = []
+  for (const elem of res) {
+    medications.push({
+      title: elem["title"].value,
+      therapies: await fetchTherapies(elem["sect"].value)
+    })
+  }  
+  return medications
+}
+
+const fetchPregnancies = async (sectionId: string): Promise<Pregnancy[]> => {
+  const query = createStardogQuery(`
+    SELECT ?start ?end ?result
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:historyOfPregnancies;
+            fse:includesPregnancy [
+                fse:start ?start ;
+                fse:end ?end ;
+                fse:result ?result
+            ]
+        FILTER(?id = <${sectionId}>)
+      }
+  `)
+  const res = (await query.execute()).results.bindings
+  return mapBindingsToValues(res) as Pregnancy[]
+}
+
+const fetchHistoryOfPregnancies = async (documentId: string): Promise<HistoryOfPregnancies> => {
+  const query = createStardogQuery(`
+    SELECT ?sect ?title
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:summaryHealthProfile ;
+            fse:hasSection ?sect.
+              ?sect a fse:historyOfPregnancies;
+                      fse:title ?title;
+        FILTER(?id = <${documentId}>)
+      } 
+  `)
+  const res = (await query.execute()).results.bindings
+  let historyOfPregnancies: HistoryOfPregnancies
+  for (const elem of res) {
+    historyOfPregnancies = {
+      title: elem["title"].value,
+      pregnancies: await fetchPregnancies(elem["sect"].value)
+    }
+  }  
+  return historyOfPregnancies
+}
+
+
+const fetchDiseases = async (sectionId: string): Promise<Disease[]> => {
+  const query = createStardogQuery(`
+    SELECT ?name
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:historyOfDiseases;
+            fse:includesDisease ?name
+        FILTER(?id = <${sectionId}>)
+      }
+  `)
+  const res = (await query.execute()).results.bindings
+  return mapBindingsToValues(res) as Disease[]
+}
+
+const fetchHistoryOfDiseases = async (documentId: string): Promise<HistoryOfDiseases> => {
+  const query = createStardogQuery(`
+    SELECT ?sect ?title
+      FROM <https://fse.ontology/>
+      WHERE {
+        ?id a fse:summaryHealthProfile ;
+            fse:hasSection ?sect.
+              ?sect a fse:historyOfDiseases;
+                      fse:title ?title;
+        FILTER(?id = <${documentId}>)
+      } 
+  `)
+  const res = (await query.execute()).results.bindings
+  let historyOfDiseases: HistoryOfDiseases
+  for (const elem of res) {
+    historyOfDiseases = {
+      title: elem["title"].value,
+      diseases: await fetchDiseases(elem["sect"].value)
+    }
+  }  
+  return historyOfDiseases
 }
 
 const useDocumentStore = (documentId: string) => {
   const [immunizationCards] = createResource<ImmunizationCard[]>(() => fetchImmunizationCards(documentId))
   const [specialties] = createResource<Specialty[]>(() => fetchSpecialties(documentId))
+  const [alerts] = createResource<Alerts[]>(() => fetchAlerts(documentId))
+  const [medications] = createResource<Medications[]>(() => fetchMedications(documentId))
+  const [historyOfPregnancies] = createResource<HistoryOfPregnancies>(() => fetchHistoryOfPregnancies(documentId))
+  const [historyOfDiseases] = createResource<HistoryOfDiseases>(() => fetchHistoryOfDiseases(documentId))
 
-  return { immunizationCards, specialties }
+  return { immunizationCards, specialties, alerts, medications, historyOfPregnancies, historyOfDiseases }
 }
 
 export default useDocumentStore

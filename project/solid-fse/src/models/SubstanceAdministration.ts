@@ -1,7 +1,7 @@
 import { OperatingProcedure } from "./OperatingProcedure"
 
 interface SubstanceAdministration extends OperatingProcedure {
-  effectiveTime: string
+  effectiveTime?: string
   via: string
   doseQuantity: number
   unit: string

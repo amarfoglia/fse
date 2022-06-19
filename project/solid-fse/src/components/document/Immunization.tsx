@@ -15,6 +15,7 @@ const renderAdministration = (administration: SubstanceAdministration): JSXEleme
 
   return (
     <>
+      <div class="divider mb-4"></div>
       <div class="flex flex-wrap gap-4 text-sm text-gray-400">
         {<p><i class="mdi mdi-svg mr-2"></i>{administration.preventedDisease}</p>}
         {<p><i class="mdi mdi-human mr-2"></i>{administration.via}</p>}
@@ -26,7 +27,7 @@ const renderAdministration = (administration: SubstanceAdministration): JSXEleme
       <h3 class="text-base mb-2">Richiamo #{booster.boosterNumber}</h3>
       <div class="flex flex-wrap gap-4 text-sm text-gray-400">
         <p><i class="mdi mdi-checkbox-multiple-blank-circle-outline mr-2"></i>{booster.statusCode}</p>
-        <p><i class="mdi mdi-skip-next mr-2"></i>{booster.nextBooster}</p>
+        <p><i class="mdi mdi-skip-next mr-2"></i>{formatDate(booster.nextBooster)}</p>
       </div>
     </>
   )
