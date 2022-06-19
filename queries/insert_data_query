@@ -238,7 +238,7 @@ INSERT DATA {
             a fse:historyOfDisease ;
             fse:title "Lista dei problemi" ;
             #fse:hasCode <loinc:10162-6> ;
-            fse:includesDisease <tag:stardog:api:#obo:DOID_1579> .
+            fse:includesDisease obo:DOID_1579 .
         
         <#e_aesposito>
             a fse:exemption ;
@@ -265,11 +265,12 @@ INSERT DATA {
         
         <#alerts_vpinto>
             a fse:alerts ;
-            fse:title "Allergie" ;
+            fse:title "Asma estrinseco" ;
             #fse:hasCode <loinc:48765-2> ;
-            fse:includesAllergy <obo:DOID_0060532> ;
+            # fse:includesAllergy <obo:DOID_0060532> ;
             fse:includesAllergy <obo:DOID_0080811> ;
-            fse:start "2022-02-02T07:35:58"^^xsd:dateTime .
+            fse:start "2022-02-02T07:35:58"^^xsd:dateTime ;
+            fse:end "2022-02-02T14:35:58"^^xsd:dateTime .
         
         <#pregnancies_vpinto>
             a fse:historyOfPregnancies ;
@@ -281,7 +282,18 @@ INSERT DATA {
             a fse:medications ;
             fse:title "Terapie" ;
             #fse:hasCode <loinc:10160-0> ;
-            fse:includesTherapy <tag:stardog:api:#antihistamine_vpinto> .
+            fse:includesTherapy <tag:stardog:api:#antihistamine_vpinto> ;
+            fse:includesTherapy <tag:stardog:api:#antihistamine_vpinto2> .
+        
+        <#medications_clori>
+            a fse:medications ;
+            fse:title "Terapie" ;
+            fse:includesTherapy <tag:stardog:api:#fugalinfectiontreatment_clori> .
+        
+        <#medications_acalbrese>
+            a fse:medications ;
+            fse:title "Terapie" ;
+            fse:includesTherapy <tag:stardog:api:#gastricacidity_acalabrese> .
 
         <#performedexam_fiorentino>
             a fse:performedExam ;
@@ -423,7 +435,6 @@ INSERT DATA {
             fse:via obo:OMIT_0008394 ;
             fse:boosterOf <tag:stardog:api:#booster_fiorentino_1> ;
             fse:participant <tag:stardog:api:#doctor_abarese>.
-            #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
 
         <#substance_administration_fiorentino_2>
             a fse:substanceAdministration ;
@@ -437,17 +448,33 @@ INSERT DATA {
             fse:via obo:OMIT_0008394 ;
             fse:boosterOf <tag:stardog:api:#booster_fiorentino_2> ;
             fse:participant <tag:stardog:api:#doctor_abarese>.
-        #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
 
-        <#substance_administration_costa>
+        <#substance_administration_vpinto>
             a fse:substanceAdministration ;
-            fse:approachSiteCode "braccio sx" ;
-            fse:doseQuantity "0.05" ;
+            fse:approachSiteCode "braccio dx" ;
+            fse:doseQuantity "0.25" ;
             fse:unit "ml" ;
             fse:prevents obo:DOID_0080600 ;
             fse:consumable obo:DRON_00020458 ;
             fse:via obo:OMIT_0008394 .
-            #fse:isPartOf <tag:stardog:api:#vac_pfiorentino> .
+
+        <#substance_administration_clori>
+            a fse:substanceAdministration ;
+            fse:approachSiteCode "braccio sx" ;
+            fse:doseQuantity "16" ;
+            fse:unit "ml" ;
+            fse:prevents obo:DOID_0080600 ;
+            fse:consumable obo:DRON_00020458 ;
+            fse:via obo:OMIT_0008394 .
+        
+        <#substance_administration_acalabrese>
+            a fse:substanceAdministration ;
+            fse:approachSiteCode "braccio dx" ;
+            fse:doseQuantity "0.5" ;
+            fse:unit "ml" ;
+            fse:prevents obo:DOID_0080600 ;
+            fse:consumable obo:DRON_00020458 ;
+            fse:via obo:OMIT_0008394 .
         # -------------------------
         # BOOSTER
         # -------------------------
@@ -475,18 +502,31 @@ INSERT DATA {
         <#antihistamine_vpinto>
             a fse:therapy ;
             fse:start "2021-09-24T07:35:58"^^xsd:dateTime ;
+            fse:end "2021-10-24T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 1 ;
-            fse:hasMedicinal obo:DRON_00070584 .
+            fse:statusCode "Completed" ;
+            fse:includesAdministration <#substance_administration_vpinto> .
+        <#antihistamine_vpinto2>
+            a fse:therapy ;
+            fse:start "2022-10-20T07:35:58"^^xsd:dateTime ;
+            fse:end "2022-12-17T07:35:58"^^xsd:dateTime ;
+            fse:dailyQuantity 1 ;
+            fse:statusCode "Active" ;
+            fse:includesAdministration <#substance_administration_vpinto> .
         <#fugalinfectiontreatment_clori>
             a fse:therapy ;
             fse:start "2022-08-08T07:35:58"^^xsd:dateTime ;
+            fse:end "2022-10-24T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 2 ;
-            fse:hasMedicinal obo:CHEBI_10023 .
+            fse:statusCode "Active" ;
+            fse:includesAdministration <#substance_administration_clori> .
         <#gastricacidity_acalabrese>
             a fse:therapy ;
             fse:start "2022-09-10T07:35:58"^^xsd:dateTime ;
+            fse:end "2022-10-24T07:35:58"^^xsd:dateTime ;
             fse:dailyQuantity 2 ;
-            fse:hasMedicinal obo:CHEBI_55324 .
+            fse:statusCode "Active" ;
+            fse:includesAdministration <#substance_administration_acalabrese> .
         # -------------------------
         # DEVICES
         # -------------------------

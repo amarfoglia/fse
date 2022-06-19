@@ -10,22 +10,19 @@ interface Section {
   isPartOf?: ClinicalDocument
 }
 
-
-// PSS - Summary Health Profile
 interface Immunizations extends Section {
   administrations: SubstanceAdministration[]
 }
 
+// PSS - Summary Health Profile
 interface Alerts extends Section {
-  startAt: string
-  endAt: string
-  adverseReaction: AdverseReaction
-  agent: Agent
-  allergy: Allergy
+  start: string
+  end: string
+  allergy: string
 }
 
 interface HistoryOfDiseases extends Section {
-  disease: Disease[]
+  diseases: Disease[]
 }
 
 interface HistoryOfPregnancies extends Section {
@@ -34,6 +31,20 @@ interface HistoryOfPregnancies extends Section {
 
 interface Medications extends Section {
   therapies: Therapy[]
+}
+
+interface Pregnancy {
+  result: string
+  start: string
+  end: string
+}
+
+interface Therapy {
+  statusCode: string
+  start: string
+  end: string
+  dailyQuantity: number
+  administration: SubstanceAdministration
 }
 
 // RML - Medicine Laboratory Report
@@ -95,20 +106,6 @@ interface Progression extends Section {}
 interface RadReport extends Section {}
 interface PerformedExam extends Section {}
 
-interface Pregnancy {
-  result: string
-  startedAt: string
-  endAt: string
-}
-
-interface Therapy {
-  statusCode: string
-  start: string
-  end: string
-  dailyQuantity: number
-  administrations: SubstanceAdministration[]
-}
-
 interface Allergy {
   name: string
   description: string
@@ -126,7 +123,6 @@ interface AdverseReaction {
 
 interface Disease {
   name: string
-  description: string
 }
 
 interface Test {
@@ -138,4 +134,7 @@ interface Test {
   latestVersion?: string
 }
 
-export { Section, OperatingProcedure, ImmunizationCard, Specialty, Test }
+export { 
+  Section, OperatingProcedure, ImmunizationCard, Specialty, 
+  Test, Alerts, HistoryOfDiseases, HistoryOfPregnancies, Medications, Therapy, Pregnancy, Disease
+}

@@ -2,6 +2,7 @@ import { Component, For } from "solid-js"
 import { ClinicalDocument } from "../models/ClinicalDocument"
 import formatDocumentType from "../utils/formatDocumentType"
 import Immunization from "./document/Immunization"
+import PSS from "./document/PSS"
 import SpecialtyCard from "./document/SpecialtyCard"
 
 const DocSections: Component<{ document: ClinicalDocument; goBack: () => void }> = (props) => {
@@ -17,7 +18,7 @@ const DocSections: Component<{ document: ClinicalDocument; goBack: () => void }>
       case "Lettera di Dimissione Ospedaliera": return <></>
       case "Prescrizione": return <></>
       case "Referto di Medicina di Laboratorio": return <SpecialtyCard document={document} />
-      case "Profilo Sanitario Sintetico": return <></>
+      case "Profilo Sanitario Sintetico": return <PSS document={document} />
       case "Prescrizione Farmaceutica": return <></>
       case "Prescrizione Specialistica": return <></>
       case "Prescrizione di Ricovero": return <></>
