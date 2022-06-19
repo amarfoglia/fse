@@ -25,6 +25,7 @@ WHERE {
     fse:versionNumber ?Versione ;
     fse:hasCode ?Codice_LOINC ;
     fse:confidentialityLevel ?Codice ;
+    fse:createdAt ?Data;
     fse:refersTo [
       foaf:firstName ?patientName ;
       foaf:lastName ?patientSurname
