@@ -692,6 +692,13 @@ foaf:lastName rdf:type owl:DatatypeProperty ;
               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
 
 
+###  https://fse.ontology#isOrganDonor
+:isOrganDonor rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain fse:patient ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> .
+
+
 ###  https://fse.ontology/approachSiteCode
 fse:approachSiteCode rdf:type owl:DatatypeProperty ;
                      rdfs:domain fse:substanceAdministration ;
@@ -2093,8 +2100,8 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
 
 
 fse:vehicle <tag:stardog:studio:label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en .
 
 
 #################################################################
