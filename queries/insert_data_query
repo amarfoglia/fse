@@ -560,6 +560,7 @@ INSERT DATA {
             foaf:lastName "Fiorentino" ;
             foaf:birthday "11/11/1956" ;
             fse:fiscalCode "FRNPSC56S51F839H" ;
+            fse:isOrganDonor false ; 
             fse:healthCardNumber "80380800301569845351" ;
             fse:hasFamilyDoctor <tag:stardog:api:#doctor_abarese> .
         <#RSSDNI48C45C573H>
@@ -567,6 +568,7 @@ INSERT DATA {
             foaf:firstName "Diana" ;
             foaf:lastName "Rossi" ;
             foaf:birthday "05/03/1948" ;
+            fse:isOrganDonor true ;
             fse:fiscalCode "RSSDNI48C45C573H" ;
             fse:healthCardNumber "80380800308945237892" .
         <#CSTBRN86H62G273H>
@@ -574,6 +576,7 @@ INSERT DATA {
             foaf:firstName "Bruna" ;
             foaf:lastName "Costa" ;
             foaf:birthday "22/06/1986" ;
+            fse:isOrganDonor true ;
             fse:fiscalCode "CSTBRN86H62G273H" ;
             fse:healthCardNumber "80380800304875162594" ;
             fse:hasFamilyDoctor <tag:stardog:api:#doctor_abarese> .
@@ -582,6 +585,7 @@ INSERT DATA {
             foaf:firstName "Veronica" ;
             foaf:lastName "Pinto" ;
             foaf:birthday "05/12/1983" ;
+            fse:isOrganDonor false ;
             fse:fiscalCode "VRNPNT83T45F205V" ;
             fse:healthCardNumber "80380800301126596519" .
         <#PSNFRU97L29G702B>
@@ -589,12 +593,14 @@ INSERT DATA {
             foaf:firstName "Furio" ;
             foaf:lastName "Pisano" ;
             foaf:birthday "29/07/1997" ;
+            fse:isOrganDonor false ;
             fse:fiscalCode "PSNFRU97L29G702B" ;
             fse:healthCardNumber "803808003099956423156" .
         <#SPSNMR60S42F839P>
             a fse:patient ;
             foaf:firstName "Anna Maria" ;
             foaf:lastName "Esposito" ;
+            fse:isOrganDonor false ;
             foaf:birthday "02/11/1960" ;
             fse:fiscalCode "SPSNMR60S42F839P" ;
             fse:healthCardNumber "803808003045876589452" .
@@ -602,6 +608,7 @@ INSERT DATA {
             a fse:patient ;
             foaf:firstName "Adele" ;
             foaf:lastName "Calabresi" ;
+            fse:isOrganDonor false ;
             foaf:birthday "07/11/1993" ;
             fse:fiscalCode "CLBDLA93S07D969X" ;
             fse:healthCardNumber "803808003087512326896" ;
@@ -610,6 +617,7 @@ INSERT DATA {
             a fse:patient ;
             foaf:firstName "Caio" ;
             foaf:lastName "Lori" ;
+            fse:isOrganDonor false ;
             foaf:birthday "04/03/1984" ;
             fse:fiscalCode "LROCAI84C04G702E" ;
             fse:healthCardNumber "803808003045852135897" .
