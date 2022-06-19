@@ -30,10 +30,12 @@ const queries: Query[] = [
     name: "Lista documenti",
     code: outdent`
     SELECT
-      ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Dominio ?Versione
+      ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Codice ?Codice_LOINC ?Versione
       (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
       (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
-      ?Dispositivo_Emittente ?Organizzazione
+      ?Dispositivo_Emittente ?Organizzazione ?Data 
+      ?In_adempimento_a
+      (CONCAT(?signatoryName, " ", ?signatorySurname) AS ?Firmatario) ?Data_firma
     FROM <https://fse.ontology/>
     WHERE {
       ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
@@ -42,29 +44,45 @@ const queries: Query[] = [
         fse:languageCode ?Lingua ;
         fse:realmCode ?Paese ;
         fse:versionNumber ?Versione ;
-        fse:confidentialityLevel ?Dominio ;
-        fse:refersTo ?p .
-      ?p
-        foaf:firstName ?patientName ;
-        foaf:lastName ?patientSurname .
+        fse:hasCode ?Codice_LOINC ;
+        fse:confidentialityLevel ?Codice ;
+        fse:createdAt ?Data;
+        fse:refersTo [
+          foaf:firstName ?patientName ;
+          foaf:lastName ?patientSurname
+        ]
       OPTIONAL {
-        ?ID fse:hasHumanAuthor ?ha .
-        ?ha
+        ?ID fse:hasHumanAuthor [
           foaf:firstName ?authorName ;
-          foaf:lastName ?authorSurname .
+          foaf:lastName ?authorSurname
+        ] .
       }
       OPTIONAL {
           ?ID fse:body ?Testo ;
       }
       OPTIONAL {
-        ?ID fse:hasDeviceAuthor ?da .
-        ?da fse:hasIdentifier ?Dispositivo_Emittente .
+        ?id fse:hasDeviceAuthor [
+          fse:hasIdentifier ?Dispositivo_Emittente
+        ]
       }
       OPTIONAL {
-        ?ID fse:hasCustodian ?o .
-        ?o org:identifier ?Organizzazione .
+          ?ID fse:inFulfillmentOf ?In_adempimento_a;
       }
-      FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument, fse:prescription))
+      OPTIONAL {
+        ?ID fse:hasCustodian [
+            org:identifier ?Organizzazione
+        ]
+      }
+      OPTIONAL {
+        ?ID fse:hasBeenSigned [
+          fse:effectiveTime ?Data_firma ;
+          fse:hasLegalAuthenticator [
+            foaf:firstName ?signatoryName;
+            foaf:lastName ?signatorySurname
+          ]
+        ];
+      }
+      FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument))
     }
     `
   },
