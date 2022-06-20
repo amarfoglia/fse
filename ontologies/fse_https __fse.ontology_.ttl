@@ -140,7 +140,7 @@ fse:boosterOf rdf:type owl:ObjectProperty ,
 
 ###  https://fse.ontology/cameWith
 fse:cameWith rdf:type owl:ObjectProperty ;
-             rdfs:domain fse:firstAidReport ;
+             rdfs:domain :modeOfTransport ;
              rdfs:range fse:vehicle ;
              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "cameWith"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
              <tag:stardog:studio:label> "cameWith"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -641,6 +641,13 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
+###  http://api.stardog.com/isOrganDonor
+:isOrganDonor rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain fse:patient ;
+              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> .
+
+
 ###  http://api.stardog.com/validUntil
 :validUntil rdf:type owl:DatatypeProperty ;
             rdfs:domain fse:substanceAdministration ;
@@ -690,13 +697,6 @@ foaf:lastName rdf:type owl:DatatypeProperty ;
               rdfs:isDefinedBy foaf: ;
               rdfs:label "lastName" ;
               <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> "testing" .
-
-
-###  https://fse.ontology#isOrganDonor
-:isOrganDonor rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf owl:topDataProperty ;
-              rdfs:domain fse:patient ;
-              rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#boolean> .
 
 
 ###  https://fse.ontology/approachSiteCode
@@ -969,18 +969,18 @@ fse:unit rdf:type owl:DatatypeProperty ;
          rdfs:range <http://fse.ontology/www.w3.org/2001/XMLSchema#string> .
 
 
-###  https://fse.ontology/vehicle
-fse:vehicle rdf:type owl:DatatypeProperty ;
-            rdfs:domain :modeOfTransport ;
-            rdfs:range [ rdf:type rdfs:Datatype ;
-                         owl:oneOf [ rdf:type rdf:List ;
-                                     rdf:first "Ambulance"^^xsd:string ;
-                                     rdf:rest [ rdf:type rdf:List ;
-                                                rdf:first "Helicopter"^^xsd:string ;
-                                                rdf:rest rdf:nil
-                                              ]
-                                   ]
-                       ] .
+###  https://fse.ontology/vehicleType
+fse:vehicleType rdf:type owl:DatatypeProperty ;
+                rdfs:domain fse:vehicle ;
+                rdfs:range [ rdf:type rdfs:Datatype ;
+                             owl:oneOf [ rdf:type rdf:List ;
+                                         rdf:first "Ambulance"^^xsd:string ;
+                                         rdf:rest [ rdf:type rdf:List ;
+                                                    rdf:first "Helicopter"^^xsd:string ;
+                                                    rdf:rest rdf:nil
+                                                  ]
+                                       ]
+                           ] .
 
 
 ###  https://fse.ontology/versionNumber
@@ -1695,7 +1695,10 @@ fse:transportRequest rdf:type owl:Class ;
 
 
 ###  https://fse.ontology/vehicle
-fse:vehicle rdf:type owl:Class .
+fse:vehicle rdf:type owl:Class ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en ;
+            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
+            <tag:stardog:studio:label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
 #################################################################
@@ -2097,11 +2100,6 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
                         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Indicates the level of confidentiality of the document based on a vocabulary."@en ;
                         <tag:stardog:studio:label> "confidentialityCode"@en ,
                                                    "confidentialityCode"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
-
-
-fse:vehicle <tag:stardog:studio:label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "vehicle"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
-            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the means of medical transport used during the patient's hospitalization."@en .
 
 
 #################################################################

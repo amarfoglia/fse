@@ -8,14 +8,28 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 
-SELECT (100 * COUNT(?amb) / (COUNT(?id)) AS ?Percentuale)
+SELECT (CONCAT(STR(((100 * ?ambulances / ?missions ))), "%") as ?Percentuale)
 FROM <https://fse.ontology/>
 WHERE {
-  ?id a fse:firstAidReport .  
-  ?amb
-    a fse:firstAidReport ;
-    fse:hasSection [
-        fse:hasVehicle ?vehicle
-    ]
-    FILTER (?vehicle = "Ambulance")
+  {
+    SELECT (COUNT(?id) as ?ambulances)
+    WHERE {
+      ?id 
+        a fse:firstAidReport ;
+          fse:hasSection [
+            a fse:modeOfTransport ;
+              fse:cameWith [
+                fse:vehicleType ?vehicle
+              ] 
+          ] 
+      FILTER (?vehicle = "Ambulance")
+    }
+  }  
+  {
+    SELECT (COUNT(?id) AS ?missions )
+    WHERE {
+      ?id 
+        a fse:firstAidReport ;
+    }
+  }  
 }
