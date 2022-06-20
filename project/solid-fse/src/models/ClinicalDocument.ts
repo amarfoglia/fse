@@ -52,15 +52,15 @@ interface Prescription extends ClinicalDocument {
 }
 
 interface Pharma extends Prescription {
-  administrations: SubstanceAdministration[]
+  consumables?: string[]
 }
 
 interface Specialist extends Prescription {
-  observations: Observation[]
+  diagnosis?: string
 }
 
 interface Admission extends Prescription {}
 
 interface TransportRequest extends Prescription {}
 
-export { ClinicalDocument, LOINC_code, Code }
+export { ClinicalDocument, LOINC_code, Code, Pharma, Prescription, Specialist }

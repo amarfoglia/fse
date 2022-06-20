@@ -12,7 +12,6 @@ interface DocProps {
 
 const renderAdministration = (administration: SubstanceAdministration): JSXElement => {
   const booster = administration.booster
-
   return (
     <>
       <div class="divider mb-4"></div>
@@ -27,7 +26,7 @@ const renderAdministration = (administration: SubstanceAdministration): JSXEleme
       <h3 class="text-base mb-2">Richiamo #{booster.boosterNumber}</h3>
       <div class="flex flex-wrap gap-4 text-sm text-gray-400">
         <p><i class="mdi mdi-checkbox-multiple-blank-circle-outline mr-2"></i>{booster.statusCode}</p>
-        <p><i class="mdi mdi-skip-next mr-2"></i>{formatDate(booster.nextBooster)}</p>
+        {booster.nextBooster ? <p><i class="mdi mdi-skip-next mr-2"></i>{formatDate(booster.nextBooster)}</p> : <></>}
       </div>
     </>
   )
@@ -67,7 +66,6 @@ const renderContent = (cards: ImmunizationCard[]) => (
 
 const Immunization: Component<Props> = (props) => {
   const { immunizationCards } = useDocumentStore(props.document.id)
-  console.log("cardss", immunizationCards())
   return (
     <FallbackWrapper 
         reasonForEmpty="Nessuna vaccinazione." 

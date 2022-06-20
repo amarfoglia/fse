@@ -77,10 +77,6 @@ const MedicationBox: Component<{ medication: Medications }> = (props) => {
   )
 }
 
-interface Props {
-  document: ClinicalDocument
-}
-
 const renderAlerts = (alerts: Alerts[]) => (
   <For each={alerts}>{ alert =>
     <AlertBox alert={alert}/>
@@ -149,6 +145,10 @@ const renderHistoryOfDiseases = (historyOfDiseases: HistoryOfDiseases) => {
         </div>
     </div>
   )
+}
+
+interface Props {
+  document: ClinicalDocument
 }
 
 const PSS: Component<Props> = (props) => {

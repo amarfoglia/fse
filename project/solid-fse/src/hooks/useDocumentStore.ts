@@ -1,5 +1,5 @@
 import { createResource } from "solid-js"
-import { Alerts, Disease, HistoryOfDiseases, HistoryOfPregnancies, ImmunizationCard, Medications, Pregnancy, Section, Specialty, Therapy } from "../models/Section"
+import { Alerts, Disease, HistoryOfDiseases, HistoryOfPregnancies, ImmunizationCard, Medications, Pregnancy, Specialty, Therapy } from "../models/Section"
 import mapBindingsToValues from "../utils/mapBindingsToValues"
 import createStardogQuery from "./createStardogQuery"
 
@@ -55,7 +55,7 @@ const fetchImmunizationCards = async (documentId: string): Promise<ImmunizationC
         booster: {
           boosterNumber: elem["boosterNumber"].value,
           statusCode: elem["boosterStatus"].value,
-          nextBooster: elem["nextBooster"] ? elem["nextBooster"].value : "N/D"
+          nextBooster: elem["nextBooster"] ? elem["nextBooster"].value : null
         },
         participant: elem["participant"].value,
         preventedDisease: elem["preventedDisease"].value
@@ -283,5 +283,7 @@ const useDocumentStore = (documentId: string) => {
 
   return { immunizationCards, specialties, alerts, medications, historyOfPregnancies, historyOfDiseases }
 }
+
+
 
 export default useDocumentStore

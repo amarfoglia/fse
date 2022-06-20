@@ -44,6 +44,10 @@ a.active {
   align-items: center;
 }
 
+.card {
+  min-width: 750px;
+}
+
 @layer components {
 
   .btn { @apply

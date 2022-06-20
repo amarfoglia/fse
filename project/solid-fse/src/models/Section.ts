@@ -1,5 +1,5 @@
-import { ClinicalDocument, LOINC_code } from "./ClinicalDocument"
-import { OperatingProcedure, Observation } from "./OperatingProcedure"
+import { ClinicalDocument } from "./ClinicalDocument"
+import { OperatingProcedure } from "./OperatingProcedure"
 import { HealthWorker } from "./Person"
 import { SubstanceAdministration } from "./SubstanceAdministration"
 
@@ -57,17 +57,20 @@ interface Service extends Section {
   procedures: OperatingProcedure[]
 }
 
-interface osReport extends Section {}
+interface OsReport extends Section {}
 
 // VPS - First Aid Report
-interface ModeOfTransport extends Section {
-  vehicle: string
-}
-
 interface Triage extends Section {
   effectiveTime: string
   statusCode: string
-  performers: HealthWorker[]
+  performer: HealthWorker
+}
+
+interface Observation {
+  statusCode: string
+  symptom: string
+  body: string
+  code: string
 }
 
 interface Discharge extends Section {
@@ -136,5 +139,6 @@ interface Test {
 
 export { 
   Section, OperatingProcedure, ImmunizationCard, Specialty, 
-  Test, Alerts, HistoryOfDiseases, HistoryOfPregnancies, Medications, Therapy, Pregnancy, Disease
+  Test, Alerts, HistoryOfDiseases, HistoryOfPregnancies, Medications, Therapy, Pregnancy, Disease,
+  Triage, Discharge, ModeOfTransport, Observation, ReasonForVisit, Service, OsReport
 }

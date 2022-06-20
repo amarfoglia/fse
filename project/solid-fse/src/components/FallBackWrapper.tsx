@@ -2,7 +2,7 @@ import { Component, createSignal, JSXElement, Match, Switch } from "solid-js"
 
 interface Props {
   renderContent: () => JSXElement
-  title: string
+  title?: string
   reasonForEmpty: string
   error: boolean
   loading: boolean
@@ -12,7 +12,7 @@ interface Props {
 const FallbackWrapper: Component<Props> = (props) => (
   <Switch fallback={
     <div class="flex flex-col gap-6">
-      <h1 class="text-3xl">{props.title}</h1>
+      {props.title ? <h1 class="text-3xl">{props.title}</h1> : <></>}
       {props.renderContent()}
     </div>
   }>

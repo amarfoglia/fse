@@ -85,7 +85,7 @@ const fetchClinicalDocuments = async (fiscalCode: string) => {
             ]
           ];
         }
-        FILTER(?documentType NOT IN (fse:clinicalDocument))
+        FILTER(?documentType NOT IN (fse:clinicalDocument, fse:prescription))
       }
   `)
   const res = (await query.execute()).results.bindings
