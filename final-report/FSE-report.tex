@@ -7,8 +7,51 @@
 \usepackage{tabularx}
 \usepackage[italian]{cleveref}
 \usepackage[italian]{babel}
-\usepackage{listings}
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\numberstyle,
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    framesep=8pt,
+    xleftmargin=40pt,
+    framexleftmargin=40pt,
+    frame=tb,
+    framerule=0pt,
+    language=SQL,
+    morekeywords={*, OPTIONAL, ?},
+}
+\lstset{style=mystyle}
+
+\newcommand\numberstyle[1]{%
+    \footnotesize
+    \color{codegray}%
+    \ttfamily
+    \ifnum#1<10 0\fi#1 |%
+}
 
 \newcommand{\emailaddr}[1]{\href{mailto:#1}{\texttt{#1}}}
 
@@ -660,186 +703,181 @@ La versione che abbiamo fornito dell'applicativo mostra non soltanto i documenti
 
 \subsection{Query rivisitate}
 Si sono riviste le query precedentemente implementate alla luce delle introduzioni apportate da una rappresentazione più a grana fine dello standard HL7:
-\begin{itemize}
-    \item \textbf{Lista pazienti}
-        \begin{verbatim}
-        SELECT ?ID ?Nome ?Cognome ?Data_di_Nascita ?Codice_Fiscale 
-        ?Tessera_Sanitaria ?Nome_Medico ?Cognome_Medico
-        FROM <https://fse.ontology/>
-        WHERE {
-          ?ID
-            a fse:patient ;
-            foaf:firstName ?Nome ;
-            foaf:lastName ?Cognome ;
-            foaf:birthday ?Data_di_Nascita ;
-            fse:fiscalCode ?Codice_Fiscale .
-          OPTIONAL { ?ID fse:healthCardNumber ?Tessera_Sanitaria }
-          OPTIONAL {
-            ?ID fse:hasFamilyDoctor ?Medico_di_Famiglia .
-            ?Medico_di_Famiglia
-              foaf:firstName ?Nome_Medico ;
-              foaf:lastName ?Cognome_Medico .
-          }
-        }    
-        \end{verbatim}
-    
-    \item \textbf{Lista documenti}
-        \begin{verbatim}
-        SELECT
-          ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Codice 
-          ?Codice_LOINC ?Versione
-          (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
-          (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
-          ?Dispositivo_Emittente ?Organizzazione ?Data 
-          ?In_adempimento_a
-          (CONCAT(?signatoryName, " ", ?signatorySurname) AS ?Firmatario) 
-          ?Data_firma
-        FROM <https://fse.ontology/>
-        WHERE {
-          ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
-          ?ID
-            a ?Tipo_Documento ;
-            fse:languageCode ?Lingua ;
-            fse:realmCode ?Paese ;
-            fse:versionNumber ?Versione ;
-            fse:hasCode ?Codice_LOINC ;
-            fse:confidentialityLevel ?Codice ;
-            fse:refersTo [
-              foaf:firstName ?patientName ;
-              foaf:lastName ?patientSurname
-            ]
-          OPTIONAL {
-            ?ID fse:hasHumanAuthor [
-              foaf:firstName ?authorName ;
-              foaf:lastName ?authorSurname
-            ] .
-          }
-          OPTIONAL {
-              ?ID fse:body ?Testo ;
-          }
-          OPTIONAL {
-            ?id fse:hasDeviceAuthor [
-              fse:hasIdentifier ?Dispositivo_Emittente
-            ]
-          }
-          OPTIONAL {
-              ?ID fse:inFulfillmentOf ?In_adempimento_a;
-          }
-          OPTIONAL {
-            ?ID fse:hasCustodian [
-                org:identifier ?Organizzazione
-            ]
-          }
-          OPTIONAL {
-            ?ID fse:hasBeenSigned [
-              fse:effectiveTime ?Data_firma ;
-              fse:hasLegalAuthenticator [
-                foaf:firstName ?signatoryName;
-                foaf:lastName ?signatorySurname
-              ]
-            ];
-          }
-          FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument))
-        }
-        \end{verbatim}
-        
-    \item \textbf{Conteggio documenti per organizzazione}
-        \begin{verbatim}
-        SELECT ?ID ?Nome_Organizzazione (COUNT(?document) AS ?Documenti)
-        FROM <https://fse.ontology/>
-        WHERE {
-          ?document fse:hasCustodian ?ID .
-          ?ID org:identifier ?Nome_Organizzazione .
-        }
-        GROUP BY ?ID ?Nome_Organizzazione
-        \end{verbatim}
-        
-    \item \textbf{Percentuale di entrate in pronto soccorso con ambulanza}
-        \begin{verbatim}
-        SELECT (100 * COUNT(?amb) / (COUNT(?id)) AS ?Percentuale)
-        FROM <https://fse.ontology/>
-        WHERE {
-          ?id
-            a fse:firstAidReport ;
-            fse:cameWith ?amb .
-        }
-        \end{verbatim}
+\subsubsection*{Lista pazienti}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID ?Nome ?Cognome ?Data_di_Nascita ?Codice_Fiscale 
+?Tessera_Sanitaria ?Nome_Medico ?Cognome_Medico
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?ID a fse:patient ;
+    foaf:firstName ?Nome ;
+    foaf:lastName ?Cognome ;
+    foaf:birthday ?Data_di_Nascita ;
+    fse:fiscalCode ?Codice_Fiscale .
+    OPTIONAL { ?ID fse:healthCardNumber ?Tessera_Sanitaria }
+    OPTIONAL {
+        ?ID fse:hasFamilyDoctor ?Medico_di_Famiglia .
+        ?Medico_di_Famiglia
+        foaf:firstName ?Nome_Medico ;
+        foaf:lastName ?Cognome_Medico .
+    }
+}    
+\end{lstlisting}
 
-    \item \textbf{Pazienti con vaccini scaduti}
-        \begin{verbatim}
-        SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento 
-        ?Data ?Valido_fino_a
-        FROM <https://fse.ontology/>
-        WHERE {
-          ?doc
-            a fse:immunization ;
-            fse:hasLatestVersion ?doc ;
-            fse:refersTo ?ID ;
-            fse:hasSection [
-              fse:body ?Documento ;
-              fse:includesAdministration [
-                fse:effectiveTime ?Data ;
-                fse:validUntil ?Valido_fino_a
-              ]
-            ] .
-            ?ID foaf:firstName ?name ;
-            foaf:lastName ?surname .
-          FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
-        }
-        \end{verbatim}
-        
-    \item \textbf{Elenco allergie}
-        \begin{verbatim}
-        SELECT ?ID ?Nome ?Cognome ?Cod_Allergia ?Descrizione
-        FROM <tag:stardog:api:context:all>
-        WHERE {
-          ?ID
-            foaf:firstName ?Nome ;
-            foaf:lastName ?Cognome ;
-            fse:hasDisease ?Cod_Allergia .
-          ?Cod_Allergia
-            obo:IAO_0000115 ?Descrizione .
-        }
-        \end{verbatim}
-    
-     \item \textbf{Elenco donatori di organi}
-        \begin{verbatim}
-        SELECT ?ID ?Nome ?Cognome
-        FROM <https://fse.ontology/>
-        WHERE {
-            ?ID
-                fse:isOrganDonor true ;
-                foaf:firstName ?Nome ;
-                foaf:lastName ?Cognome .
-        }
-        \end{verbatim}
-    
-    \item \textbf{Elenco malattie}
-        \begin{verbatim}
-        SELECT ?ID ?Nome ?Cognome ?Cod_Malattie ?Descrizione
-        FROM <tag:stardog:api:context:all>
-        WHERE {
-          ?ID
-            foaf:firstName ?Nome ;
-            foaf:lastName ?Cognome ;
-            fse:hasDisease ?Cod_Malattie .
-          ?Cod_Allergia
-            obo:IAO_0000115 ?Descrizione .
-        }
-        \end{verbatim}
-        
-    \item \textbf{Descrizione documenti}
-        \begin{verbatim}
-        SELECT ?id ?desc
-        FROM <tag:stardog:api:context:all>
-        WHERE {
-          ?id a fse:clinicalDocument .
-          ?id fse:hasCode [
-                  loinc:LOINC_COMPONENT ?desc 
-              ]
-        }
-        \end{verbatim}
-\end{itemize}
+\subsubsection*{Lista documenti}
+\begin{lstlisting}[ language=SQL ]
+SELECT
+  ?ID ?Tipo_Documento ?Testo ?Lingua ?Paese ?Codice 
+  ?Codice_LOINC ?Versione
+  (CONCAT(?patientName, " ", ?patientSurname) AS ?Paziente)
+  (CONCAT(?authorName, " ", ?authorSurname) AS ?Autore)
+  ?Dispositivo_Emittente ?Organizzazione ?Data 
+  ?In_adempimento_a
+  (CONCAT(?signatoryName, " ", ?signatorySurname) AS ?Firmatario) 
+  ?Data_firma
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?Tipo_Documento rdfs:subClassOf fse:clinicalDocument .
+    ?ID a ?Tipo_Documento ;
+    fse:languageCode ?Lingua ;
+    fse:realmCode ?Paese ;
+    fse:versionNumber ?Versione ;
+    fse:hasCode ?Codice_LOINC ;
+    fse:confidentialityLevel ?Codice ;
+    fse:refersTo [
+        foaf:firstName ?patientName ;
+        foaf:lastName ?patientSurname
+    ]
+    OPTIONAL {
+      ?ID fse:hasHumanAuthor [
+        foaf:firstName ?authorName ;
+        foaf:lastName ?authorSurname
+      ]
+    }
+    OPTIONAL {
+      ?ID fse:body ?Testo ;
+    }
+    OPTIONAL {
+      ?id fse:hasDeviceAuthor [
+        fse:hasIdentifier ?Dispositivo_Emittente
+      ]
+    }
+    OPTIONAL {
+      ?ID fse:inFulfillmentOf ?In_adempimento_a;
+    }
+    OPTIONAL {
+      ?ID fse:hasCustodian [
+        org:identifier ?Organizzazione
+      ]
+    }
+    OPTIONAL {
+      ?ID fse:hasBeenSigned [
+        fse:effectiveTime ?Data_firma ;
+        fse:hasLegalAuthenticator [
+            foaf:firstName ?signatoryName;
+            foaf:lastName ?signatorySurname
+        ]
+      ]
+    }
+    FILTER (?Tipo_Documento NOT IN (fse:clinicalDocument))
+}
+\end{lstlisting}
+
+\subsubsection*{Conteggio documenti per organizzazione}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID ?Nome_Organizzazione (COUNT(?document) AS ?Documenti)
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?document fse:hasCustodian ?ID .
+    ?ID org:identifier ?Nome_Organizzazione .
+  }
+  GROUP BY ?ID ?Nome_Organizzazione
+\end{lstlisting}
+
+\subsubsection*{Percentuale di entrate in pronto soccorso con ambulanza}
+\begin{lstlisting}[ language=SQL ]
+SELECT (100 * COUNT(?amb) / (COUNT(?id)) AS ?Percentuale)
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?id
+      a fse:firstAidReport ;
+      fse:cameWith ?amb .
+  }
+\end{lstlisting}
+
+\subsubsection*{Pazienti con vaccini scaduti}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID (CONCAT(?name, " ", ?surname) AS ?Paziente) ?Documento 
+   ?Data ?Valido_fino_a
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?doc
+    a fse:immunization ;
+    fse:hasLatestVersion ?doc ;
+    fse:refersTo ?ID ;
+    fse:hasSection [
+        fse:body ?Documento ;
+        fse:includesAdministration [
+        fse:effectiveTime ?Data ;
+        fse:validUntil ?Valido_fino_a
+        ]
+    ] .
+    ?ID foaf:firstName ?name ;
+    foaf:lastName ?surname .
+    FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
+  }
+\end{lstlisting}
+
+\subsubsection*{Elenco allergie}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID ?Nome ?Cognome ?Cod_Allergia ?Descrizione
+  FROM <tag:stardog:api:context:all>
+  WHERE {
+    ?ID
+    foaf:firstName ?Nome ;
+    foaf:lastName ?Cognome ;
+    fse:hasDisease ?Cod_Allergia .
+    ?Cod_Allergia
+    obo:IAO_0000115 ?Descrizione .
+  }
+\end{lstlisting}
+
+\subsubsection*{Elenco donatori di organi}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID ?Nome ?Cognome
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?ID fse:isOrganDonor true ;
+        foaf:firstName ?Nome ;
+        foaf:lastName ?Cognome .
+  }
+\end{lstlisting}
+
+\subsubsection*{Elenco malattie}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?ID ?Nome ?Cognome ?Cod_Malattie ?Descrizione
+  FROM <tag:stardog:api:context:all>
+  WHERE {
+    ?ID
+    foaf:firstName ?Nome ;
+    foaf:lastName ?Cognome ;
+    fse:hasDisease ?Cod_Malattie .
+    ?Cod_Allergia
+    obo:IAO_0000115 ?Descrizione .
+  }
+\end{lstlisting}
+
+\subsubsection*{Descrizione documenti}
+\begin{lstlisting}[ language=SQL ]
+SELECT ?id ?Descrizione
+  FROM <tag:stardog:api:context:all>
+  WHERE {
+    ?id a fse:clinicalDocument .
+    ?id fse:hasCode [
+            loinc:LOINC_COMPONENT ?Descrizione 
+        ]
+  }
+\end{lstlisting}
 
 \section{Applicativo}
 \section{Conclusioni}
