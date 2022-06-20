@@ -406,18 +406,34 @@ raggruppate per competenza (Figura \ref*{fig:pss}):
     \item \texttt{fse:historyOfDiseases}: storico delle eventuali patologie che
     affliggono il paziente. Le patologie sono modellate dall'ontologia
     \textbf{DOID\_4} messa in relazione tramite \texttt{fse:includesDisease}. 
-    \item \texttt{fse:medications}: la sezione raccoglie, tramite la
-    relazione \texttt{fse:includesTherapy}, tutte le terapie assegnate, e di ognuna
-    anche la sostanza somministrata.
+    \item \texttt{fse:medications}: la sezione raccoglie, tramite la relazione
+    \texttt{fse:includesTherapy}, tutte le terapie assegnate, e di ognuna anche
+    la sostanza somministrata. La terapia è legata da una \textit{Data Property}
+    \texttt{fse:statusCode} il cui valore deve essere scelto da un set
+    predefinito (Tabella \ref*{table:statusCodes}).
     \item  \texttt{fse:historyOfPregnancies}: corrisponde all'elenco delle
     gravidanze associate tramite la relazione \texttt{fse:includesPregnancy}, la
     quale include l'esito finale e il periodo.
 \end{itemize}
+
 \begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/pss.png}
     \caption[]{Estensione dell'entità \texttt{fse:summaryHealthProfile} (referto PSS).}
     \label{fig:pss}
 \end{figure}
+
+\begin{table}[htp]
+    \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{Codice}  & \textbf{Descrizione}   \\ \hline
+    Active  & \small{In corso di validità.}      \\ \hline
+    Suspended  & \small{Momentaneamente sospesa.}      \\ \hline 
+    Aborted  & \small{Non è mai stata valida.}      \\ \hline 
+    Completed  & \small{Non è più in corso di validatà.}      \\ \hline 
+    \end{tabularx}
+    \caption{Elenco dei codici di stato (\texttt{fse:statusCode}).}
+    \label{table:statusCodes}
+\end{table}
 
 \subsection{Osservazioni}
 Il Verbale di Pronto Soccorso si articola su più sezioni
