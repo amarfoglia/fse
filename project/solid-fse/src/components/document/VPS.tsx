@@ -58,7 +58,7 @@ const VPS: Component<Props> = (props) => {
   )
 
   const renderTriage = (triage: Triage): JSXElement => (
-    <CardBox title={triage.title} body={triage.body} iconName="ambulance" children={<TriageInfo triage={triage} />}/>
+    <CardBox title={triage.title} body={triage.body} iconName="call-split" children={<TriageInfo triage={triage} />}/>
   )
 
   return (

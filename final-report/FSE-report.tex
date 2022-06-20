@@ -660,7 +660,7 @@ Come già anticipato, le procedure sanitarie effettuate possono essere di divers
 Alcune ontologie esterne come LOINC e OMIT, includono un numero elevato di
 classi e assiomi di difficile gestione all'interno di \textit{Protégé}. Per
 questo motivo si è deciso di estrapolare da queste i soli concetti necessari per
-l'implementazione del FSE. Questa attività a prodotto nuove ontologie di
+l'implementazione del FSE. Questa attività ha prodotto nuove ontologie di
 supporto che al bisogno possono essere sostituite da quelle complete. Nel caso
 di LOINC sono stati importati tutti gli \textit{Individuals} e le classi di
 contorno che modellano i codici dei \texttt{fse:clinicalDocument} e delle
@@ -796,29 +796,28 @@ SELECT ?ID ?Nome_Organizzazione (COUNT(?document) AS ?Documenti)
 
 \subsubsection*{Percentuale di entrate in pronto soccorso con ambulanza}
 \begin{lstlisting}[ language=SQL ]
-SELECT (CONCAT(STR(((100 * ?ambulances / ?missions ))), "%") as ?Percentuale)
-FROM <https://fse.ontology/>
-WHERE {
+SELECT (CONCAT(STR(((100 * ?ambulances / ?missions ))), "%") 
+       as ?Percentuale)
+  FROM <https://fse.ontology/>
+  WHERE {
   {
     SELECT (COUNT(?id) as ?ambulances)
-    WHERE {
-      ?id 
-        a fse:firstAidReport ;
-          fse:hasSection [
+      WHERE {
+        ?id a fse:firstAidReport ;
+            fse:hasSection [
             a fse:modeOfTransport ;
-              fse:cameWith [
+                fse:cameWith [
                 fse:vehicleType ?vehicle
-              ] 
-          ] 
-      FILTER (?vehicle = "Ambulance")
-    }
+                ] 
+            ] 
+        FILTER (?vehicle = "Ambulance")
+      }
   }  
   {
     SELECT (COUNT(?id) AS ?missions )
-    WHERE {
-      ?id 
-        a fse:firstAidReport ;
-    }
+      WHERE {
+        ?id a fse:firstAidReport ;
+      }
   }  
 }
 \end{lstlisting}
@@ -862,40 +861,43 @@ SELECT ?ID ?Nome ?Cognome ?Cod_Allergia ?Descrizione
 
 \subsubsection*{Durata media terapie}
 \begin{lstlisting}[ language=SQL ]
-    SELECT (CONCAT(STR(DAY(AVG(?newDate))), " giorni e ", STR(HOURS(AVG(?newDate))), " ore") AS ?Durata_terapia) 
-    FROM <https://fse.ontology/>
-    WHERE {
-      ?id a fse:therapy ;
-          fse:start ?start ;
-          fse:end ?end .
-        bind(?end - ?start as ?newDate) .
-    }
+SELECT (CONCAT(
+         STR(DAY(AVG(?newDate))), " giorni e ", 
+         STR(HOURS(AVG(?newDate))), " ore"
+       ) AS ?Durata_terapia) 
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?id a fse:therapy ;
+      fse:start ?start ;
+      fse:end ?end .
+    bind(?end - ?start as ?newDate) .
+  }
 \end{lstlisting}
 
 \subsubsection*{Numero di prescrizioni per priorità}
 \begin{lstlisting}[ language=SQL ]
-    SELECT (COUNT(?id) AS ?count) ?Priorità ?Commento
-    FROM <tag:stardog:api:context:all>
-    WHERE {
-      ?id a fse:prescription ;
-          fse:hasPriority ?Priorità .
-          ?Priorità rdfs:comment ?Commento .
-    }
-    GROUP BY ?Priorità ?Commento
+SELECT (COUNT(?id) AS ?count) ?Priorita ?Commento
+  FROM <tag:stardog:api:context:all>
+  WHERE {
+    ?id a fse:prescription ;
+        fse:hasPriority ?Priorita .
+        ?Priorita rdfs:comment ?Commento .
+  }
+  GROUP BY ?Priorita ?Commento
 \end{lstlisting}
 
 \subsubsection*{Orario con più ingressi al PS}
 \begin{lstlisting}[ language=SQL ]
-    SELECT ?Orario (COUNT(?Orario) as ?Count)
-    FROM <https://fse.ontology/>
-    WHERE {
-      ?id a fse:firstAidReport ;
-          fse:hasSection [
-              a fse:triage ;
-              fse:effectiveTime ?effectiveTime ;
-          ].
-    }
-    GROUP BY (HOURS(?effectiveTime) as ?Orario)
+SELECT ?Orario (COUNT(?Orario) as ?Count)
+  FROM <https://fse.ontology/>
+  WHERE {
+    ?id a fse:firstAidReport ;
+        fse:hasSection [
+            a fse:triage ;
+            fse:effectiveTime ?effectiveTime ;
+        ].
+  }
+  GROUP BY (HOURS(?effectiveTime) as ?Orario)
 \end{lstlisting}
 
 \subsubsection*{Elenco donatori di organi}
@@ -936,6 +938,44 @@ SELECT ?id ?Descrizione
 \end{lstlisting}
 
 \section{Applicativo}
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/application/clinicalDocument-application.png}
+    \caption[]{Elenco dei documenti clinici.}
+    \label{fig:app_clinicaDocument}
+\end{figure}
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/application/vps-application.png}
+    \caption[]{Verbale di pronto soccorso}
+    \label{fig:app_vps}
+\end{figure}
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/application/vac-application.png}
+    \caption[]{Certficato vaccinale}
+    \label{fig:app_vac}
+\end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/application/pharma-application.png}
+    \caption[]{Prescrizione farmaceutica}
+    \label{fig:app_pharma}
+\end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/application/rsa-application.png}
+    \caption[]{Referto di specialistica ambulatoriale}
+    \label{fig:app_rsa}
+\end{figure}
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/application/pss-application1.png}
+    \caption[]{Profilo sanitario sintetico}
+    \label{fig:app_pss1}
+\end{figure}
+\begin{figure}[htp]
+    \includegraphics[width=\textwidth]{images/application/queries-application.png}
+    \caption[]{Elenco delle query}
+    \label{fig:app_query}
+\end{figure}
+
 \section{Conclusioni}
 %
 %
