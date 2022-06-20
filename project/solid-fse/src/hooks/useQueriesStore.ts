@@ -101,13 +101,31 @@ const queries: Query[] = [
   {
     name: "Percentuale di entrate in pronto soccorso con ambulanza",
     code: outdent`
-      SELECT (100 * COUNT(?amb) / (COUNT(?id)) AS ?Percentuale)
-      FROM <https://fse.ontology/>
-      WHERE {
-        ?id
-          a fse:firstAidReport ;
-          fse:cameWith ?amb .
-      }
+    SELECT (CONCAT(STR(((100 * ?ambulances / ?missions ))), "%") as ?Percentuale)
+    FROM <https://fse.ontology/>
+    WHERE {
+      {
+        SELECT (COUNT(?id) as ?ambulances)
+        WHERE {
+          ?id 
+            a fse:firstAidReport ;
+              fse:hasSection [
+                a fse:modeOfTransport ;
+                  fse:cameWith [
+                    fse:vehicleType ?vehicle
+                  ] 
+              ] 
+          FILTER (?vehicle = "Ambulance")
+        }
+      }  
+      {
+        SELECT (COUNT(?id) AS ?missions )
+        WHERE {
+          ?id 
+            a fse:firstAidReport ;
+        }
+      }  
+    }
     `
   },
   {
@@ -132,6 +150,50 @@ const queries: Query[] = [
       FILTER(xsd:dateTime(?Valido_fino_a) < xsd:dateTime(NOW())) .
     }
     `
+  },
+  {
+    name: "Durata media terapie",
+    code: outdent`
+    SELECT (CONCAT(STR(DAY(AVG(?newDate))), " giorni e ", STR(HOURS(AVG(?newDate))), " ore") AS ?Durata_terapia) 
+    FROM <https://fse.ontology/>
+    WHERE {
+      ?id a fse:therapy ;
+          fse:start ?start ;
+          fse:end ?end .
+        bind(?end - ?start as ?newDate) .
+    }
+    `,
+    //options: { reasoning: true }
+  },
+  {
+    name: "Numero di prescrizioni per priorità",
+    code: outdent`
+    SELECT (COUNT(?id) AS ?count) ?Priorità ?Commento
+    FROM <tag:stardog:api:context:all>
+    WHERE {
+      ?id a fse:prescription ;
+          fse:hasPriority ?Priorità .
+          ?Priorità rdfs:comment ?Commento .
+    }
+    GROUP BY ?Priorità ?Commento
+    `,
+    //options: { reasoning: true }
+  },
+  {
+    name: "Orario con più ingressi PS",
+    code: outdent`
+    SELECT ?Orario (COUNT(?Orario) as ?Count)
+    FROM <https://fse.ontology/>
+    WHERE {
+      ?id a fse:firstAidReport ;
+          fse:hasSection [
+              a fse:triage ;
+              fse:effectiveTime ?effectiveTime ;
+          ].
+    }
+    GROUP BY (HOURS(?effectiveTime) as ?Orario)
+    `,
+    //options: { reasoning: true }
   },
   {
     name: "Elenco donatori di organi",
