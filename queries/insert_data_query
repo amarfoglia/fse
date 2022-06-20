@@ -57,7 +57,7 @@ INSERT DATA {
             a fse:radiologyReport ;
             fse:body "Referto di valutazione ecografica paziente B. Costa" ;
             #fse:hasCode <loinc:68604> ;
-            fse:confidentialityLevel <tag:stardog:api:Normal> ;
+            fse:confidentialityLevel <tag:stardog:api:Very_Restricted> ;
             fse:languageCode "it-IT" ;
             fse:realmCode "IT" ;
             fse:versionNumber 1 ;
@@ -75,7 +75,6 @@ INSERT DATA {
             fse:realmCode "IT" ;
             fse:versionNumber 1 ;
             fse:confidentialityLevel <tag:stardog:api:Normal> ;
-            fse:cameWith <tag:stardog:api:#plate_ca128td> ;
             fse:refersTo <tag:stardog:api:#CSTBRN86H62G273H> ;
             fse:hasHumanAuthor <tag:stardog:api:#nurse_gvanni> ;
             fse:hasResponsible <tag:stardog:api:#doctor_aparatore> ;
@@ -91,7 +90,7 @@ INSERT DATA {
         <#vac_bcosta>
             a fse:immunization ;
             fse:validUntil "2022-05-05T07:35:58"^^xsd:dateTime ;
-            fse:confidentialityLevel <tag:stardog:api:Normal> ;
+            fse:confidentialityLevel <tag:stardog:api:Restricted> ;
             #fse:hasCode <loinc:87273-9> ;
             fse:languageCode "it-IT" ;
             fse:realmCode "IT" ;
@@ -143,7 +142,7 @@ INSERT DATA {
             #fse:hasCode <loinc:34105-7> ;
             fse:realmCode "IT" ;
             fse:versionNumber 1 ;
-            fse:confidentialityLevel <tag:stardog:api:Normal> ;
+            fse:confidentialityLevel <tag:stardog:api:Restricted> ;
             fse:refersTo <tag:stardog:api:#PSNFRU97L29G702B> ;
             fse:hasHumanAuthor <tag:stardog:api:#doctor_aarcuri> ;
             fse:hasCustodian <tag:stardog:api:#ordinemedici> ;
@@ -216,7 +215,7 @@ INSERT DATA {
             fse:consumable obo:DRON_00080857 ;
             fse:consumable obo:DRON_00080856 ;
             fse:consumable obo:DRON_00080858 ;
-            fse:hasPriority <tag:stardog:api:A> ;
+            fse:hasPriority <tag:stardog:api:EL> ;
             fse:createdAt "2021-10-23T18:30:15" .
         # -------------------------
         # SIGN
@@ -383,13 +382,14 @@ INSERT DATA {
             fse:title "Modalità di trasporto" ;
             #fse:hasCode <loinc:11459-5> ;
             fse:body "Nessun evento avverso durante il trasporto";
-            fse:vehicle <tag:stardog:api:#plate_ca128td> ;
+            fse:cameWith <tag:stardog:api:#plate_ca128td> ;
             fse:hasMissionManager <tag:stardog:api:#doctor_aparatore>;
             fse:statusCode "Completed" .
         
         <#service_rossi>
             a fse:services ;
             fse:title "Prestazioni" ;
+            fse:body "" ;
             #fse:hasCode <loinc:62387-6> ;
             fse:hasProcedure <obo:NCIT_C15329> .
         
@@ -402,6 +402,7 @@ INSERT DATA {
         <#service_acalabrese>
             a fse:services ;
             fse:title "Prestazioni" ;
+            fse:body "" ;
             #fse:hasCode <loinc:62387-6> ;
             fse:hasProcedure <obo:NCIT_C18020> .
         

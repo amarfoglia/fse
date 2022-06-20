@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js"
+import { Component } from "solid-js"
 import useQueriesStore from "../hooks/useQueriesStore"
 
 const CustomQuery: Component = () => {

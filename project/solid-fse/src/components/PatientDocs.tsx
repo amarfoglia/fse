@@ -11,11 +11,11 @@ interface DocProps {
 }
 
 const ConfidentialTooltip: Component<{ confidentialityLevel: string }> = (props) => {
-  const tooltipText = <span class="tooltiptext bg-blue-400 text-gray-700">{props.confidentialityLevel}</span>
+  const tooltipText = <span class="tooltiptext bg-blue-400 text-gray-700">{props.confidentialityLevel.replace("_", " ")}</span>
   switch(props.confidentialityLevel) {
     case "Normal": return <i class="text-blue-400 mdi mdi-alert-circle tooltip">{tooltipText}</i>
     case "Restricted": return <i class="text-yellow-400 mdi mdi-alert-circle tooltip">{tooltipText}</i>
-    case "Very Restricted": return <i class="text-red-400 mdi mdi-alert-circle tooltip">{tooltipText}</i>
+    case "Very_Restricted": return <i class="text-red-400 mdi mdi-alert-circle tooltip">{tooltipText}</i>
     default: return <></>
   }
 }

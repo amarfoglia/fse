@@ -1,5 +1,4 @@
 import { createResource } from "solid-js"
-import { ClinicalDocument, Pharma, Prescription, Specialist } from "../models/ClinicalDocument"
 import { Discharge, ModeOfTransport, ReasonForVisit, Triage } from "../models/Section"
 import createStardogQuery from "./createStardogQuery"
 
@@ -12,7 +11,7 @@ const fetchModeOfTransport = async (documentId: string): Promise<ModeOfTransport
           a fse:firstAidReport ;
             fse:hasSection [
                 a fse:modeOfTransport;
-                fse:vehicle ?vehicle ;
+                fse:cameWith ?vehicle ;
                 fse:body ?body;
                 fse:title ?title;
                 fse:hasCode ?code;
@@ -112,7 +111,6 @@ const fetchTriage = async (documentId: string): Promise<Triage> => {
       }
     }
   }
-  console.log("ciaio ", triage)
   return triage
 }
 
