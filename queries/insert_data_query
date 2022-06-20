@@ -181,6 +181,7 @@ INSERT DATA {
             fse:refersTo <tag:stardog:api:#CLBDLA93S07D969X> ;
             fse:hasHumanAuthor <tag:stardog:api:#doctor_aarcuri> ;
             fse:hasCustodian <tag:stardog:api:#ausl> ;
+            fse:hasPriority <tag:stardog:api:A> ;
             fse:createdAt "2021-10-23T18:30:15" .
 
         <#rsa_acalabrese>
@@ -203,7 +204,6 @@ INSERT DATA {
         <#pharma_acalabrese>
             a fse:pharma ;
             fse:hasQuantity 2 ;
-            fse:consumable obo:DRON_00080858 ;
             fse:body "Documento di prescrizione medica per Coumadin paziente A. Calabrese" ;
             fse:languageCode "it-IT" ;
             fse:realmCode "IT" ;
@@ -213,6 +213,10 @@ INSERT DATA {
             fse:hasHumanAuthor <tag:stardog:api:#doctor_aarcuri> ;
             fse:hasCustodian <tag:stardog:api:#ausl> ;
             fse:hasLatestVersion <tag:stardog:api:#prescription_acalabrese> ;
+            fse:consumable obo:DRON_00080857 ;
+            fse:consumable obo:DRON_00080856 ;
+            fse:consumable obo:DRON_00080858 ;
+            fse:hasPriority <tag:stardog:api:A> ;
             fse:createdAt "2021-10-23T18:30:15" .
         # -------------------------
         # SIGN
@@ -235,9 +239,10 @@ INSERT DATA {
         # SECTIONS
         # -------------------------
         <#diseases_vpinto>
-            a fse:historyOfDisease ;
+            a fse:historyOfDiseases ;
             fse:title "Lista dei problemi" ;
             #fse:hasCode <loinc:10162-6> ;
+            fse:includesDisease obo:DOID_1578 ;
             fse:includesDisease obo:DOID_1579 .
         
         <#e_aesposito>
@@ -276,7 +281,8 @@ INSERT DATA {
             a fse:historyOfPregnancies ;
             fse:title "Gravidanze e parto" ;
             #fse:hasCode <loinc:10162-6> ;
-            fse:includesPregnancy <tag:stardog:api:#pregnancy_vpinto> .
+            fse:includesPregnancy <tag:stardog:api:#pregnancy_vpinto> ;
+            fse:includesPregnancy <tag:stardog:api:#pregnancy_vpinto_2> .
         
         <#medications_vpinto>
             a fse:medications ;
@@ -359,6 +365,8 @@ INSERT DATA {
             fse:title "Dimissione" ;
             fse:body "Trauma distorsivo alla 1 MTC-F con lesione di Stener. Non fratture nè deficit v/n. Mantiene tutore dedicato con blocco 1° MTC-F per 20 gg. Rivalutazione in chir della mano tra 20 gg Arcoxia 90 mg 1 cp se dolore" ;
             fse:effectiveTime "2020-08-15T07:35:58"^^xsd:dateTime ;
+            fse:hasPerformer <tag:stardog:api:#doctor_aparatore> ;
+            fse:transfer <#ospedalembufalini>;
             fse:statusCode "Completed" .
         
         <#triage_costa>
@@ -368,14 +376,16 @@ INSERT DATA {
             fse:hasVehicle "Ambulance" ;
             fse:hasPerformer <tag:stardog:api:#doctor_aparatore> ;
             fse:effectiveTime "2020-07-15T07:35:58"^^xsd:dateTime ;
+            fse:body "";
             fse:statusCode "Completed" .
         
         <#transport_costa>
             a fse:modeOfTransport ;
             fse:title "Modalità di trasporto" ;
             #fse:hasCode <loinc:11459-5> ;
-            fse:hasVehicle <tag:stardog:api:#plate_ca128td> ;
-            fse:effectiveTime "2020-07-15T07:35:58"^^xsd:dateTime ;
+            fse:body "";
+            fse:vehicle <tag:stardog:api:#plate_ca128td> ;
+            fse:hasMissionManager <tag:stardog:api:#doctor_aparatore>;
             fse:statusCode "Completed" .
         
         <#service_rossi>
@@ -493,6 +503,12 @@ INSERT DATA {
         # -------------------------
         <#pregnancy_vpinto>
             a fse:pregnancy ;
+            fse:start "2019-01-02T07:35:58"^^xsd:dateTime ;
+            fse:end "2019-10-02T07:35:58"^^xsd:dateTime ;
+            fse:result true .
+        
+        <#pregnancy_vpinto_2>
+            a fse:pregnancy ;
             fse:start "2022-02-02T07:35:58"^^xsd:dateTime ;
             fse:end "2022-11-02T07:35:58"^^xsd:dateTime ;
             fse:result true .
@@ -560,7 +576,6 @@ INSERT DATA {
             foaf:lastName "Fiorentino" ;
             foaf:birthday "11/11/1956" ;
             fse:fiscalCode "FRNPSC56S51F839H" ;
-            fse:isOrganDonor false ; 
             fse:healthCardNumber "80380800301569845351" ;
             fse:hasFamilyDoctor <tag:stardog:api:#doctor_abarese> .
         <#RSSDNI48C45C573H>
@@ -568,7 +583,6 @@ INSERT DATA {
             foaf:firstName "Diana" ;
             foaf:lastName "Rossi" ;
             foaf:birthday "05/03/1948" ;
-            fse:isOrganDonor true ;
             fse:fiscalCode "RSSDNI48C45C573H" ;
             fse:healthCardNumber "80380800308945237892" .
         <#CSTBRN86H62G273H>
@@ -576,7 +590,6 @@ INSERT DATA {
             foaf:firstName "Bruna" ;
             foaf:lastName "Costa" ;
             foaf:birthday "22/06/1986" ;
-            fse:isOrganDonor true ;
             fse:fiscalCode "CSTBRN86H62G273H" ;
             fse:healthCardNumber "80380800304875162594" ;
             fse:hasFamilyDoctor <tag:stardog:api:#doctor_abarese> .
@@ -585,7 +598,6 @@ INSERT DATA {
             foaf:firstName "Veronica" ;
             foaf:lastName "Pinto" ;
             foaf:birthday "05/12/1983" ;
-            fse:isOrganDonor false ;
             fse:fiscalCode "VRNPNT83T45F205V" ;
             fse:healthCardNumber "80380800301126596519" .
         <#PSNFRU97L29G702B>
@@ -593,14 +605,12 @@ INSERT DATA {
             foaf:firstName "Furio" ;
             foaf:lastName "Pisano" ;
             foaf:birthday "29/07/1997" ;
-            fse:isOrganDonor false ;
             fse:fiscalCode "PSNFRU97L29G702B" ;
             fse:healthCardNumber "803808003099956423156" .
         <#SPSNMR60S42F839P>
             a fse:patient ;
             foaf:firstName "Anna Maria" ;
             foaf:lastName "Esposito" ;
-            fse:isOrganDonor false ;
             foaf:birthday "02/11/1960" ;
             fse:fiscalCode "SPSNMR60S42F839P" ;
             fse:healthCardNumber "803808003045876589452" .
@@ -608,7 +618,6 @@ INSERT DATA {
             a fse:patient ;
             foaf:firstName "Adele" ;
             foaf:lastName "Calabresi" ;
-            fse:isOrganDonor false ;
             foaf:birthday "07/11/1993" ;
             fse:fiscalCode "CLBDLA93S07D969X" ;
             fse:healthCardNumber "803808003087512326896" ;
@@ -617,7 +626,6 @@ INSERT DATA {
             a fse:patient ;
             foaf:firstName "Caio" ;
             foaf:lastName "Lori" ;
-            fse:isOrganDonor false ;
             foaf:birthday "04/03/1984" ;
             fse:fiscalCode "LROCAI84C04G702E" ;
             fse:healthCardNumber "803808003045852135897" .
