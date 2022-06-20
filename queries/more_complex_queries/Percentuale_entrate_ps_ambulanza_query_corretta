@@ -11,7 +11,11 @@ PREFIX loinc: <http://purl.bioontology.org/ontology/LNC/>
 SELECT (100 * COUNT(?amb) / (COUNT(?id)) AS ?Percentuale)
 FROM <https://fse.ontology/>
 WHERE {
-  ?id
+  ?id a fse:firstAidReport .  
+  ?amb
     a fse:firstAidReport ;
-    fse:cameWith ?amb .
+    fse:hasSection [
+        fse:hasVehicle ?vehicle
+    ]
+    FILTER (?vehicle = "Ambulance")
 }
