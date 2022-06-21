@@ -937,7 +937,11 @@ SELECT ?id ?Descrizione
   }
 \end{lstlisting}
 
+\newpage
 \section{Applicativo}
+A seguire vengono mostrate alcune schermate dell'applicativo, nello specifico sono inerenti ai componenti aggiunti nella seconda versione dell'elaborato, nuove parti che permettono di visualizzare informazioni relative alle singole sezioni, ampliando anche quelle preesistenti, come nel caso dei documenti clinici, per i quali viene mostrato ora anche un eventuale firmatario e il livello di confidenzialità per determinarne i permessi (Figura \ref*{fig:app_clinicaDocument})
+
+
 \begin{figure}[htp]
     \includegraphics[width=\textwidth]{images/application/clinicalDocument-application.png}
     \caption[]{Elenco dei documenti clinici.}
@@ -976,12 +980,37 @@ SELECT ?id ?Descrizione
     \label{fig:app_query}
 \end{figure}
 
-\section{Conclusioni}
-%
-%
-%
-%
 \newpage
+\section{Differenze tra Stardog e Protégé}
+Ecco un breve confronto tra le possibilità presentate da Stardog e Protege per la realizzazione del progetto. Stardog Studio era stato già precedentemente messo in campo durante la creazione della prima versione del progetto, dal momento che l'applicativo si rivolgeva ad un'istanza di database realizzata mediante questa suite, per cui si è deciso di mantenere la struttura originale e adeguarsi alle scelte implementative del precedente team che ha avviato il lavoro.
+
+\subsection{Stardog Studio}
+\begin{itemize}
+    \item[-] L’interfaccia di Stardog Studio risulta più moderna e intuitiva rispetto a quella di Protégé, più "adottabile" in ambito professionale.
+    \item[-] Ha un supporto più esteso alle query SPARQL, ad esempio supporta nativamente INSERT DATA e UPDATE, che su Protégé richiedono un plugin esterno.
+    \item[-] Può essere usato come backend di un applicativo, a differenza di Protégé che supporta unicamente la creazione e la gestione di un’ontologia
+\end{itemize}
+
+\subsection{Protégé}
+\begin{itemize}
+    \item[-] La sua interfaccia ha un miglior supporto al data modelling rispetto a quella di Stardog Studio.
+    \item[-] È possibile configurare più facilmente Protege rispetto a Stardog Studio, in modo che possa supportare anche ontologie molto ampie.
+    \item[-] È possibile configurare più facilmente Protege rispetto a Stardog Studio, in modo che possa supportare anche ontologie molto ampie.
+    \item[-] Superate le difficoltà che si possono presentare ad un primo utilizzo di Protege, si apprezza la possibilità di personalizzare l'interfaccia quasi completamente, rendendo possibile maneggiare tutti i dettagli della produzione di un'ontologia a proprio piacimento, potendo configurare nella maniera più comoda l'ambiente di lavoro.
+    \item[-] Apprezzata maggiormente rispetto a Stardog l'importing di ontologie esterne, per le quali è possibile fornire anche soltanto l'url e lasciare a Protege il compito di effettuarne il download.
+\end{itemize}
+
+\newpage
+\section{Conclusioni}
+Il progetto ha permesso di rivolgere uno sguardo al mondo delle ontologie e delle tecnologie che vi ruotano attorno, specialmente per quanto riguarda l'ambito sanitario.
+Ci si è confrontati con uno standard complesso come HL7, utilizzato per la produzione digitale di documenti clinici, un riferimento che per dimensionalità e ampiezza dei contenuti richiede un lavoro di studio e analisi consistente.
+HL7 non nasce rivolto al Web Semantico, quindi manca di fornire un supporto per l'estensione della conoscenza volta all'interoperabilità dei dati provenienti da differenti sorgenti (punto cardine dell'idea di open world propria dell'ambito disciplinare informatico in cui si inserisce il progetto).
+Una delle difficoltà che si sono dovute fronteggiare ha riguardato dunque l'integrazione con altre ontologie esistenti per arricchire la base informativa, cosa che è stata ulteriormente resa più ostica dalla mole di dati gestita da questi altri grafi di conoscenza e che si è parzialmente risolta andando a selezionare parte delle informazioni che fossero d'interesse per l'applicazione, ma che non si è riusciti ad utilizzare a pieno, in quanto difficili da processare dalle macchine locali su cui si è svolto il lavoro.
+Tuttavia, il team si ritiene soddisfatto del progetto, che rispetta uno standard complesso come HL7 (del quale si sono aggiunte tutte le sezioni principali per ogni documento), e crede di aver migliorato il prodotto preesistente, sia da un punto di vista ontologico, mediante l'introduzione di vicoli che aumentino l'espressività degli oggetti descritti dall'ontologia, che da un punto di vista quantitativo, specialmente in relazione all'ampiezza del contenuto informativo rappresentato.
+
+\section{Sviluppi futuri}
+Data la complessità del dominio applicativo su cui ci si è confrontati sono possibili numerose estensioni al progetto realizzato, implementabili sia rimanendo legati all'ambito disciplinare del Web Semantico (ad esempio, un'eventuale ampliamento dell'ontologia mediante l'inserimento di contenuti relativi ad HL7 che si è scelto di non maneggiare in questa versione), sia collegando nuovi sistemi e tecnologie provenienti da altri ambiti delle scienze informatiche (ad esempio, la realizzazione di un modello di Text Mining che, a partire da dati non strutturati, come i documenti clinici, sia in grado di estrarre un contenuto informativo e provvedere all'inserimento in un database).
+Una possibile proposta di sviluppo dell'applicativo riguarda la messa in esercizio di questo come un'architettura distribuita, composta dalle tecnologie e dalle componenti che si sono descritte sopra, perfettamente orchestrate e cooperanti fra loro, disponibile mediante una piattaforma applicativa web orientata a fornire la possibilità di estrazione del dato per indagini statistiche e per la creazione di una più solida base di conoscenza per altri progetti sempre legati alla sfera tematica della sanità.
 \nocite{*} % Includes all references from the `references.bib` file
 \bibliographystyle{plain}
 \bibliography{references}
