@@ -695,6 +695,71 @@ di OWL 2. Prendendo come esempio il predicato \texttt{fse:hasAllergy}:
     \caption[]{\textit{Object Properties} interessate dalla catena OWL.}
     \label{fig:chain}
 \end{figure}
+
+\subsection{Regole SWRL}
+Al fine di espandere le potenzialità inferenziali del \textit{reasoner} sono
+state definite alcune regole SWRL. Queste permettono di estrarre nuova
+conoscenza superando i limiti di OWL. 
+\subsubsection*{Estensione della proprietà transitiva}
+Come già anticipato, le \textit{Object Properties} relative al livello di
+priorità (\texttt{fse:priorityLevel}) e al livello di permessi
+(\texttt{fse:confidentialityCode}) sono state definite transitive.
+L'impossibilità, da parte di OWL, di rendere le proprietà anche irriflessive, ha
+spinto alla elaborazione di specifiche regole.    
+\begin{center}
+\begin{verbatim}
+    fse:priorityLevel(?x) ^ fse:isLessUrgentThan(?x, ?y) 
+                -> differentFrom(?x, ?y)
+\end{verbatim}
+\begin{verbatim}
+    fse:priorityLevel(?x) ^ fse:isMoreUrgentThan(?x, ?y) 
+                -> differentFrom(?x, ?y)
+\end{verbatim}
+\begin{verbatim}
+    fse:confidentialityCode(?x) ^ fse:isLessConfidentialThan(?x, ?y) 
+                -> differentFrom(?x, ?y)
+\end{verbatim}
+\begin{verbatim}
+    fse:confidentialityCode(?x) ^ fse:isMoreConfidentialThan(?x, ?y) 
+                -> differentFrom(?x, ?y)
+\end{verbatim}
+\end{center}
+\subsubsection*{Calcolo dei giorni di ricovero}
+Tramite la regola proposta, il \textit{reasoner} è in grado di inferire
+automaticamente il numero dei giorni di ricovero totali. Il conteggio viene
+esplicitato tramite la \textit{Data Property} \texttt{fse:daysOfRecovery}, ed è
+il risultato della sottrazione tra la data di \texttt{fse:triage} con quella di
+\texttt{fse:discharge}.
+\begin{center}
+\begin{verbatim}
+    fse:firstAidReport(?doc)  ^ fse:triage(?x) 
+        ^ fse:isPartOf(?x, ?doc) 
+        ^ fse:effectiveTime(?x, ?t1) ^ fse:discharge(?y) 
+        ^ fse:isPartOf(?y, ?doc) ^ fse:effectiveTime(?y, ?t2) 
+        ^ swrlb:subtractDateTimesYieldingDayTimeDuration(?d, ?t1, ?t2)  
+            -> fse:daysOfRecovery(?y, ?d)
+\end{verbatim}
+\end{center}
+\subsubsection*{Somministrazione inferita da prescrizione farmacologica}
+Attraverso la regola sottostante, la generazione di una prescrizione
+farmacologica consente al \textit{reasoner} di inferire il tipo di medicinale
+(della somministrazione) e lo stato della terapia da svolgere. Quest'ultima,
+come da standard HL7, deve far parte di un documento
+\texttt{fse:summaryHealthProfile} tramite la sezione \texttt{fse:medications}.
+\begin{center}
+    \begin{verbatim}
+        fse:patient(?p) ^ fse:pharma(?pp) ^ fse:refersTo(?pp, ?p) 
+            ^ fse:consumable(?pp,?drug) ^ fse:summaryHealthProfile(?doc) 
+            ^ fse:refersTo(?doc, ?p) ^ fse:medications(?m) 
+            ^ fse:hasSection(?doc, ?m) ^ fse:therapy(?t) 
+            ^ fse:includesTherapy(?m, ?t) ^ fse:substanceAdministration(?adm) 
+            ^ fse:includesAdministration(?t, ?adm) 
+                -> fse:statusCode(?t, "Active") ^ fse:consumable(?adm, ?drug)
+    \end{verbatim}
+\end{center}
+
+
+
 \section{SPARQL}
 In questa sezione documentiamo il lavoro svolto sulle query di estrazione dei dati legati ai documenti clinici dei pazienti e 
 le operazioni svolte per adattare quanto precedentemente realizzato dal gruppo che ha iniziato il progetto alle estensioni che abbiamo applicato al formato dei dati.
