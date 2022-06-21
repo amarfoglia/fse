@@ -202,7 +202,7 @@ const queries: Query[] = [
       FROM <https://fse.ontology/>
       WHERE {
         ?ID
-          fse:isOrganDonor "true" ;
+          fse:isOrganDonor true ;
           foaf:firstName ?Nome ;
           foaf:lastName ?Cognome .
       }
