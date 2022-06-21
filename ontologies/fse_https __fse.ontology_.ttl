@@ -148,7 +148,7 @@ fse:boosterOf rdf:type owl:ObjectProperty ,
 
 ###  https://fse.ontology/cameWith
 fse:cameWith rdf:type owl:ObjectProperty ;
-             rdfs:domain :modeOfTransport ;
+             rdfs:domain fse:modeOfTransport ;
              rdfs:range fse:vehicle ;
              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "cameWith"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
              <tag:stardog:studio:label> "cameWith"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -353,7 +353,7 @@ fse:hasLegalAuthenticator rdf:type owl:ObjectProperty ,
 
 ###  https://fse.ontology/hasMissionManager
 fse:hasMissionManager rdf:type owl:ObjectProperty ;
-                      rdfs:domain :modeOfTransport ;
+                      rdfs:domain fse:modeOfTransport ;
                       rdfs:range fse:healthWorker .
 
 
@@ -368,8 +368,8 @@ fse:hasParticipant rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/hasPerformer
 fse:hasPerformer rdf:type owl:ObjectProperty ;
                  rdfs:domain [ rdf:type owl:Class ;
-                               owl:unionOf ( :discharge
-                                             :triage
+                               owl:unionOf ( fse:discharge
+                                             fse:triage
                                            )
                              ] ;
                  rdfs:range fse:healthWorker .
@@ -420,7 +420,7 @@ fse:hasPriority rdf:type owl:ObjectProperty ,
 fse:hasProcedure rdf:type owl:ObjectProperty ,
                           owl:FunctionalProperty ,
                           owl:IrreflexiveProperty ;
-                 rdfs:domain :services ;
+                 rdfs:domain fse:services ;
                  rdfs:range fse:operatingProcedure .
 
 
@@ -454,7 +454,7 @@ fse:hasResponsible rdf:type owl:ObjectProperty ;
 
 ###  https://fse.ontology/hasResult
 fse:hasResult rdf:type owl:ObjectProperty ;
-              rdfs:domain :specialty ;
+              rdfs:domain fse:specialty ;
               rdfs:range fse:test .
 
 
@@ -498,7 +498,7 @@ document."""@en ;
 fse:includesAdministration rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf fse:includesField ;
                            rdfs:domain [ rdf:type owl:Class ;
-                                         owl:unionOf ( :immunizationCard
+                                         owl:unionOf ( fse:immunizationCard
                                                        fse:therapy
                                                      )
                                        ] ;
@@ -510,7 +510,7 @@ fse:includesAdministration rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesAllergy
 fse:includesAllergy rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain :alerts ;
+                    rdfs:domain fse:alerts ;
                     rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_1205> ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesAllergy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesAllergy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -519,7 +519,7 @@ fse:includesAllergy rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesDisease
 fse:includesDisease rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain :historyOfDiseases ;
+                    rdfs:domain fse:historyOfDiseases ;
                     rdfs:range <http://fse.ontology/purl.obolibrary.org/obo/DOID_4> ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesDisease"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesDisease"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -535,7 +535,7 @@ fse:includesField rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesPregnancy
 fse:includesPregnancy rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf fse:includesField ;
-                      rdfs:domain :historyOfPregnancies ;
+                      rdfs:domain fse:historyOfPregnancies ;
                       rdfs:range fse:pregnancy ;
                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesPregnancy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                       <tag:stardog:studio:label> "includesPregnancy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -544,7 +544,7 @@ fse:includesPregnancy rdf:type owl:ObjectProperty ;
 ###  https://fse.ontology/includesTherapy
 fse:includesTherapy rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf fse:includesField ;
-                    rdfs:domain :medications ;
+                    rdfs:domain fse:medications ;
                     rdfs:range fse:therapy ;
                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "includesTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                     <tag:stardog:studio:label> "includesTherapy"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
@@ -593,7 +593,7 @@ fse:isPartOf rdf:type owl:ObjectProperty ,
 ###  https://fse.ontology/mainProblem
 fse:mainProblem rdf:type owl:ObjectProperty ,
                          owl:FunctionalProperty ;
-                rdfs:domain :reasonForVisit ;
+                rdfs:domain fse:reasonForVisit ;
                 rdfs:range fse:observation .
 
 
@@ -625,7 +625,7 @@ fse:refersTo rdf:type owl:ObjectProperty ,
 
 ###  https://fse.ontology/transfer
 fse:transfer rdf:type owl:ObjectProperty ;
-             rdfs:domain :discharge ;
+             rdfs:domain fse:discharge ;
              rdfs:range <http://fse.ontology/www.w3.org/ns/org#Organization> .
 
 
@@ -654,7 +654,7 @@ fse:worksIn rdf:type owl:ObjectProperty ;
 ###  http://api.stardog.com/daysOfRecovery
 :daysOfRecovery rdf:type owl:DatatypeProperty ,
                          owl:FunctionalProperty ;
-                rdfs:domain :discharge ;
+                rdfs:domain fse:discharge ;
                 rdfs:range xsd:duration .
 
 
@@ -782,10 +782,10 @@ fse:doseQuantity rdf:type owl:DatatypeProperty ;
 ###  https://fse.ontology/effectiveTime
 fse:effectiveTime rdf:type owl:DatatypeProperty ;
                   rdfs:domain [ rdf:type owl:Class ;
-                                owl:unionOf ( :discharge
-                                              :triage
+                                owl:unionOf ( fse:discharge
                                               fse:sign
                                               fse:substanceAdministration
+                                              fse:triage
                                             )
                               ] ;
                   rdfs:range xsd:dateTime ;
@@ -797,7 +797,7 @@ fse:effectiveTime rdf:type owl:DatatypeProperty ;
 ###  https://fse.ontology/end
 fse:end rdf:type owl:DatatypeProperty ;
         rdfs:domain [ rdf:type owl:Class ;
-                      owl:unionOf ( :alerts
+                      owl:unionOf ( fse:alerts
                                     fse:pregnancy
                                     fse:therapy
                                   )
@@ -927,7 +927,7 @@ fse:siteAddress rdf:type owl:DatatypeProperty ;
 ###  https://fse.ontology/start
 fse:start rdf:type owl:DatatypeProperty ;
           rdfs:domain [ rdf:type owl:Class ;
-                        owl:unionOf ( :alerts
+                        owl:unionOf ( fse:alerts
                                       fse:pregnancy
                                       fse:therapy
                                     )
@@ -940,11 +940,11 @@ fse:start rdf:type owl:DatatypeProperty ;
 ###  https://fse.ontology/statusCode
 fse:statusCode rdf:type owl:DatatypeProperty ;
                rdfs:domain [ rdf:type owl:Class ;
-                             owl:unionOf ( :discharge
-                                           :triage
-                                           fse:booster
+                             owl:unionOf ( fse:booster
+                                           fse:discharge
                                            fse:observation
                                            fse:therapy
+                                           fse:triage
                                          )
                            ] ;
                rdfs:range [ rdf:type rdfs:Datatype ;
@@ -1028,233 +1028,11 @@ fse:versionNumber rdf:type owl:DatatypeProperty ;
           <tag:stardog:studio:label> "RML_code"@en .
 
 
-###  http://api.stardog.com/alerts
-:alerts rdf:type owl:Class ;
-        rdfs:subClassOf fse:section ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty fse:hasCode ;
-                          owl:hasValue <http://purl.bioontology.org/ontology/LNC/48765-2>
-                        ] ;
-        <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collects all information relating to allergies, adverse reactions, and past or present alarms relating to the patient, if deemed relevant."@en ;
-        <tag:stardog:studio:label> "alerts"@en .
-
-
-###  http://api.stardog.com/discharge
-:discharge rdf:type owl:Class ;
-           rdfs:subClassOf fse:section ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty fse:hasCode ;
-                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/18842-5>
-                           ] ;
-           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the data relating to the discharge phase, including the discharge diagnosis, prognosis, treatment outcome."@en ;
-           <tag:stardog:studio:label> "discharge"@en .
-
-
-###  http://api.stardog.com/dischargeDiagnosis
-:dischargeDiagnosis rdf:type owl:Class ;
-                    rdfs:subClassOf fse:section ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty fse:hasCode ;
-                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/11535-2>
-                                    ] ;
-                    <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes the list of discharge diagnoses, in order of relevance."@en ;
-                    <tag:stardog:studio:label> "dischargeDiagnosis"@en .
-
-
-###  http://api.stardog.com/exemption
-:exemption rdf:type owl:Class ;
-           rdfs:subClassOf fse:section ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty fse:hasCode ;
-                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/57827-8>
-                           ] ;
-           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Contains information about exemptions."@en ;
-           <tag:stardog:studio:label> "exemption"@en .
-
-
-###  http://api.stardog.com/historyOfDiseases
-:historyOfDiseases rdf:type owl:Class ;
-                   rdfs:subClassOf fse:section ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty fse:hasCode ;
-                                     owl:hasValue <http://purl.bioontology.org/ontology/LNC/11450-4>
-                                   ] ;
-                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It documents all relevant clinical problems known at the time the document was generated (clinical problems, conditions, diagnostic suspicions and certain diagnoses, current or past symptoms)."@en ;
-                   <tag:stardog:studio:label> "historyOfDiseases"@en .
-
-
-###  http://api.stardog.com/historyOfPregnancies
-:historyOfPregnancies rdf:type owl:Class ;
-                      rdfs:subClassOf fse:section ,
-                                      [ rdf:type owl:Restriction ;
-                                        owl:onProperty fse:hasCode ;
-                                        owl:hasValue <http://purl.bioontology.org/ontology/LNC/10162-6>
-                                      ] ;
-                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Includes all information regarding pregnancies (including miscarriages), births, any resulting complications and menstrual status."@en ;
-                      <tag:stardog:studio:label> "historyOfPregnancies"@en .
-
-
-###  http://api.stardog.com/immunizationCard
-:immunizationCard rdf:type owl:Class ;
-                  rdfs:subClassOf fse:section ,
-                                  [ rdf:type owl:Restriction ;
-                                    owl:onProperty fse:hasCode ;
-                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
-                                  ] ;
-                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes all the details of administration."@en ;
-                  <tag:stardog:studio:label> "immunizationCard"@en .
-
-
-###  http://api.stardog.com/immunizations
-:immunizations rdf:type owl:Class ;
-               rdfs:subClassOf fse:section ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty fse:hasCode ;
-                                 owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
-                               ] ;
-               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It reports information about the patient's current immunization status (vaccinations) and the vaccinations performed."@en ;
-               <tag:stardog:studio:label> "immunizations"@en .
-
-
-###  http://api.stardog.com/medications
-:medications rdf:type owl:Class ;
-             rdfs:subClassOf fse:section ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty fse:hasCode ;
-                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/10160-0>
-                             ] ;
-             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Deputy for the registration of all information relating to pharmacological therapies (prescriptions, administrations, etc.)"@en ;
-             <tag:stardog:studio:label> "medications"@en .
-
-
-###  http://api.stardog.com/modeOfTransport
-:modeOfTransport rdf:type owl:Class ;
-                 rdfs:subClassOf fse:section ,
-                                 [ rdf:type owl:Restriction ;
-                                   owl:onProperty fse:hasCode ;
-                                   owl:hasValue <http://purl.bioontology.org/ontology/LNC/11459-5>
-                                 ] ;
-                 <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Specifies the mode of transport (arrival mode) of the patient to the emergency room and the person in charge of sending them to the emergency room."@en ;
-                 <tag:stardog:studio:label> "modeOfTransport"@en .
-
-
-###  http://api.stardog.com/osReport
-:osReport rdf:type owl:Class ;
-          rdfs:subClassOf fse:section ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty fse:hasCode ;
-                            owl:hasValue <http://purl.bioontology.org/ontology/LNC/47045-0>
-                          ] ;
-          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Description of the doctor's assessments and the outcome of the service."@en ;
-          <tag:stardog:studio:label> "osReport"@en .
-
-
-###  http://api.stardog.com/performedExam
-:performedExam rdf:type owl:Class ;
-               rdfs:subClassOf fse:section ,
-                               [ rdf:type owl:Restriction ;
-                                 owl:onProperty fse:hasCode ;
-                                 owl:hasValue <http://purl.bioontology.org/ontology/LNC/55111-9>
-                               ] ;
-               <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the radiological examination that is the subject of the report and must include both the date and the method of execution."@en ;
-               <tag:stardog:studio:label> "performedExam"@en .
-
-
-###  http://api.stardog.com/prescriptions
-:prescriptions rdf:type owl:Class ;
-               rdfs:subClassOf fse:section ;
-               <tag:stardog:studio:label> "prescriptions"@en .
-
-
 ###  http://api.stardog.com/procedure
 :procedure rdf:type owl:Class ;
            rdfs:subClassOf fse:operatingProcedure ;
            <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Indicates invasive, interventional, surgical, therapeutic non-pharmacological procedures."@en ;
            <tag:stardog:studio:label> "procedure"@en .
-
-
-###  http://api.stardog.com/progression
-:progression rdf:type owl:Class ;
-             rdfs:subClassOf fse:section ,
-                             [ rdf:type owl:Restriction ;
-                               owl:onProperty fse:hasCode ;
-                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/8648-8>
-                             ] ;
-             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describe the progress of the hospitalization, the diagnostic, therapeutic, rehabilitation or assistance process."@en ;
-             <tag:stardog:studio:label> "progression"@en .
-
-
-###  http://api.stardog.com/radReport
-:radReport rdf:type owl:Class ;
-           rdfs:subClassOf fse:section ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty fse:hasCode ;
-                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/18782-3>
-                           ] ;
-           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the central element and contains a description of the doctor's evaluations."@en ;
-           <tag:stardog:studio:label> "radReport"@en .
-
-
-###  http://api.stardog.com/reasonForAdmission
-:reasonForAdmission rdf:type owl:Class ;
-                    rdfs:subClassOf fse:section ,
-                                    [ rdf:type owl:Restriction ;
-                                      owl:onProperty fse:hasCode ;
-                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/46241-6>
-                                    ] ;
-                    <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the main cause that led to the patient's hospitalization through the admission diagnosis."@en ;
-                    <tag:stardog:studio:label> "reasonForAdmission"@en .
-
-
-###  http://api.stardog.com/reasonForVisit
-:reasonForVisit rdf:type owl:Class ;
-                rdfs:subClassOf fse:section ,
-                                [ rdf:type owl:Restriction ;
-                                  owl:onProperty fse:mainProblem ;
-                                  owl:allValuesFrom [ rdf:type owl:Restriction ;
-                                                      owl:onProperty fse:hasCode ;
-                                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/56817-0>
-                                                    ]
-                                ] ,
-                                [ rdf:type owl:Restriction ;
-                                  owl:onProperty fse:hasCode ;
-                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/46239-0>
-                                ] ;
-                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the reason why the patient enters the emergency room, and the problem, the main symptom encountered or perceived by the patient."@en ;
-                <tag:stardog:studio:label> "reasonForVisit"@en .
-
-
-###  http://api.stardog.com/services
-:services rdf:type owl:Class ;
-          rdfs:subClassOf fse:section ,
-                          [ rdf:type owl:Restriction ;
-                            owl:onProperty fse:hasCode ;
-                            owl:hasValue <http://purl.bioontology.org/ontology/LNC/62387-6>
-                          ] ;
-          <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It reports the administrative services provided, and, where applicable, the operative and clinical procedures performed (eg drug administration)."@en ;
-          <tag:stardog:studio:label> "services"@en .
-
-
-###  http://api.stardog.com/specialty
-:specialty rdf:type owl:Class ;
-           rdfs:subClassOf fse:section ,
-                           [ rdf:type owl:Restriction ;
-                             owl:onProperty fse:hasCode ;
-                             owl:allValuesFrom :RML_code
-                           ] ;
-           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Contains the results of laboratory tests relating to a single specialty (for example a microbiological study) or to multiple specialties."@en ;
-           <tag:stardog:studio:label> "specialty"@en .
-
-
-###  http://api.stardog.com/triage
-:triage rdf:type owl:Class ;
-        rdfs:subClassOf fse:section ,
-                        [ rdf:type owl:Restriction ;
-                          owl:onProperty fse:hasCode ;
-                          owl:hasValue <http://purl.bioontology.org/ontology/LNC/54094-8>
-                        ] ;
-        <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the data relating to the discharge phase, including the discharge diagnosis, prognosis, treatment outcome."@en ;
-        <tag:stardog:studio:label> "triage"@en .
 
 
 ###  http://fse.ontology/purl.obolibrary.org/obo/DOID_1205
@@ -1322,6 +1100,17 @@ fse:admission rdf:type owl:Class ;
               <tag:stardog:studio:label> "admission"@en .
 
 
+###  https://fse.ontology/alerts
+fse:alerts rdf:type owl:Class ;
+           rdfs:subClassOf fse:section ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty fse:hasCode ;
+                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/48765-2>
+                           ] ;
+           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Collects all information relating to allergies, adverse reactions, and past or present alarms relating to the patient, if deemed relevant."@en ;
+           <tag:stardog:studio:label> "alerts"@en .
+
+
 ###  https://fse.ontology/booster
 fse:booster rdf:type owl:Class ;
             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents a single booster instance of the vaccine."@en ;
@@ -1365,6 +1154,28 @@ fse:device rdf:type owl:Class ;
            <tag:stardog:studio:label> "device"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/discharge
+fse:discharge rdf:type owl:Class ;
+              rdfs:subClassOf fse:section ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty fse:hasCode ;
+                                owl:hasValue <http://purl.bioontology.org/ontology/LNC/18842-5>
+                              ] ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the data relating to the discharge phase, including the discharge diagnosis, prognosis, treatment outcome."@en ;
+              <tag:stardog:studio:label> "discharge"@en .
+
+
+###  https://fse.ontology/dischargeDiagnosis
+fse:dischargeDiagnosis rdf:type owl:Class ;
+                       rdfs:subClassOf fse:section ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty fse:hasCode ;
+                                         owl:hasValue <http://purl.bioontology.org/ontology/LNC/11535-2>
+                                       ] ;
+                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes the list of discharge diagnoses, in order of relevance."@en ;
+                       <tag:stardog:studio:label> "dischargeDiagnosis"@en .
+
+
 ###  https://fse.ontology/doctor
 fse:doctor rdf:type owl:Class ;
            rdfs:subClassOf fse:healthWorker ;
@@ -1372,12 +1183,23 @@ fse:doctor rdf:type owl:Class ;
            <tag:stardog:studio:label> "doctor"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/exemption
+fse:exemption rdf:type owl:Class ;
+              rdfs:subClassOf fse:section ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty fse:hasCode ;
+                                owl:hasValue <http://purl.bioontology.org/ontology/LNC/57827-8>
+                              ] ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Contains information about exemptions."@en ;
+              <tag:stardog:studio:label> "exemption"@en .
+
+
 ###  https://fse.ontology/exemptionReport
 fse:exemptionReport rdf:type owl:Class ;
                     rdfs:subClassOf fse:clinicalDocument ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty fse:hasSection ;
-                                      owl:allValuesFrom :exemption
+                                      owl:allValuesFrom fse:exemption
                                     ] ,
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty fse:hasCode ;
@@ -1402,10 +1224,10 @@ fse:firstAidReport rdf:type owl:Class ;
                                    [ rdf:type owl:Restriction ;
                                      owl:onProperty fse:hasSection ;
                                      owl:allValuesFrom [ rdf:type owl:Class ;
-                                                         owl:unionOf ( :discharge
-                                                                       :modeOfTransport
-                                                                       :reasonForVisit
-                                                                       :triage
+                                                         owl:unionOf ( fse:discharge
+                                                                       fse:modeOfTransport
+                                                                       fse:reasonForVisit
+                                                                       fse:triage
                                                                      )
                                                        ]
                                    ] ,
@@ -1446,15 +1268,37 @@ fse:healthcareFacility rdf:type owl:Class ;
                        <tag:stardog:studio:label> "healthcareFacility"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/historyOfDiseases
+fse:historyOfDiseases rdf:type owl:Class ;
+                      rdfs:subClassOf fse:section ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty fse:hasCode ;
+                                        owl:hasValue <http://purl.bioontology.org/ontology/LNC/11450-4>
+                                      ] ;
+                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It documents all relevant clinical problems known at the time the document was generated (clinical problems, conditions, diagnostic suspicions and certain diagnoses, current or past symptoms)."@en ;
+                      <tag:stardog:studio:label> "historyOfDiseases"@en .
+
+
+###  https://fse.ontology/historyOfPregnancies
+fse:historyOfPregnancies rdf:type owl:Class ;
+                         rdfs:subClassOf fse:section ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty fse:hasCode ;
+                                           owl:hasValue <http://purl.bioontology.org/ontology/LNC/10162-6>
+                                         ] ;
+                         <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Includes all information regarding pregnancies (including miscarriages), births, any resulting complications and menstrual status."@en ;
+                         <tag:stardog:studio:label> "historyOfPregnancies"@en .
+
+
 ###  https://fse.ontology/hospitalDischargeLetter
 fse:hospitalDischargeLetter rdf:type owl:Class ;
                             rdfs:subClassOf fse:clinicalDocument ,
                                             [ rdf:type owl:Restriction ;
                                               owl:onProperty fse:hasSection ;
                                               owl:allValuesFrom [ rdf:type owl:Class ;
-                                                                  owl:unionOf ( :dischargeDiagnosis
-                                                                                :progression
-                                                                                :reasonForAdmission
+                                                                  owl:unionOf ( fse:dischargeDiagnosis
+                                                                                fse:progression
+                                                                                fse:reasonForAdmission
                                                                               )
                                                                 ]
                                             ] ,
@@ -1478,7 +1322,7 @@ fse:immunization rdf:type owl:Class ;
                  rdfs:subClassOf fse:clinicalDocument ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty fse:hasSection ;
-                                   owl:allValuesFrom :immunizationCard
+                                   owl:allValuesFrom fse:immunizationCard
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty fse:hasCode ;
@@ -1494,6 +1338,28 @@ fse:immunization rdf:type owl:Class ;
                  <tag:stardog:studio:label> "immunization"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/immunizationCard
+fse:immunizationCard rdf:type owl:Class ;
+                     rdfs:subClassOf fse:section ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty fse:hasCode ;
+                                       owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
+                                     ] ;
+                     <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describes all the details of administration."@en ;
+                     <tag:stardog:studio:label> "immunizationCard"@en .
+
+
+###  https://fse.ontology/immunizations
+fse:immunizations rdf:type owl:Class ;
+                  rdfs:subClassOf fse:section ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty fse:hasCode ;
+                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/11369-6>
+                                  ] ;
+                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It reports information about the patient's current immunization status (vaccinations) and the vaccinations performed."@en ;
+                  <tag:stardog:studio:label> "immunizations"@en .
+
+
 ###  https://fse.ontology/laboratory
 fse:laboratory rdf:type owl:Class ;
                rdfs:subClassOf fse:healthcareFacility ;
@@ -1506,7 +1372,7 @@ fse:laboratoryMedicineReport rdf:type owl:Class ;
                              rdfs:subClassOf fse:clinicalDocument ,
                                              [ rdf:type owl:Restriction ;
                                                owl:onProperty fse:hasSection ;
-                                               owl:allValuesFrom :specialty
+                                               owl:allValuesFrom fse:specialty
                                              ] ,
                                              [ rdf:type owl:Restriction ;
                                                owl:onProperty fse:hasCode ;
@@ -1519,6 +1385,28 @@ fse:laboratoryMedicineReport rdf:type owl:Class ;
                              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Document (RML) that represents the result of a service carried out by a specific laboratory inside a health facility"@en ;
                              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "laboratoryMedicineReport"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
                              <tag:stardog:studio:label> "laboratoryMedicineReport"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+
+
+###  https://fse.ontology/medications
+fse:medications rdf:type owl:Class ;
+                rdfs:subClassOf fse:section ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty fse:hasCode ;
+                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/10160-0>
+                                ] ;
+                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Deputy for the registration of all information relating to pharmacological therapies (prescriptions, administrations, etc.)"@en ;
+                <tag:stardog:studio:label> "medications"@en .
+
+
+###  https://fse.ontology/modeOfTransport
+fse:modeOfTransport rdf:type owl:Class ;
+                    rdfs:subClassOf fse:section ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty fse:hasCode ;
+                                      owl:hasValue <http://purl.bioontology.org/ontology/LNC/11459-5>
+                                    ] ;
+                    <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Specifies the mode of transport (arrival mode) of the patient to the emergency room and the person in charge of sending them to the emergency room."@en ;
+                    <tag:stardog:studio:label> "modeOfTransport"@en .
 
 
 ###  https://fse.ontology/nurse
@@ -1541,14 +1429,25 @@ fse:operatingProcedure rdf:type owl:Class ;
                        <tag:stardog:studio:label> "operatingProcedure"@en .
 
 
+###  https://fse.ontology/osReport
+fse:osReport rdf:type owl:Class ;
+             rdfs:subClassOf fse:section ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty fse:hasCode ;
+                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/47045-0>
+                             ] ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Description of the doctor's assessments and the outcome of the service."@en ;
+             <tag:stardog:studio:label> "osReport"@en .
+
+
 ###  https://fse.ontology/outpatientSpecialistReport
 fse:outpatientSpecialistReport rdf:type owl:Class ;
                                rdfs:subClassOf fse:clinicalDocument ,
                                                [ rdf:type owl:Restriction ;
                                                  owl:onProperty fse:hasSection ;
                                                  owl:allValuesFrom [ rdf:type owl:Class ;
-                                                                     owl:unionOf ( :osReport
-                                                                                   :services
+                                                                     owl:unionOf ( fse:osReport
+                                                                                   fse:services
                                                                                  )
                                                                    ]
                                                ] ,
@@ -1569,6 +1468,17 @@ fse:patient rdf:type owl:Class ;
             rdfs:subClassOf <http://fse.ontology/xmlns.com/foaf/0.1/Person> ;
             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label> "patient"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> ;
             <tag:stardog:studio:label> "patient"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
+
+
+###  https://fse.ontology/performedExam
+fse:performedExam rdf:type owl:Class ;
+                  rdfs:subClassOf fse:section ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty fse:hasCode ;
+                                    owl:hasValue <http://purl.bioontology.org/ontology/LNC/55111-9>
+                                  ] ;
+                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the radiological examination that is the subject of the report and must include both the date and the method of execution."@en ;
+                  <tag:stardog:studio:label> "performedExam"@en .
 
 
 ###  https://fse.ontology/pharma
@@ -1593,7 +1503,7 @@ fse:prescription rdf:type owl:Class ;
                  rdfs:subClassOf fse:clinicalDocument ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty fse:hasSection ;
-                                   owl:allValuesFrom :prescriptions
+                                   owl:allValuesFrom fse:prescriptions
                                  ] ;
                  owl:disjointWith fse:radiologyReport ,
                                   fse:summaryHealthProfile ;
@@ -1602,10 +1512,38 @@ fse:prescription rdf:type owl:Class ;
                  <tag:stardog:studio:label> "prescription"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/prescriptions
+fse:prescriptions rdf:type owl:Class ;
+                  rdfs:subClassOf fse:section ;
+                  <tag:stardog:studio:label> "prescriptions"@en .
+
+
 ###  https://fse.ontology/priorityLevel
 fse:priorityLevel rdf:type owl:Class ;
                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Specifies the priority level of the prescription."@en ;
                   <tag:stardog:studio:label> "priorityLevel"@en .
+
+
+###  https://fse.ontology/progression
+fse:progression rdf:type owl:Class ;
+                rdfs:subClassOf fse:section ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty fse:hasCode ;
+                                  owl:hasValue <http://purl.bioontology.org/ontology/LNC/8648-8>
+                                ] ;
+                <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Describe the progress of the hospitalization, the diagnostic, therapeutic, rehabilitation or assistance process."@en ;
+                <tag:stardog:studio:label> "progression"@en .
+
+
+###  https://fse.ontology/radReport
+fse:radReport rdf:type owl:Class ;
+              rdfs:subClassOf fse:section ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty fse:hasCode ;
+                                owl:hasValue <http://purl.bioontology.org/ontology/LNC/18782-3>
+                              ] ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It represents the central element and contains a description of the doctor's evaluations."@en ;
+              <tag:stardog:studio:label> "radReport"@en .
 
 
 ###  https://fse.ontology/radiologyReport
@@ -1614,8 +1552,8 @@ fse:radiologyReport rdf:type owl:Class ;
                                     [ rdf:type owl:Restriction ;
                                       owl:onProperty fse:hasSection ;
                                       owl:allValuesFrom [ rdf:type owl:Class ;
-                                                          owl:unionOf ( :performedExam
-                                                                        :radReport
+                                                          owl:unionOf ( fse:performedExam
+                                                                        fse:radReport
                                                                       )
                                                         ]
                                     ] ,
@@ -1629,8 +1567,48 @@ fse:radiologyReport rdf:type owl:Class ;
                     <tag:stardog:studio:label> "radiologyReport"^^<http://fse.ontology/www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral> .
 
 
+###  https://fse.ontology/reasonForAdmission
+fse:reasonForAdmission rdf:type owl:Class ;
+                       rdfs:subClassOf fse:section ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty fse:hasCode ;
+                                         owl:hasValue <http://purl.bioontology.org/ontology/LNC/46241-6>
+                                       ] ;
+                       <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the main cause that led to the patient's hospitalization through the admission diagnosis."@en ;
+                       <tag:stardog:studio:label> "reasonForAdmission"@en .
+
+
+###  https://fse.ontology/reasonForVisit
+fse:reasonForVisit rdf:type owl:Class ;
+                   rdfs:subClassOf fse:section ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty fse:mainProblem ;
+                                     owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                         owl:onProperty fse:hasCode ;
+                                                         owl:hasValue <http://purl.bioontology.org/ontology/LNC/56817-0>
+                                                       ]
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty fse:hasCode ;
+                                     owl:hasValue <http://purl.bioontology.org/ontology/LNC/46239-0>
+                                   ] ;
+                   <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the reason why the patient enters the emergency room, and the problem, the main symptom encountered or perceived by the patient."@en ;
+                   <tag:stardog:studio:label> "reasonForVisit"@en .
+
+
 ###  https://fse.ontology/section
 fse:section rdf:type owl:Class .
+
+
+###  https://fse.ontology/services
+fse:services rdf:type owl:Class ;
+             rdfs:subClassOf fse:section ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty fse:hasCode ;
+                               owl:hasValue <http://purl.bioontology.org/ontology/LNC/62387-6>
+                             ] ;
+             <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It reports the administrative services provided, and, where applicable, the operative and clinical procedures performed (eg drug administration)."@en ;
+             <tag:stardog:studio:label> "services"@en .
 
 
 ###  https://fse.ontology/sign
@@ -1650,6 +1628,17 @@ fse:specialist rdf:type owl:Class ;
                <tag:stardog:studio:label> "specialist"@en .
 
 
+###  https://fse.ontology/specialty
+fse:specialty rdf:type owl:Class ;
+              rdfs:subClassOf fse:section ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty fse:hasCode ;
+                                owl:allValuesFrom :RML_code
+                              ] ;
+              <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Contains the results of laboratory tests relating to a single specialty (for example a microbiological study) or to multiple specialties."@en ;
+              <tag:stardog:studio:label> "specialty"@en .
+
+
 ###  https://fse.ontology/substanceAdministration
 fse:substanceAdministration rdf:type owl:Class ;
                             rdfs:subClassOf fse:operatingProcedure ;
@@ -1663,11 +1652,11 @@ fse:summaryHealthProfile rdf:type owl:Class ;
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty fse:hasSection ;
                                            owl:allValuesFrom [ rdf:type owl:Class ;
-                                                               owl:unionOf ( :alerts
-                                                                             :historyOfDiseases
-                                                                             :historyOfPregnancies
-                                                                             :immunizations
-                                                                             :medications
+                                                               owl:unionOf ( fse:alerts
+                                                                             fse:historyOfDiseases
+                                                                             fse:historyOfPregnancies
+                                                                             fse:immunizations
+                                                                             fse:medications
                                                                            )
                                                              ]
                                          ] ,
@@ -1710,6 +1699,17 @@ fse:transportRequest rdf:type owl:Class ;
                                      ] ;
                      <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Represents the transport request."@en ;
                      <tag:stardog:studio:label> "transportRequest"@en .
+
+
+###  https://fse.ontology/triage
+fse:triage rdf:type owl:Class ;
+           rdfs:subClassOf fse:section ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty fse:hasCode ;
+                             owl:hasValue <http://purl.bioontology.org/ontology/LNC/54094-8>
+                           ] ;
+           <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "It describes the data relating to the discharge phase, including the discharge diagnosis, prognosis, treatment outcome."@en ;
+           <tag:stardog:studio:label> "triage"@en .
 
 
 ###  https://fse.ontology/vehicle
@@ -1786,25 +1786,6 @@ fse:vehicle rdf:type owl:Class ;
                  <http://fse.ontology/www.w3.org/2000/01/rdf-schema#comment> "Accessible only to the patient and the doctor who wrote the report."@en ;
                  rdfs:label "V (very restricted)"@en ;
                  <tag:stardog:studio:label> "V (very restricted)"@en .
-
-
-###  http://api.stardog.com/discharge1
-:discharge1 rdf:type owl:NamedIndividual ,
-                     :discharge ;
-            fse:effectiveTime "2015-10-10T22:15:05"^^xsd:dateTime .
-
-
-###  http://api.stardog.com/doc1
-:doc1 rdf:type owl:NamedIndividual ,
-               fse:firstAidReport ;
-      fse:hasSection :discharge1 ,
-                     :triage1 .
-
-
-###  http://api.stardog.com/triage1
-:triage1 rdf:type owl:NamedIndividual ,
-                  :triage ;
-         fse:effectiveTime "2015-10-07T22:15:05"^^xsd:dateTime .
 
 
 ###  http://purl.bioontology.org/ontology/LNC/LP185407-6
@@ -2118,6 +2099,48 @@ loinc:MTHU034750 rdf:type owl:NamedIndividual .
 
 ###  http://purl.bioontology.org/ontology/STY/T201
 <http://purl.bioontology.org/ontology/STY/T201> rdf:type owl:NamedIndividual .
+
+
+###  https://fse.ontology#Indiv_drug
+:Indiv_drug rdf:type owl:NamedIndividual ,
+                     <http://fse.ontology/purl.obolibrary.org/obo/DRON_00000005> .
+
+
+###  https://fse.ontology#Indiv_med
+:Indiv_med rdf:type owl:NamedIndividual ,
+                    fse:medications ;
+           fse:includesTherapy :Indiv_therapy ;
+           fse:isPartOf :Indiv_shp .
+
+
+###  https://fse.ontology#Indiv_patient
+:Indiv_patient rdf:type owl:NamedIndividual ,
+                        fse:patient .
+
+
+###  https://fse.ontology#Indiv_pharma
+:Indiv_pharma rdf:type owl:NamedIndividual ,
+                       fse:pharma ;
+              fse:consumable :Indiv_drug ;
+              fse:refersTo :Indiv_patient .
+
+
+###  https://fse.ontology#Indiv_shp
+:Indiv_shp rdf:type owl:NamedIndividual ,
+                    fse:summaryHealthProfile ;
+           fse:hasSection :Indiv_med ;
+           fse:refersTo :Indiv_patient .
+
+
+###  https://fse.ontology#Indiv_therapy
+:Indiv_therapy rdf:type owl:NamedIndividual ,
+                        fse:therapy ;
+               fse:includesAdministration :Invid_admin .
+
+
+###  https://fse.ontology#Invid_admin
+:Invid_admin rdf:type owl:NamedIndividual ,
+                      fse:substanceAdministration .
 
 
 [ <http://fse.ontology/www.w3.org/2002/07/owl#maxCardinalityQ> "1"^^<http://fse.ontology/www.w3.org/2001/XMLSchema#integer> ;
@@ -2969,18 +2992,6 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
 #    Rules
 #################################################################
 
-:tr rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-:dis rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-:doc rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-:t1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-:t2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
-:d rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
-
 :x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
 :y rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
@@ -2989,149 +3000,31 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
 
 <urn:swrl:var#y> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
-   rdfs:comment ""^^xsd:string ;
-   rdfs:label "S4"^^xsd:string ;
-   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
-   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :triage ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :tr
-                                                     ] ;
-                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :discharge ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :dis
-                                                                ] ;
-                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> fse:firstAidReport ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :doc
-                                                                           ] ;
-                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :tr ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :doc
-                                                                                      ] ;
-                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :dis ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :doc
-                                                                                                 ] ;
-                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> :tr ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> :t1
-                                                                                                            ] ;
-                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :dis ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> :t2
-                                                                                                                       ] ;
-                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
-                                                                                                                                    <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#subtractDateTimesYieldingYearMonthDuration> ;
-                                                                                                                                    <http://www.w3.org/2003/11/swrl#arguments> ( :d
-                                                                                                                                                                                 :t1
-                                                                                                                                                                                 :t2
-                                                                                                                                                                               )
-                                                                                                                                  ] ;
-                                                                                                                        rdf:rest rdf:nil
-                                                                                                                      ]
-                                                                                                           ]
-                                                                                                ]
-                                                                                     ]
-                                                                          ]
-                                                               ]
-                                                    ]
-                                         ] ;
-   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :daysOfRecovery ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :dis ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> :d
-                                                     ] ;
-                                           rdf:rest rdf:nil
-                                         ]
- ] .
+:tr rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
-   rdfs:comment ""^^xsd:string ;
-   rdfs:label "S5"^^xsd:string ;
-   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
-   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :triage ;
-                                                       <http://www.w3.org/2003/11/swrl#argument1> :tr
-                                                     ] ;
-                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :discharge ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument1> :dis
-                                                                ] ;
-                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> fse:firstAidReport ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument1> :doc
-                                                                           ] ;
-                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :tr ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :doc
-                                                                                      ] ;
-                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :dis ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> :doc
-                                                                                                 ] ;
-                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> :tr ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> :t1
-                                                                                                            ] ;
-                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :dis ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> :t2
-                                                                                                                       ] ;
-                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
-                                                                                                                                    <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#subtractDateTimesYieldingYearMonthDuration> ;
-                                                                                                                                    <http://www.w3.org/2003/11/swrl#arguments> ( :d
-                                                                                                                                                                                 :t2
-                                                                                                                                                                                 :t1
-                                                                                                                                                                               )
-                                                                                                                                  ] ;
-                                                                                                                        rdf:rest rdf:nil
-                                                                                                                      ]
-                                                                                                           ]
-                                                                                                ]
-                                                                                     ]
-                                                                          ]
-                                                               ]
-                                                    ]
-                                         ] ;
-   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
-                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#select> ;
-                                                       <http://www.w3.org/2003/11/swrl#arguments> ( :d
-                                                                                                    :tr
-                                                                                                    :doc
-                                                                                                    :t1
-                                                                                                    :t2
-                                                                                                  )
-                                                     ] ;
-                                           rdf:rest rdf:nil
-                                         ]
- ] .
+:doc rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:t1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:dis rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:d rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:t2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:pp rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:drug rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:shp2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:med rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:t rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:ad rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
 [ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
    rdfs:comment ""^^xsd:string ;
@@ -3181,6 +3074,250 @@ fse:confidentialityCode <http://fse.ontology/www.w3.org/2000/01/rdf-schema#label
                                                        <http://www.w3.org/2003/11/swrl#argument2> <urn:swrl:var#y>
                                                      ] ;
                                            rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S4"^^xsd:string ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> fse:triage ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :tr
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :tr ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :doc
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :tr ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :t1
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> fse:discharge ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :dis
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#classPredicate> fse:firstAidReport ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :doc
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> :dis ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> :doc
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#subtractDateTimesYieldingDayTimeDuration> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#arguments> ( :d
+                                                                                                                                                                      :t1
+                                                                                                                                                                      :t2
+                                                                                                                                                                    )
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :dis ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> :t2
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest rdf:nil
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :daysOfRecovery ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :dis ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :d
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S5"^^xsd:string ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> fse:triage ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :tr
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :tr ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :doc
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :tr ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :t1
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> fse:discharge ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :dis
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#classPredicate> fse:firstAidReport ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :doc
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#subtractDateTimesYieldingDayTimeDuration> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#arguments> ( :d
+                                                                                                                                                           :t2
+                                                                                                                                                           :t1
+                                                                                                                                                         )
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:isPartOf ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :dis ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> :doc
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:effectiveTime ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :dis ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> :t2
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest rdf:nil
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://sqwrl.stanford.edu/ontologies/built-ins/3.4/sqwrl.owl#select> ;
+                                                       <http://www.w3.org/2003/11/swrl#arguments> ( :d
+                                                                                                    :tr
+                                                                                                    :doc
+                                                                                                    :t1
+                                                                                                    :t2
+                                                                                                  )
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment ""^^xsd:string ;
+   rdfs:label "S6"^^xsd:string ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> fse:patient ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :p
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> fse:pharma ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :pp
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:refersTo ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :pp ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:consumable ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :pp ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> :drug
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#classPredicate> fse:summaryHealthProfile ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> :shp2
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:refersTo ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> :shp2 ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#classPredicate> fse:medications ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :med
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:hasSection ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :shp2 ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> :med
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#classPredicate> fse:therapy ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :t
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:includesTherapy ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> :med ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> :t
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#classPredicate> fse:substanceAdministration ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#argument1> :ad
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:includesAdministration ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> :t ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument2> :ad
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest rdf:nil
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:statusCode ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :t ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "Active"^^xsd:string
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> fse:consumable ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :ad ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :drug
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
                                          ]
  ] .
 
