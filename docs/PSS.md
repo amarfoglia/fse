@@ -105,28 +105,28 @@ Il tag `<ClinicalDocument>/<recordTarget>.` identifica la partecipazione relativ
 ```
 #### 3.1.11.1 Paziente soggetto del Documento: `<patientRole>`
 Il tag `<recordTarget>/<patienRole>` è un elemento che identifica il ruolo svolto dalla persona a cui il PSS si riferisce. 
-| Attributo | Tipo | Valore | Dettagli | Obbligatorio |
+| Attributo/Nodo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| :id | | | | X |
-| ---- root | OID | "2.16.840.1.113883.2.9.4.3.2" | OID del Ministero dell'Economia e delle Finanze  | X |
-| ---- extension | ST | `[CODICE_FISCALE]` | Codice fiscale del paziente | X |
-| ---- assigningAuthorityName | ST | "Ministero Economia e Finanze" | | |
-| : addr | | | Indirizzo del paziente | X |
-| ---- use | | `HP` oppure `H`[^1] |  | X |
-| :::: country | ST | `[COD_STATO_RECAPITO_PAZIENTE]` |  Codice identificativo dello stato Rif:(https://www.istat.it/it/archivio/6747)  | X |
-| :::: state | ST | `[COD_REGIONE_RECAPITO_PAZIENTE]` | Codice identificativo della regione |  |
-| :::: county | ST | `[COD_PROVINCIA_RECAPITO_PAZIENTE` |  Sigla automobilistica della provincia (Rif https://www.istat.it/it/archivio/6789) |  |
-| :::: city | ST | `[DESC_COMUNE_RECAPITO_PAZIENTE]` | Descrizione del comune (Rif https://www.istat.it/it/archivio/6789) | X |
-| :::: censusTract | ST | `[COD_COMUNE_RECAPITO_PAZIENTE]` | Codice ISTAT del comune (Rif https://www.istat.it/it/archivio/6789) | X |
-| :::: postalCode | ST | `[COD_CAP_RECAPITO_PAZIENTE]` | CAP dell'indirizzo | X |
-| :::: streetAddressLine | ST | `[DESC_INDIRIZZO_RECAPITO_PAZIENTE]` | Descrizione indirizzo | X |
-| : patient | | | Contiene i dati anagrafici del soggetto della prestazione | X |
-| :::: name.family | | | Cognome del paziente | X |
-| :::: name.given | | | Nome del paziente | X |
-| :::: birthtime | | | Data di nascita del paziente | X |
-| :::: administrativeGenderCode | | | Sesso | X |
-| -------- code | | | Sesso dichiarato dal paziente | X |
-| -------- codeSystemName | | "HL7 AdministrativeGender" | | |
+| `<id>` | | | | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;root | OID | "2.16.840.1.113883.2.9.4.3.2" | OID del Ministero dell'Economia e delle Finanze  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;extension | ST | `[CODICE_FISCALE]` | Codice fiscale del paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;assigningAuthorityName | ST | "Ministero Economia e Finanze" | | |
+| `<addr>` | | | Indirizzo del paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;use | | `HP` oppure `H`[^1] |  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<country>` | ST | `[COD_STATO_RECAPITO_PAZIENTE]` |  Codice identificativo dello stato Rif:(https://www.istat.it/it/archivio/6747)  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<state>` | ST | `[COD_REGIONE_RECAPITO_PAZIENTE]` | Codice identificativo della regione |  |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<county>` | ST | `[COD_PROVINCIA_RECAPITO_PAZIENTE` |  Sigla automobilistica della provincia (Rif https://www.istat.it/it/archivio/6789) |  |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<city>` | ST | `[DESC_COMUNE_RECAPITO_PAZIENTE]` | Descrizione del comune (Rif https://www.istat.it/it/archivio/6789) | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<censusTract>` | ST | `[COD_COMUNE_RECAPITO_PAZIENTE]` | Codice ISTAT del comune (Rif https://www.istat.it/it/archivio/6789) | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<postalCode>` | ST | `[COD_CAP_RECAPITO_PAZIENTE]` | CAP dell'indirizzo | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<streetAddressLine>` | ST | `[DESC_INDIRIZZO_RECAPITO_PAZIENTE]` | Descrizione indirizzo | X |
+| `<patient>` | | | Contiene i dati anagrafici del soggetto della prestazione | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<name><family>` | | | Cognome del paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<name><given>` | | | Nome del paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<birthtime>` | | | Data di nascita del paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<administrativeGenderCode>` | | | Sesso | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; code | | | Sesso dichiarato dal paziente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; codeSystemName | | "HL7 AdministrativeGender" | | |
 
 
 [^1]: "HP" (primary home), "H" (home).
@@ -134,21 +134,21 @@ Il tag `<recordTarget>/<patienRole>` è un elemento che identifica il ruolo svol
 
 ### 3.1.12 Autore del documento: `<author>`
 Identifica il soggetto che ha creato il documento. 
-| Attributo | Tipo | Valore | Dettagli | Obbligatorio |
-|---|:---:|:---:|---|:---:|
-| : time | TS | `[YYYYMMddhhmmss+-ZZZZ]` | Ora di produzione del documento | X |
-| : assignedAuthor |  | |  | X |
-| :::: id |  | | Identifica l'autore del documento | X |
-| -------- root | OID |  "2.16.840.1.113883.2.9.4.3.2" |  | X |
-| -------- extension | ST | | Codice fiscale dell'autore del documento | X |
-| -------- assigningAuthorityName | ST | "MEF" | Codice fiscale del medico autore |  |
-| :::: assignedPerson |  | | Nominativo del medico autore | X |
-| :::::::: name.family | | | Cognome dell'autore | X |
-| :::::::: name.given | | | Nome dell'autore | X |
-| :::: telecom |  | | Riferimenti del medico autore | X |
 
-L’elemento `<author>/<assignedAuthor>` DEVE contenere almeno tre
-elementi `<telecom>` che riporta i riferimenti e-mail, PEC, telefono, necessari per contattare il medico autore.
+| Attributo/Nodo | Tipo | Valore | Dettagli | Obbligatorio |
+|---|:---:|:---:|---|:---:|
+| `<time>` | TS | `[YYYYMMddhhmmss+-ZZZZ]` | Ora di produzione del documento | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; `<assignedAuthor>` |  | |  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; `<id>` |  | | Identifica l'autore del documento | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root | OID |  "2.16.840.1.113883.2.9.4.3.2" |  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; extension | ST | | Codice fiscale dell'autore del documento | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigningAuthorityName | ST | "MEF" | Codice fiscale del medico autore |  |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<assignedPerson>` |  | | Nominativo del medico autore | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`<name><family>` | | | Cognome dell'autore | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`<name><given>` | | | Nome dell'autore | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<telecom>` |  | | Riferimenti del medico autore | X |
+
+> - L’elemento `<author>/<assignedAuthor>` DEVE contenere almeno tre elementi `<telecom>` che riporta i riferimenti e-mail, PEC, telefono, necessari per contattare il medico autore.
 
 ```xml
 <telecom use="HP" value="mailto://user@domain.com"></telecom>
@@ -191,12 +191,12 @@ Elemento che identifica l'organizzazione incaricata della custodia del
 documento originale, corrispondente al conservatore dei beni digitali.
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| : assignedCustodian |  |  | Ruolo | X |
-| :::: representedCustodianOrganization |  | | Entità che svolge il ruolo | X |
-| :::: id | | |  | X |
-| -------- root[^2] | OID | | Identificativo del dominio di identificazione delle organizzazioni. | X |
-| -------- extesion | ST | | Identificativo dell’organizzazione (ASL, Regione) da parte del dominio di identificazione definito nell'attributo `@root` | X |
-| -------- assigningAuthorityName | ST | | Nome mnemonico dell’Autorità responsabile dell’assegnazione dell’identificativo all’organizzazione custode del documento | X |
+| `<assignedCustodian>` |  |  | Ruolo | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; `<representedCustodianOrganization>` |  | | Entità che svolge il ruolo | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; `<id>` | | |  | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; root[^2] | OID | | Identificativo del dominio di identificazione delle organizzazioni. | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; extesion | ST | | Identificativo dell’organizzazione (ASL, Regione) da parte del dominio di identificazione definito nell'attributo `@root` | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigningAuthorityName | ST | | Nome mnemonico dell’Autorità responsabile dell’assegnazione dell’identificativo all’organizzazione custode del documento | X |
 
 [^2]: Se si vuole identificare le Aziende Sanitarie, l'attributo `@root` deve essere valorizzato con l’OID `"2.16.840.1.113883.2.9.4.1.1"`.
 
@@ -207,13 +207,13 @@ Il tag `<legalAuthenticator>` è un elemento OPZIONALE che identifica il soggett
 Il tag `<authenticator>` è un elemento che identifica il soggetto che effettua la validazione clinica del documento e deve essere svolto dalla stessa persona che interpreta il ruolo di autore (`<author>`).
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| : assignedEntity.id |  |  | | X |
-| ---- root | OID | `"2.16.840.1.113883.2.9.4.3.2"`| OID Ministero economia e finanze - CF | X |
-| ---- extension | ST | `[CF_VALIDATORE]`| Da valorizzare con il codice fiscale del validatore | X |
-| ---- assigningAuthorityName | ST | `MEF` | Ministero dell’Economia e delle Finanze | X |
-| : time | TS | `YYYYMMddhhmmss+-ZZzz` | | X |
-| : signatureCode | | | Indica che il documento è stato firmato digitalmente | X |
-| ---- code | ST | `S`[^3] | Codice che indica che il documento è firmato digitalmente | X |
+| `<assignedEntity><id>` |  |  | | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; root | OID | `"2.16.840.1.113883.2.9.4.3.2"`| OID Ministero economia e finanze - CF | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; extension | ST | `[CF_VALIDATORE]`| Da valorizzare con il codice fiscale del validatore | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;assigningAuthorityName | ST | `MEF` | Ministero dell’Economia e delle Finanze | X |
+| `<time>` | TS | `YYYYMMddhhmmss+-ZZzz` | | X |
+| `<signatureCode>` | | | Indica che il documento è stato firmato digitalmente | X |
+| &nbsp;&nbsp;&nbsp;&nbsp; code | ST | `S`[^3] | Codice che indica che il documento è firmato digitalmente | X |
 
 [^3]: "S" (Signed).
 
@@ -222,17 +222,17 @@ Il tag `<authenticator>` è un elemento che identifica il soggetto che effettua 
 Tale elemento indica che questo documento è stato creato al fine di documentare un evento (`<documentationOf>/<serviceEvent>`) di Cura del Paziente.
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| : serviceEvent | | | | X |
-| :::: effectiveTime | | | Data dell’ultimo aggiornamento | X |
-| -------- value | TS | `YYYYMMDDhhmmss+-ZZZZ` | | X |
+| `<serviceEvent>` | | | | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<effectiveTime>` | | | Data dell’ultimo aggiornamento | X |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value | TS | `YYYYMMDDhhmmss+-ZZZZ` | | X |
 
 ### 3.1.22 Relazione con documenti preesistenti: `<relatedDocument>`
 Il tag `<relatedDocument>` viene utilizzato nella gestione delle trasformazioni successive alla prima versione del documento. `<relatedDocument>` è un elemento OPZIONALE alla prima generazione di un documento CDA ed è OBBLIGATORIO per le trasformazioni successive.
 
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| - typeCode | ST |  `RPLC` o `APND` o `XFRM` | | X |
-| : parentDocument[^4] | | | | X |
+| typeCode | ST |  `RPLC` o `APND` o `XFRM` | | X |
+| `<parentDocument>`[^4] | | | | X |
 
 [^4]: In caso di integrativo o sostitutivo DEVE contenere un elemento `<id>` con valore degli attributi `@root` e `@extension` pari ai codici del documento di cui si fa il _replace_ o l’_append_.
 
@@ -307,11 +307,11 @@ All'interno del blocco `<entry>` ci possono essere tanti `<act>` quante le aller
 ```
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: effectiveTime[^5] |||Intervallo di tempo in cui il problema è attivo|X|
-|:::: low |TS||Data di inizio tracciamento del problema||
-|:::: high |TS||Data di fine tracciamento del problema. Non presente se stato diverso da `"aborted"` o `"completed"`||
-|: entryRelationship||`[OINT_CONCERN]` o `[NO_ALLERGIES]`|Fornisce dettagli riguardo all'allergia/intolleranza oppure indica esplicitamente l'assenza di queste[^6]|X|
-|:statusCode|||Si veda il paragrafo 6.2.1.2 del documento HL7 PSS v2.0 per i possibili valori|X|
+|`<effectiveTime>`[^5] |||Intervallo di tempo in cui il problema è attivo|X|
+| &nbsp;&nbsp;&nbsp;&nbsp; `<low>` |TS||Data di inizio tracciamento del problema||
+| &nbsp;&nbsp;&nbsp;&nbsp; `<high>` |TS||Data di fine tracciamento del problema. Non presente se stato diverso da `"aborted"` o `"completed"`||
+|`<entryRelationship>`||`[OINT_CONCERN]` o `[NO_ALLERGIES]`|Fornisce dettagli riguardo all'allergia/intolleranza oppure indica esplicitamente l'assenza di queste[^6]|X|
+|`<statusCode>`|||Si veda il paragrafo 6.2.1.2 del documento HL7 PSS v2.0 per i possibili valori|X|
 
 [^5]: se non si conosce il valore, deve essere impostato a `nullFlavor="UNK"`.
 
@@ -323,10 +323,10 @@ Le informazioni di dettaglio relative ad un’allergia od intolleranza, o relati
 ##### 4.3.3.1 Assenza Allergie Note: : `<observation>`
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: templateId | | ||X|
-|: code.code ||`OINT`[^7]||X|
-|: effectiveTime ||||X|
-|:::: low|TS||Data inizio stato di assenza di allergie|X|
+|`<templateId>` | | ||X|
+|`<code><code>` ||`OINT`[^7]||X|
+|`<effectiveTime>` ||||X|
+|&nbsp;&nbsp;&nbsp;&nbsp;`<low>`|TS||Data inizio stato di assenza di allergie|X|
 
 ```xml
 <observation classCode="OBS" moodCode="EVN">
@@ -355,11 +355,11 @@ Le informazioni di dettaglio relative ad un’allergia od intolleranza, o relati
 
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: templateId | | ||X|
-|: id |||Identificatore univoco, in genere un UUID|X|
-|: effectiveTime | | |Descrive l’intervallo di tempo in cui ciò che viene osservato è attivo|X|
-| : value | | |Descrittore dell’allarme, dell’allergia o della reazione avversa||
-| : participant | | |Rappresenta l’agente che ha causato l’allergia (intolleranza) e/o la reazione avversa|X|
+|`<templateId>` | | ||X|
+|`<id>` |||Identificatore univoco, in genere un UUID|X|
+|`<effectiveTime>` | | |Descrive l’intervallo di tempo in cui ciò che viene osservato è attivo|X|
+|`<value>` | | |Descrittore dell’allarme, dell’allergia o della reazione avversa||
+|`<participant>` | | |Rappresenta l’agente che ha causato l’allergia (intolleranza) e/o la reazione avversa|X|
 
 ```xml
 <observation classCode="OBS" moodCode="EVN">
@@ -479,8 +479,8 @@ Le informazioni relative all’attività di somministrazione dei farmaci sono fo
 #### 4.4.3 Dettagli Farmaco: `<consumable>`
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-| - code | ST |  | Deve assumere uno dei valori previsti nel catalogo nazionale di codifica ATC, AIC o GE | X |
-| - codeSystem | UID | `[CODE_SYS]` | Rappresenta l’OID del sistema di codifica ATC, AIC o GE | X |
+|code | ST |  | Deve assumere uno dei valori previsti nel catalogo nazionale di codifica ATC, AIC o GE | X |
+|codeSystem | UID | `[CODE_SYS]` | Rappresenta l’OID del sistema di codifica ATC, AIC o GE | X |
 
 > `[CODE_SYS]` deve essere uno dei valori costanti:
 >  - "2.16.840.1.113883.6.73"
@@ -798,8 +798,8 @@ Esempio di Narrative Block:
 #### 4.11.2 Dettaglio Protesi Impianti Ausili: `<supply>`
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: code |||Derivato dal [value set della CND](https://www.salute.gov.it/portale/temi/p2_6.jsp?area=dispositivi-medici&id=328&lingua=italiano&menu=classificazione) dei medici|X|
-|: effectiveTime |||Rappresenta la data e ora in cui l’impianto o l’ausilio sono stati forniti al paziente|X|
+|`<code>` |||Derivato dal [value set della CND](https://www.salute.gov.it/portale/temi/p2_6.jsp?area=dispositivi-medici&id=328&lingua=italiano&menu=classificazione) dei medici|X|
+|`<effectiveTime>` |||Rappresenta la data e ora in cui l’impianto o l’ausilio sono stati forniti al paziente|X|
 
 > L’assenza di protesi, impianti o ausili noti DEVE essere esplicitamente indicata valorizzando il `<supply>/<code>` secondo il Value Set AssenzaProtesiImpiantiAusili_PSSIT.
 
