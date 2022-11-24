@@ -83,7 +83,7 @@ Il tag `<ClinicalDocument>/<languageCode>` specifica la lingua utilizzata nella 
 | assigningAuthorityName | ST | `[NOME_STRUTTURA_COMPETENZA]` | Nome del dominio di identificazione dei documenti  |  |
 
 
-	Il nuovo documento sostitutivo DEVE comprendere un elemento `<relatedDocument>` che punta al documento sostituito.
+  Il nuovo documento sostitutivo DEVE comprendere un elemento `<relatedDocument>` che punta al documento sostituito.
 
 ### 3.1.10 Versione del documento: `<versionNumber>`
 `<ClinicalDocument>/<versionNumber>` rappresenta la
@@ -96,11 +96,11 @@ versione del documento stesso (cambia al variare della versione).
 Il tag `<ClinicalDocument>/<recordTarget>.` identifica la partecipazione relativa al soggetto a cui il documento di PSS si riferisce.
 ```xml
 <recordTarget>
-	<patientRole>
-		<patient>
-			...
-		</patient>
-	</patientRole>
+  <patientRole>
+    <patient>
+      ...
+    </patient>
+  </patientRole>
 </recordTarget>
 ```
 #### 3.1.11.1 Paziente soggetto del Documento: `<patientRole>`
@@ -160,29 +160,29 @@ elementi `<telecom>` che riporta i riferimenti e-mail, PEC, telefono, necessari 
 
 ```xml
 <author>
-	<time value="[TS_CREAZIONE]"/>
-	<assignedAuthor classCode="ASSIGNED"
-		<id root="2.16.840.1.113883.2.9.4.3.2"
-		extension="[CF_AUTORE]"
-		assigningAuthorityName="MEF"/>
-		<addr>
-		...
-		</addr>
-		<telecom value="mailto:[MAIL_AUTORE]"/>
-		<telecom value="mailto:[PEC_AUTORE]"/>
-		<telecom value="tel:[NUM_TEL_AUTORE]"/>
-		<assignedPerson>
-			<name>
-				<family>[COGNOME_AUTORE]</family>
-				<given>[NOME_AUTORE]</given>
-			</name>
-		</assignedPerson>
-		<representedOrganization>
-			<id root="2.16.840.1.113883.2.9.4.1.1"
-			extension="[COD_PRESIDIO]"
-			assigningAuthorityName="Ministero della Salute"/>
-		</representedOrganization>
-	</assignedAuthor>
+  <time value="[TS_CREAZIONE]"/>
+  <assignedAuthor classCode="ASSIGNED"
+    <id root="2.16.840.1.113883.2.9.4.3.2"
+    extension="[CF_AUTORE]"
+    assigningAuthorityName="MEF"/>
+    <addr>
+    ...
+    </addr>
+    <telecom value="mailto:[MAIL_AUTORE]"/>
+    <telecom value="mailto:[PEC_AUTORE]"/>
+    <telecom value="tel:[NUM_TEL_AUTORE]"/>
+    <assignedPerson>
+      <name>
+        <family>[COGNOME_AUTORE]</family>
+        <given>[NOME_AUTORE]</given>
+      </name>
+    </assignedPerson>
+    <representedOrganization>
+      <id root="2.16.840.1.113883.2.9.4.1.1"
+      extension="[COD_PRESIDIO]"
+      assigningAuthorityName="Ministero della Salute"/>
+    </representedOrganization>
+  </assignedAuthor>
 </author>
 ```
 
@@ -267,23 +267,23 @@ Tale sezione deve riportare almeno le seguenti informazioni, se riferite dall’
 
 ```xml
 <component>
-	<section>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.2.1"/>
-		<id root="[ID_SEZ]"/> <!-- Può essere un UUID -->
-		<code 
-			code="48765-2"
-			codeSystem="2.16.840.1.113883.6.1" 
-			codeSystemName="LOINC"
-			displayName="Allergie, Reazioni Avverse"/>
-		<title>Allergie e Intolleranze</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<!-- Molteplicità 1 ...N - Allergia o Intolleranza -->
-		<entry>
-			[ALLERGY] <!-- 4.3.2 Allergie o Intolleranza -->
-		</entry>
-	</section>
+  <section>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.1"/>
+    <id root="[ID_SEZ]"/> <!-- Può essere un UUID -->
+    <code 
+      code="48765-2"
+      codeSystem="2.16.840.1.113883.6.1" 
+      codeSystemName="LOINC"
+      displayName="Allergie, Reazioni Avverse"/>
+    <title>Allergie e Intolleranze</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <!-- Molteplicità 1 ...N - Allergia o Intolleranza -->
+    <entry>
+      [ALLERGY] <!-- 4.3.2 Allergie o Intolleranza -->
+    </entry>
+  </section>
 </component>
 ```
 
@@ -291,18 +291,18 @@ Tale sezione deve riportare almeno le seguenti informazioni, se riferite dall’
 All'interno del blocco `<entry>` ci possono essere tanti `<act>` quante le allergie e/o tinolleranze evidenziate dal paziente.
 ```xml
 <act classCode="ACT" moodCode="EVN">
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.1"/>
-	<id root="[ID_SEZ]"/>
-	<code nullFlavor="NA"/>
-	<statusCode code="[STATUS_CODE]"/>
-	<effectiveTime>
-		<low ( value="[LOW_TS]" | nullFlavor="UNK" )/> <!-- RICHIESTO -->
-		<high value="[HIGH_TS]"/> <!-- OPZIONALE -->
-	</effectiveTime>
-	<!-- UNA SOLA entryRelationship -->
-	<entryRelationship type="SUBJ">
-		[OINT_CONCERN] | [NO_ALLERGIES]
-	</entryRelationship>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.1"/>
+  <id root="[ID_SEZ]"/>
+  <code nullFlavor="NA"/>
+  <statusCode code="[STATUS_CODE]"/>
+  <effectiveTime>
+    <low ( value="[LOW_TS]" | nullFlavor="UNK" )/> <!-- RICHIESTO -->
+    <high value="[HIGH_TS]"/> <!-- OPZIONALE -->
+  </effectiveTime>
+  <!-- UNA SOLA entryRelationship -->
+  <entryRelationship type="SUBJ">
+    [OINT_CONCERN] | [NO_ALLERGIES]
+  </entryRelationship>
 </act>
 ```
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
@@ -323,29 +323,29 @@ Le informazioni di dettaglio relative ad un’allergia od intolleranza, o relati
 ##### 4.3.3.1 Assenza Allergie Note: : `<observation>`
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: templateId.root | | `"2.16.840.1.113883.2.9.10.1.4.3.1.4"`||X|
+|: templateId | | ||X|
 |: code.code ||`OINT`[^7]||X|
 |: effectiveTime ||||X|
 |:::: low|TS||Data inizio stato di assenza di allergie|X|
 
 ```xml
 <observation classCode="OBS" moodCode="EVN">
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.4"/>
-	<!-- Alert observation template -->
-	<id root="[ID_SEZ]"/> <!-- in generale un UUID -->
-	<code code="OINT" 
-		codeSystem="2.16.840.1.113883.5.4"
-		codeSystemName="ObservationIntoleranceType"
-		displayName="Intolerance"/>
-	<statusCode code="completed"/>
-	<effectiveTime>
-		<low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
-	</effectiveTime>
-	<value xsi:type="CD" 
-		code="no-allergy-info"
-		codeSystem="2.16.840.1.113883.5.1150.1"
-		codeSystemName="UnknownAllergies"
-		displayName="Informazioni non note su allergie"/>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.4"/>
+  <!-- Alert observation template -->
+  <id root="[ID_SEZ]"/> <!-- in generale un UUID -->
+  <code code="OINT" 
+    codeSystem="2.16.840.1.113883.5.4"
+    codeSystemName="ObservationIntoleranceType"
+    displayName="Intolerance"/>
+  <statusCode code="completed"/>
+  <effectiveTime>
+    <low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
+  </effectiveTime>
+  <value xsi:type="CD" 
+    code="no-allergy-info"
+    codeSystem="2.16.840.1.113883.5.1150.1"
+    codeSystemName="UnknownAllergies"
+    displayName="Informazioni non note su allergie"/>
 </observation>
 ```
 
@@ -355,7 +355,7 @@ Le informazioni di dettaglio relative ad un’allergia od intolleranza, o relati
 
 | Attributo | Tipo | Valore | Dettagli | Obbligatorio |
 |---|:---:|:---:|---|:---:|
-|: templateId.root | | `"2.16.840.1.113883.2.9.10.1.4.3.1.3"`||X|
+|: templateId | | ||X|
 |: id |||Identificatore univoco, in genere un UUID|X|
 |: effectiveTime | | |Descrive l’intervallo di tempo in cui ciò che viene osservato è attivo|X|
 | : value | | |Descrittore dell’allarme, dell’allergia o della reazione avversa||
@@ -363,34 +363,34 @@ Le informazioni di dettaglio relative ad un’allergia od intolleranza, o relati
 
 ```xml
 <observation classCode="OBS" moodCode="EVN">
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.3"/>
-	<id root="[ID_SEZ]"/>
-	<code code="52473-6" 
-		codeSystem="2.16.840.1.113883.6.1"
-		codeSystemName="LOINC" 
-		displayName="Allergia o causa della reazione"/>
-	<statusCode code="completed"/>
-	<effectiveTime>
-		<low ( value="[LOW_TS]" | nullFlavor="UNK" ) />
-		<high value="[HIGH_TS]" /> <!-- OPZIONALE -->
-	</effectiveTime>
-	<value 
-		xsi:type="CD" 
-		code="[OBS_CODE]" 
-		codeSystem="2.16.840.1.113883.5.4"
-		codeSystemName="ObservationIntoleranceType" 
-		displayName="[OBS_DESC]"/>
-	<participant>
-		[CODED_AGENT]
-	</participant>
-	<entryRelationship>
-		[CODED_REACTION]
-	</entryRelationship>
-	<entryRelationship>
-		[STATO_ALLERGIA]
-	<entryRelationship>
-		[NOTE]
-	</entryRelationship>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.1.3"/>
+  <id root="[ID_SEZ]"/>
+  <code code="52473-6" 
+    codeSystem="2.16.840.1.113883.6.1"
+    codeSystemName="LOINC" 
+    displayName="Allergia o causa della reazione"/>
+  <statusCode code="completed"/>
+  <effectiveTime>
+    <low ( value="[LOW_TS]" | nullFlavor="UNK" ) />
+    <high value="[HIGH_TS]" /> <!-- OPZIONALE -->
+  </effectiveTime>
+  <value 
+    xsi:type="CD" 
+    code="[OBS_CODE]" 
+    codeSystem="2.16.840.1.113883.5.4"
+    codeSystemName="ObservationIntoleranceType" 
+    displayName="[OBS_DESC]"/>
+  <participant>
+    [CODED_AGENT]
+  </participant>
+  <entryRelationship>
+    [CODED_REACTION]
+  </entryRelationship>
+  <entryRelationship>
+    [STATO_ALLERGIA]
+  <entryRelationship>
+    [NOTE]
+  </entryRelationship>
 </observation>
 ```
 | Valore | Dettagli | Paragrafo Doc HL7 |
@@ -408,37 +408,37 @@ Il valore dell'attributo `code` deve essere selezionato dai sistemi di codifica:
 
 ```xml
 <participant typeCode="CSM">
-	<participantRole classCode="MANU">
-		<playingEntity classCode="MMAT">
-			<code code="[COD_AGENTE]" 
-			codeSystem="[COD_SYS_AGENT]"
-			codeSystemName="[DESC_COD_SYS_AGENT]"
-			displayName="[DESC_AGENTE]">
-			</code>
-		</playingEntity>
-	</participantRole>
+  <participantRole classCode="MANU">
+    <playingEntity classCode="MMAT">
+      <code code="[COD_AGENTE]" 
+      codeSystem="[COD_SYS_AGENT]"
+      codeSystemName="[DESC_COD_SYS_AGENT]"
+      displayName="[DESC_AGENTE]">
+      </code>
+    </playingEntity>
+  </participantRole>
 </participant>
 ```
 
 ### 4.4 Terapie Farmacologiche (Medications)
 ```xml
 <component>
-	<section>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.2.2"/>
-		<id root="[ID_SEZ]"/> <!-- In generale un UUID -->
-		<code code='10160-0'
-			codeSystem='2.16.840.1.113883.6.1' 
-			codeSystemName='LOINC'
-			displayName='HISTORY OF MEDICATION USE'/>
-		<title>Terapie Farmacologiche</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<!-- molteplicità 1 ...N – Descrizione Terapia Farmacologica -->
-		<entry>
-			[MEDICATION] | [NO_MEDICATION]
-		</entry>
-	</section>
+  <section>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.2"/>
+    <id root="[ID_SEZ]"/> <!-- In generale un UUID -->
+    <code code='10160-0'
+      codeSystem='2.16.840.1.113883.6.1' 
+      codeSystemName='LOINC'
+      displayName='HISTORY OF MEDICATION USE'/>
+    <title>Terapie Farmacologiche</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <!-- molteplicità 1 ...N – Descrizione Terapia Farmacologica -->
+    <entry>
+      [MEDICATION] | [NO_MEDICATION]
+    </entry>
+  </section>
 </component>
 ```
 
@@ -450,29 +450,29 @@ Le informazioni relative all’attività di somministrazione dei farmaci sono fo
 
 ```xml
 <substanceAdministration>
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.2.1" />
-	<id root="[ID_SEZ]"/>
-	<statusCode code="COMPLETED|ABORTED"/>
-	<effectiveTime>
-		<low value="[DT_INIZIO_TERAPIA]" | nullFlavor="UNK"/>
-		<high value="[DT_FINE_TERAPIA]" | nullFlavor="UNK"/>
-	</effectiveTime>
-	<!-- Via di somministrazione (OPZIONALE) -->
-	<routeCode code="[COD_VIA_SOMMINISTRAZIONE]" 
-		codeSystem="2.16.840.1.113883.5.112" 
-		codeSystemName=" HL7 RouteOfAdministration" 
-		displayName="[DESC_VIA_SOMMINISTRAZIONE]"/>
-	<!-- Dose (OPZIONALE)-->
-	<doseQuantity>
-		<low value="[DOSE_MIN]" unit="[UNITÀ_DOSE]"/>
-		<high value="[DOSE_MAX]" unit="[UNITÀ_DOSE]"/>
-	</doseQuantity>
-	<!-- ATC / AIC / GE-->
-	<consumable>
-		<manufacturedProduct classCode="MANU">
-		<!-- Dettagli del Farmaco -->
-		</manufacturedProduct>
-	</consumable>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.2.1" />
+  <id root="[ID_SEZ]"/>
+  <statusCode code="COMPLETED|ABORTED"/>
+  <effectiveTime>
+    <low value="[DT_INIZIO_TERAPIA]" | nullFlavor="UNK"/>
+    <high value="[DT_FINE_TERAPIA]" | nullFlavor="UNK"/>
+  </effectiveTime>
+  <!-- Via di somministrazione (OPZIONALE) -->
+  <routeCode code="[COD_VIA_SOMMINISTRAZIONE]" 
+    codeSystem="2.16.840.1.113883.5.112" 
+    codeSystemName=" HL7 RouteOfAdministration" 
+    displayName="[DESC_VIA_SOMMINISTRAZIONE]"/>
+  <!-- Dose (OPZIONALE)-->
+  <doseQuantity>
+    <low value="[DOSE_MIN]" unit="[UNITÀ_DOSE]"/>
+    <high value="[DOSE_MAX]" unit="[UNITÀ_DOSE]"/>
+  </doseQuantity>
+  <!-- ATC / AIC / GE-->
+  <consumable>
+    <manufacturedProduct classCode="MANU">
+    <!-- Dettagli del Farmaco -->
+    </manufacturedProduct>
+  </consumable>
 </substanceAdministration>
 ```
 
@@ -483,21 +483,21 @@ Le informazioni relative all’attività di somministrazione dei farmaci sono fo
 | - codeSystem | UID | `[CODE_SYS]` | Rappresenta l’OID del sistema di codifica ATC, AIC o GE | X |
 
 > `[CODE_SYS]` deve essere uno dei valori costanti:
->	- "2.16.840.1.113883.6.73"
->	- "2.16.840.1.113883.2.9.6.1.5"
->	- "2.16.840.1.113883.2.9.6.1.51"
+>  - "2.16.840.1.113883.6.73"
+>  - "2.16.840.1.113883.2.9.6.1.5"
+>  - "2.16.840.1.113883.2.9.6.1.51"
 
 ```xml
 <consumable>
-	<manufacturedProduct>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.3.2.2"/>
-		<manufacturedMaterial>
-			<code code = "[COD_AIC]"
-				codeSystem = "2.16.840.1.113883.2.9.6.1.5"
-				codeSystemName = "AIC"
-				displayName = "[DESC_AIC]"/>
-		</manufacturedMaterial>
-	</manufacturedProduct>
+  <manufacturedProduct>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.3.2.2"/>
+    <manufacturedMaterial>
+      <code code = "[COD_AIC]"
+        codeSystem = "2.16.840.1.113883.2.9.6.1.5"
+        codeSystemName = "AIC"
+        displayName = "[DESC_AIC]"/>
+    </manufacturedMaterial>
+  </manufacturedProduct>
 </consumable>
 ```
 
@@ -510,20 +510,20 @@ In questa sezione andranno rappresentati almeno i seguenti elementi:
 
  ```xml
 <component>
-	<section>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.2.4"/>
-		<id root="[ID_SEZ]"/>
-		<code code="11450-4"
-			codeSystem="2.16.840.1.113883.6.1" 
-			codeSystemName="LOINC"
-			displayName="Lista dei Problemi"/>
-		<title>Lista dei Problemi</title>
-		<entry>
-			[PROBLEM_ACT]
-		</entry>
-		<!-- OPZIONALE -->
-		[NOTE]
-	</section>
+  <section>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.4"/>
+    <id root="[ID_SEZ]"/>
+    <code code="11450-4"
+      codeSystem="2.16.840.1.113883.6.1" 
+      codeSystemName="LOINC"
+      displayName="Lista dei Problemi"/>
+    <title>Lista dei Problemi</title>
+    <entry>
+      [PROBLEM_ACT]
+    </entry>
+    <!-- OPZIONALE -->
+    [NOTE]
+  </section>
 </component>
  ```
 
@@ -539,18 +539,18 @@ In questa sezione andranno rappresentati almeno i seguenti elementi:
 |[PROBLEM_OBS](#463-dettagli-problema)|Dettagli del Problema|
  ```xml
 <act classCode="ACT" moodCode="EVN">
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.4.1" />
-	<id root="[ID_SEZ]"/>
-	<code nullFlavor="NA"/>
-	<statusCode code="[STATUS_CODE]" /> <!-- OPZIONALE -->
-	<effectiveTime>
-		<low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
-		<high nullFlavor="[HIGH_TS]"/> <!-- OPZIONALE -->
-	</effectiveTime>
-	<!-- UNA SOLA entry, indica il problema principale -->
-	<entryRelationship type="SUBJ" inversionInd="false">
-		[PROBLEM_OBS]
-	</entryRelationship>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.4.1" />
+  <id root="[ID_SEZ]"/>
+  <code nullFlavor="NA"/>
+  <statusCode code="[STATUS_CODE]" /> <!-- OPZIONALE -->
+  <effectiveTime>
+    <low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
+    <high nullFlavor="[HIGH_TS]"/> <!-- OPZIONALE -->
+  </effectiveTime>
+  <!-- UNA SOLA entry, indica il problema principale -->
+  <entryRelationship type="SUBJ" inversionInd="false">
+    [PROBLEM_OBS]
+  </entryRelationship>
 </act>
  ```
 #### 4.6.3 Dettagli problema
@@ -569,37 +569,37 @@ In questa sezione andranno rappresentati almeno i seguenti elementi:
 
 ```xml
 <observation classCode="OBS" moodCode="EVN" >
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.4.2"/>
-	<id root="[ID_SEZ]"/>
-	<code code="[OBS_CODE]"
-		codeSystem="2.16.840.1.113883.6.1" 
-		codeSystemName="LOINC"
-		displayName="[OBS_DESC]"/>
-	<statusCode code="completed"/>
-	<effectiveTime>
-		<low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
-		<high low ( value="[HIGH_TS]" | nullFlavor="UNK" ) /> <!-- OPZIONALE -->
-	</effectiveTime>
-	<value xsi:type="CD" 
-		( 
-			code="[COD_PROB]"
-			codeSystem="2.16.840.1.113883.6.103"
-			codeSystemName="ICD-9CM (diagnosis codes)" 
-		)
-		displayName="[DESC_PROB]"| nullFlavor="OTH">
-	</value>
-	<entryRelationship>
-		[SEVERITY] <!-- OPZIONALE -->
-	</entryRelationship>
-	<entryRelationship>
-		[STATO_CLINICO_PROBLEMA] <!-- OPZIONALE -->
-	</entryRelationship>
-	<entryRelationship>
-		[CRONICITA_PROBLEMA] <!-- OPZIONALE -->
-	</entryRelationship>
-	<entryRelationship>
-		[NOTE] <!-- OPZIONALE -->
-	</entryRelationship>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.4.2"/>
+  <id root="[ID_SEZ]"/>
+  <code code="[OBS_CODE]"
+    codeSystem="2.16.840.1.113883.6.1" 
+    codeSystemName="LOINC"
+    displayName="[OBS_DESC]"/>
+  <statusCode code="completed"/>
+  <effectiveTime>
+    <low ( value="[LOW_TS]" | nullFlavor="UNK" )/>
+    <high low ( value="[HIGH_TS]" | nullFlavor="UNK" ) /> <!-- OPZIONALE -->
+  </effectiveTime>
+  <value xsi:type="CD" 
+    ( 
+      code="[COD_PROB]"
+      codeSystem="2.16.840.1.113883.6.103"
+      codeSystemName="ICD-9CM (diagnosis codes)" 
+    )
+    displayName="[DESC_PROB]"| nullFlavor="OTH">
+  </value>
+  <entryRelationship>
+    [SEVERITY] <!-- OPZIONALE -->
+  </entryRelationship>
+  <entryRelationship>
+    [STATO_CLINICO_PROBLEMA] <!-- OPZIONALE -->
+  </entryRelationship>
+  <entryRelationship>
+    [CRONICITA_PROBLEMA] <!-- OPZIONALE -->
+  </entryRelationship>
+  <entryRelationship>
+    [NOTE] <!-- OPZIONALE -->
+  </entryRelationship>
 </observation>
 ```
 
@@ -608,21 +608,21 @@ Questa sezione contiene i dati che definiscono lo stile di vita del paziente, la
 
 ```xml
 <component>
-	<section>
-		<templateId root=" 2.16.840.1.113883.2.9.10.1.4.2.6 "/>
-		<id root="[ID_SEZ]"/>
-		<code code="29762-2"
-			codeSystem="2.16.840.1.113883.6.1" 
-			codeSystemName="LOINC"
-			displayName="Stile di vita">
-		<title>Stili di Vita (Social History)</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<entry>
-			[SOCIALHIS_OBS]
-		</entry>
-	</section>
+  <section>
+    <templateId root=" 2.16.840.1.113883.2.9.10.1.4.2.6 "/>
+    <id root="[ID_SEZ]"/>
+    <code code="29762-2"
+      codeSystem="2.16.840.1.113883.6.1" 
+      codeSystemName="LOINC"
+      displayName="Stile di vita">
+    <title>Stili di Vita (Social History)</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <entry>
+      [SOCIALHIS_OBS]
+    </entry>
+  </section>
 </component>
 ```
 
@@ -641,18 +641,18 @@ Le informazioni codificate sullo stile di vita sono fornite attraverso una `<obs
 
 ```xml
 <observation typeCode="OBS" moodCode="EVN">
-	<templateId root="2.16.840.1.113883.2.9.10.1.4.3.6.1"/>
-	<id root="[ID_SEZ]"/>
-	<code code="[COD_OBS]"
-		displayName="[DESC_OBS]"
-		codeSystem="2.16.840.1.113883.6.1" 
-		codeSystemName="LOINC"/>
-	<text>
-		<reference value="#[REF_SOCIALOBS] "/>
-	</text>
-	<statusCode code="completed"/>
-	<effectiveTime value="[TS]"/>
-	<value xsi:type="CD" | "PQ" [VALUE_OBS]/>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.6.1"/>
+  <id root="[ID_SEZ]"/>
+  <code code="[COD_OBS]"
+    displayName="[DESC_OBS]"
+    codeSystem="2.16.840.1.113883.6.1" 
+    codeSystemName="LOINC"/>
+  <text>
+    <reference value="#[REF_SOCIALOBS] "/>
+  </text>
+  <statusCode code="completed"/>
+  <effectiveTime value="[TS]"/>
+  <value xsi:type="CD" | "PQ" [VALUE_OBS]/>
 </observation>
 ```
 
@@ -668,38 +668,38 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
 
 ```xml
 <component>
-	<section>
-		<tempalteId root=" 2.16.840.1.113883.2.9.10.1.4.2.8"/>
-		<id root="[ID_SEZ]"/>
-		<code code="8716-3"
-			codeSystem="2.16.840.1.113883.6.1" 
-			codeSystemName="LOINC"
-			displayName="Parametri vitali"/>
-		<title>Parametri Vitali</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<entry>
-			[VS_ORGANIZER]|[V_OBS]
-		</entry>
-	</section>
+  <section>
+    <tempalteId root=" 2.16.840.1.113883.2.9.10.1.4.2.8"/>
+    <id root="[ID_SEZ]"/>
+    <code code="8716-3"
+      codeSystem="2.16.840.1.113883.6.1" 
+      codeSystemName="LOINC"
+      displayName="Parametri vitali"/>
+    <title>Parametri Vitali</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <entry>
+      [VS_ORGANIZER]|[V_OBS]
+    </entry>
+  </section>
 </component>
 ```
 
 #### 4.10.2 Organizer Parametri Vitali
 ```xml
 <organizer classCode="CLUSTER" moodCode="EVN">
-	<tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.1"/>
-		<id root="[ID_SEZ]"/>
-		<code code="8716-3"
-		codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
-		display-
-		Name="Parametri vitali"/>
-	<statusCode code="completed"/>
-	<effectiveTime value="[TS]"/>
-	<component typeCode="COMP">
-		[VS_OBS]
-	</component>
+  <tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.1"/>
+    <id root="[ID_SEZ]"/>
+    <code code="8716-3"
+    codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+    display-
+    Name="Parametri vitali"/>
+  <statusCode code="completed"/>
+  <effectiveTime value="[TS]"/>
+  <component typeCode="COMP">
+    [VS_OBS]
+  </component>
 </organizer>
 ```
 
@@ -721,32 +721,32 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
 
 ```xml
 <observation classCode="OBS" moodCode='EVN'>
-	<tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.2"/>
-	<id root="[ID_SEZ]"/>
-	<code code="[OBS_COD]" 
-		codeSystem="2.16.840.1.113883.6.1" 
-		codeSystemName="LOINC" 
-		displayName="[OBS_DESC]"/>
-	<statusCode code="completed"/>
-	<effectiveTime ( value="[DT_OBS]" | nullFlavor="UNK" ) />
-	<!-- OPZIONALE -->
-	<repeatNumber value="[REP_NUM]"/>
-	<value xsi:type="PQ" value="[OBS_VALUE]" unit="[OBS_UNIT]"/>
-	<!-- OPZIONALE -->
-	<interpretationCode code="[INT_CODE]" 
-		codeSystem="2.16.840.1.113883.5.83" 
-		codeSystemName="HL7 ObservationInterpretation" 
-		displayName="[INT_DESC]"/>
-	<!-- OPZIONALE -->
-	<methodCode code="[COD_METHOD]" 
-		codeSystem="[CODSYS_METHOD]"
-		codeSystemName="[DESC_CODESYSTEM]" 
-		displayName="[DESC_METHOD]"/>
-	<!-- OPZIONALE -->
-	<targetSiteCode code="[TRG_CODE]" 
-		codeSystem="[OID_CODESYSTEM]"
-		codeSystemName="[DESC_CODESYSTEM]" 
-		displayName="[DESC_TARGET]"/>
+  <tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.2"/>
+  <id root="[ID_SEZ]"/>
+  <code code="[OBS_COD]" 
+    codeSystem="2.16.840.1.113883.6.1" 
+    codeSystemName="LOINC" 
+    displayName="[OBS_DESC]"/>
+  <statusCode code="completed"/>
+  <effectiveTime ( value="[DT_OBS]" | nullFlavor="UNK" ) />
+  <!-- OPZIONALE -->
+  <repeatNumber value="[REP_NUM]"/>
+  <value xsi:type="PQ" value="[OBS_VALUE]" unit="[OBS_UNIT]"/>
+  <!-- OPZIONALE -->
+  <interpretationCode code="[INT_CODE]" 
+    codeSystem="2.16.840.1.113883.5.83" 
+    codeSystemName="HL7 ObservationInterpretation" 
+    displayName="[INT_DESC]"/>
+  <!-- OPZIONALE -->
+  <methodCode code="[COD_METHOD]" 
+    codeSystem="[CODSYS_METHOD]"
+    codeSystemName="[DESC_CODESYSTEM]" 
+    displayName="[DESC_METHOD]"/>
+  <!-- OPZIONALE -->
+  <targetSiteCode code="[TRG_CODE]" 
+    codeSystem="[OID_CODESYSTEM]"
+    codeSystemName="[DESC_CODESYSTEM]" 
+    displayName="[DESC_TARGET]"/>
 </observation>
 ```
 
@@ -761,37 +761,37 @@ Tale sezione deve riportare tutte le protesi ed impianti permanenti, nonché tut
 
 ```xml
 <component>
-	<section>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.2.9"/>
-		<id root="[ID_SEZ]"/>
-		<code code="46264-8" 
-			displayName="Storia di uso di dispositivi medici"
-			codeSystem="2.16.840.1.113883.6.1"
-			codeSystemName="LOINC"/>
-		<title>Protesi, Impianti ed Ausilii</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<!-- 1 ...N – Dettaglio Protesi Impianti Ausili -->
-		<entry>
-			[SUPPLY]
-		</entry>
-	</section>
+  <section>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.9"/>
+    <id root="[ID_SEZ]"/>
+    <code code="46264-8" 
+      displayName="Storia di uso di dispositivi medici"
+      codeSystem="2.16.840.1.113883.6.1"
+      codeSystemName="LOINC"/>
+    <title>Protesi, Impianti ed Ausilii</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <!-- 1 ...N – Dettaglio Protesi Impianti Ausili -->
+    <entry>
+      [SUPPLY]
+    </entry>
+  </section>
 </component>
 ```
 
 Esempio di Narrative Block:
 ```xml
 <text>
-	<table border="1" width="100%">
-	<thead>
-		<tr><th> Informazioni Protesi</th></tr>
-	</thead>
-	<tbody>
-		<tr><td>PORTATORE PACE MAKER (ICD9-CM V4501) (Maggio 2008</td></tr>
-		<tr><td>PROTESI DI ARTO INFERIORE</td></tr>
-	</tbody>
-	</table>
+  <table border="1" width="100%">
+  <thead>
+    <tr><th> Informazioni Protesi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>PORTATORE PACE MAKER (ICD9-CM V4501) (Maggio 2008</td></tr>
+    <tr><td>PROTESI DI ARTO INFERIORE</td></tr>
+  </tbody>
+  </table>
 </text>
 ```
 
@@ -817,44 +817,44 @@ La sezione mappa le informazioni relative alle procedure diagnostiche invasive, 
 
 ```xml
 <component>
-	<section>
-		<tempalteId root="2.16.840.1.113883.2.9.10.1.4.2.11"/>
-		<id root="[ID_SEZ]"/>
-		<code code="47519-4" 
-			codeSystem="2.16.840.1.113883.6.1"
-			displayName="Storia di Procedure"/>
-		<title> Trattamenti e procedure terapeutiche, chirurgiche e diagnostiche </title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<entry>
-			[PROCEDURA] <!-- OPZIONALE 0...N Procedure codificate -->
-		</entry>
-	</section>
+  <section>
+    <tempalteId root="2.16.840.1.113883.2.9.10.1.4.2.11"/>
+    <id root="[ID_SEZ]"/>
+    <code code="47519-4" 
+      codeSystem="2.16.840.1.113883.6.1"
+      displayName="Storia di Procedure"/>
+    <title> Trattamenti e procedure terapeutiche, chirurgiche e diagnostiche </title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <entry>
+      [PROCEDURA] <!-- OPZIONALE 0...N Procedure codificate -->
+    </entry>
+  </section>
 </component>
 ```
 
 #### 4.13.2 Procedura
 ```xml
 <procedure classCode="PROC" moodCode="EVN" >
-	<templateId root= "2.16.840.1.113883.2.9.10.1.4.3.11.1"/>
-	<id root="[ID_SEZ]"/>
-	<code code="[PROC_CODE]"
-		codeSystem="[PROC_COD_SYS]" 
-		codeSystemName="[PROC_COD_SYS_NAME]" />
-	<statusCode code="completed|active|aborted|cancelled"/>
-	<effectiveTime>
-		<low value="[LOW_TS]"/>
-		<high value="[HIGH_TS]"/>
-	</effectiveTime >
-	<!-- OPZIONALE Riferimento ad Encounter -->
-	<entryRelationship typeCode="REFR">
-		[RIF_ENCOUNTER]
-	</entryRelationship>
-	<!-- OPZIONALE Ragione della procedura -->
-	<entryRelationship typeCode="RSON">
-		[RAGIONE]
-	</entryRelationship>
+  <templateId root= "2.16.840.1.113883.2.9.10.1.4.3.11.1"/>
+  <id root="[ID_SEZ]"/>
+  <code code="[PROC_CODE]"
+    codeSystem="[PROC_COD_SYS]" 
+    codeSystemName="[PROC_COD_SYS_NAME]" />
+  <statusCode code="completed|active|aborted|cancelled"/>
+  <effectiveTime>
+    <low value="[LOW_TS]"/>
+    <high value="[HIGH_TS]"/>
+  </effectiveTime >
+  <!-- OPZIONALE Riferimento ad Encounter -->
+  <entryRelationship typeCode="REFR">
+    [RIF_ENCOUNTER]
+  </entryRelationship>
+  <!-- OPZIONALE Ragione della procedura -->
+  <entryRelationship typeCode="RSON">
+    [RAGIONE]
+  </entryRelationship>
 </procedure>
 ```
 
@@ -878,22 +878,22 @@ Esempi di informazioni incluse in questa sezione:
 
 ```xml
 <component>
-	<section>
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.2.13"/>
-		<id root= "[ID_SEZ]"/>
-		<code code="47420-5"
-			codeSystem="2.16.840.1.113883.6.1" 
-			codeSystemName="LOINC" 
-			displayName="Nota di valutazione dello stato funzionale" />
-		<title>Stato funzionale del Paziente</title>
-		<text>
-			[NARRATIVE_BLOCK]
-		</text>
-		<!-- Molteplicità 1...N -->
-		<entry>
-			[ORGANIZER]
-		</entry>
-	</section>
+  <section>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.13"/>
+    <id root= "[ID_SEZ]"/>
+    <code code="47420-5"
+      codeSystem="2.16.840.1.113883.6.1" 
+      codeSystemName="LOINC" 
+      displayName="Nota di valutazione dello stato funzionale" />
+    <title>Stato funzionale del Paziente</title>
+    <text>
+      [NARRATIVE_BLOCK]
+    </text>
+    <!-- Molteplicità 1...N -->
+    <entry>
+      [ORGANIZER]
+    </entry>
+  </section>
 </component>
 ```
 
@@ -902,28 +902,28 @@ Per la gestione dei contenuti strutturati/codificati viene utilizzato l’elemen
 
 ```xml
 <entry typeCode="DRIV">
-	<organizer classCode="BATTERY" moodCode="EVN">
-		<!-- Result organizer template -->
-		<templateId root="2.16.840.1.113883.2.9.10.1.4.3.14.1"/>
-		<statusCode code="completed"/>
-		<component>
-			<observation classCode="OBS" moodCode="EVN">
-			<!-- Capacità motoria -->
-			<templateId root="2.16.840.1.113883.2.9.10.1.4.3.14.2"/>
-			<code code="75246-9" 
-				codeSystem="2.16.840.1.113883.6.1" 
-				displayName="Activity"/>
-			<statusCode code="completed"/>
-			<effectiveTime>
-				<low value="2013"/>
-			</effectiveTime>
-			<value xsi:type="CD" code="LA4270-0"
-				codeSystem="2.16.840.1.113883.6.1"
-				codeSystemName="LOINC"
-				displayName="Allettato"/>
-			</value>
-			</observation>
-		</component>
-	</organizer>
+  <organizer classCode="BATTERY" moodCode="EVN">
+    <!-- Result organizer template -->
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.3.14.1"/>
+    <statusCode code="completed"/>
+    <component>
+      <observation classCode="OBS" moodCode="EVN">
+      <!-- Capacità motoria -->
+      <templateId root="2.16.840.1.113883.2.9.10.1.4.3.14.2"/>
+      <code code="75246-9" 
+        codeSystem="2.16.840.1.113883.6.1" 
+        displayName="Activity"/>
+      <statusCode code="completed"/>
+      <effectiveTime>
+        <low value="2013"/>
+      </effectiveTime>
+      <value xsi:type="CD" code="LA4270-0"
+        codeSystem="2.16.840.1.113883.6.1"
+        codeSystemName="LOINC"
+        displayName="Allettato"/>
+      </value>
+      </observation>
+    </component>
+  </organizer>
 </entry>
 ```
