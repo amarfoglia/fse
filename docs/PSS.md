@@ -279,9 +279,9 @@ Tale sezione deve riportare almeno le seguenti informazioni, se riferite dall’
     <text>
       [NARRATIVE_BLOCK]
     </text>
-    <!-- Molteplicità 1 ...N - Allergia o Intolleranza -->
+    <!-- Card. [1..N] - Allergia o Intolleranza -->
     <entry>
-      [ALLERGY] <!-- 4.3.2 Allergie o Intolleranza -->
+      [ALLERGY]
     </entry>
   </section>
 </component>
@@ -434,7 +434,7 @@ Il valore dell'attributo `code` deve essere selezionato dai sistemi di codifica:
     <text>
       [NARRATIVE_BLOCK]
     </text>
-    <!-- molteplicità 1 ...N – Descrizione Terapia Farmacologica -->
+    <!-- Card. [1..N] – Descrizione Terapia Farmacologica -->
     <entry>
       [MEDICATION] | [NO_MEDICATION]
     </entry>
@@ -518,11 +518,11 @@ In questa sezione andranno rappresentati almeno i seguenti elementi:
       codeSystemName="LOINC"
       displayName="Lista dei Problemi"/>
     <title>Lista dei Problemi</title>
+    <!-- Card. [1..N] Problem Concern Entry element -->
     <entry>
       [PROBLEM_ACT]
     </entry>
-    <!-- OPZIONALE -->
-    [NOTE]
+    [NOTE] <!-- Card. [0..N] OPZIONALE -->
   </section>
 </component>
  ```
@@ -620,6 +620,7 @@ Questa sezione contiene i dati che definiscono lo stile di vita del paziente, la
       [NARRATIVE_BLOCK]
     </text>
     <entry>
+      <!-- Card. [1..N] - Social history observations -->
       [SOCIALHIS_OBS]
     </entry>
   </section>
@@ -669,7 +670,7 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
 ```xml
 <component>
   <section>
-    <tempalteId root=" 2.16.840.1.113883.2.9.10.1.4.2.8"/>
+    <templateId root=" 2.16.840.1.113883.2.9.10.1.4.2.8"/>
     <id root="[ID_SEZ]"/>
     <code code="8716-3"
       codeSystem="2.16.840.1.113883.6.1" 
@@ -679,6 +680,7 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
     <text>
       [NARRATIVE_BLOCK]
     </text>
+    <!-- Card. [0..N] – Organizer PV o Osservazione PV -->
     <entry>
       [VS_ORGANIZER]|[V_OBS]
     </entry>
@@ -689,7 +691,7 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
 #### 4.10.2 Organizer Parametri Vitali
 ```xml
 <organizer classCode="CLUSTER" moodCode="EVN">
-  <tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.1"/>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.8.1"/>
     <id root="[ID_SEZ]"/>
     <code code="8716-3"
     codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
@@ -721,7 +723,7 @@ I possibili parametri da gestire all’interno di questa sezione sono: pressione
 
 ```xml
 <observation classCode="OBS" moodCode='EVN'>
-  <tempalteId root="2.16.840.1.113883.2.9.10.1.4.3.8.2"/>
+  <templateId root="2.16.840.1.113883.2.9.10.1.4.3.8.2"/>
   <id root="[ID_SEZ]"/>
   <code code="[OBS_COD]" 
     codeSystem="2.16.840.1.113883.6.1" 
@@ -772,7 +774,7 @@ Tale sezione deve riportare tutte le protesi ed impianti permanenti, nonché tut
     <text>
       [NARRATIVE_BLOCK]
     </text>
-    <!-- 1 ...N – Dettaglio Protesi Impianti Ausili -->
+    <!-- Card. [1..N] – Dettaglio Protesi Impianti Ausili -->
     <entry>
       [SUPPLY]
     </entry>
@@ -818,7 +820,7 @@ La sezione mappa le informazioni relative alle procedure diagnostiche invasive, 
 ```xml
 <component>
   <section>
-    <tempalteId root="2.16.840.1.113883.2.9.10.1.4.2.11"/>
+    <templateId root="2.16.840.1.113883.2.9.10.1.4.2.11"/>
     <id root="[ID_SEZ]"/>
     <code code="47519-4" 
       codeSystem="2.16.840.1.113883.6.1"
@@ -828,7 +830,8 @@ La sezione mappa le informazioni relative alle procedure diagnostiche invasive, 
       [NARRATIVE_BLOCK]
     </text>
     <entry>
-      [PROCEDURA] <!-- OPZIONALE 0...N Procedure codificate -->
+      <!-- Card. [0..N] - Procedure codificate -->
+      [PROCEDURA] 
     </entry>
   </section>
 </component>
@@ -889,7 +892,7 @@ Esempi di informazioni incluse in questa sezione:
     <text>
       [NARRATIVE_BLOCK]
     </text>
-    <!-- Molteplicità 1...N -->
+    <!-- Card. [1...N] -->
     <entry>
       [ORGANIZER]
     </entry>
