@@ -36,3 +36,5 @@ There are two key identifiers in the document:
 The document has two mandatory dates in it:
 - The document date. This is found in `Bundle.timestamp` and identifies when the document bundle was assembled from the underlying resources
 - The Composition date. This is found in `Composition.date`, which is when the author wrote the document logically
+
+![Composition UML](https://github.com/amarfoglia/fse/blob/v2.0/docs/images/composition-uml.png?raw=true "Composition UML")
