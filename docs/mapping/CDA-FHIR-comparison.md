@@ -1,4 +1,4 @@
-# CDA FHIR Comperison
+# CDA FHIR Comparison
 While FHIR can be used to create [documents](https://build.fhir.org/documents.html) using the [Composition Resource](https://build.fhir.org/composition.html), FHIR can also be used to exchange traditional CDA R2 documents making use of the [DocumentReference](https://build.fhir.org/documentreference.html) resource, and handling the CDA document itself as a binary attachment (as XDS does). 
 
 As its name implies, Clinical Document Architecture is limited to "clinical" use cases.

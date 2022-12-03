@@ -114,7 +114,7 @@ Il tag `<recordTarget>/<patienRole>` è un elemento che identifica il ruolo svol
 | `<addr>` | | | Indirizzo del paziente | X |
 | &nbsp;&nbsp;&nbsp;&nbsp;use | | `HP` oppure `H`[^1] |  | X |
 | &nbsp;&nbsp;&nbsp;&nbsp;`<country>` | ST | `[COD_STATO_RECAPITO_PAZIENTE]` |  Codice identificativo dello stato Rif:(https://www.istat.it/it/archivio/6747)  | X |
-| &nbsp;&nbsp;&nbsp;&nbsp;`<state>` | ST | `[COD_REGIONE_RECAPITO_PAZIENTE]` | Codice identificativo della regione |  |
+| &nbsp;&nbsp;&nbsp;&nbsp;`<state>` | ST | `[COD_REGIONE_RECAPITO_PAZIENTE]` | Codice identificativo della regione (Rif https://www.salute.gov.it/portale/documentazione/p6_2_2_1.jsp?lingua=italiano&id=1049) |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;`<county>` | ST | `[COD_PROVINCIA_RECAPITO_PAZIENTE` |  Sigla automobilistica della provincia (Rif https://www.istat.it/it/archivio/6789) |  |
 | &nbsp;&nbsp;&nbsp;&nbsp;`<city>` | ST | `[DESC_COMUNE_RECAPITO_PAZIENTE]` | Descrizione del comune (Rif https://www.istat.it/it/archivio/6789) | X |
 | &nbsp;&nbsp;&nbsp;&nbsp;`<censusTract>` | ST | `[COD_COMUNE_RECAPITO_PAZIENTE]` | Codice ISTAT del comune (Rif https://www.istat.it/it/archivio/6789) | X |
