@@ -256,6 +256,7 @@ Il tag `<relatedDocument>` viene utilizzato nella gestione delle trasformazioni 
 |[Protesi, Impianti e Ausili](#411-protesi-impianti-e-ausili-medical-equipment)|Sezione in cui sono descritte tutte le informazioni inerenti dispositivi medici, ausili, protesi,etc.("devices") siano essi impiantati che esterni, da cui dipende, o è dipeso, lo stato di salute del paziente|`46264-8`|X|
 |[Trattamenti e Procedure Terapeutiche, Chirurgiche e Diagnostiche](#413-trattamenti-e-procedure-terapeutiche-chirurgiche-e-diagnostiche-procedures)|Documenta le procedure (interventistiche, diagnostiche, chirurgiche, terapeutiche,etc.) pertinenti il paziente oggetto del documento|`47519-4`|X|
 |[Stato funzionale del paziente](#415-stato-funzionale-del-paziente-functional-status)|Riporta almeno la valutazione della capacità motoria dell’assistito (autonomo, assistito, allettato)|`47420-5`|X|
+|[Vaccinazioni](#45-vaccinazioni-immunizations)|Riporta lo stato attuale di immunizzazione (vaccinazioni) del paziente.|`11369-6`|--|
 |[Stile di vita](#48-stile-di-vita-social-history)|i dati che definiscono lo stile di vita del paziente, la condizione sociale, fattori di rischio ambientali|`29762-2`||
 |[Parametri Vitali](#410-parametri-vitali-vital-signs)| Riporta le informazioni relative ai parametri vitali, attuali e passati, rilevanti ai fini del quadro clinico del paziente, in particolare almeno altezza, peso, indice di massa corporea, pressione arteriosa|`8716-3`||
 
@@ -929,4 +930,129 @@ Per la gestione dei contenuti strutturati/codificati viene utilizzato l’elemen
     </component>
   </organizer>
 </entry>
+```
+
+### 4.5 Vaccinazioni (Immunizations)
+Questa sezione contiene tutte le informazioni relative allo stato attuale di immunizzazione (vaccinazioni) del paziente e alle vaccinazioni effettuate dal MMG/PLS a cui il paziente si è sottoposto in passato
+
+Le informazioni gestite per indicare i dettagli della vaccinazione saranno:
+- Nome Vaccino (Obbligatorio)
+- Numero Richiamo (se indicato)
+- Periodo di copertura
+- Data Somministrazione (Obbligatorio)
+- Farmaco Utilizzato (codice AIC)
+- Lotto Vaccino
+- Eventuale Reazione
+- Note
+
+| Valori | Dettagli |
+|---|---|
+|ID_SEZ|Identificativo unico della sezione, in genere un UUID|
+|NARRATIVE_BLOCK|Descrizione testuale del contenuto di sezione|
+|[IMM_ITEM](#452-vaccinazione)|Vaccinazione (specializzazione dei `2.16.840.1.113883.10.20.1.24`)|
+
+```xml
+<component>
+  <section>
+    <templateId root=“2.16.840.1.113883.2.9.10.1.4.2.3 />
+    <id root=“[ID_SEZ]”/>
+    <code code=“11369-6”
+      codeSystem=“2.16.840.1.113883.6.1” 
+      codeSystemName=“LOINC”
+      displayName=“Storia di immunizzazioni”/>
+    <title>Vaccinazioni</title>
+    <text>[NARRATIVE_BLOCK]</text>
+    <!-- Card. 1..N - Immunization element -->
+    <entry>
+      [IMM_ITEM]
+    </entry>
+  </section>
+</component>
+```
+
+#### 4.5.2 Vaccinazione
+| Valori | Dettagli |
+|---|---|
+|COD_VIA_SOMM|Codifica via di somministrazione. Da vocabolario HL7 RouteOfAdministration|
+|[VACCINO](#453-dettagli-vaccino)|Vaccino somministrato|
+|NUMERO_DOSE|Numero del richiamo. Rappresentato attraverso un’`observation` conforme al template `2.16.840.1.113883.2.9.10.1.4.3.3.4` (numero interno all'interno di `<observation>/<value>`)|
+|COPERTURA|Periodo di copertura del vaccino in base. Rappresentato attraverso un’`observation` conforme al template `2.16.840.1.113883.2.9.10.1.4.3.3.3` (`<observation>/<value>/<low/><high/>`)|
+|REAZIONI|Descrizione delle possibili reazioni|
+|NOTE|Eventuali note|
+
+```xml
+<substanceAdministration classCode=“SBADM” moodCode=“INT|EVN”>
+  <templateId root=”2.16.840.1.113883.2.9.10.1.4.3.3.1” />
+  <id root=“[ID_SEZ]”/>
+  <code code=“IMMUNIZ” 
+    codeSystem=“2.16.840.1.113883.5.4” 
+    codeSystemName=“ActCode”/>
+  <text>
+    <reference value=“#[REF_DESC_VACC]”/>
+  </text>
+  <statusCode code=“completed”/>
+  <!-- Obbligatorio indica la data della vaccinazione -->
+  <!-- Se non noto deve essere valorizzato a UNK -->
+  <effectiveTime value=“[DATA_VACC]” | nullFlavor="UNK" )/>
+  <!-- OPZIONALE -->
+  <routeCode [COD_VIA_SOMM]/ >
+  <consumable>
+    [VACCINO]
+  </consumable>
+  <!-- Elemento Opzionale indica il numero della dose -->
+  <entryRelationship>
+    [NUMERO_DOSE]
+  </entryRelationship>
+  <!-- Elemento Opzionale indica il periodo di copertura -->
+  <entryRelationship>
+    [COPERTURA]
+  </entryRelationship>
+  <!-- Elemento Opzionale indica reazioni avverse -->
+  <entryRelationship>
+    [REAZIONI]
+  </entryRelationship>
+  <!-- Elemento Opzionale Opzionali Note -->
+  <entryRelationship>
+    [NOTE]
+  </entryRelationship>
+</substanceAdministation>
+```
+
+> L’elemento <substanceAdministration>/<statusCode>/@code DEVE essere valorizzato con `“completed”` ad indicare che la vaccinazione è stata eseguita.
+
+#### 4.5.3 Dettagli Vaccino
+
+```xml
+<consumable typeCode='CSM'>
+  <manufacturedProduct classCode='MANU'>
+    <templateId root='2.16.840.1.113883.2.9.10.1.4.3.3.2'/>
+    <manufacturedMaterial classCode='MMAT' determinerCode='KIND'>
+      <code code='[COD_VACC_AIC]'
+        codeSystem="2.16.840.1.113883.2.9.6.1.5"
+        codeSystemName='AIC'
+        displayName=’[DESC_VACC]’>
+
+      <!-- OPZIONALE: se è noto il codice ATC del farmaco viene passato così -->
+      <translation code='[COD_FARM_ATC]'
+        codeSystem=”2.16.840.1.113883.6.73”
+        codeSystemName='ATC'
+        displayName=’[DESC_FARM]’>
+        <originalText>
+          <reference value='#[REF_FARMACO]'/>
+        </originalText>
+      </translation>
+      
+      <!-- IN ASSENZA DI CODIFICA DEFINITA USARE la seguente soluzione -->
+      <code nullFlavor=’OTH’>
+        <originalText>
+          <reference value='#[REF_DESC_VACCINO]'/>
+        </originalText>
+      </code>
+
+      <lotNumberText>
+        [LOTTO_VACCINO]
+      </lotNumberText>
+    </manufacturedMaterial>
+  </manufacturedProduct>
+</consumable>
 ```
